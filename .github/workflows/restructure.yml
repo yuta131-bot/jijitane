@@ -1,0 +1,28 @@
+name: 初期配置
+on:
+  push:
+    branches: [main]
+    paths: [".github/workflows/restructure.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  move:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: フォルダに移す
+        run: |
+          mvto() { for f in "${@:2}"; do if [ -f "$f" ]; then mkdir -p "$1"; git mv -f "$f" "$1/$f"; fi; done; }
+          mvto content 2026-10-09.json
+          mvto prompts system.md
+          mvto scripts build.mjs factcheck.mjs generate.mjs post-x.mjs validate.mjs
+          mvto src card.mjs client.js markup.mjs readings.mjs schema.mjs style.css templates.mjs review.mjs
+          mvto state posted.json
+          git rm -f --ignore-unmatch download
+          git config user.name "news-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "ファイルを正しいフォルダに配置" || echo "移すものはありません"
+          git push
