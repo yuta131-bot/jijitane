@@ -1,0 +1,189 @@
+# 毎朝5時（日本時間）に Claude が下書きを作り、確認用の Pull Request を出す
+#
+# 2つの動かし方があります（README 参照）
+#   ・サブスク版：Secrets に CLAUDE_CODE_OAUTH_TOKEN を登録（Claude の Pro / Max プランの範囲で動く。API 料金なし）
+#   ・API 版    ：Secrets に ANTHROPIC_API_KEY を登録（API の従量課金）
+# 両方ある場合はサブスク版を使います。
+name: 下書きを作る
+on:
+  schedule:
+    - cron: "0 20 * * *"   # UTC 20:00 = 日本時間 5:00
+  workflow_dispatch:
+    inputs:
+      date:
+        description: "日付（空なら今日）例：2026-10-15"
+        required: false
+
+permissions:
+  contents: write
+  pull-requests: write
+  actions: write
+  id-token: write
+
+concurrency: draft
+
+jobs:
+  draft:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      USE_SUB: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN != '' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - uses: actions/cache@v4
+        with:
+          path: fonts
+          key: fonts-zen-maru-v1
+
+      - name: 日付を決める
+        id: d
+        run: |
+          D="${{ inputs.date }}"; [ -z "$D" ] && D="$(TZ=Asia/Tokyo date +%F)"
+          echo "date=$D" >> "$GITHUB_OUTPUT"
+          if [ -f "content/$D.json" ]; then echo "skip=true" >> "$GITHUB_OUTPUT"; else echo "skip=false" >> "$GITHUB_OUTPUT"; fi
+
+      # ---------- API 版 ----------
+      - name: 下書きを作る（API 版）
+        if: steps.d.outputs.skip == 'false' && env.USE_SUB != 'true'
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          CLAUDE_MODEL: ${{ vars.CLAUDE_MODEL }}
+          TARGET_DATE: ${{ steps.d.outputs.date }}
+        run: node scripts/generate.mjs
+
+      # ---------- サブスク版（Claude Code） ----------
+      - name: 下書きを作る（サブスク版）
+        if: steps.d.outputs.skip == 'false' && env.USE_SUB == 'true'
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          github_token: ${{ github.token }}
+          prompt: |
+            今日は ${{ steps.d.outputs.date }}（日本時間）です。子ども向け時事ニュースサイトの、今日の号の記事データを作ってください。
+
+            1. prompts/system.md を読み、そこに書かれたルール（ニュースの選び方・書き方・図・出力形式）にすべて従ってください。{{SITE_NAME}} は「中受 じじニュースのたね」です。
+            2. content/ フォルダの新しい順に7号分の見出しを確認し、話題のかぶりを避けてください。いちばん新しい号を1つ開いて、書きぶりのお手本にしてください。
+            3. WebSearch と WebFetch で、日本時間の今日〜前日のニュースを必ず調べてから書いてください。記憶だけで書かないでください。sources には実際に開いたページの URL だけを入れてください。
+            4. 完成した JSON を content/${{ steps.d.outputs.date }}.json に書き出してください（"date" は "${{ steps.d.outputs.date }}"）。ファイルの中身は JSON だけにします。
+            5. 書き出したら node scripts/validate.mjs content/${{ steps.d.outputs.date }}.json を実行し、「OK」が出るまで直してください。
+            ほかのファイルは変更しないでください。
+          claude_args: |
+            --allowedTools "WebSearch,WebFetch,Read,Write,Edit,Glob,Grep,Bash(node scripts/validate.mjs:*)"
+            --max-turns 80
+
+      - name: 形のチェックと確認メモ（サブスク版）
+        if: steps.d.outputs.skip == 'false' && env.USE_SUB == 'true'
+        env:
+          TARGET_DATE: ${{ steps.d.outputs.date }}
+        run: |
+          node scripts/validate.mjs "content/$TARGET_DATE.json"
+          node scripts/review.mjs
+
+      - name: 事実確認（サブスク版）
+        if: steps.d.outputs.skip == 'false' && env.USE_SUB == 'true'
+        continue-on-error: true
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          github_token: ${{ github.token }}
+          prompt: |
+            あなたは子ども向けニュースサイトの校閲者です。content/${{ steps.d.outputs.date }}.json の記事を読み、事実（数字・日付・人名・地名・できごとの順番・だれが何を言ったか）を WebSearch と WebFetch で、信頼できる報道や公的機関の情報と照らして確認してください。意見や書き方の好みには触れません。
+            確認すべき記述は、各ニュース3〜6個を目安に、数字や固有名詞を優先してください。
+            結果は .review/${{ steps.d.outputs.date }}-fact.json に、次の形の JSON 配列だけで書き出してください。
+            [{"news": 番号(1〜3), "claim": "確認した記述", "verdict": "ok か wrong か unclear", "detail": "根拠や問題点（短く）", "fix": "直し方（wrong / unclear のとき）"}]
+            記事ファイルそのものは変更しないでください。
+          claude_args: |
+            --allowedTools "WebSearch,WebFetch,Read,Write,Glob"
+            --max-turns 40
+
+      - name: 二重チェックのまとめ（ふりがな＋事実確認）
+        if: steps.d.outputs.skip == 'false'
+        env:
+          ANTHROPIC_API_KEY: ${{ env.USE_SUB != 'true' && secrets.ANTHROPIC_API_KEY || '' }}
+          CLAUDE_MODEL: ${{ vars.CLAUDE_MODEL }}
+          TARGET_DATE: ${{ steps.d.outputs.date }}
+        run: node scripts/factcheck.mjs
+
+      - name: 事実確認の結果を調べる
+        id: fc
+        if: steps.d.outputs.skip == 'false'
+        env:
+          D: ${{ steps.d.outputs.date }}
+        run: |
+          F=".review/$D-fact.json"
+          if [ -f "$F" ]; then
+            echo "has=true" >> "$GITHUB_OUTPUT"
+            BAD=$(node -e "try{const a=JSON.parse(require('fs').readFileSync('$F','utf8'));console.log(a.filter(x=>x.verdict!=='ok').length)}catch(e){console.log(0)}")
+            echo "bad=$BAD" >> "$GITHUB_OUTPUT"
+          else
+            echo "has=false" >> "$GITHUB_OUTPUT"; echo "bad=0" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: 見つかったまちがいを自動で直す（サブスク版・自動公開のとき）
+        if: steps.d.outputs.skip == 'false' && env.USE_SUB == 'true' && vars.AUTO_PUBLISH == 'true' && steps.fc.outputs.bad != '0'
+        continue-on-error: true
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          github_token: ${{ github.token }}
+          prompt: |
+            .review/${{ steps.d.outputs.date }}-fact.json は、content/${{ steps.d.outputs.date }}.json の事実確認の結果です。
+            verdict が "wrong" の項目は、detail と fix に従って記事の該当箇所を正しく直してください。必要なら WebSearch で確かめてください。
+            verdict が "unclear" の項目は、確かめられた場合だけ直し、確かめられない場合はその記述を記事から外すか、断定しない言い方に変えてください（数字は消す）。
+            直すときは、ふりがな記法 {漢字|よみ}・==強調==・子ども向けの文体を保ってください。図（svg）の中の同じ数字や言葉も合わせて直してください。
+            直し終えたら node scripts/validate.mjs content/${{ steps.d.outputs.date }}.json を実行し、「OK」が出るまで直してください。
+            最後に、直した内容を .review/${{ steps.d.outputs.date }}-fixed.md に箇条書きで書いてください（直さなかった場合は「修正なし」）。
+          claude_args: |
+            --allowedTools "WebSearch,WebFetch,Read,Write,Edit,Glob,Bash(node scripts/validate.mjs:*)"
+            --max-turns 50
+
+      - name: サイトが作れるか確かめる
+        if: steps.d.outputs.skip == 'false'
+        env:
+          D: ${{ steps.d.outputs.date }}
+        run: |
+          node scripts/validate.mjs "content/$D.json"
+          if [ -f ".review/$D-fixed.md" ]; then printf '\n### 🛠 自動で直したところ\n' >> ".review/$D.md"; cat ".review/$D-fixed.md" >> ".review/$D.md"; fi
+          node scripts/build.mjs
+
+      - name: プレビューを保存
+        if: steps.d.outputs.skip == 'false'
+        uses: actions/upload-artifact@v4
+        with:
+          name: preview-${{ steps.d.outputs.date }}
+          path: dist
+          retention-days: 7
+
+      - name: Pull Request を出す
+        if: steps.d.outputs.skip == 'false'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          D: ${{ steps.d.outputs.date }}
+          AUTO_PUBLISH: ${{ vars.AUTO_PUBLISH }}
+        run: |
+          git config user.name "news-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          B="draft/$D"
+          git checkout -b "$B"
+          git add "content/$D.json"
+          git commit -m "下書き: $D"
+          git push -f origin "$B"
+          echo "" >> ".review/$D.md"
+          echo "プレビュー: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" >> ".review/$D.md"
+          T="【確認】$D のニュース"
+          if [ -f ".review/$D.flag" ]; then T="⚠️要確認 $T"; fi
+          gh pr create --base main --head "$B" --title "$T" --body-file ".review/$D.md"
+          # 自動公開：事実確認が実行できた日は、そのまま公開する（確認自体が失敗した日だけ、人の確認を待つ）
+          if [ "$AUTO_PUBLISH" = "true" ]; then
+            if [ -f ".review/$D-fact.json" ]; then
+              gh pr merge "$B" --squash --delete-branch
+              gh workflow run publish.yml --ref main
+            else
+              gh pr comment "$B" --body "事実確認が実行できなかったため、自動公開を止めています。内容を確認して Merge してください。"
+            fi
+          fi
