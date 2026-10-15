@@ -1,0 +1,19 @@
+{
+  "name": "kodomo-3news",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "generate": "node scripts/generate.mjs",
+    "post": "node scripts/post-x.mjs",
+    "check": "node scripts/factcheck.mjs"
+  },
+  "dependencies": {
+    "@resvg/resvg-js": "2.6.2",
+    "kuromoji": "0.1.2",
+    "twitter-api-v2": "1.29.1"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
