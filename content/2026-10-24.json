@@ -1,0 +1,151 @@
+{
+ "date": "2026-10-24",
+ "intro": "台風30号と、新しく生まれた31号の「ダブル台風」、きょう{施行|しこう}された{改正皇室典範|かいせいこうしつてんぱん}、{見直|みなお}しが{検討|けんとう}される{ガソリン補助金|ガソリンほじょきん}の3本です。",
+ "news": [
+  {
+   "subject": "理科（天気）",
+   "subject_key": "rika",
+   "title": "台風30号は{九州|きゅうしゅう}へ、31号も{発生|はっせい}して「ダブル台風」に",
+   "short_title": "台風31号が発生、ダブル台風に",
+   "points": [
+    "24日の{午前|ごぜん}3時、{日本|にほん}のはるか{南東|なんとう}の{海上|かいじょう}で{台風|たいふう}31号が{生|う}まれた。",
+    "30号は{先島諸島|さきしましょとう}の{近|ちか}くを{通|とお}り、26日（{月|げつ}）に{九州|きゅうしゅう}へ{近|ちか}づき、{上陸|じょうりく}するおそれもある。",
+    "{前線|ぜんせん}の{影響|えいきょう}で、{九州|きゅうしゅう}から{東海|とうかい}にかけて{警報級|けいほうきゅう}の{大雨|おおあめ}になるおそれがある。"
+   ],
+   "svg": "<svg viewBox=\"0 0 640 400\" role=\"img\" aria-label=\"台風30号が先島諸島付近から九州へ向かう進路予想と、はるか南東で生まれた台風31号の位置関係のイメージ図\"><defs><marker id=\"a1\" viewBox=\"0 0 10 10\" refX=\"8\" refY=\"5\" markerWidth=\"7\" markerHeight=\"7\" orient=\"auto\"><path d=\"M0 0L10 5L0 10z\" fill=\"#E5484D\"/></marker></defs><rect x=\"10\" y=\"10\" width=\"400\" height=\"300\" rx=\"14\" style=\"fill:var(--sea)\"/><path d=\"M300 40 L390 30 L400 70 L350 85 L318 80Z\" style=\"fill:var(--land);stroke:var(--landline)\" stroke-width=\"1.5\" stroke-linejoin=\"round\"/><path d=\"M262 78 L296 84 L300 110 L286 140 L262 146 L252 118Z\" style=\"fill:var(--land);stroke:var(--landline)\" stroke-width=\"1.5\" stroke-linejoin=\"round\"/><ellipse cx=\"236\" cy=\"196\" rx=\"8\" ry=\"4\" style=\"fill:var(--land);stroke:var(--landline)\" stroke-width=\"1.5\"/><ellipse cx=\"96\" cy=\"276\" rx=\"9\" ry=\"4\" style=\"fill:var(--land);stroke:var(--landline)\" stroke-width=\"1.5\"/><text x=\"350\" y=\"56\" font-size=\"14\" font-weight=\"900\" text-anchor=\"middle\" style=\"fill:var(--ink)\">本州</text><text x=\"350\" y=\"70\" font-size=\"10\" text-anchor=\"middle\" style=\"fill:var(--muted)\">ほんしゅう</text><text x=\"277\" y=\"104\" font-size=\"13\" font-weight=\"900\" text-anchor=\"middle\" style=\"fill:var(--ink)\">九州</text><text x=\"277\" y=\"118\" font-size=\"10\" text-anchor=\"middle\" style=\"fill:var(--muted)\">きゅうしゅう</text><text x=\"236\" y=\"222\" font-size=\"12\" font-weight=\"700\" text-anchor=\"middle\" style=\"fill:var(--ink)\">沖縄本島</text><text x=\"40\" y=\"300\" font-size=\"12\" font-weight=\"900\" style=\"fill:var(--ink)\">先島諸島</text><text x=\"100\" y=\"300\" font-size=\"9\" style=\"fill:var(--muted)\">さきしましょとう</text><path d=\"M104 268 Q130 240 160 215 Q210 180 246 130\" fill=\"none\" stroke=\"#E5484D\" stroke-width=\"3.5\" stroke-dasharray=\"8 6\" marker-end=\"url(#a1)\"/><circle cx=\"104\" cy=\"268\" r=\"8\" fill=\"#E5484D\" stroke=\"#fff\" stroke-width=\"2\"/><text x=\"120\" y=\"262\" font-size=\"13\" font-weight=\"900\" style=\"fill:#E5484D\">30号</text><text x=\"176\" y=\"222\" font-size=\"12\" font-weight=\"900\" style=\"fill:#E5484D\">25日：東シナ海を東寄りに</text><text x=\"120\" y=\"160\" font-size=\"12\" font-weight=\"900\" style=\"fill:#E5484D\">26日(月)ごろ</text><text x=\"120\" y=\"175\" font-size=\"11\" font-weight=\"900\" style=\"fill:#E5484D\">九州に近づく</text><circle cx=\"372\" cy=\"270\" r=\"9\" fill=\"#E5484D\" stroke=\"#fff\" stroke-width=\"2\"/><text x=\"372\" y=\"252\" font-size=\"13\" font-weight=\"900\" text-anchor=\"middle\" style=\"fill:#E5484D\">31号</text><text x=\"372\" y=\"296\" font-size=\"11\" text-anchor=\"middle\" style=\"fill:var(--ink)\">24日午前3時に発生</text><text x=\"20\" y=\"30\" font-size=\"10\" style=\"fill:var(--muted)\">位置関係のイメージ図</text><text x=\"20\" y=\"43\" font-size=\"10\" style=\"fill:var(--muted)\">（正確な地図ではありません）</text><text x=\"24\" y=\"140\" font-size=\"12\" font-weight=\"700\" style=\"fill:var(--sky)\">東シナ海</text><text x=\"24\" y=\"152\" font-size=\"9\" style=\"fill:var(--sky)\">ひがしシナかい</text><text x=\"330\" y=\"200\" font-size=\"13\" font-weight=\"700\" text-anchor=\"middle\" style=\"fill:var(--sky)\">太平洋</text><rect x=\"424\" y=\"10\" width=\"206\" height=\"150\" rx=\"14\" style=\"fill:var(--soft);stroke:#E5484D\" stroke-width=\"3\"/><text x=\"438\" y=\"36\" font-size=\"16\" font-weight=\"900\" style=\"fill:#E5484D\">台風30号（チャンパー）</text><text x=\"438\" y=\"60\" font-size=\"13\" style=\"fill:var(--ink)\">23日正午ごろ</text><text x=\"438\" y=\"82\" font-size=\"17\" font-weight=\"900\" style=\"fill:var(--ink)\">955hPa</text><text x=\"438\" y=\"104\" font-size=\"13\" style=\"fill:var(--ink)\">大型で「強い」</text><text x=\"438\" y=\"128\" font-size=\"12\" style=\"fill:var(--ink)\">24日4時：与那国島の西北西</text><text x=\"438\" y=\"146\" font-size=\"12\" style=\"fill:var(--ink)\">約60kmでほぼ止まっている</text><rect x=\"424\" y=\"170\" width=\"206\" height=\"140\" rx=\"14\" style=\"fill:var(--soft);stroke:var(--sky)\" stroke-width=\"3\"/><text x=\"438\" y=\"196\" font-size=\"16\" font-weight=\"900\" style=\"fill:var(--sky)\">これから注意</text><text x=\"438\" y=\"220\" font-size=\"13\" style=\"fill:var(--ink)\">・九州：26日ごろに台風が</text><text x=\"450\" y=\"238\" font-size=\"13\" style=\"fill:var(--ink)\">近づき、大雨のおそれ</text><text x=\"438\" y=\"260\" font-size=\"13\" style=\"fill:var(--ink)\">・東海：予報は25日午後〜27日</text><text x=\"450\" y=\"278\" font-size=\"13\" style=\"fill:var(--ink)\">警報級の大雨のおそれ</text><text x=\"438\" y=\"300\" font-size=\"11\" style=\"fill:var(--muted)\">※進路の幅はまだ大きい</text><rect x=\"10\" y=\"322\" width=\"620\" height=\"68\" rx=\"12\" style=\"fill:var(--soft)\"/><text x=\"320\" y=\"350\" font-size=\"15\" text-anchor=\"middle\" style=\"fill:var(--ink)\">台風が2つ！ でも日本に近づくのは今のところ30号。</text><text x=\"320\" y=\"374\" font-size=\"13\" text-anchor=\"middle\" style=\"fill:var(--muted)\">台風のまわりの暖かくしめった空気が前線にあたると、雨雲が育つ。</text></svg>",
+   "caption": "台風30号の進路予想と31号の位置（イメージ）、これから気をつけたい地域",
+   "body": [
+    "24日の午前3時、日本のはるか{南東|なんとう}の海の上で、{熱帯低気圧|ねったいていきあつ}が{台風|たいふう}31号（名前は「インファ」）に{変|か}わりました。いま、30号（チャンパー）とあわせて==台風が2つ同時にある「ダブル台風」==のじょうたいです。いまのところ、日本に近づくのは30号のほうです。",
+    "30号は23日、{大型|おおがた}で{勢力|せいりょく}の強い台風として{先島諸島|さきしましょとう}の近くを通りました。24日の{明|あ}け方は、{与那国島|よなぐにじま}の{西北西|せいほくせい}の約60キロで、ほとんど動いていません。このあと{東寄|ひがしよ}りに進路を変え、==26日（月）に九州へ近づき、上陸するおそれがあります==。ただし、動きがおそいと{時期|じき}がずれるため、予想の{幅|はば}はまだ大きいです。",
+    "{九州|きゅうしゅう}では、26日ごろに台風が近づくため、大雨のおそれがあります。{東海|とうかい}地方でも、{予報|よほう}では25日の午後から27日にかけて、{警報級|けいほうきゅう}の大雨になる可能性が高いとされています。",
+    "台風が{弱|よわ}まっていても、==台風まわりの暖かくしめった空気が前線に流れこむと、大雨になりやすい==のです。ハザードマップや、避難する場所を、早めに家族で{確|たし}かめておきましょう。"
+   ],
+   "keywords": [
+    {"term": "{熱帯低気圧|ねったいていきあつ}", "desc": "{熱帯|ねったい}の海で生まれる低気圧。{最大風速|さいだいふうそく}がおよそ17m/sをこえると「台風」とよばれる"},
+    {"term": "{警報級|けいほうきゅう}の{大雨|おおあめ}", "desc": "{気象庁|きしょうちょう}が「警報」を出すくらいの、{災害|さいがい}につながりかねない強い雨のこと"}
+   ],
+   "quiz": {
+    "q": "{熱帯|ねったい}の海で生まれた{熱帯低気圧|ねったいていきあつ}のうち、{台風|たいふう}とよばれるのは、{最大風速|さいだいふうそく}がおよそ何m/s以上のものか？",
+    "choices": ["約17m/s", "約8m/s", "約33m/s"],
+    "answer": 0,
+    "a": "約17m/s（17.2m/s）以上のものが台風です。33m/s以上になると、台風の強さの区分で「強い」になります。",
+    "hint": "台風の名前がつくのは、「強い」になるよりずっと前の段階だよ。"
+   },
+   "units": ["理科：天気の変化（台風）", "社会：自然災害とぼうさい"],
+   "talk": "台風が2つ同時にあるとき、ニュースでは何に気をつけて見ればいいと思う？",
+   "talk_hints": [
+    "台風ごとに名前や番号がちがうので、どちらの話か分けて聞く、という考え方。",
+    "進路のほかに、前線と合わさって雨が強まることにも注意する、という考え方。",
+    "家の近くで、大雨のときに水がたまりやすい場所はどこか、家族と話してみよう。"
+   ],
+   "exam_level": 3
+  },
+  {
+   "subject": "社会（政治）",
+   "subject_key": "shakai",
+   "title": "{改正皇室典範|かいせいこうしつてんぱん}、きょう24日に{施行|しこう}",
+   "short_title": "改正皇室典範がきょう施行",
+   "points": [
+    "{女性皇族|じょせいこうぞく}が{結婚後|けっこんご}も{皇族|こうぞく}の{身分|みぶん}をもてるようになる。",
+    "{旧|きゅう}11{宮家|みやけ}の{男系男子|だんけいだんし}を{養子|ようし}にむかえる{制度|せいど}もできる。",
+    "1947年の{施行|しこう}いらい、{内容|ないよう}にふれる{初|はじ}めての{本則|ほんそく}の{改正|かいせい}とされる。"
+   ],
+   "svg": "<svg viewBox=\"0 0 640 400\" role=\"img\" aria-label=\"改正された皇室典範の2つの柱と、公布から施行、これからの流れを示す図\"><defs><marker id=\"a2\" viewBox=\"0 0 10 10\" refX=\"8\" refY=\"5\" markerWidth=\"7\" markerHeight=\"7\" orient=\"auto\"><path d=\"M0 0L10 5L0 10z\" style=\"fill:var(--ink)\"/></marker></defs><text x=\"320\" y=\"28\" font-size=\"18\" font-weight=\"900\" text-anchor=\"middle\" style=\"fill:var(--ink)\">改正された皇室典範の2つの柱</text><text x=\"320\" y=\"44\" font-size=\"11\" text-anchor=\"middle\" style=\"fill:var(--muted)\">こうしつてんぱん</text><rect x=\"14\" y=\"58\" width=\"300\" height=\"196\" rx=\"14\" style=\"fill:var(--soft);stroke:var(--soc)\" stroke-width=\"3\"/><text x=\"30\" y=\"86\" font-size=\"16\" font-weight=\"900\" style=\"fill:var(--soc)\">柱① 女性皇族のこと</text><text x=\"30\" y=\"114\" font-size=\"14\" style=\"fill:var(--ink)\">結婚したあとも、</text><text x=\"30\" y=\"134\" font-size=\"14\" font-weight=\"900\" style=\"fill:#E5484D\">皇族の身分をもち続けられる</text><text x=\"30\" y=\"184\" font-size=\"13\" style=\"fill:var(--ink)\">・女性・女系の天皇は</text><text x=\"42\" y=\"202\" font-size=\"13\" style=\"fill:var(--ink)\">みとめない内容</text><text x=\"30\" y=\"236\" font-size=\"11\" style=\"fill:var(--muted)\">こうぞく／じょせい・じょけい</text><rect x=\"326\" y=\"58\" width=\"300\" height=\"196\" rx=\"14\" style=\"fill:var(--soft);stroke:var(--soc)\" stroke-width=\"3\"/><text x=\"342\" y=\"86\" font-size=\"16\" font-weight=\"900\" style=\"fill:var(--soc)\">柱② 養子のこと</text><text x=\"342\" y=\"112\" font-size=\"14\" style=\"fill:var(--ink)\">もと皇族の家（旧11宮家）の</text><text x=\"342\" y=\"132\" font-size=\"14\" font-weight=\"900\" style=\"fill:#E5484D\">男系の男子を養子にむかえる</text><text x=\"342\" y=\"158\" font-size=\"12\" style=\"fill:var(--ink)\">・15歳以上で、配偶者と子がいない人</text><text x=\"342\" y=\"178\" font-size=\"12\" style=\"fill:var(--ink)\">・養子になったら、自分の意思で</text><text x=\"354\" y=\"194\" font-size=\"12\" style=\"fill:var(--ink)\">皇族をやめることはできない</text><text x=\"342\" y=\"214\" font-size=\"12\" style=\"fill:var(--ink)\">・養子本人は皇位をつげない。</text><text x=\"354\" y=\"230\" font-size=\"12\" style=\"fill:var(--ink)\">子孫は男性だけが資格をもつ</text><text x=\"342\" y=\"248\" font-size=\"10\" style=\"fill:var(--muted)\">ようし／きゅうじゅういちみやけ</text><rect x=\"14\" y=\"282\" width=\"150\" height=\"66\" rx=\"12\" style=\"fill:var(--soft);stroke:var(--muted)\" stroke-width=\"3\"/><text x=\"89\" y=\"308\" font-size=\"14\" font-weight=\"900\" text-anchor=\"middle\" style=\"fill:var(--ink)\">7月24日</text><text x=\"89\" y=\"330\" font-size=\"13\" text-anchor=\"middle\" style=\"fill:var(--ink)\">公布（発表）</text><rect x=\"212\" y=\"282\" width=\"170\" height=\"66\" rx=\"12\" style=\"fill:var(--soft);stroke:#E5484D\" stroke-width=\"3\"/><text x=\"297\" y=\"308\" font-size=\"14\" font-weight=\"900\" text-anchor=\"middle\" style=\"fill:#E5484D\">10月24日</text><text x=\"297\" y=\"330\" font-size=\"13\" text-anchor=\"middle\" style=\"fill:var(--ink)\">施行（きょうから）</text><rect x=\"430\" y=\"282\" width=\"196\" height=\"66\" rx=\"12\" style=\"fill:var(--soft);stroke:var(--muted)\" stroke-width=\"3\"/><text x=\"528\" y=\"308\" font-size=\"14\" font-weight=\"900\" text-anchor=\"middle\" style=\"fill:var(--ink)\">宮内庁が</text><text x=\"528\" y=\"330\" font-size=\"13\" text-anchor=\"middle\" style=\"fill:var(--ink)\">くわしい手続きを検討</text><path d=\"M166 315 H208\" style=\"stroke:var(--ink)\" stroke-width=\"3\" marker-end=\"url(#a2)\"/><path d=\"M384 315 H426\" style=\"stroke:var(--ink)\" stroke-width=\"3\" marker-end=\"url(#a2)\"/><text x=\"320\" y=\"376\" font-size=\"12\" text-anchor=\"middle\" style=\"fill:var(--muted)\">国会では衆議院も参議院も、全会一致（全員賛成）にはならなかった。</text><text x=\"320\" y=\"392\" font-size=\"10\" text-anchor=\"middle\" style=\"fill:var(--muted)\">こうふ／しこう／くないちょう</text></svg>",
+   "caption": "改正皇室典範の2つの柱と、施行までの流れ",
+   "body": [
+    "{皇室典範|こうしつてんぱん}は、天皇の{位|くらい}をだれがつぐか、皇族とはだれかなどを決めた{法律|ほうりつ}です。その{改正|かいせい}が7月24日に{公布|こうふ}され、24日の==きょう、{施行|しこう}されました==。1947年にこの法律が施行されてから、{内容|ないよう}をかえる{初|はじ}めての{本則|ほんそく}の改正だとされています。",
+    "改正の柱は2つです。1つ目は、==女性皇族が結婚したあとも、皇族の身分をもち続けられる==ようにすること。2つ目は、1947年に皇族をはなれた{旧|きゅう}11宮家の男系の男子を、{養子|ようし}にむかえる制度をつくることです。",
+    "養子になれるのは、配偶者と子がいない15歳以上の男子です。養子になった時から皇族となり、自分の意思でやめることはできません。養子本人には皇位をつぐ資格はなく、その子孫のうち男性だけが資格をもちます。女性や、母方だけが天皇の血を引く「女系」の天皇は、みとめない内容です。",
+    "==衆議院でも参議院でも、全会一致（全員賛成）にはなりませんでした==。皇室のあり方には、いろいろな考え方があります。これから{宮内庁|くないちょう}が、くわしい手続きなどの検討を進めていきます。"
+   ],
+   "keywords": [
+    {"term": "{男系男子|だんけいだんし}", "desc": "父方をたどると天皇につながる男の子のこと"},
+    {"term": "{本則|ほんそく}", "desc": "法律の本文の部分。おまけの決まり（附則）とはちがう"}
+   ],
+   "quiz": {
+    "q": "{日本国憲法|にほんこくけんぽう}では、天皇は日本国と日本国民{統合|とうごう}の何であると{定|さだ}められているか？",
+    "choices": ["{元首|げんしゅ}（国のかしら）", "{主権者|しゅけんしゃ}", "{象徴|しょうちょう}"],
+    "answer": 2,
+    "a": "「象徴」です（憲法第1条）。天皇の地位は、主権をもつ国民の総意にもとづくとされ、国の政治についての権限はもたず、国事行為だけを行います。",
+    "hint": "国の主権者（いちばん大もとの決定権をもつ人）は、国民だよ。"
+   },
+   "units": ["社会：日本国憲法（天皇の地位）", "社会：政治のしくみ（国会）"],
+   "talk": "皇室のあり方のように、国民のみんなに関わることは、どうやって決めるのがいいと思う？",
+   "talk_hints": [
+    "国会で、いろいろな意見を出し合って決める、という考え方。",
+    "国民の意見を聞く機会をもっと作るべきだ、という考え方。",
+    "クラスやお家のルールを決めるとき、反対の人がいたらどうするか、思い出してみよう。"
+   ],
+   "exam_level": 3
+  },
+  {
+   "subject": "社会（経済）",
+   "subject_key": "shakai",
+   "title": "ガソリン{補助金|ほじょきん}を{見直|みなお}しへ、{首相|しゅしょう}が{検討|けんとう}を{指示|しじ}",
+   "short_title": "ガソリン補助金の見直しを検討",
+   "points": [
+    "{国|くに}は、ガソリンの{値段|ねだん}を{全国平均|ぜんこくへいきん}で1リットル170円{程度|ていど}に{抑|おさ}える{補助|ほじょ}を{続|つづ}けている。",
+    "{補助|ほじょ}のお{金|かね}をためた{基金|ききん}が、{近|ちか}いうちに{足|た}りなくなるおそれがある。",
+    "{高市首相|たかいちしゅしょう}は23日、{金額|きんがく}ややめ{方|かた}を{含|ふく}めた{見直|みなお}しを{指示|しじ}した。"
+   ],
+   "svg": "<svg viewBox=\"0 0 640 400\" role=\"img\" aria-label=\"中東情勢で原油が高くなり、国の補助金でガソリン価格を170円程度に抑えているが、基金が足りなくなりそうで見直しが検討されている流れの図\"><defs><marker id=\"a3\" viewBox=\"0 0 10 10\" refX=\"8\" refY=\"5\" markerWidth=\"7\" markerHeight=\"7\" orient=\"auto\"><path d=\"M0 0L10 5L0 10z\" style=\"fill:var(--ink)\"/></marker></defs><text x=\"320\" y=\"28\" font-size=\"18\" font-weight=\"900\" text-anchor=\"middle\" style=\"fill:var(--ink)\">ガソリン補助金の「いま」</text><rect x=\"14\" y=\"48\" width=\"180\" height=\"100\" rx=\"14\" style=\"fill:var(--soft);stroke:#E5484D\" stroke-width=\"3\"/><text x=\"104\" y=\"76\" font-size=\"15\" font-weight=\"900\" text-anchor=\"middle\" style=\"fill:var(--ink)\">中東の情勢が悪化</text><text x=\"104\" y=\"92\" font-size=\"10\" text-anchor=\"middle\" style=\"fill:var(--muted)\">ちゅうとう</text><text x=\"104\" y=\"120\" font-size=\"13\" text-anchor=\"middle\" style=\"fill:var(--ink)\">原油が高くなる</text><text x=\"104\" y=\"136\" font-size=\"10\" text-anchor=\"middle\" style=\"fill:var(--muted)\">げんゆ</text><rect x=\"230\" y=\"48\" width=\"180\" height=\"100\" rx=\"14\" style=\"fill:var(--soft);stroke:var(--soc)\" stroke-width=\"3\"/><text x=\"320\" y=\"76\" font-size=\"15\" font-weight=\"900\" text-anchor=\"middle\" style=\"fill:var(--ink)\">国が補助金を出す</text><text x=\"320\" y=\"100\" font-size=\"13\" text-anchor=\"middle\" style=\"fill:var(--ink)\">石油元売りなどへ</text><text x=\"320\" y=\"122\" font-size=\"12\" text-anchor=\"middle\" style=\"fill:var(--ink)\">ねだんが急に上がるのを</text><text x=\"320\" y=\"138\" font-size=\"12\" text-anchor=\"middle\" style=\"fill:var(--ink)\">ふせぐ「激変緩和」</text><rect x=\"446\" y=\"48\" width=\"180\" height=\"100\" rx=\"14\" style=\"fill:var(--soft);stroke:var(--sky)\" stroke-width=\"3\"/><text x=\"536\" y=\"76\" font-size=\"15\" font-weight=\"900\" text-anchor=\"middle\" style=\"fill:var(--ink)\">ガソリン価格</text><text x=\"536\" y=\"108\" font-size=\"20\" font-weight=\"900\" text-anchor=\"middle\" style=\"fill:#E5484D\">約170円</text><text x=\"536\" y=\"132\" font-size=\"12\" text-anchor=\"middle\" style=\"fill:var(--ink)\">1リットル・全国平均</text><path d=\"M196 98 H226\" style=\"stroke:var(--ink)\" stroke-width=\"3\" marker-end=\"url(#a3)\"/><path d=\"M412 98 H442\" style=\"stroke:var(--ink)\" stroke-width=\"3\" marker-end=\"url(#a3)\"/><text x=\"320\" y=\"176\" font-size=\"13\" text-anchor=\"middle\" style=\"fill:var(--muted)\">に抑える目標（レギュラーガソリン）</text><rect x=\"14\" y=\"196\" width=\"300\" height=\"190\" rx=\"14\" style=\"fill:var(--soft)\"/><text x=\"30\" y=\"224\" font-size=\"16\" font-weight=\"900\" style=\"fill:var(--ink)\">こまっていること</text><text x=\"30\" y=\"252\" font-size=\"14\" style=\"fill:var(--ink)\">補助のお金をためた「基金」が</text><text x=\"30\" y=\"282\" font-size=\"20\" font-weight=\"900\" style=\"fill:#E5484D\">約5600億円</text><text x=\"30\" y=\"302\" font-size=\"12\" style=\"fill:var(--muted)\">（9月末の時点）</text><text x=\"30\" y=\"328\" font-size=\"14\" style=\"fill:var(--ink)\">→ 原油が高く、近いうちに</text><text x=\"42\" y=\"348\" font-size=\"14\" style=\"fill:var(--ink)\">足りなくなるおそれがある</text><text x=\"30\" y=\"372\" font-size=\"12\" style=\"fill:var(--muted)\">財政の負担を心配する声が与野党から出ている</text><rect x=\"330\" y=\"196\" width=\"296\" height=\"190\" rx=\"14\" style=\"fill:var(--soft)\"/><text x=\"346\" y=\"224\" font-size=\"16\" font-weight=\"900\" style=\"fill:var(--ink)\">首相の指示（23日）</text><text x=\"346\" y=\"252\" font-size=\"13\" style=\"fill:var(--ink)\">・補助の金額（単価）や、</text><text x=\"358\" y=\"270\" font-size=\"13\" style=\"fill:var(--ink)\">やめ方（出口）もふくめて</text><text x=\"358\" y=\"288\" font-size=\"13\" style=\"fill:var(--ink)\">やわらかく考え直す</text><text x=\"346\" y=\"314\" font-size=\"13\" style=\"fill:var(--ink)\">・当面の補助を続けるための</text><text x=\"358\" y=\"332\" font-size=\"13\" style=\"fill:var(--ink)\">基金の大きさを確保する</text><text x=\"346\" y=\"364\" font-size=\"12\" font-weight=\"900\" style=\"fill:#E5484D\">まだ何も決まっていない。水準と時期が焦点</text></svg>",
+   "caption": "ガソリン補助金のしくみと、いま起きていること",
+   "body": [
+    "{中東|ちゅうとう}の{情勢|じょうせい}が悪くなったことで、原油の値段が上がり、ガソリンも高くなりやすくなっています。そこで国は、石油の会社などにお金を出して、==レギュラーガソリンの全国平均を1リットル170円{程度|ていど}に抑える=={取|と}り{組|く}みを{続|つづ}けています。急に値上がりするのをやわらげる「{激変緩和|げきへんかんわ}」の{措置|そち}です。",
+    "23日、{高市|たかいち}首相は{赤沢|あかざわ}{経済産業相|けいざいさんぎょうしょう}に、この支援のあり方を考え直すよう指示しました。国会の与党からも野党からも、国のお金の負担が心配だ、段階的な見直しや出口の戦略が必要だという声が出ているためです。首相は、==「支援の金額（単価）や出口もふくめて、柔軟に検討する」==と話しました。",
+    "補助のお金のもとになる基金は、9月末で約5600億円でした。原油の値段が高く、近いうちに足りなくなるおそれがあるため、首相は当面の補助を続けるのに必要な基金の大きさを確保することも指示しています。==ただし、新しい金額は何も決まっていません==。補助を減らすとしたら、どのくらいの水準で、いつからにするかが焦点です。"
+   ],
+   "keywords": [
+    {"term": "{激変緩和措置|げきへんかんわそち}", "desc": "値段などが急に大きく変わって、くらしや仕事が困らないよう、変化をやわらげる政策"},
+    {"term": "{補助金|ほじょきん}", "desc": "国などが、特定の目的のために出すお金。もとは税金などでまかなわれる"}
+   ],
+   "quiz": {
+    "q": "日本が{輸入|ゆにゅう}する{原油|げんゆ}の{大部分|だいぶぶん}は、どの{地域|ちいき}からのものか？",
+    "choices": ["東南アジア", "{中東|ちゅうとう}", "ヨーロッパ"],
+    "answer": 1,
+    "a": "中東（サウジアラビアやアラブ首長国連邦など）です。日本は石油のほとんどを輸入にたよっているため、中東の情勢はガソリンの値段に直接ひびきます。",
+    "hint": "ホルムズ{海峡|かいきょう}という、石油を運ぶ大事な海の通り道がある地域だよ。"
+   },
+   "units": ["社会：資源とエネルギー", "社会：国民のくらしと税金"],
+   "talk": "ガソリンの補助金は、値段が安いとうれしいけれど、ずっと続けてもいいと思う？",
+   "talk_hints": [
+    "車で仕事をする人や、地方でくらす人には助かる、という考え方。",
+    "税金から出すお金には限りがあり、ほかの使いみち（教育・防災など）も考える必要がある、という考え方。",
+    "ガソリンを使わない電車やバス、電気自動車の利用についても考えてみよう。"
+   ],
+   "exam_level": 2
+  }
+ ],
+ "briefs": [
+  "{環境省|かんきょうしょう}が{使|つか}っているメール{配信|はいしん}サービスに{不正|ふせい}なアクセスがあり、{最大|さいだい}2万2000{件|けん}の{情報|じょうほう}がもれたおそれがあると{伝|つた}えられました。",
+  "{火星|かせい}の{衛星|えいせい}フォボスをめざす{探査機|たんさき}「MMX」は、20日の{打|う}ち{上|あ}げ{後|ご}、{発電|はつでん}・{姿勢制御|しせいせいぎょ}・{通信|つうしん}が{正常|せいじょう}に{動|うご}くことが{確認|かくにん}されました。2027年8月に{火星|かせい}に{着|つ}く{予定|よてい}です。"
+ ],
+ "extra": "台風30号は、26日（月）に九州へ近づく見込みです。",
+ "sources": [
+  {"title": "NHK 改正皇室典範 きょう施行", "url": "https://news.web.nhk/newsweb/na/nd-20261024de64625"},
+  {"title": "秋田魁新報（共同通信）改正皇室典範を公布 女性身分保持と男系養子が柱", "url": "https://www.sakigake.jp/news/article/20260724CO0031/"},
+  {"title": "NHK 台風31号が日本のはるか南東の海上で発生", "url": "https://news.web.nhk/newsweb/na/nd-20261024de64647"},
+  {"title": "tenki.jp 台風30号は九州上陸か 東海は警報級大雨に警戒", "url": "https://tenki.jp/forecaster/n_takeshita/2026/10/23/41061.html"},
+  {"title": "NHK 政府 ガソリン補助見直しも検討 水準や時期など焦点", "url": "https://news.web.nhk/newsweb/na/nd-20261024de64636"},
+  {"title": "時事ドットコム ガソリン補助の見直し指示 高市首相「出口戦略含め柔軟に」", "url": "https://www.jiji.com/jc/article?k=2026102300839&g=pol"},
+  {"title": "NHK 環境省 最大2万2000件漏えいか ブラストメールに不正アクセス", "url": "https://news.web.nhk/newsweb/na/nd-20261024de64630"},
+  {"title": "熊本日日新聞（共同通信）火星衛星探査機、機能正常 MMX", "url": "https://kumanichi.com/articles/2049026"},
+  {"title": "NHK 新着ニュース一覧（24日未明の見出し）", "url": "https://news.web.nhk/newsweb/pl/news-nwa-latest-nationwide"}
+ ],
+ "review_notes": [
+  "今日24日は土曜日のため通常号。日曜の「今週のふり返り」号ではない。",
+  "台風30号の強さ：図の「950hPa・非常に強い」は23日15時ごろの気象庁発表（西日本新聞の検索結果の要約）で、記事本体は未開封。tenki.jp（23日13時）は955hPa・40m/s。最新の気象庁発表で要確認。",
+  "台風30号が24日4時に与那国島の西北西約60kmでほぼ停滞、という記述はtenki.jpの表示によるもの。気象庁の最新の位置・予報と照合してほしい。上陸の有無・時期は予報の幅が大きい。",
+  "台風31号の名前「インファ」はtenki.jpの記事一覧の見出しのみ。発生時刻（24日午前3時）はNHK。位置は本文で「日本のはるか南東」とし、マーシャル諸島付近という説明は使っていない。",
+  "福岡・佐賀の25日午後〜26日の警報級大雨はFBS福岡放送（検索結果の要約）、東海の25日午後〜27日はtenki.jpに基づく。FBSの記事は未開封。",
+  "クイズ（台風は最大風速約17m/s以上）は気象庁の定義（17.2m/s以上）に基づく知識で、記事には出てこない。",
+  "皇室典範：公布7月24日・施行10月24日・柱2つ・養子の条件は共同通信（秋田魁新報）。「衆参とも全会一致ではない」「初の本則改正」も同記事。NHK記事は本文が途中までで内容は概要のみ。皇室のあり方は意見が分かれる話題なので、表現が中立か人の目で確認してほしい。",
+  "「女系」の説明（母方だけが天皇の血を引く）は一般的な定義で、記事には出てこない。養子本人に皇位継承資格がなく子孫の男性のみ、の表現も共同通信の記載どおりか再確認を。",
+  "クイズ（憲法第1条の「象徴」）は憲法の知識で、記事にはない。",
+  "ガソリン補助：170円程度・基金約5600億円（9月末）・首相の指示内容は時事ドットコム。NHKは本文が途中までで、概要のみ。自民党が26日に議論する方針は検索結果の要約（ANN）で、記事は未開封。",
+  "ガソリン補助のクイズ「原油の大部分は中東から」は一般知識で記事にはない。ヒントのホルムズ海峡は、10月9日号で扱った話題とのつながりとして書いた。",
+  "ひとことニュースの環境省の件は、NHKの見出しと冒頭のみ確認。「ブラストメール」というサービス名は本文では出していない。最大2万2000件・メールアドレスなどが含まれる点は冒頭の情報。",
+  "MMXの20日打ち上げ・機能確認（21日JAXA発表）・2027年8月到着は熊本日日新聞（共同通信）。打ち上げは4日前のため、ひとことニュース扱いにした。",
+  "ふりがな：与那国島（よなぐにじま）、旧11宮家（きゅうじゅういちみやけ）、赤沢経済産業相（あかざわけいざいさんぎょうしょう）、高市首相（たかいちしゅしょう）、宮内庁（くないちょう）の読みを確認してほしい。"
+ ]
+}
