@@ -1,3 +1,4 @@
+import fs from 'node:fs';
 // 記事テキストの簡易記法を HTML に変換する
 //   {漢字|よみ}  → ふりがな
 //   ==文字==     → 蛍光ペン
@@ -24,9 +25,25 @@ export function plain(s = '') {
     .replace(/\*\*(.+?)\*\*/g, '$1');
 }
 
+// 正確な海岸線のベースマップ（tools/make-basemaps.py で Natural Earth から作成）
+//   図の中に <basemap name="typhoon" x="0" y="40" width="360"/> と書くと、ここで地図に置きかわる
+export const BASEMAPS = JSON.parse(fs.readFileSync(new URL('./basemaps.json', import.meta.url), 'utf8'));
+const num = (v, d) => (Number.isFinite(parseFloat(v)) ? parseFloat(v) : d);
+export function expandBasemaps(svg = '') {
+  return String(svg).replace(/<basemap\b([^>]*?)\/?>(\s*<\/basemap>)?/gi, (_, attrs) => {
+    const a = Object.fromEntries([...attrs.matchAll(/([a-z-]+)\s*=\s*"([^"]*)"/gi)].map((m) => [m[1].toLowerCase(), m[2]]));
+    const m = BASEMAPS[a.name];
+    if (!m) return '';
+    const x = num(a.x, 0), y = num(a.y, 0), w = num(a.width, m.W), h = +(w * m.H / m.W).toFixed(1);
+    return `<svg x="${x}" y="${y}" width="${w}" height="${h}" viewBox="0 0 ${m.W} ${m.H}" overflow="hidden" aria-hidden="true">`
+      + `<rect width="${m.W}" height="${m.H}" style="fill:var(--sea)"/>`
+      + `<path d="${m.d}" style="fill:var(--land);stroke:var(--landline)" stroke-width="${(0.8 * m.W / w).toFixed(2)}" stroke-linejoin="round"/></svg>`;
+  });
+}
+
 // AI が作った SVG を安全にして、ページ内で id がぶつからないようにする
 export function safeSvg(svg = '', prefix = 'f') {
-  let s = String(svg).trim();
+  let s = expandBasemaps(String(svg).trim());
   if (!/^<svg[\s>]/i.test(s) || !/<\/svg>\s*$/i.test(s)) return '';
   s = s
     .replace(/<script[\s\S]*?<\/script>/gi, '')

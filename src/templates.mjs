@@ -5,6 +5,8 @@ const TOOLS = `<div class="hero-tools"><button type="button" class="ruby-toggle"
 
 const SUBJ = { rika: ['理科', 'var(--sci)', 't-sci'], shakai: ['社会', 'var(--soc)', 't-soc'], other: ['その他', 'var(--sky)', 't-sky'] };
 const subj = (k) => SUBJ[k] || SUBJ.other;
+// 図の形：スマホ向けのたて長（viewBox の幅 400 以下）か、以前の横長か
+const figClass = (svg) => { const m = /viewBox="\s*[-\d.]+\s+[-\d.]+\s+([\d.]+)\s+([\d.]+)/.exec(svg); return m && +m[1] <= 400 ? 'fig-tall' : 'fig-wide'; };
 const baseOf = (cfg) => cfg.siteUrl.replace(/\/$/, '');
 
 const CLIENT_JS = fs.readFileSync(new URL('./client.js', import.meta.url), 'utf8').replace(/<\/script/gi, '<\\/script');
@@ -109,7 +111,7 @@ function newsBlock(n, i, a, base, single = false) {
   ${(n.units || []).length ? `<div class="units">${n.units.map((u) => `<a class="unit" href="${base}/units.html#${slug(u)}">${esc(u)}</a>`).join('')}</div>` : ''}
   <div class="art-tools"><button type="button" class="speak" data-target="${single ? 'single' : `news${i + 1}`}"><span aria-hidden="true">🔊</span> よみあげ</button>${single ? '' : `<a class="permalink" href="${base}/news/${a.date}-${i + 1}.html">この記事だけのページ →</a>`}</div>
   <div class="three"><b>3行でいうと</b><ul>${n.points.map((p) => `<li>${inline(p)}</li>`).join('')}</ul></div>
-  ${svg ? `<figure class="fig">${svg}<figcaption class="cap">${inline(n.caption || '')}</figcaption></figure>` : ''}
+  ${svg ? `<figure class="fig ${figClass(svg)}"><button type="button" class="fig-zoom" aria-label="図を大きく見る">${svg}<span class="zoom-hint" aria-hidden="true">🔍 大きく見る</span></button><figcaption class="cap">${inline(n.caption || '')}</figcaption></figure>` : ''}
   ${n.body.map((p) => `<p>${inline(p)}</p>`).join('\n  ')}
   <h3>おぼえておきたい<ruby>言葉<rt>ことば</rt></ruby></h3>
   <ul class="kw">${(n.keywords || []).map((k) => `<li><a href="${base}/glossary.html#${slug(plain(k.term))}"><b>${inline(k.term)}</b></a>：${inline(k.desc)}</li>`).join('')}</ul>

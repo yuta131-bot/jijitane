@@ -1,3 +1,5 @@
+import { BASEMAPS } from './markup.mjs';
+const BASEMAP_NAMES = Object.keys(BASEMAPS);
 // 記事データの形をチェックする（AI の出力が崩れていないか）
 export function validate(a) {
   const e = [];
@@ -18,6 +20,9 @@ export function validate(a) {
     if (n.units !== undefined && !Array.isArray(n.units)) e.push(`${p}.units は配列`);
     if (typeof n.svg !== 'string' || !/^\s*<svg[\s>]/i.test(n.svg) || !/<\/svg>\s*$/i.test(n.svg)) e.push(`${p}.svg が正しい SVG ではありません`);
     if (/<script/i.test(n.svg || '')) e.push(`${p}.svg に script が入っています`);
+    for (const m of String(n.svg || '').matchAll(/<basemap\b[^>]*name="([^"]*)"/gi)) {
+      if (!BASEMAP_NAMES.includes(m[1])) e.push(`${p}.svg のベースマップ名「${m[1]}」がありません（${BASEMAP_NAMES.join(' / ')}）`);
+    }
     const brace = (JSON.stringify(n).match(/\{[^{}|"]*$/g) || []).length;
     if (brace) e.push(`${p} のふりがな記法が閉じていない可能性があります`);
   });

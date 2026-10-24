@@ -21,8 +21,41 @@
     var sp = e.target.closest('.speak');
     if (sp) { toggleSpeak(sp); return; }
     var ch = e.target.closest('.choice');
-    if (ch) answer(ch);
+    if (ch) { answer(ch); return; }
+    var fz = e.target.closest('.fig-zoom');
+    if (fz) { openZoom(fz); return; }
+    if (e.target.closest('.zclose')) closeZoom();
   });
+
+  /* ---------- 図を大きく見る ---------- */
+  var zoomBox = null, zoomFrom = null;
+  function openZoom(btn) {
+    var svg = btn.querySelector('svg'); if (!svg) return;
+    var vb = (svg.getAttribute('viewBox') || '0 0 640 400').trim().split(/[\s,]+/).map(Number);
+    var vw = window.innerWidth;
+    // たて長の図は画面いっぱい（最大 2 倍）、横長の図はスマホでは横にスクロールして読める大きさに
+    var w = vb[2] <= 400 ? Math.min(Math.max(vw - 24, vb[2]), vb[2] * 2.4) : Math.max(vw - 24, Math.min(vb[2] * 1.9, 1200));
+    var clone = svg.cloneNode(true);
+    clone.style.width = Math.round(w) + 'px';
+    var cap = btn.parentNode.querySelector('.cap');
+    zoomBox = document.createElement('div');
+    zoomBox.className = 'zoombox'; zoomBox.setAttribute('role', 'dialog'); zoomBox.setAttribute('aria-modal', 'true'); zoomBox.setAttribute('aria-label', '図の拡大');
+    zoomBox.innerHTML = '<button type="button" class="zclose">とじる ✕</button><div class="zin"></div>';
+    zoomBox.querySelector('.zin').appendChild(clone);
+    if (cap) { var c = document.createElement('p'); c.className = 'zcap'; c.innerHTML = cap.innerHTML; zoomBox.querySelector('.zin').appendChild(c); }
+    document.body.appendChild(zoomBox);
+    root.classList.add('zooming');
+    zoomFrom = btn;
+    zoomBox.querySelector('.zclose').focus();
+    // 横長の図は、まんなかが見えるように
+    zoomBox.scrollLeft = Math.max(0, (zoomBox.scrollWidth - vw) / 2);
+  }
+  function closeZoom() {
+    if (!zoomBox) return;
+    zoomBox.remove(); zoomBox = null; root.classList.remove('zooming');
+    if (zoomFrom) zoomFrom.focus();
+  }
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeZoom(); });
 
   /* ---------- よみあげ ---------- */
   var synth = window.speechSynthesis;
