@@ -86,6 +86,7 @@ ${img ? `<meta property="og:image" content="${esc(img)}">\n<meta name="twitter:i
 <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&display=swap" rel="stylesheet">
 ${adsHead}
 ${cfg.analytics?.plausible ? `<script defer data-domain="${esc(cfg.analytics.plausible)}" src="https://plausible.io/js/script.js"></script>` : ''}
+${cfg.analytics?.cloudflare ? `<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='${JSON.stringify({ token: String(cfg.analytics.cloudflare) }).replace(/'/g, '')}'></script>` : ''}
 <style>${css}</style>
 </head>
 <body>

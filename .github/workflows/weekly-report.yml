@@ -1,0 +1,73 @@
+# 毎週月曜 8:00（日本時間）に、先週のアクセス数を集めて Claude が週次レポートを書く
+#   必要な Secrets：CF_API_TOKEN、CF_ACCOUNT_ID、CLAUDE_CODE_OAUTH_TOKEN
+#   レポートは reports/ に保存し、GitHub の Issue としても届く（スマホに通知）
+name: 週次レポート
+on:
+  schedule:
+    - cron: "0 23 * * 0"   # UTC 日曜 23:00 = 日本時間 月曜 8:00
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+  id-token: write
+
+concurrency: weekly-report
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: アクセス数を集める
+        id: stats
+        env:
+          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+        run: |
+          node scripts/weekly-stats.mjs
+          echo "date=$(TZ=Asia/Tokyo date +%F)" >> "$GITHUB_OUTPUT"
+
+      - name: Claude がレポートを書く
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          github_token: ${{ github.token }}
+          prompt: |
+            あなたは、中学受験向け時事ニュースサイト「中受 じじニュースのたね」の運営を手伝うアナリストです。
+            reports/data/${{ steps.stats.outputs.date }}.json が先週のアクセスデータです（this_week と last_week、change_pct、人気ページ、流入元、端末）。
+            content/ フォルダの記事（articles_published にある日付のファイル）を開いて、どんな記事がよく読まれたかも確かめてください。reports/ に前回のレポートがあれば、前回の改善案がどうなったかにも触れてください。
+
+            reports/${{ steps.stats.outputs.date }}.md に、日本語で、次の形のレポートを書いてください（保護者でもある運営者が、スマホで3分で読める長さ）。
+            # 週次レポート（期間）
+            ## 3行まとめ
+            ## 数字（ページビュー・訪問数・先週比。表で）
+            ## よく読まれた記事 トップ5（記事の見出しで。ページのパスから日付と番号を読み取る）
+            ## どこから来たか（流入元・スマホ/PC の割合）
+            ## 気になる点（課題）
+            ## 改善案（すぐできるもの3つ。具体的に。作成ルール prompts/system.md の直し方の提案も可）
+            ## 来週やること（チェックリスト）
+
+            ルール：データにない数字は作らない。アクセスがまだ少ないときは、少ないことをはっきり書き、数字より「集客の打ち手」を中心に提案する。ファイルは reports/ の中だけに書き、ほかのファイルは変更しない。
+          claude_args: |
+            --allowedTools "Read,Write,Glob,Grep"
+            --max-turns 30
+
+      - name: 保存して Issue で届ける
+        env:
+          GH_TOKEN: ${{ github.token }}
+          D: ${{ steps.stats.outputs.date }}
+        run: |
+          git config user.name "news-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reports
+          git commit -m "週次レポート: $D" || echo "変更なし"
+          git push
+          if [ -f "reports/$D.md" ]; then
+            gh issue create --title "📊 週次レポート $D" --body-file "reports/$D.md"
+          fi

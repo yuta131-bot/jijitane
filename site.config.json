@@ -19,6 +19,7 @@
   "brandMain": "じじニュースのたね",
   "taglineShort": "毎日のニュースが、入試で芽を出す",
   "analytics": {
-    "plausible": ""
+    "plausible": "",
+    "cloudflare": ""
   }
 }
