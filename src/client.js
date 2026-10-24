@@ -155,17 +155,27 @@
     document.querySelectorAll('span.rd').forEach(function (sp) {
       var p = sp.parentNode; while (sp.firstChild) p.insertBefore(sp.firstChild, sp); p.removeChild(sp); p.normalize();
     });
-    document.querySelectorAll('.reading').forEach(function (x) { x.classList.remove('reading'); });
+    document.querySelectorAll('.reading').forEach(function (x) { x.classList.remove('reading'); if (!x.getAttribute('class')) x.removeAttribute('class'); });
   }
+  // 文の中の文字（ふりがな rt 以外）を1つずつ <span class="rd"> で囲む。
+  // ふりがなのついた漢字は、漢字の部分だけを囲むので、ふりがなには印がかからない
   function wrapSentence(el, idx) {
     var r = sentenceRanges(el)[idx]; if (!r) return null;
-    var rs = r.startContainer.parentNode && r.startContainer.parentNode.closest('ruby');
-    if (rs && el.contains(rs)) r.setStartBefore(rs);
-    var re = r.endContainer.parentNode && r.endContainer.parentNode.closest('ruby');
-    if (re && el.contains(re)) r.setEndAfter(re);
-    var sp = document.createElement('span'); sp.className = 'rd';
-    try { sp.appendChild(r.extractContents()); r.insertNode(sp); } catch (e) { return null; }
-    return sp;
+    var nodes = [], w = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, { acceptNode: function (n) { return n.parentNode.closest('rt') ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT; } });
+    while (w.nextNode()) { if (r.intersectsNode(w.currentNode)) nodes.push(w.currentNode); }
+    var first = null;
+    nodes.forEach(function (n) {
+      var st = n === r.startContainer ? r.startOffset : 0;
+      var en = n === r.endContainer ? r.endOffset : n.nodeValue.length;
+      if (en <= st) return;
+      if (en < n.nodeValue.length) n.splitText(en);
+      if (st > 0) n = n.splitText(st);
+      if (!/\S/.test(n.nodeValue)) return;
+      var sp = document.createElement('span'); sp.className = 'rd';
+      n.parentNode.insertBefore(sp, n); sp.appendChild(n);
+      if (!first) first = sp;
+    });
+    return first;
   }
   function mark(item) {
     unwrapReading();
@@ -191,15 +201,15 @@
       });
     };
     var h = art.querySelector('h2 > span:last-child');
-    if (h) add(h, speechText(h) + '。', 420);
+    if (h) addEach(h, 420);
     var three = art.querySelectorAll('.three li');
     if (three.length) { q.push({ el: art.querySelector('.three'), text: '3行でいうと。', pause: 120 }); three.forEach(function (li) { addEach(li, 160); }); }
     art.querySelectorAll(':scope > p:not(.talk)').forEach(function (p) { addEach(p, 260); });
     var quiz = art.querySelector('.quiz');
     if (quiz) {
       var qt = quiz.querySelector('.qhead > span:last-child, summary > span:nth-child(2)');
-      if (qt) add(quiz, 'クイズです。' + speechText(qt), 300);
-      quiz.querySelectorAll('.choice').forEach(function (b, i) { add(b, 'ABCD'[i] + '、' + speechText(b) + '。', 120); });
+      if (qt) addEach(qt, 300, 'クイズです。');
+      quiz.querySelectorAll('.choice').forEach(function (b, i) { addEach(b, 120, 'ABCD'[i] + '、'); });
     }
     return q;
   }
