@@ -26,5 +26,11 @@ export function validate(a) {
     const brace = (JSON.stringify(n).match(/\{[^{}|"]*$/g) || []).length;
     if (brace) e.push(`${p} のふりがな記法が閉じていない可能性があります`);
   });
+  if (a.math !== undefined && a.math !== null) {
+    const m = a.math;
+    if (![1, 2, 3].includes(Number(m.news))) e.push('math.news は 1〜3（問題をつけるニュースの番号）');
+    for (const k of ['q', 'answer']) if (typeof m[k] !== 'string' || !m[k].trim()) e.push(`math.${k} がありません`);
+    if (m.steps !== undefined && !Array.isArray(m.steps)) e.push('math.steps は配列');
+  }
   return e;
 }

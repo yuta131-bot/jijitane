@@ -124,6 +124,20 @@ h3{font-size:18px;font-weight:900;margin:18px 0 6px}
 .quiz[open] .open{display:none}
 .quiz .ans{padding:10px 16px 12px;background:var(--soft);border-top:2px dotted var(--line)}
 .hint{font-size:13px;color:var(--muted)}
+.mathbox{border:2px solid var(--sky);border-radius:14px;margin-top:12px;padding:12px 14px;background:var(--card)}
+.mhead{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.mmark{flex:none;width:30px;height:30px;border-radius:50%;background:var(--sky);color:#fff;font-weight:900;font-size:20px;display:flex;align-items:center;justify-content:center}
+.mlabel{font-weight:900;color:var(--sky)}
+.munit{font-size:12px;font-weight:700;color:var(--muted);border:1.5px solid var(--line);border-radius:999px;padding:0 10px}
+.mq{margin:8px 0 6px;font-weight:700}
+.mdet{border-top:2px dotted var(--line);padding:6px 0 0;margin-top:6px}
+.mdet summary{cursor:pointer;font-size:14px;font-weight:900;color:var(--sky);list-style:none}
+.mdet summary::-webkit-details-marker{display:none}
+.mdet summary::before{content:'▶ ';font-size:11px}
+.mdet[open] summary::before{content:'▼ '}
+.mdet p{margin:6px 0 4px}
+.ma b{display:inline-block;background:var(--sky);color:#fff;border-radius:6px;padding:0 8px;margin-right:6px;font-size:13px}
+.msteps{margin:4px 0 2px;padding-left:1.4em;font-size:15px}
 .talk{margin-top:14px;font-size:15px;color:var(--muted)}.talk b{color:var(--ink)}
 .talkbox{display:flex;gap:12px;align-items:flex-start;margin-top:12px;padding:12px 14px;border:2px solid var(--ink);border-radius:14px;background:var(--talkbg)}
 .tmark{flex:none;width:34px;height:34px;border-radius:50%;background:#E86A92;display:flex;align-items:center;justify-content:center}

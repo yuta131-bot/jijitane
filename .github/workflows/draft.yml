@@ -94,8 +94,9 @@ jobs:
           prompt: |
             あなたは子ども向けニュースサイトの校閲者です。content/${{ steps.d.outputs.date }}.json の記事を読み、事実（数字・日付・人名・地名・できごとの順番・だれが何を言ったか）を WebSearch と WebFetch で、信頼できる報道や公的機関の情報と照らして確認してください。意見や書き方の好みには触れません。
             確認すべき記述は、各ニュース3〜6個を目安に、数字や固有名詞を優先してください。
+            "math"（ニュースで算数）がある場合は、問題に使った数字が記事と合っているかと、答えと計算の式が正しいかを自分で計算して確かめ、結果に news: 0 として加えてください。
             結果は .review/${{ steps.d.outputs.date }}-fact.json に、次の形の JSON 配列だけで書き出してください。
-            [{"news": 番号(1〜3), "claim": "確認した記述", "verdict": "ok か wrong か unclear", "detail": "根拠や問題点（短く）", "fix": "直し方（wrong / unclear のとき）"}]
+            [{"news": 番号(1〜3。算数の問題は0), "claim": "確認した記述", "verdict": "ok か wrong か unclear", "detail": "根拠や問題点（短く）", "fix": "直し方（wrong / unclear のとき）"}]
             記事ファイルそのものは変更しないでください。
           claude_args: |
             --allowedTools "WebSearch,WebFetch,Read,Write,Glob"
@@ -136,6 +137,7 @@ jobs:
             verdict が "wrong" の項目は、detail と fix に従って記事の該当箇所を正しく直してください。必要なら WebSearch で確かめてください。
             verdict が "unclear" の項目は、確かめられた場合だけ直し、確かめられない場合はその記述を記事から外すか、断定しない言い方に変えてください（数字は消す）。
             直すときは、ふりがな記法 {漢字|よみ}・==強調==・子ども向けの文体を保ってください。図（svg）の中の同じ数字や言葉も合わせて直してください。
+            news が 0 の項目は「ニュースで算数」（math）のまちがいです。問題文・答え・steps を正しく直し、直せない場合は math を null にしてください。
             直し終えたら node scripts/validate.mjs content/${{ steps.d.outputs.date }}.json を実行し、「OK」が出るまで直してください。
             最後に、直した内容を .review/${{ steps.d.outputs.date }}-fixed.md に箇条書きで書いてください（直さなかった場合は「修正なし」）。
           claude_args: |

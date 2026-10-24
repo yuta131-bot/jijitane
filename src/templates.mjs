@@ -6,6 +6,15 @@ const TOOLS = `<div class="hero-tools"><button type="button" class="ruby-toggle"
 const SUBJ = { rika: ['理科', 'var(--sci)', 't-sci'], shakai: ['社会', 'var(--soc)', 't-soc'], other: ['その他', 'var(--sky)', 't-sky'] };
 const subj = (k) => SUBJ[k] || SUBJ.other;
 // 図の形：スマホ向けのたて長（viewBox の幅 400 以下）か、以前の横長か
+// 「ニュースで算数」：記事の数字を使った算数の問題（1日1問。a.math.news の番号のニュースに出す）
+const mathBlock = (a, i) => {
+  const m = a.math;
+  if (!m || Number(m.news) !== i + 1 || !m.q || !m.answer) return '';
+  return `<div class="mathbox"><div class="mhead"><span class="mmark" aria-hidden="true">÷</span><span class="mlabel">ニュースで算数</span>${m.unit ? `<span class="munit">${esc(m.unit)}</span>` : ''}</div>`
+    + `<p class="mq">${inline(m.q)}</p>`
+    + (m.hint ? `<details class="mdet"><summary>ヒントを見る</summary><p>${inline(m.hint)}</p></details>` : '')
+    + `<details class="mdet mans"><summary>答えと考え方を見る</summary><p class="ma"><b>答え</b> ${inline(m.answer)}</p>${(m.steps || []).length ? `<ol class="msteps">${m.steps.map((x) => `<li>${inline(x)}</li>`).join('')}</ol>` : ''}</details></div>`;
+};
 const figClass = (svg) => { const m = /viewBox="\s*[-\d.]+\s+[-\d.]+\s+([\d.]+)\s+([\d.]+)/.exec(svg); return m && +m[1] <= 400 ? 'fig-tall' : 'fig-wide'; };
 const baseOf = (cfg) => cfg.siteUrl.replace(/\/$/, '');
 
@@ -116,6 +125,7 @@ function newsBlock(n, i, a, base, single = false) {
   <h3>おぼえておきたい<ruby>言葉<rt>ことば</rt></ruby></h3>
   <ul class="kw">${(n.keywords || []).map((k) => `<li><a href="${base}/glossary.html#${slug(plain(k.term))}"><b>${inline(k.term)}</b></a>：${inline(k.desc)}</li>`).join('')}</ul>
   ${Array.isArray(n.quiz.choices) && n.quiz.choices.length >= 2 ? `<div class="quiz mc" data-qid="${a.date}-${i + 1}" data-answer="${Number(n.quiz.answer) || 0}"><div class="qhead"><span class="qmark">Q</span><span>${inline(n.quiz.q)}</span></div><div class="choices">${n.quiz.choices.map((c, j) => `<button type="button" class="choice" data-i="${j}"><span class="cl">${'ABCD'[j]}</span><span>${inline(c)}</span></button>`).join('')}</div><div class="ans" hidden><b class="verdict"></b> ${inline(n.quiz.a)}${n.quiz.hint ? `<br><span class="hint">${inline(n.quiz.hint)}</span>` : ''}</div></div>` : `<details class="quiz"><summary><span class="qmark">Q</span><span>${inline(n.quiz.q)}</span><span class="open">答えを見る</span></summary><div class="ans"><b>A.</b> ${inline(n.quiz.a)}${n.quiz.hint ? `<br><span class="hint">${inline(n.quiz.hint)}</span>` : ''}</div></details>`}
+  ${mathBlock(a, i)}
   ${(n.corrections || []).map((c) => `<div class="fix"><b>訂正（${esc(c.date)}）</b>${inline(c.text)}</div>`).join('')}
   ${(n.talk_hints || []).length ? `<details class="talkbox tdet"><summary><span class="tmark" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M5 7h15a3 3 0 0 1 3 3v7a3 3 0 0 1-3 3h-8l-5 4v-4H5a3 3 0 0 1-3-3v-7a3 3 0 0 1 3-3z" fill="#fff"/><path d="M25 12h2a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3h-1v3l-4-3h-5" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"/><circle cx="8" cy="13.5" r="1.4" fill="#E86A92"/><circle cx="12.5" cy="13.5" r="1.4" fill="#E86A92"/><circle cx="17" cy="13.5" r="1.4" fill="#E86A92"/></svg></span><span class="tbody"><span class="tlabel">おうちの人と話そう</span><span class="ttext">${inline(n.talk)}</span></span><span class="open">ヒントを見る</span></summary><div class="tans"><b>こんな考え方があるよ</b><ul>${n.talk_hints.map((h) => `<li>${inline(h)}</li>`).join('')}</ul><span class="thint">正解はないよ。自分はどう思うか、話してみよう</span></div></details>` : `<div class="talkbox"><span class="tmark" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M5 7h15a3 3 0 0 1 3 3v7a3 3 0 0 1-3 3h-8l-5 4v-4H5a3 3 0 0 1-3-3v-7a3 3 0 0 1 3-3z" fill="#fff"/><path d="M25 12h2a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3h-1v3l-4-3h-5" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"/><circle cx="8" cy="13.5" r="1.4" fill="#E86A92"/><circle cx="12.5" cy="13.5" r="1.4" fill="#E86A92"/><circle cx="17" cy="13.5" r="1.4" fill="#E86A92"/></svg></span><div class="tbody"><span class="tlabel">おうちの人と話そう</span><span class="ttext">${inline(n.talk)}</span><span class="thint">正解はないよ。思ったことを話してみよう</span></div></div>`}
 </article>`;
