@@ -1,0 +1,109 @@
+{
+ "site": "https://jijitane.com",
+ "generated_at": "2026-10-24T13:58:13.162Z",
+ "period": {
+  "this_week": [
+   "2026-10-17",
+   "2026-10-23"
+  ],
+  "last_week": [
+   "2026-10-10",
+   "2026-10-16"
+  ]
+ },
+ "this_week": {
+  "pageviews": 0,
+  "visits": 0,
+  "daily": [
+   {
+    "date": "2026-10-17",
+    "pageviews": 0,
+    "visits": 0
+   },
+   {
+    "date": "2026-10-18",
+    "pageviews": 0,
+    "visits": 0
+   },
+   {
+    "date": "2026-10-19",
+    "pageviews": 0,
+    "visits": 0
+   },
+   {
+    "date": "2026-10-20",
+    "pageviews": 0,
+    "visits": 0
+   },
+   {
+    "date": "2026-10-21",
+    "pageviews": 0,
+    "visits": 0
+   },
+   {
+    "date": "2026-10-22",
+    "pageviews": 0,
+    "visits": 0
+   },
+   {
+    "date": "2026-10-23",
+    "pageviews": 0,
+    "visits": 0
+   }
+  ],
+  "pages": [],
+  "referrers": [],
+  "devices": []
+ },
+ "last_week": {
+  "pageviews": 0,
+  "visits": 0,
+  "daily": [
+   {
+    "date": "2026-10-10",
+    "pageviews": 0,
+    "visits": 0
+   },
+   {
+    "date": "2026-10-11",
+    "pageviews": 0,
+    "visits": 0
+   },
+   {
+    "date": "2026-10-12",
+    "pageviews": 0,
+    "visits": 0
+   },
+   {
+    "date": "2026-10-13",
+    "pageviews": 0,
+    "visits": 0
+   },
+   {
+    "date": "2026-10-14",
+    "pageviews": 0,
+    "visits": 0
+   },
+   {
+    "date": "2026-10-15",
+    "pageviews": 0,
+    "visits": 0
+   },
+   {
+    "date": "2026-10-16",
+    "pageviews": 0,
+    "visits": 0
+   }
+  ],
+  "pages": [],
+  "referrers": [],
+  "devices": []
+ },
+ "change_pct": {
+  "pageviews": null,
+  "visits": null
+ },
+ "articles_published": [
+  "2026-10-23.json"
+ ]
+}
