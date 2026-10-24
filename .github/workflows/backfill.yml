@@ -1,0 +1,54 @@
+# 過去の号を、日付を指定してまとめて作る（1日ずつ順番に「下書きを作る」を動かす）
+#   例：最初の日 2026-10-16、最後の日 2026-10-22 → 7号分
+#   AUTO_PUBLISH=true なら、1号できるたびに事実確認・自動修正をして公開する
+#   すでにある日付の号は作り直さずに飛ばす
+name: 過去の号をまとめて作る
+on:
+  workflow_dispatch:
+    inputs:
+      from:
+        description: "最初の日（例：2026-10-16）"
+        required: true
+      to:
+        description: "最後の日（例：2026-10-22）"
+        required: true
+
+permissions:
+  contents: write
+  pull-requests: write
+  actions: write
+  id-token: write
+
+jobs:
+  dates:
+    runs-on: ubuntu-latest
+    outputs:
+      list: ${{ steps.d.outputs.list }}
+    steps:
+      - id: d
+        env:
+          FROM: ${{ inputs.from }}
+          TO: ${{ inputs.to }}
+        run: |
+          node -e '
+            const [a, b] = process.argv.slice(1);
+            const ok = (x) => /^\d{4}-\d{2}-\d{2}$/.test(x);
+            if (!ok(a) || !ok(b)) { console.error("日付は YYYY-MM-DD で入れてください"); process.exit(1); }
+            const out = [];
+            for (let t = Date.parse(a + "T00:00:00Z"); t <= Date.parse(b + "T00:00:00Z"); t += 864e5) out.push(new Date(t).toISOString().slice(0, 10));
+            if (!out.length || out.length > 14) { console.error("1〜14日分にしてください"); process.exit(1); }
+            console.log("list=" + JSON.stringify(out));
+          ' "$FROM" "$TO" >> "$GITHUB_OUTPUT"
+          cat "$GITHUB_OUTPUT"
+
+  make:
+    needs: dates
+    strategy:
+      max-parallel: 1
+      fail-fast: false
+      matrix:
+        date: ${{ fromJSON(needs.dates.outputs.list) }}
+    uses: ./.github/workflows/draft.yml
+    with:
+      date: ${{ matrix.date }}
+    secrets: inherit

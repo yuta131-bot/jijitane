@@ -13,6 +13,11 @@ on:
       date:
         description: "日付（空なら今日）例：2026-10-15"
         required: false
+  workflow_call:   # 「過去の号をまとめて作る」から1日ずつ呼び出す
+    inputs:
+      date:
+        type: string
+        required: false
 
 permissions:
   contents: write
@@ -30,6 +35,8 @@ jobs:
       USE_SUB: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN != '' }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main   # まとめて作るとき、前の号が公開されたあとの最新の状態から始める
       - uses: actions/setup-node@v4
         with:
           node-version: 22
@@ -67,8 +74,9 @@ jobs:
             今日は ${{ steps.d.outputs.date }}（日本時間）です。子ども向け時事ニュースサイトの、今日の号の記事データを作ってください。
 
             1. prompts/system.md を読み、そこに書かれたルール（ニュースの選び方・書き方・図・出力形式）にすべて従ってください。{{SITE_NAME}} は「中受 じじニュースのたね」です。
-            2. content/ フォルダの新しい順に7号分の見出しを確認し、話題のかぶりを避けてください。いちばん新しい号を1つ開いて、書きぶりのお手本にしてください。
-            3. WebSearch と WebFetch で、日本時間の今日〜前日のニュースを必ず調べてから書いてください。記憶だけで書かないでください。sources には実際に開いたページの URL だけを入れてください。
+            2. content/ フォルダの、この日付より前の号を新しい順に7号分見て、話題のかぶりを避けてください。この日付より前でいちばん新しい号を1つ開いて、書きぶりのお手本にしてください。
+               この日付より新しい号が content/ にある場合は、過去の号を後から作っています。その号は読まず、この日付の時点で報じられていたことだけを書いてください（後の展開や結果は書かない）。
+            3. WebSearch と WebFetch で、日本時間の ${{ steps.d.outputs.date }}〜その前日に報じられたニュースを必ず調べてから書いてください。記憶だけで書かないでください。sources には実際に開いたページの URL だけを入れてください。
             4. 完成した JSON を content/${{ steps.d.outputs.date }}.json に書き出してください（"date" は "${{ steps.d.outputs.date }}"）。ファイルの中身は JSON だけにします。
             5. 書き出したら node scripts/validate.mjs content/${{ steps.d.outputs.date }}.json を実行し、「OK」が出るまで直してください。
             ほかのファイルは変更しないでください。
