@@ -13,7 +13,7 @@ if (!token || !account) { console.error('CF_API_TOKEN / CF_ACCOUNT_ID があり�
 const jstToday = new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 10);
 const day = (base, off) => new Date(Date.parse(base + 'T00:00:00Z') + off * 86400e3).toISOString().slice(0, 10);
 const days = Array.from({ length: 14 }, (_, i) => day(jstToday, i - 14)); // 古い順に14日
-const Q = `query($a: String!, $s: Time!, $e: Time!, $h: String!) { viewer { accounts(filter: {accountTag: $a}) {
+const Q = `query($a: string!, $s: Time!, $e: Time!, $h: string!) { viewer { accounts(filter: {accountTag: $a}) {
   total: rumPageloadEventsAdaptiveGroups(limit: 1, filter: {datetime_geq: $s, datetime_lt: $e, requestHost: $h}) { count sum { visits } }
   paths: rumPageloadEventsAdaptiveGroups(limit: 100, orderBy: [count_DESC], filter: {datetime_geq: $s, datetime_lt: $e, requestHost: $h}) { count sum { visits } dimensions { requestPath } }
   refs: rumPageloadEventsAdaptiveGroups(limit: 50, orderBy: [count_DESC], filter: {datetime_geq: $s, datetime_lt: $e, requestHost: $h}) { count dimensions { refererHost } }
