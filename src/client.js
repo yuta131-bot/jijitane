@@ -150,29 +150,44 @@
     });
     return out;
   }
-  var canHL = !!(window.CSS && CSS.highlights && window.Highlight);
-  function mark(item) {
+  // いま読んでいる文を <span class="rd"> で囲む（ふりがなの上には印をつけない）
+  function unwrapReading() {
+    document.querySelectorAll('span.rd').forEach(function (sp) {
+      var p = sp.parentNode; while (sp.firstChild) p.insertBefore(sp.firstChild, sp); p.removeChild(sp); p.normalize();
+    });
     document.querySelectorAll('.reading').forEach(function (x) { x.classList.remove('reading'); });
-    if (canHL) CSS.highlights.delete('reading');
+  }
+  function wrapSentence(el, idx) {
+    var r = sentenceRanges(el)[idx]; if (!r) return null;
+    var rs = r.startContainer.parentNode && r.startContainer.parentNode.closest('ruby');
+    if (rs && el.contains(rs)) r.setStartBefore(rs);
+    var re = r.endContainer.parentNode && r.endContainer.parentNode.closest('ruby');
+    if (re && el.contains(re)) r.setEndAfter(re);
+    var sp = document.createElement('span'); sp.className = 'rd';
+    try { sp.appendChild(r.extractContents()); r.insertNode(sp); } catch (e) { return null; }
+    return sp;
+  }
+  function mark(item) {
+    unwrapReading();
     if (!item) return;
-    if (item.range && canHL) CSS.highlights.set('reading', new Highlight(item.range));
-    else if (item.el) item.el.classList.add('reading');
+    var target = (item.sIdx != null && item.el) ? wrapSentence(item.el, item.sIdx) : null;
+    if (!target && item.el) { item.el.classList.add('reading'); target = item.el; }
     // 読んでいるところが画面の外なら、見える位置まで動かす
-    var box = (item.range && item.range.getBoundingClientRect) ? item.range.getBoundingClientRect() : (item.el && item.el.getBoundingClientRect());
+    var box = target && target.getBoundingClientRect();
     if (box && box.height && (box.top < 90 || box.bottom > window.innerHeight - 40)) {
       window.scrollBy({ top: box.top - window.innerHeight * 0.35, behavior: 'smooth' });
     }
   }
   function buildQueue(art) {
     var q = [];
-    var add = function (el, text, pauseAfter, range) { if (text) splitSentences(text).forEach(function (s, i, arr) { q.push({ el: el, range: range || null, text: s, pause: i === arr.length - 1 ? pauseAfter : 60 }); }); };
+    var add = function (el, text, pauseAfter, sIdx) { if (text) splitSentences(text).forEach(function (s, i, arr) { q.push({ el: el, sIdx: sIdx == null ? null : sIdx, text: s, pause: i === arr.length - 1 ? pauseAfter : 60 }); }); };
     // 段落などは1文ずつに分けて、いま読んでいる文だけに印をつける
     var addEach = function (el, pauseAfter, prefix) {
       var rs = sentenceRanges(el);
       if (!rs.length) { add(el, (prefix || '') + speechText(el), pauseAfter); return; }
       rs.forEach(function (r, i) {
         var box = document.createElement('span'); box.appendChild(r.cloneContents());
-        add(el, (i === 0 && prefix ? prefix : '') + speechText(box), i === rs.length - 1 ? pauseAfter : 160, r);
+        add(el, (i === 0 && prefix ? prefix : '') + speechText(box), i === rs.length - 1 ? pauseAfter : 160, i);
       });
     };
     var h = art.querySelector('h2 > span:last-child');
@@ -213,7 +228,7 @@
     var item = r.queue[r.i++];
     var u = new SpeechSynthesisUtterance(item.text);
     u.lang = 'ja-JP'; if (voice) u.voice = voice;
-    u.rate = 1.0; u.pitch = 0.92; u.volume = 1;
+    u.rate = 1.05; u.pitch = 0.92; u.volume = 1;
     // 声が実際に出はじめたときに印を動かす（ずれを防ぐ）
     var shown = false;
     u.onstart = function () { if (!r.stopped) { shown = true; mark(item); } };

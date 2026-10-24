@@ -1,19 +1,19 @@
 :root{
   --paper:#F5FAFE; --grid:#DDEAF4; --card:#FFFFFF; --ink:#1D2B44; --muted:#56677F;
-  --line:#C9D8E6; --marker:#FFE36E; --mark-bg:#FFE36E; --mark-ink:inherit; --read-bg:#CDE7FF; --read-line:#2E78C9; --sci:#1E9A72; --soc:#DB7420; --sky:#2E78C9;
+  --line:#C9D8E6; --marker:#FFE36E; --mark-bg:#FFE36E; --mark-ink:inherit; --read-bg:#B9DCFF; --read-line:#2E78C9; --sci:#1E9A72; --soc:#DB7420; --sky:#2E78C9;
   --sea:#BFE0F5; --land:#F1E3C6; --landline:#C9AE7C; --soft:#EEF5FB; --navy:#1D2B44; --hdr:#8ED4FF; --hdr-ink:#1D2B44; --ftr:#D9F0FF; --talkbg:#FFF1F5;
   box-sizing:border-box;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
     --paper:#141B27; --grid:#1A2333; --card:#1B2433; --ink:#E9EEF6; --muted:#A3B1C6;
-    --line:#33425A; --marker:#E8C547; --mark-bg:rgba(255,214,90,.30); --mark-ink:#FFF3C4; --read-bg:rgba(111,174,240,.32); --read-line:#6FAEF0; --sci:#4CC79C; --soc:#F2A15C; --sky:#6FAEF0;
+    --line:#33425A; --marker:#E8C547; --mark-bg:rgba(255,214,90,.30); --mark-ink:#FFF3C4; --read-bg:rgba(111,174,240,.45); --read-line:#6FAEF0; --sci:#4CC79C; --soc:#F2A15C; --sky:#6FAEF0;
     --sea:#1F3B57; --land:#4A4130; --landline:#7D6A45; --soft:#212C3D; --hdr:#2A6F9E; --hdr-ink:#fff; --ftr:#1B3550; --talkbg:#3A2430;
   }
 }
 :root[data-theme="dark"]{
   --paper:#141B27; --grid:#1A2333; --card:#1B2433; --ink:#E9EEF6; --muted:#A3B1C6;
-  --line:#33425A; --marker:#E8C547; --mark-bg:rgba(255,214,90,.30); --mark-ink:#FFF3C4; --read-bg:rgba(111,174,240,.32); --read-line:#6FAEF0; --sci:#4CC79C; --soc:#F2A15C; --sky:#6FAEF0;
+  --line:#33425A; --marker:#E8C547; --mark-bg:rgba(255,214,90,.30); --mark-ink:#FFF3C4; --read-bg:rgba(111,174,240,.45); --read-line:#6FAEF0; --sci:#4CC79C; --soc:#F2A15C; --sky:#6FAEF0;
   --sea:#1F3B57; --land:#4A4130; --landline:#7D6A45; --soft:#212C3D; --hdr:#2A6F9E; --hdr-ink:#fff; --ftr:#1B3550; --talkbg:#3A2430;
 }
 *,*::before,*::after{box-sizing:inherit}
@@ -244,7 +244,7 @@ svg text{font-family:"Zen Maru Gothic","Hiragino Maru Gothic ProN","Hiragino San
 .tdet summary{flex-wrap:wrap}
 .tdet summary .tbody{flex:1 1 calc(100% - 50px)}
 .tdet .open{margin-left:auto;order:3}
-.reading{background:var(--read-bg);border-radius:4px;box-shadow:0 0 0 3px var(--read-bg);transition:background .2s}
+.reading,.rd{background:linear-gradient(transparent 52%,var(--read-bg) 52%);border-radius:2px}
+.rd rt,.reading rt{background:none}
 .three.reading,.quiz.reading{background:var(--soft);box-shadow:none;outline:3px solid var(--read-line)}
-::highlight(reading){background-color:var(--read-bg);color:inherit}
 @media (prefers-reduced-motion:reduce){.reading{transition:none}}
