@@ -1,0 +1,158 @@
+{
+ "site": "https://jijitane.com",
+ "generated_at": "2026-10-25T23:11:54.404Z",
+ "period": {
+  "this_week": [
+   "2026-10-19",
+   "2026-10-25"
+  ],
+  "last_week": [
+   "2026-10-12",
+   "2026-10-18"
+  ]
+ },
+ "this_week": {
+  "pageviews": 34,
+  "visits": 28,
+  "daily": [
+   {
+    "date": "2026-10-19",
+    "pageviews": 0,
+    "visits": 0
+   },
+   {
+    "date": "2026-10-20",
+    "pageviews": 0,
+    "visits": 0
+   },
+   {
+    "date": "2026-10-21",
+    "pageviews": 0,
+    "visits": 0
+   },
+   {
+    "date": "2026-10-22",
+    "pageviews": 0,
+    "visits": 0
+   },
+   {
+    "date": "2026-10-23",
+    "pageviews": 0,
+    "visits": 0
+   },
+   {
+    "date": "2026-10-24",
+    "pageviews": 10,
+    "visits": 4
+   },
+   {
+    "date": "2026-10-25",
+    "pageviews": 24,
+    "visits": 24
+   }
+  ],
+  "pages": [
+   {
+    "key": "/",
+    "pageviews": 29
+   },
+   {
+    "key": "/contact",
+    "pageviews": 1
+   },
+   {
+    "key": "/glossary",
+    "pageviews": 1
+   },
+   {
+    "key": "/about",
+    "pageviews": 1
+   },
+   {
+    "key": "/privacy",
+    "pageviews": 1
+   },
+   {
+    "key": "/news/2026-10-09",
+    "pageviews": 1
+   }
+  ],
+  "referrers": [
+   {
+    "key": "（直接・不明）",
+    "pageviews": 20
+   },
+   {
+    "key": "yuta131-bot.github.io",
+    "pageviews": 8
+   },
+   {
+    "key": "（サイト内）",
+    "pageviews": 6
+   }
+  ],
+  "devices": [
+   {
+    "key": "mobile",
+    "pageviews": 18
+   },
+   {
+    "key": "desktop",
+    "pageviews": 16
+   }
+  ]
+ },
+ "last_week": {
+  "pageviews": 0,
+  "visits": 0,
+  "daily": [
+   {
+    "date": "2026-10-12",
+    "pageviews": 0,
+    "visits": 0
+   },
+   {
+    "date": "2026-10-13",
+    "pageviews": 0,
+    "visits": 0
+   },
+   {
+    "date": "2026-10-14",
+    "pageviews": 0,
+    "visits": 0
+   },
+   {
+    "date": "2026-10-15",
+    "pageviews": 0,
+    "visits": 0
+   },
+   {
+    "date": "2026-10-16",
+    "pageviews": 0,
+    "visits": 0
+   },
+   {
+    "date": "2026-10-17",
+    "pageviews": 0,
+    "visits": 0
+   },
+   {
+    "date": "2026-10-18",
+    "pageviews": 0,
+    "visits": 0
+   }
+  ],
+  "pages": [],
+  "referrers": [],
+  "devices": []
+ },
+ "change_pct": {
+  "pageviews": null,
+  "visits": null
+ },
+ "articles_published": [
+  "2026-10-23.json",
+  "2026-10-24.json",
+  "2026-10-25.json"
+ ]
+}
