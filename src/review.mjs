@@ -21,7 +21,7 @@ ${dropped ? `\n※ 検索結果で確認できなかった出典を ${dropped} �
 ${(data.sources || []).map((s) => `- [${s.title}](${s.url})`).join('\n') || '（なし）'}
 
 ---
-問題なければ **Merge** すると、サイトに公開され、${cfg.postHourJst}時以降に X へ投稿されます。直したいところは、このブランチの \`content/${date}.json\` を編集してください。
+問題なければ **Merge** すると、サイトに公開され、${String(cfg.postHourJst).replace(".5", "時半").replace(/^(\d+)$/, "$1時")}以降に X へ投稿されます。直したいところは、このブランチの \`content/${date}.json\` を編集してください。
 `;
   fs.mkdirSync('.review', { recursive: true });
   fs.writeFileSync(path.join('.review', `${date}.md`), md);

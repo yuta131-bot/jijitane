@@ -16,7 +16,10 @@ const file = path.join('content', `${date}.json`);
 if (!fs.existsSync(file)) { console.log(`${date} の号はまだ公開されていません`); process.exit(0); }
 const state = fs.existsSync(STATE) ? JSON.parse(fs.readFileSync(STATE, 'utf8')) : {};
 if (state[date] && !force) { console.log(`${date} は投稿済みです`); process.exit(0); }
-if (hourJst() < cfg.postHourJst && !force) { console.log(`投稿は ${cfg.postHourJst} 時以降に行います`); process.exit(0); }
+// postHourJst は 7.5（＝7時30分）のように小数でも書ける
+const nowH = (() => { const d = new Date(Date.now() + 9 * 3600e3); return d.getUTCHours() + d.getUTCMinutes() / 60; })();
+const ph = Number(cfg.postHourJst) || 7, phLabel = `${Math.floor(ph)}時${ph % 1 ? `${Math.round((ph % 1) * 60)}分` : ''}`;
+if (nowH < ph && !force) { console.log(`投稿は ${phLabel} 以降に行います`); process.exit(0); }
 
 const a = JSON.parse(fs.readFileSync(file, 'utf8'));
 const dt = jpDate(date);

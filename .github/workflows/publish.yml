@@ -5,7 +5,7 @@ on:
     branches: [main]
     paths: ["content/**", "src/**", "scripts/**", "site.config.json"]
   schedule:
-    - cron: "0 22 * * *"   # UTC 22:00 = 日本時間 7:00（マージが早朝に済んでいた日の投稿用）
+    - cron: "30 22 * * *"   # UTC 22:30 = 日本時間 7:30（X への投稿。site.config.json の postHourJst と合わせる）
   workflow_dispatch:
     inputs:
       force_post:

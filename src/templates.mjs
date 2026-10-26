@@ -50,7 +50,7 @@ function sidebar(cfg, recent) {
   const base = baseOf(cfg);
   const xUrl = cfg.xHandle ? `https://x.com/${cfg.xHandle}` : 'https://x.com/';
   return `<aside class="side">
-  <section class="box follow-box"><b>毎朝7時に配信中</b><p>その日の3本とクイズが届きます。</p>
+  <section class="box follow-box"><b>毎朝7時半に X で配信中</b><p>その日の3本とクイズが届きます。</p>
     <a class="btn" href="${esc(xUrl)}" target="_blank" rel="noopener">Xでフォロー</a>
     ${cfg.lineUrl ? `<a class="btn btn-line" href="${esc(cfg.lineUrl)}" target="_blank" rel="noopener">LINEで受け取る</a>` : ''}</section>
   ${ad(cfg, 'side', 'rect')}

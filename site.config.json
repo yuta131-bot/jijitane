@@ -6,7 +6,7 @@
     "中学受験",
     "時事問題"
   ],
-  "postHourJst": 7,
+  "postHourJst": 7.5,
   "model": "claude-sonnet-5-5",
   "xHandle": "jijitane_news",
   "lineUrl": "",
