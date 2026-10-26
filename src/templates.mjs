@@ -105,7 +105,7 @@ ${sidebar(cfg, recent)}
 <footer class="gf"><div class="gf-in">
   <div><b>${esc(cfg.siteName)}</b><br>${esc(cfg.tagline)}</div>
   <nav><a href="${base}/glossary.html">用語集</a><a href="${base}/units.html">単元別</a><a href="${base}/about.html">このサイトについて・訂正の方針</a><a href="${base}/privacy.html">プライバシーポリシー</a><a href="${base}/contact.html">お問い合わせ</a></nav>
-  <p>記事はAIが下書きし、別のAIによる事実確認と人の確認をへて公開しています。まちがいが見つかった場合は、記事の中に訂正内容と日付を示して直します。</p>
+  <p>記事はAIが報道をもとに下書きし、別のAIが出典と照らし合わせて確認してから公開しています。公開後も運営者が確認し、まちがいが見つかった場合は、記事の中に訂正内容と日付を示して直します。</p>
 </div></footer>
 <script>${CLIENT_JS}</script>
 </body>
