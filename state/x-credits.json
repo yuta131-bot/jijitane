@@ -1,0 +1,8 @@
+{
+ "note": "X のクレジットを買ったら、purchases に日付と金額（ドル）を足してください。Claude に「X のクレジットを○ドル買った」と伝えれば追記します。",
+ "cost_per_day_usd": 0.215,
+ "alert_below_usd": 3,
+ "purchases": [
+  { "date": "2026-10-26", "usd": 10 }
+ ]
+}

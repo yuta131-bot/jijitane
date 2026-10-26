@@ -60,7 +60,15 @@ const result = {
   x_posts: (() => {
     let p = {}; try { p = JSON.parse(fs.readFileSync('state/posted.json', 'utf8')); } catch {}
     const inWeek = Object.keys(p).filter((d) => d >= days[7] && d <= days[13]).length;
-    return { this_week: inWeek, est_cost_usd: Math.round(inWeek * 0.215 * 100) / 100, per_month_est_usd: Math.round(0.215 * 30 * 100) / 100 };
+    // 買ったクレジット（state/x-credits.json）から、これまでの投稿回数分を引いて残りを見積もる
+    let c = { purchases: [], cost_per_day_usd: 0.215, alert_below_usd: 3 };
+    try { c = { ...c, ...JSON.parse(fs.readFileSync('state/x-credits.json', 'utf8')) }; } catch {}
+    const bought = c.purchases.reduce((t, x) => t + (Number(x.usd) || 0), 0);
+    const total = Object.keys(p).length;
+    const remaining = Math.round((bought - total * c.cost_per_day_usd) * 100) / 100;
+    const daysLeft = c.cost_per_day_usd ? Math.floor(remaining / c.cost_per_day_usd) : null;
+    return { this_week: inWeek, est_cost_usd: Math.round(inWeek * c.cost_per_day_usd * 100) / 100, total_posts: total, bought_usd: bought,
+      est_remaining_usd: remaining, est_days_left: daysLeft, low: bought > 0 && remaining < c.alert_below_usd };
   })(),
   articles_published: fs.readdirSync('content').filter((f) => f >= days[7] && f <= days[13] + '.json').sort()
 };

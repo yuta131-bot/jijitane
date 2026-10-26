@@ -33,6 +33,20 @@ jobs:
           node scripts/weekly-stats.mjs
           echo "date=$(TZ=Asia/Tokyo date +%F)" >> "$GITHUB_OUTPUT"
 
+      - name: X のクレジットが少なければ知らせる
+        env:
+          GH_TOKEN: ${{ github.token }}
+          D: ${{ steps.stats.outputs.date }}
+        run: |
+          read LOW REM DAYS < <(node -e "const x=JSON.parse(require('fs').readFileSync('reports/data/'+process.env.D+'.json','utf8')).x_posts||{};console.log(!!x.low, x.est_remaining_usd, x.est_days_left)")
+          if [ "$LOW" = "true" ]; then
+            gh issue create --title "💳 X のクレジットが残りわずかの見込みです（約${REM}ドル・あと${DAYS}日ほど）" --body "$(printf '%s\n\n%s\n%s\n%s' \
+              "買ったクレジットとこれまでの投稿回数から計算すると、X のクレジットの残りは **約${REM}ドル**（毎朝の投稿であと **${DAYS}日ほど**）の見込みです。" \
+              "1. https://developer.x.com の Developer Console で「合計残高」を確かめる" \
+              "2. 少なければ「クレジットを購入する」から追加する（10ドルで約45日分）" \
+              "3. 買ったら Claude に「X のクレジットを○ドル買った」と伝えるか、state/x-credits.json の purchases に日付と金額を足す")"
+          fi
+
       - name: Claude がレポートを書く
         uses: anthropics/claude-code-action@v1
         with:
@@ -51,7 +65,7 @@ jobs:
             ## どこから来たか（流入元・スマホ/PC の割合）
             ## 気になる点（課題）
             ## 改善案（すぐできるもの3つ。具体的に。作成ルール prompts/system.md の直し方の提案も可）
-            ## X の投稿と費用（x_posts：今週の投稿回数と、おおよその費用。「X の残高は developer.x.com の Developer Console で確かめてください」と一言そえる）
+            ## X の投稿と費用（x_posts：今週の投稿回数、おおよその費用、クレジットの残りの見込み est_remaining_usd と残り日数 est_days_left。「X の残高は developer.x.com の Developer Console で確かめてください」と一言そえる）
             ## 来週やること（チェックリスト）
 
             ルール：データにない数字は作らない。アクセスがまだ少ないときは、少ないことをはっきり書き、数字より「集客の打ち手」を中心に提案する。ファイルは reports/ の中だけに書き、ほかのファイルは変更しない。
