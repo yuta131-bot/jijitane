@@ -5,17 +5,17 @@
   {
    "subject": "{社会|しゃかい}（{情報|じょうほう}・{科学技術|かがくぎじゅつ}）",
    "subject_key": "other",
-   "title": "{世界|せかい}のサイトの{約|やく}7{割|わり}が{使|つか}うPHPに{重大|じゅうだい}な{欠陥|けっかん}",
+   "title": "{世界|せかい}のサイトの{約|やく}7{割|わり}が{使|つか}う{PHP|ピーエイチピー}に{重大|じゅうだい}な{欠陥|けっかん}",
    "short_title": "PHPの重大な欠陥で対応広がる",
    "points": [
-    "{世界|せかい}のウェブサイトの{約|やく}7{割|わり}で{使|つか}われる{言葉|ことば}「PHP」に、{重大|じゅうだい}な{欠陥|けっかん}が2つ{見|み}つかった。",
+    "{世界|せかい}のウェブサイトの{約|やく}7{割|わり}で{使|つか}われる{言葉|ことば}「{PHP|ピーエイチピー}」に、{重大|じゅうだい}な{欠陥|けっかん}が2つ{見|み}つかった。",
     "21{日|にち}の{夜|よる}に{修正版|しゅうせいばん}が{出|で}て、{高市早苗首相|たかいちさなえしゅしょう}は「{直|なお}すか、サイトを{止|と}めて」と{呼|よ}びかけた。",
     "OpenAIは、AIが{攻撃者|こうげきしゃ}より{先|さき}に{見|み}つけたと{説明|せつめい}。22{日|にち}、{日本政府|にほんせいふ}は{被害|ひがい}の{報告|ほうこく}はないとした。"
    ],
    "svg": "<svg viewBox='0 0 360 520' role='img' aria-label='PHPの欠陥と対応の流れの図'><defs><marker id='a1' viewBox='0 0 10 10' refX='8' refY='5' markerWidth='6' markerHeight='6' orient='auto'><path d='M0 0 L10 5 L0 10z' style='fill:var(--ink)'/></marker></defs><text x='180' y='28' text-anchor='middle' font-size='17' font-weight='900' style='fill:var(--ink)'>PHPの欠陥と、その対応</text><rect x='20' y='46' width='320' height='84' rx='12' style='fill:var(--soft)'/><text x='180' y='74' text-anchor='middle' font-size='15' font-weight='900' style='fill:var(--sci)'>PHPとは</text><text x='180' y='98' text-anchor='middle' font-size='14' style='fill:var(--ink)'>サイトを動かすプログラムの言葉</text><text x='180' y='118' text-anchor='middle' font-size='14' style='fill:var(--ink)'>世界のサイトの約7割が使う</text><path d='M180 134 V152' stroke='var(--ink)' stroke-width='3' marker-end='url(#a1)'/><rect x='20' y='158' width='320' height='104' rx='12' style='fill:var(--card)' stroke='#E5484D' stroke-width='3'/><text x='180' y='186' text-anchor='middle' font-size='15' font-weight='900' style='fill:#E5484D'>重大な欠陥が2つ</text><text x='180' y='212' text-anchor='middle' font-size='14' style='fill:var(--ink)'>①メモリがこわれ、悪いコードを</text><text x='180' y='232' text-anchor='middle' font-size='14' style='fill:var(--ink)'>　動かされるおそれ</text><text x='180' y='252' text-anchor='middle' font-size='14' style='fill:var(--ink)'>②消すデータが残ってしまう</text><path d='M180 266 V284' stroke='var(--ink)' stroke-width='3' marker-end='url(#a1)'/><rect x='20' y='290' width='320' height='72' rx='12' style='fill:var(--soft)'/><text x='180' y='318' text-anchor='middle' font-size='15' font-weight='900' style='fill:var(--ink)'>21日の夜</text><text x='180' y='344' text-anchor='middle' font-size='14' style='fill:var(--ink)'>直した新しい版が公開された</text><path d='M180 366 V384' stroke='var(--ink)' stroke-width='3' marker-end='url(#a1)'/><rect x='20' y='390' width='320' height='84' rx='12' style='fill:var(--card)' stroke='var(--soc)' stroke-width='3'/><text x='180' y='418' text-anchor='middle' font-size='15' font-weight='900' style='fill:var(--soc)'>日本では</text><text x='180' y='442' text-anchor='middle' font-size='14' style='fill:var(--ink)'>首相が「すぐ直すか、サイトを</text><text x='180' y='462' text-anchor='middle' font-size='14' style='fill:var(--ink)'>一時停止して」と呼びかけた</text><text x='180' y='504' text-anchor='middle' font-size='13' style='fill:var(--muted)'>22日、官房長官「被害の報告なし」</text></svg>",
    "caption": "PHPの欠陥が見つかってから、日本政府が呼びかけるまで",
    "body": [
-    "ウェブサイトは、たくさんのプログラムで動いています。その一つの「PHP」というプログラミング言語に、{重大|じゅうだい}な{欠陥|けっかん}が2つ{見|み}つかりました。アメリカのAP{通信|つうしん}によると、PHPは{世界|せかい}のウェブサイトの{約|やく}7{割|わり}で{使|つか}われています。==欠陥をつかれると、悪い人にサーバーを遠くから操られるおそれがある==と、専門家は指摘しています。",
+    "ウェブサイトは、たくさんのプログラムで動いています。その一つの「{PHP|ピーエイチピー}」というプログラミング言語に、{重大|じゅうだい}な{欠陥|けっかん}が2つ{見|み}つかりました。アメリカのAP{通信|つうしん}によると、PHPは{世界|せかい}のウェブサイトの{約|やく}7{割|わり}で{使|つか}われています。==欠陥をつかれると、悪い人にサーバーを遠くから操られるおそれがある==と、専門家は指摘しています。",
     "21{日|にち}の{夜|よる}に{修正版|しゅうせいばん}が{公開|こうかい}されると、{高市早苗首相|たかいちさなえしゅしょう}はXで「{大至急|だいしきゅう}のお{願|ねが}い」を{出|だ}しました。PHPを{使|つか}うサイトの{持|も}ち{主|ぬし}は、すぐ{修正|しゅうせい}を{当|あ}てること。できなければ、==サイトをいったん止めることも有効==だと{話|はな}しました。22{日|にち}には、首相のホームページが{一時停止|いちじていし}されました。",
     "{見|み}つけたのは、OpenAIのAIが{役立|やくだ}ったといいます。OpenAIは「==攻撃者より先にAIが見つけたようだ==」と{説明|せつめい}しています。{一方|いっぽう}、PHP{財団|ざいだん}は、この{問題|もんだい}が2024年から{知|し}られていたのに{直|なお}すのが{遅|おく}れたと{認|みと}めたと{報|ほう}じられています。{木原稔官房長官|きはらみのるかんぼうちょうかん}は22{日|にち}、{被害|ひがい}の{報告|ほうこく}は{受|う}けていないと{話|はな}しました。"
    ],
