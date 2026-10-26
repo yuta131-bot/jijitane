@@ -47,8 +47,8 @@ export function cardSvg(a, cfg) {
     + Array.from({ length: 29 }, (_, i) => `<line x1="0" y1="${i * 24}" x2="1200" y2="${i * 24}" stroke="#DDEAF4" stroke-width="2"/>`).join('');
   return `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" font-family="Zen Maru Gothic">
 <rect width="1200" height="675" fill="#F5FAFE"/>${grid}
-${cfg.brandPrefix ? `<rect x="70" y="72" width="96" height="60" rx="12" fill="#fff" stroke="#1D2B44" stroke-width="4"/><text x="118" y="116" text-anchor="middle" font-size="36" font-weight="700" fill="#1D2B44">${esc(cfg.brandPrefix)}</text><text x="184" y="128" font-size="62" font-weight="700" fill="#1D2B44">${esc(cfg.brandMain)}</text>` : `<text x="70" y="128" font-size="76" font-weight="700" fill="#1D2B44">${esc(cfg.siteName)}</text>`}
-<text x="1130" y="128" text-anchor="end" font-size="40" font-weight="700" fill="#1D2B44">${esc(dt.label)}</text>
+${cfg.brandPrefix ? `<rect x="70" y="72" width="96" height="60" rx="12" fill="#fff" stroke="#1D2B44" stroke-width="4"/><text x="118" y="116" text-anchor="middle" font-size="36" font-weight="700" fill="#1D2B44">${esc(cfg.brandPrefix)}</text><text x="184" y="128" font-size="58" font-weight="700" fill="#1D2B44">${esc(cfg.brandMain)}</text>` : `<text x="70" y="128" font-size="76" font-weight="700" fill="#1D2B44">${esc(cfg.siteName)}</text>`}
+<text x="1130" y="128" text-anchor="end" font-size="40" font-weight="700" fill="#1D2B44">${esc(dt.short)}</text>
 <rect x="70" y="152" width="1060" height="8" fill="#1D2B44"/>
 <rect x="70" y="182" width="${Math.min(1060, 30 + clip(cfg.taglineShort || cfg.tagline, 60).length * 30)}" height="44" rx="22" fill="#FFE36E"/>
 <text x="92" y="215" font-size="28" font-weight="500" fill="#1D2B44">${esc(clip(cfg.taglineShort || cfg.tagline, 60))}</text>
