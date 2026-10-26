@@ -17,6 +17,7 @@ permissions:
   contents: write
   pages: write
   id-token: write
+  issues: write
 
 concurrency:
   group: publish
@@ -64,6 +65,7 @@ jobs:
           path: fonts
           key: fonts-zen-maru-v1
       - name: X に投稿
+        id: xpost
         env:
           SITE_URL: ${{ vars.SITE_URL }}
           FORCE_POST: ${{ inputs.force_post }}
@@ -72,6 +74,18 @@ jobs:
           X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
           X_ACCESS_SECRET: ${{ secrets.X_ACCESS_SECRET }}
         run: node scripts/post-x.mjs
+      - name: 投稿に失敗したら Issue で知らせる
+        if: failure() && steps.xpost.outcome == 'failure'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          D="$(TZ=Asia/Tokyo date +%F)"
+          gh issue create --title "⚠️ X への投稿に失敗しました（$D）" --body "$(printf '%s\n\n%s\n%s\n%s\n\n%s' \
+            "今朝の X への自動投稿が失敗しました。" \
+            "- いちばん多い原因は **X のクレジット不足** です。https://console.x.com のダッシュボードで「合計残高」を確かめ、少なければ「クレジットを購入する」から追加してください。" \
+            "- 残高があるのに失敗した場合は、キー（Secrets の X_ で始まる4つ）が無効になっていないか確かめてください。" \
+            "- 追加したあと、Actions →「公開とX投稿」→「Run workflow」で「時刻に関係なく今日の号を投稿する」にチェックを入れて実行すると、今日の分を投稿できます。" \
+            "くわしいエラー：${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}")"
       - name: 投稿の記録を残す
         run: |
           if ! git diff --quiet state/; then

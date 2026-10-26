@@ -56,6 +56,12 @@ const result = {
   period: { this_week: [days[7], days[13]], last_week: [days[0], days[6]] },
   this_week: cur, last_week: prev,
   change_pct: { pageviews: pct(cur.pageviews, prev.pageviews), visits: pct(cur.visits, prev.visits) },
+  // X の自動投稿（画像つき投稿 0.015ドル＋リンクつき返信 0.20ドル）の回数と、おおよその費用
+  x_posts: (() => {
+    let p = {}; try { p = JSON.parse(fs.readFileSync('state/posted.json', 'utf8')); } catch {}
+    const inWeek = Object.keys(p).filter((d) => d >= days[7] && d <= days[13]).length;
+    return { this_week: inWeek, est_cost_usd: Math.round(inWeek * 0.215 * 100) / 100, per_month_est_usd: Math.round(0.215 * 30 * 100) / 100 };
+  })(),
   articles_published: fs.readdirSync('content').filter((f) => f >= days[7] && f <= days[13] + '.json').sort()
 };
 fs.mkdirSync('reports/data', { recursive: true });
