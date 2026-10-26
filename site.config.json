@@ -8,7 +8,7 @@
   ],
   "postHourJst": 7,
   "model": "claude-sonnet-5-5",
-  "xHandle": "",
+  "xHandle": "jijitane_news",
   "lineUrl": "",
   "ads": {
     "enabled": false,
