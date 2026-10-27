@@ -105,6 +105,7 @@ ${sidebar(cfg, recent)}
 <footer class="gf"><div class="gf-in">
   <div><b>${esc(cfg.siteName)}</b><br>${esc(cfg.tagline)}</div>
   <nav><a href="${base}/glossary.html">用語集</a><a href="${base}/units.html">単元別</a><a href="${base}/about.html">このサイトについて・訂正の方針</a><a href="${base}/privacy.html">プライバシーポリシー</a><a href="${base}/contact.html">お問い合わせ</a></nav>
+  <p>読み上げ音声：VOICEVOX:冥鳴ひまり</p>
   <p>記事はAIが報道をもとに下書きし、別のAIが出典と照らし合わせて確認してから公開しています。公開後も運営者が確認し、まちがいが見つかった場合は、記事の中に訂正内容と日付を示して直します。</p>
 </div></footer>
 <script>${CLIENT_JS}</script>
@@ -115,7 +116,7 @@ ${sidebar(cfg, recent)}
 function newsBlock(n, i, a, base, single = false) {
   const svg = safeSvg(n.svg, `n${i}`);
   const s = subj(n.subject_key);
-  return `<article id="news${i + 1}" style="--c:${s[1]}">
+  return `<article id="news${i + 1}" style="--c:${s[1]}" data-audio="${base}/audio/${a.date}-${i + 1}.json">
   <div class="art-head"><span class="tag ${s[2]}">${inline(n.subject)}</span>${stars(n.exam_level)}</div>
   <h2><span class="num">${i + 1}</span><span>${inline(n.title)}</span></h2>
   ${(n.units || []).length ? `<div class="units">${n.units.map((u) => `<a class="unit" href="${base}/units.html#${slug(u)}">${esc(u)}</a>`).join('')}</div>` : ''}

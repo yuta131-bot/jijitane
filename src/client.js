@@ -84,12 +84,12 @@
   if (synth) { pickVoice(); if (synth.addEventListener) synth.addEventListener('voiceschanged', pickVoice); }
 
   // 読み上げ用に文を整える
-  function speechText(el) {
+  function speechText(el, allYomi) {
     var c = el.cloneNode(true);
     // 漢字はふりがなの読みで読ませる（読みまちがいを防ぐ）
     c.querySelectorAll('ruby').forEach(function (r) {
       var rt = r.querySelector('rt');
-      var useYomi = r.hasAttribute('data-say') && rt;
+      var useYomi = (allYomi || r.hasAttribute('data-say')) && rt;
       if (rt) rt.remove();
       r.replaceWith(document.createTextNode(useYomi ? rt.textContent : r.textContent));
     });
@@ -188,16 +188,16 @@
       window.scrollBy({ top: box.top - window.innerHeight * 0.35, behavior: 'smooth' });
     }
   }
-  function buildQueue(art) {
+  function buildQueue(art, allYomi) {
     var q = [];
     var add = function (el, text, pauseAfter, sIdx) { if (text) splitSentences(text).forEach(function (s, i, arr) { q.push({ el: el, sIdx: sIdx == null ? null : sIdx, text: s, pause: i === arr.length - 1 ? pauseAfter : 60 }); }); };
     // 段落などは1文ずつに分けて、いま読んでいる文だけに印をつける
     var addEach = function (el, pauseAfter, prefix) {
       var rs = sentenceRanges(el);
-      if (!rs.length) { add(el, (prefix || '') + speechText(el), pauseAfter); return; }
+      if (!rs.length) { add(el, (prefix || '') + speechText(el, allYomi), pauseAfter); return; }
       rs.forEach(function (r, i) {
         var box = document.createElement('span'); box.appendChild(r.cloneContents());
-        add(el, (i === 0 && prefix ? prefix : '') + speechText(box), i === rs.length - 1 ? pauseAfter : 160, i);
+        add(el, (i === 0 && prefix ? prefix : '') + speechText(box, allYomi), i === rs.length - 1 ? pauseAfter : 160, i);
       });
     };
     var h = art.querySelector('h2 > span:last-child');
@@ -213,24 +213,59 @@
     }
     return q;
   }
+  // 録音ずみの読み上げ（VOICEVOX）を作るときに、読む文の並びを取り出すための入り口
+  window.__jtVoiceQueue = function (art) { return buildQueue(art, true).map(function (x) { return { text: x.text, pause: x.pause || 60 }; }); };
   var run = null;
   function stopSpeak() {
     if (!run) return;
     run.stopped = true; clearTimeout(run.timer);
+    if (run.audio) { run.audio.pause(); run.audio.src = ''; cancelAnimationFrame(run.raf); }
     if (synth) synth.cancel();
     mark(null);
     run.btn.classList.remove('on'); run.btn.innerHTML = '<span aria-hidden="true">🔊</span> よみあげ';
     run = null;
   }
+  // 録音ずみの声（data-audio の JSON）があればそれを使い、なければ端末の声で読む
+  var audioInfo = {};
+  function loadAudio(url) {
+    if (!url || !window.fetch) return Promise.resolve(null);
+    if (!audioInfo[url]) audioInfo[url] = fetch(url).then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; });
+    return audioInfo[url];
+  }
   function toggleSpeak(btn) {
-    if (!synth || typeof SpeechSynthesisUtterance === 'undefined') { btn.textContent = 'この端末では読み上げできません'; return; }
     if (run && run.btn === btn) { stopSpeak(); return; }
     stopSpeak();
-    if (!voice) pickVoice();
     var art = btn.closest('article');
-    run = { btn: btn, queue: buildQueue(art), i: 0, stopped: false, timer: null };
+    var r0 = { btn: btn, i: 0, stopped: false, timer: null };
+    run = r0;
     btn.classList.add('on'); btn.innerHTML = '<span aria-hidden="true">■</span> とめる';
-    next();
+    loadAudio(art.getAttribute('data-audio')).then(function (info) {
+      if (run !== r0 || r0.stopped) return;
+      var q = buildQueue(art, true);
+      if (info && info.items && info.items.length === q.length && info.src) { playRecorded(r0, q, info, art); return; }
+      if (!synth || typeof SpeechSynthesisUtterance === 'undefined') { stopSpeak(); btn.textContent = 'この端末では読み上げできません'; return; }
+      if (!voice) pickVoice();
+      r0.queue = buildQueue(art);
+      next();
+    });
+  }
+  function playRecorded(r, q, info, art) {
+    var base = art.getAttribute('data-audio').replace(/[^/]*$/, '');
+    var a = new Audio(base + info.src);
+    r.audio = a; r.queue = q;
+    var cur = -1;
+    var tick = function () {
+      if (r.stopped) return;
+      var t = a.currentTime, idx = -1;
+      for (var k = 0; k < info.items.length; k++) { if (t >= info.items[k][0] - 0.05) idx = k; else break; }
+      if (idx !== cur && idx >= 0 && idx < q.length) { cur = idx; mark(q[idx]); }
+      r.raf = requestAnimationFrame(tick);
+    };
+    a.addEventListener('ended', function () { if (run === r) stopSpeak(); });
+    a.addEventListener('error', function () { if (run !== r) return; r.audio = null; if (synth) { if (!voice) pickVoice(); r.queue = buildQueue(art); r.i = 0; next(); } else stopSpeak(); });
+    var p = a.play();
+    if (p && p.catch) p.catch(function () { if (run === r) stopSpeak(); });
+    r.raf = requestAnimationFrame(tick);
   }
   function next() {
     var r = run; if (!r || r.stopped) return;

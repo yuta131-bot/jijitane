@@ -13,7 +13,6 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 W, H = 1080, 1920
-SPEAKER = int(os.environ.get('VOICEVOX_SPEAKER', '14'))  # 14 = 冥鳴ひまり（ノーマル）：落ち着いた女性の声
 SPEAKER_CREDIT = os.environ.get('VOICEVOX_CREDIT', 'VOICEVOX:冥鳴ひまり')
 SPEED = float(os.environ.get('VOICEVOX_SPEED', '1.15'))
 GAP = 0.25  # 文と文のあいだの間（秒）
@@ -123,21 +122,9 @@ def scene_end(date_long):
             '<div style="font-size:44px;font-weight:700">毎朝7時半に X でも配信中<br>@jijitane_news</div></div>')
     return body
 
-# ---------- 音声（VOICEVOX） ----------
-def tts(text, path, url):
-    q = urllib.request.urlopen(urllib.request.Request(
-        f'{url}/audio_query?text={urllib.parse.quote(text)}&speaker={SPEAKER}', method='POST'), timeout=120).read()
-    qj = json.loads(q); qj['speedScale'] = SPEED; qj['prePhonemeLength'] = 0.05; qj['postPhonemeLength'] = 0.1
-    wavb = urllib.request.urlopen(urllib.request.Request(
-        f'{url}/synthesis?speaker={SPEAKER}', data=json.dumps(qj).encode(), headers={'Content-Type': 'application/json'}, method='POST'),
-        timeout=300).read()
-    path.write_bytes(wavb)
-    with wave.open(str(path)) as w:
-        return w.getnframes() / w.getframerate()
-
-def silence(path, sec, rate=24000):
-    with wave.open(str(path), 'wb') as w:
-        w.setnchannels(1); w.setsampwidth(2); w.setframerate(rate); w.writeframes(b'\x00\x00' * int(rate * sec))
+# ---------- 音声（VOICEVOX：scripts/voicevox.py と同じ声・同じ読み方） ----------
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import voicevox as vv
 
 def main():
     ap = argparse.ArgumentParser()
@@ -167,26 +154,40 @@ def main():
     q = a['news'][0]['quiz']
     scenes.append((scene_quiz(q, date_long), [('クイズ！ わかるかな？', f'クイズ！ {say(q["q"])}')]))
     for k in (3, 2, 1):
-        scenes.append((scene_quiz(q, date_long, count=k), [('', None, 1.0)]))
+        scenes.append((scene_quiz(q, date_long, count=k), [('', None, 1.0, 'beep')]))
     ans = int(q.get('answer', 0))
     scenes.append((scene_quiz(q, date_long, reveal=ans),
-                   [(f'正解は {disp(q["choices"][ans])}！', f'正解は、{say(q["choices"][ans])}！'), (disp(first_sentence(q.get('a'))), say(first_sentence(q.get('a'))))]))
+                   [(f'正解は {disp(q["choices"][ans])}！', f'正解は、{say(q["choices"][ans])}！', None, 'chime'), (disp(first_sentence(q.get('a'))), say(first_sentence(q.get('a'))))]))
     scenes.append((scene_end(date_long), [('くわしくは、サイトで読んでね！', 'くわしくは、じじたねのサイトで読んでね！')]))
 
     # 音声と長さ
-    items = []  # (html, 字幕, wav, 秒)
+    if args.voicevox:
+        vv.setup_dict(args.voicevox)
+    items = []  # (html, 字幕, 音声wav, 間wav, 秒)
     k = 0
     for html, lines in scenes:
         for ln in lines:
             sub, spoken = ln[0], ln[1]
-            wav = work / f'a{k:03d}.wav'
+            fixed = ln[2] if len(ln) > 2 else None
+            sound = ln[3] if len(ln) > 3 else None
+            data = b''
+            if sound == 'beep':      # カウントダウンの「ピッ」
+                data = vv.tone_pcm([880], each=0.16)
+            elif sound == 'chime':   # 正解の「ピンポン」
+                data = vv.tone_pcm([1047, 1319], each=0.16) + vv.silence_pcm(0.15)
             if spoken and args.voicevox:
-                sec = tts(spoken, wav, args.voicevox)
-            else:
-                sec = ln[2] if len(ln) > 2 else max(1.2, len(spoken or sub) * 0.13 + 0.4)
-                silence(wav, sec)
-            pad = work / f'p{k:03d}.wav'; silence(pad, GAP)
-            items.append((html, sub, wav, pad, sec + GAP)); k += 1
+                wb, _ = vv.tts(args.voicevox, spoken, SPEED)
+                data += vv.pcm(wb)
+            sec = len(data) / 2 / vv.RATE
+            if fixed and sec < fixed:
+                data += vv.silence_pcm(fixed - sec); sec = fixed
+            elif not args.voicevox and spoken:
+                extra = max(1.2, len(spoken) * 0.13 + 0.4)
+                data += vv.silence_pcm(extra); sec += extra
+            wav = work / f'a{k:03d}.wav'; vv.write_wav(wav, data)
+            gap = 0 if sound == 'beep' else GAP
+            pad = work / f'p{k:03d}.wav'; vv.write_wav(pad, vv.silence_pcm(gap) or b'\x00\x00')
+            items.append((html, sub, wav, pad, sec + gap + (1 / vv.RATE if not gap else 0))); k += 1
 
     # 画面を画像に
     from playwright.sync_api import sync_playwright

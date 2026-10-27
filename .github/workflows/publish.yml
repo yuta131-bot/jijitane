@@ -29,6 +29,11 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.pages.outputs.page_url }}
+    services:
+      voicevox:   # サイトの読み上げ音声（VOICEVOX:冥鳴ひまり）を作る
+        image: voicevox/voicevox_engine:cpu-latest
+        ports:
+          - 50021:50021
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -43,6 +48,20 @@ jobs:
       - run: node scripts/build.mjs
         env:
           SITE_URL: ${{ vars.SITE_URL }}
+      # 読み上げ音声：直近30日分。文が変わった記事だけ作り直し、作った音声はキャッシュに残す
+      - uses: actions/cache@v4
+        with:
+          path: audio-cache
+          key: audio-${{ github.run_id }}
+          restore-keys: audio-
+      - name: 読み上げ音声を作る
+        continue-on-error: true   # うまくいかなくても公開は止めない（その記事は端末の声で読み上げる）
+        timeout-minutes: 20
+        run: |
+          sudo apt-get install -y -qq ffmpeg >/dev/null
+          pip install -q playwright==1.49.1 && python -m playwright install --with-deps chromium >/dev/null
+          for i in $(seq 1 60); do curl -sf http://localhost:50021/version >/dev/null && break; sleep 3; done
+          python3 scripts/make_audio.py --dist dist --cache audio-cache --voicevox http://localhost:50021
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
