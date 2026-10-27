@@ -3,6 +3,8 @@
 #   できた動画は、GitHub の Releases にのせる（スマホからそのままダウンロードできる）
 name: ショート動画を作る
 on:
+  schedule:
+    - cron: "0 21 * * *"   # UTC 21:00 = 日本時間 6:00（朝5時の記事が公開されたあと）
   workflow_dispatch:
     inputs:
       date:
@@ -39,18 +41,26 @@ jobs:
         run: |
           D="${{ inputs.date }}"; [ -z "$D" ] && D="$(TZ=Asia/Tokyo date +%F)"
           echo "date=$D" >> "$GITHUB_OUTPUT"
+      - name: その日の号があるか確かめる
+        id: has
+        run: |
+          if [ -f "content/${{ steps.d.outputs.date }}.json" ]; then echo "ok=true" >> "$GITHUB_OUTPUT"; else echo "ok=false" >> "$GITHUB_OUTPUT"; echo "まだ号がありません"; fi
       - name: 読み上げエンジンの起動を待つ
+        if: steps.has.outputs.ok == 'true'
         run: |
           for i in $(seq 1 60); do curl -sf http://localhost:50021/version && exit 0; sleep 3; done; echo "VOICEVOX が起動しませんでした"; exit 1
       - name: 動画を作る
+        if: steps.has.outputs.ok == 'true'
         run: python scripts/make_short.py --date "${{ steps.d.outputs.date }}" --out dist-video --voicevox http://localhost:50021
       - name: Releases にのせる
+        if: steps.has.outputs.ok == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
           D: ${{ steps.d.outputs.date }}
         run: |
           T="short-$D"
           gh release delete "$T" --yes --cleanup-tag 2>/dev/null || true
-          gh release create "$T" --prerelease --title "ショート動画 $D" --notes-file "dist-video/short-$D.txt" \
+          { echo "タイトル：$(cat dist-video/short-$D-title.txt)"; echo; echo "説明："; cat "dist-video/short-$D.txt"; } > notes.txt
+          gh release create "$T" --prerelease --title "ショート動画 $D" --notes-file notes.txt \
             "dist-video/short-$D.mp4" "dist-video/short-$D-thumb.png"
           echo "動画：${{ github.server_url }}/${{ github.repository }}/releases/tag/$T" >> "$GITHUB_STEP_SUMMARY"

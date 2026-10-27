@@ -252,6 +252,9 @@ def main():
             + f'\n\nくわしい解説・図解・ふりがなはサイトで👇\nhttps://jijitane.com/news/{args.date}.html\n\n毎朝7時半に X でも配信中：https://x.com/jijitane_news\n'
             f'音声：{SPEAKER_CREDIT}\n\n#中学受験 #時事問題 #Shorts')
     (out / f'short-{args.date}.txt').write_text(desc, encoding='utf-8')
+    t0 = disp(a['news'][0].get('short_title') or a['news'][0]['title'])
+    title = f'【中学受験の時事】{date_short}のニュース3本｜{t0} ほか #shorts'
+    (out / f'short-{args.date}-title.txt').write_text(title, encoding='utf-8')
     print(f'OK: {mp4}（{total:.1f}秒）')
 
 SYMBOLS = (ROOT / 'src' / 'characters.svg').read_text(encoding='utf-8')
