@@ -105,7 +105,29 @@ jobs:
             "- 残高があるのに失敗した場合は、キー（Secrets の X_ で始まる4つ）が無効になっていないか確かめてください。" \
             "- 追加したあと、Actions →「公開とX投稿」→「Run workflow」で「時刻に関係なく今日の号を投稿する」にチェックを入れて実行すると、今日の分を投稿できます。" \
             "くわしいエラー：${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}")"
+      - name: Threads と Instagram に投稿
+        id: metapost
+        if: always()
+        timeout-minutes: 20
+        env:
+          SITE_URL: ${{ vars.SITE_URL }}
+          FORCE_POST: ${{ inputs.force_post }}
+          THREADS_TOKEN: ${{ secrets.THREADS_TOKEN }}
+          IG_TOKEN: ${{ secrets.IG_TOKEN }}
+        run: node scripts/post-meta.mjs
+      - name: Threads・Instagram の投稿に失敗したら Issue で知らせる
+        if: always() && steps.metapost.outcome == 'failure'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          D="$(TZ=Asia/Tokyo date +%F)"
+          { echo "今朝の Threads・Instagram への自動投稿で、うまくいかなかったものがあります。"; echo; echo '```'; cat meta-errors.txt 2>/dev/null; echo '```'; echo; \
+            echo "- 「token」「OAuth」などのエラーなら、トークンの期限切れの可能性があります。開発者サイトでトークンを作り直し、Secrets（THREADS_TOKEN / IG_TOKEN）を更新してください。"; \
+            echo "- 直したあと、Actions →「公開とX投稿」→「Run workflow」で「時刻に関係なく今日の号を投稿する」にチェックを入れて実行すると、まだの分だけ投稿します。"; \
+            echo; echo "くわしいエラー：${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"; } > body.txt
+          gh issue create --title "⚠️ Threads / Instagram への投稿に失敗しました（$D）" --body-file body.txt
       - name: 投稿の記録を残す
+        if: always()
         run: |
           if ! git diff --quiet state/; then
             git config user.name "news-bot"

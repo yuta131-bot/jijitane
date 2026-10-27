@@ -1,0 +1,45 @@
+# Threads と Instagram のトークン（60日で切れる）を、毎週のばして Secrets を更新する
+#   必要な Secrets：THREADS_TOKEN、IG_TOKEN、SECRETS_PAT（Secrets を書きかえる権限だけを持つ GitHub のトークン）
+#   SECRETS_PAT がない場合は、更新できないので Issue で知らせる
+name: SNSのトークンを更新
+on:
+  schedule:
+    - cron: "17 1 * * 1"   # 毎週月曜 10:17（日本時間）
+  workflow_dispatch:
+
+permissions:
+  issues: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: トークンをのばす
+        env:
+          THREADS_TOKEN: ${{ secrets.THREADS_TOKEN }}
+          IG_TOKEN: ${{ secrets.IG_TOKEN }}
+          PAT: ${{ secrets.SECRETS_PAT }}
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -u
+          fail=""
+          if [ -z "$PAT" ]; then
+            if ! gh issue list -R "$REPO" --state open --search "SNSのトークンの自動更新" --json number --jq '.[0].number' | grep -q .; then
+              gh issue create -R "$REPO" --title "🔑 SNSのトークンの自動更新を設定してください" --body "Threads と Instagram のトークンは60日で切れます。自動で更新するには、Secrets に SECRETS_PAT（このリポジトリの Secrets を書きかえる権限だけを持つ GitHub のトークン）を登録してください。登録しない場合は、50日ごとに開発者サイトでトークンを作り直して、Secrets を更新してください。"
+            fi
+            exit 0
+          fi
+          upd() { echo "$2" | GH_TOKEN="$PAT" gh secret set "$1" -R "$REPO"; }
+          if [ -n "$THREADS_TOKEN" ]; then
+            N=$(curl -sf "https://graph.threads.net/refresh_access_token?grant_type=th_refresh_token&access_token=$THREADS_TOKEN" | jq -r '.access_token // empty') || true
+            if [ -n "$N" ]; then upd THREADS_TOKEN "$N" && echo "Threads：更新しました"; else fail="$fail Threads"; fi
+          fi
+          if [ -n "$IG_TOKEN" ]; then
+            N=$(curl -sf "https://graph.instagram.com/refresh_access_token?grant_type=ig_refresh_token&access_token=$IG_TOKEN" | jq -r '.access_token // empty') || true
+            if [ -n "$N" ]; then upd IG_TOKEN "$N" && echo "Instagram：更新しました"; else fail="$fail Instagram"; fi
+          fi
+          if [ -n "$fail" ]; then
+            gh issue create -R "$REPO" --title "⚠️ SNSのトークンを更新できませんでした：$fail" --body "トークンの期限が切れているか、無効になっている可能性があります。開発者サイトでトークンを作り直して、Secrets（THREADS_TOKEN / IG_TOKEN）を更新してください。"
+            exit 1
+          fi
