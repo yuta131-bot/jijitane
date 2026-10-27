@@ -4,3 +4,4 @@ fonts/
 .review/
 dist-video/
 audio-cache/
+__pycache__/
