@@ -1,0 +1,56 @@
+# YouTube ショート用の縦長動画（1080x1920・mp4）を作る
+#   読み上げは VOICEVOX エンジン（無料・Docker）で作成。音声のクレジット表記：「VOICEVOX:冥鳴ひまり」
+#   できた動画は、GitHub の Releases にのせる（スマホからそのままダウンロードできる）
+name: ショート動画を作る
+on:
+  workflow_dispatch:
+    inputs:
+      date:
+        description: "日付（空なら今日）例：2026-10-27"
+        required: false
+
+permissions:
+  contents: write
+
+jobs:
+  short:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    services:
+      voicevox:
+        image: voicevox/voicevox_engine:cpu-latest
+        ports:
+          - 50021:50021
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: 道具を入れる
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg fonts-noto-cjk >/dev/null
+          pip install -q playwright==1.49.1
+          python -m playwright install --with-deps chromium >/dev/null
+      - name: 日付を決める
+        id: d
+        run: |
+          D="${{ inputs.date }}"; [ -z "$D" ] && D="$(TZ=Asia/Tokyo date +%F)"
+          echo "date=$D" >> "$GITHUB_OUTPUT"
+      - name: 読み上げエンジンの起動を待つ
+        run: |
+          for i in $(seq 1 60); do curl -sf http://localhost:50021/version && exit 0; sleep 3; done; echo "VOICEVOX が起動しませんでした"; exit 1
+      - name: 動画を作る
+        run: python scripts/make_short.py --date "${{ steps.d.outputs.date }}" --out dist-video --voicevox http://localhost:50021
+      - name: Releases にのせる
+        env:
+          GH_TOKEN: ${{ github.token }}
+          D: ${{ steps.d.outputs.date }}
+        run: |
+          T="short-$D"
+          gh release delete "$T" --yes --cleanup-tag 2>/dev/null || true
+          gh release create "$T" --prerelease --title "ショート動画 $D" --notes-file "dist-video/short-$D.txt" \
+            "dist-video/short-$D.mp4" "dist-video/short-$D-thumb.png"
+          echo "動画：${{ github.server_url }}/${{ github.repository }}/releases/tag/$T" >> "$GITHUB_STEP_SUMMARY"
