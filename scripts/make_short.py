@@ -42,8 +42,17 @@ CSS_VARS = ('--paper:#F5FAFE;--grid:#DDEAF4;--card:#FFFFFF;--ink:#1D2B44;--muted
             '--sci:#1E9A72;--soc:#DB7420;--sky:#2E78C9;--sea:#BFE0F5;--land:#F1E3C6;--landline:#C9AE7C;--soft:#EEF5FB;'
             '--marker:#FFE36E;--mark-bg:#FFE36E;--mark-ink:inherit')
 
-def page(body, subtitle, credit=True):
-    sub = f'<div class="sub">{esc(subtitle)}</div>' if subtitle else ''
+def sub_html(subtitle, progress=None):
+    if subtitle and progress is not None:
+        # 読んでいるところまで、字幕にマーカーをのばす（声の長さに合わせて文字数で按分）
+        chars = list(subtitle); n = round(len(chars) * max(0.0, min(1.0, progress)))
+        sub = f'<div class="sub"><span><span class="mk">{esc("".join(chars[:n]))}</span>{esc("".join(chars[n:]))}</span></div>'
+    else:
+        sub = f'<div class="sub"><span>{esc(subtitle)}</span></div>' if subtitle else ''
+    return sub
+
+def page(body, subtitle, credit=True, progress=None):
+    sub = sub_html(subtitle, progress)
     cr = f'<div class="credit">{esc(SPEAKER_CREDIT)}</div>' if credit else ''
     return f'''<!doctype html><html><head><meta charset="utf-8">
 <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&display=block" rel="stylesheet">
@@ -61,6 +70,7 @@ body{{font-family:"Zen Maru Gothic","Noto Sans CJK JP","Hiragino Maru Gothic Pro
 .main{{position:absolute;left:56px;right:56px;top:240px;bottom:470px;display:flex;flex-direction:column;gap:28px}}
 .sub{{position:absolute;left:44px;right:44px;bottom:110px;min-height:300px;background:rgba(20,28,44,.88);color:#fff;border-radius:36px;
   padding:34px 40px;font-size:54px;font-weight:700;line-height:1.45;display:flex;align-items:center}}
+.mk{{background:linear-gradient(transparent 56%,rgba(255,214,64,.62) 56%);border-radius:4px;-webkit-box-decoration-break:clone;box-decoration-break:clone}}
 .credit{{position:absolute;right:52px;bottom:44px;font-size:28px;color:#56677F;font-weight:700}}
 .card{{background:#fff;border:4px solid #1D2B44;border-radius:30px;padding:26px 30px;display:flex;align-items:center;gap:24px}}
 .num{{flex:none;width:84px;height:84px;border-radius:50%;color:#fff;font-size:50px;font-weight:900;display:flex;align-items:center;justify-content:center}}
@@ -171,40 +181,63 @@ def main():
             fixed = ln[2] if len(ln) > 2 else None
             sound = ln[3] if len(ln) > 3 else None
             data = b''
+            sp_start = sp_len = 0.0
             if sound == 'beep':      # カウントダウンの「ピッ」
                 data = vv.tone_pcm([880], each=0.16)
             elif sound == 'chime':   # 正解の「ピンポン」
                 data = vv.tone_pcm([1047, 1319], each=0.16) + vv.silence_pcm(0.15)
             if spoken and args.voicevox:
                 wb, _ = vv.tts(args.voicevox, spoken, SPEED)
+                sp_start = len(data) / 2 / vv.RATE
                 data += vv.pcm(wb)
+                sp_len = len(data) / 2 / vv.RATE - sp_start
             sec = len(data) / 2 / vv.RATE
             if fixed and sec < fixed:
                 data += vv.silence_pcm(fixed - sec); sec = fixed
             elif not args.voicevox and spoken:
                 extra = max(1.2, len(spoken) * 0.13 + 0.4)
+                sp_start, sp_len = sec, extra
                 data += vv.silence_pcm(extra); sec += extra
             wav = work / f'a{k:03d}.wav'; vv.write_wav(wav, data)
             gap = 0 if sound == 'beep' else GAP
             pad = work / f'p{k:03d}.wav'; vv.write_wav(pad, vv.silence_pcm(gap) or b'\x00\x00')
-            items.append((html, sub, wav, pad, sec + gap + (1 / vv.RATE if not gap else 0))); k += 1
+            items.append((html, sub, wav, pad, sec + gap + (1 / vv.RATE if not gap else 0), sp_start, sp_len)); k += 1
 
-    # 画面を画像に
+    # 画面を画像に。読み上げ中の字幕は 0.2 秒ごとにマーカーをのばした画像を作る
+    STEP = 0.2
+    frames = []  # (画像ファイル名, 秒)
     from playwright.sync_api import sync_playwright
     with sync_playwright() as p:
         b = p.chromium.launch()
         pg = b.new_page(viewport={'width': W, 'height': H})
-        for j, (html, sub, *_r) in enumerate(items):
-            pg.set_content(page(html, sub), wait_until='networkidle')
-            pg.evaluate('document.fonts.ready')
-            pg.screenshot(path=str(work / f'f{j:03d}.png'))
+        cur_body = None
+        def shot(body, sub, prog, dur):
+            nonlocal cur_body
+            if body != cur_body or not sub:
+                pg.set_content(page(body, sub, progress=prog), wait_until='networkidle'); pg.evaluate('document.fonts.ready')
+                cur_body = body if sub else None
+            else:  # 同じ場面なら字幕だけ入れかえる
+                pg.evaluate("h => { document.querySelector('.sub').outerHTML = h; }", sub_html(sub, prog))
+            name = f'f{len(frames):04d}.png'
+            pg.screenshot(path=str(work / name)); frames.append((name, dur))
+        for (body, sub, _w, _p, total, sp_start, sp_len) in items:
+            if not sub or sp_len <= 0:
+                shot(body, sub, None, total); continue
+            t = 0.0
+            if sp_start > 0:  # 声の前（正解音など）
+                shot(body, sub, 0.0, sp_start); t = sp_start
+            while t < sp_start + sp_len - 1e-6:
+                d = min(STEP, sp_start + sp_len - t)
+                shot(body, sub, (t + d - sp_start) / sp_len, d); t += d
+            if total - t > 1e-3:  # 読み終わり〜次の文まで
+                shot(body, sub, 1.0, total - t)
         b.close()
 
     # つなぐ
     with open(work / 'v.txt', 'w') as f:
-        for j, it in enumerate(items):
-            f.write(f"file 'f{j:03d}.png'\nduration {it[4]:.3f}\n")
-        f.write(f"file 'f{len(items)-1:03d}.png'\n")
+        for name, dur in frames:
+            f.write(f"file '{name}'\nduration {dur:.3f}\n")
+        f.write(f"file '{frames[-1][0]}'\n")
     with open(work / 'a.txt', 'w') as f:
         for it in items:
             f.write(f"file '{it[2].name}'\nfile '{it[3].name}'\n")
@@ -213,7 +246,7 @@ def main():
     subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-f', 'concat', '-safe', '0', '-i', 'v.txt', '-f', 'concat', '-safe', '0', '-i', 'a.txt',
                     '-r', '30', '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-preset', 'medium', '-crf', '20',
                     '-c:a', 'aac', '-b:a', '160k', '-ar', '48000', '-shortest', str(mp4)], cwd=work, check=True)
-    shutil.copy(work / 'f000.png', out / f'short-{args.date}-thumb.png')
+    shutil.copy(work / frames[0][0], out / f'short-{args.date}-thumb.png')
     total = sum(it[4] for it in items)
     desc = (f'{date_long}の「中受 じじニュースのたね」🌱\n' + '\n'.join(f'{"①②③"[i]}{disp(n.get("short_title") or n["title"])}' for i, n in enumerate(a['news']))
             + f'\n\nくわしい解説・図解・ふりがなはサイトで👇\nhttps://jijitane.com/news/{args.date}.html\n\n毎朝7時半に X でも配信中：https://x.com/jijitane_news\n'
