@@ -1,9 +1,9 @@
 # 「入試の時事問題まとめ」と「出題予想ランキング TOP20」を Claude が作る・更新する
-#   毎月1日の21時（日本時間）に自動で更新。Actions の画面から手動でも実行できる
+#   毎月4日の21時（日本時間）に自動で更新（週の使用量のリセット後になりやすい日にしている）。Actions の画面から手動でも実行できる
 name: 時事まとめを更新
 on:
   schedule:
-    - cron: "0 12 1 * *"   # UTC 12:00 = 日本時間 21:00（毎月1日）
+    - cron: "0 12 4 * *"   # UTC 12:00 = 日本時間 21:00（毎月4日）
   workflow_dispatch:
 
 permissions:
@@ -53,7 +53,7 @@ jobs:
             ほかのファイルは変更しないでください。
           claude_args: |
             --allowedTools "WebSearch,WebFetch,Read,Write,Edit,Glob,Grep,Bash(node scripts/validate-matome.mjs:*)"
-            --max-turns 150
+            --max-turns 100
 
       - name: 形のチェック
         run: node scripts/validate-matome.mjs "content/matome/${{ steps.y.outputs.exam }}.json"
@@ -72,7 +72,7 @@ jobs:
             まとめのファイルそのものは変更しないでください。
           claude_args: |
             --allowedTools "WebSearch,WebFetch,Read,Write,Glob"
-            --max-turns 80
+            --max-turns 40
 
       - name: 事実確認の結果を調べる
         id: fc
@@ -95,7 +95,7 @@ jobs:
             直し終えたら node scripts/validate-matome.mjs content/matome/${{ steps.y.outputs.exam }}.json を実行し、「OK」が出るまで直してください。
           claude_args: |
             --allowedTools "WebSearch,WebFetch,Read,Write,Edit,Glob,Bash(node scripts/validate-matome.mjs:*)"
-            --max-turns 50
+            --max-turns 40
 
       - name: サイトが作れるか確かめて公開する
         env:
