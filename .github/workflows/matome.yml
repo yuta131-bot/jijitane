@@ -1,0 +1,115 @@
+# 「入試の時事問題まとめ」と「出題予想ランキング TOP20」を Claude が作る・更新する
+#   毎月1日の21時（日本時間）に自動で更新。Actions の画面から手動でも実行できる
+name: 時事まとめを更新
+on:
+  schedule:
+    - cron: "0 12 1 * *"   # UTC 12:00 = 日本時間 21:00（毎月1日）
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+  id-token: write
+
+concurrency: matome
+
+jobs:
+  matome:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - uses: actions/cache@v4
+        with:
+          path: fonts
+          key: fonts-zen-maru-v1
+
+      - name: 対象の年を決める
+        id: y
+        run: |
+          T="$(TZ=Asia/Tokyo date +%F)"; Y=${T:0:4}; M=$((10#${T:5:2}))
+          if [ $M -ge 3 ]; then E=$((Y+1)); else E=$Y; fi
+          echo "today=$T" >> "$GITHUB_OUTPUT"
+          echo "exam=$E" >> "$GITHUB_OUTPUT"
+          echo "period=$((E-2))年9月〜$((10#${T:0:4}))年${M}月" >> "$GITHUB_OUTPUT"
+          mkdir -p content/matome .review
+          sed -e "s/{{EXAM_YEAR}}/$E/g" -e "s/{{TODAY}}/$T/g" -e "s/{{PERIOD}}/$((E-2))年9月〜$((10#${T:0:4}))年${M}月/g" prompts/matome.md > .review/matome-prompt.md
+
+      - name: まとめを作る
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          github_token: ${{ github.token }}
+          prompt: |
+            .review/matome-prompt.md を読み、そこに書かれたルールにすべて従って、content/matome/${{ steps.y.outputs.exam }}.json を作って（あれば更新して）ください。
+            書き出したら node scripts/validate-matome.mjs content/matome/${{ steps.y.outputs.exam }}.json を実行し、「OK」が出るまで直してください。
+            ほかのファイルは変更しないでください。
+          claude_args: |
+            --allowedTools "WebSearch,WebFetch,Read,Write,Edit,Glob,Grep,Bash(node scripts/validate-matome.mjs:*)"
+            --max-turns 150
+
+      - name: 形のチェック
+        run: node scripts/validate-matome.mjs "content/matome/${{ steps.y.outputs.exam }}.json"
+
+      - name: 事実確認
+        continue-on-error: true
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          github_token: ${{ github.token }}
+          prompt: |
+            あなたは子ども向けニュースサイトの校閲者です。content/matome/${{ steps.y.outputs.exam }}.json の各トピックを読み、事実（数字・日付・人名・地名・できごと・だれが何を言ったか）と、ふりがなの読みを、WebSearch と WebFetch で信頼できる報道や公的機関の情報と照らして確認してください。
+            トピックごとに、いちばん大事な記述を1〜3個確認してください。意見や書き方の好み、ランキングの順位には触れません。
+            結果は .review/matome-fact.json に、次の形の JSON 配列だけで書き出してください。
+            [{"id": "トピックの id", "claim": "確認した記述", "verdict": "ok か wrong か unclear", "detail": "根拠や問題点（短く）", "fix": "直し方（wrong / unclear のとき）"}]
+            まとめのファイルそのものは変更しないでください。
+          claude_args: |
+            --allowedTools "WebSearch,WebFetch,Read,Write,Glob"
+            --max-turns 80
+
+      - name: 事実確認の結果を調べる
+        id: fc
+        run: |
+          F=".review/matome-fact.json"
+          BAD=$(node -e "try{const a=JSON.parse(require('fs').readFileSync('$F','utf8'));console.log(a.filter(x=>x.verdict!=='ok').length)}catch(e){console.log(-1)}")
+          echo "bad=$BAD" >> "$GITHUB_OUTPUT"
+          echo "事実確認で問題のあった記述：$BAD"
+
+      - name: まちがいを直す
+        if: steps.fc.outputs.bad != '0' && steps.fc.outputs.bad != '-1'
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          github_token: ${{ github.token }}
+          prompt: |
+            .review/matome-fact.json は、content/matome/${{ steps.y.outputs.exam }}.json の事実確認の結果です。
+            verdict が "wrong" の項目は、detail と fix に従って正しく直してください。"unclear" の項目は、確かめられた場合だけ直し、確かめられない場合はその記述を外すか、断定しない言い方に変えてください（数字は消す）。
+            ふりがな記法 {漢字|よみ}・子ども向けの文体を保ってください。
+            直し終えたら node scripts/validate-matome.mjs content/matome/${{ steps.y.outputs.exam }}.json を実行し、「OK」が出るまで直してください。
+          claude_args: |
+            --allowedTools "WebSearch,WebFetch,Read,Write,Edit,Glob,Bash(node scripts/validate-matome.mjs:*)"
+            --max-turns 50
+
+      - name: サイトが作れるか確かめて公開する
+        env:
+          GH_TOKEN: ${{ github.token }}
+          F: content/matome/${{ steps.y.outputs.exam }}.json
+        run: |
+          node scripts/validate-matome.mjs "$F"
+          node scripts/build.mjs
+          test -f "dist/matome/${{ steps.y.outputs.exam }}.html"
+          git config user.name "news-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "$F"
+          if git diff --cached --quiet; then echo "変更なし"; exit 0; fi
+          git commit -m "時事まとめを更新（${{ steps.y.outputs.today }}）"
+          git pull --rebase -q origin main
+          git push origin HEAD:main
+          gh workflow run publish.yml --ref main

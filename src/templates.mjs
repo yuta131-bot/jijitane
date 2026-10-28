@@ -53,6 +53,7 @@ function sidebar(cfg, recent) {
   <section class="box follow-box"><b>毎朝7時半に X で配信中</b><p>その日の3本とクイズが届きます。</p>
     <a class="btn" href="${esc(xUrl)}" target="_blank" rel="noopener">Xでフォロー</a>
     ${cfg.lineUrl ? `<a class="btn btn-line" href="${esc(cfg.lineUrl)}" target="_blank" rel="noopener">LINEで受け取る</a>` : ''}</section>
+  ${cfg.matomeLinks ? `<section class="box mt-side"><h4>入試の時事対策</h4>${cfg.matomeLinks.map(([u, t]) => `<a href="${base}${u}">${esc(t)}</a>`).join('')}</section>` : ''}
   ${ad(cfg, 'side', 'rect')}
   <section class="box"><h4>教科でさがす</h4><div class="subj-links"><a href="${base}/subject/rika.html" style="--c:var(--sci)">理科</a><a href="${base}/subject/shakai.html" style="--c:var(--soc)">社会</a><a href="${base}/archive.html" style="--c:var(--ink)">すべて</a></div></section>
   ${recent.length ? `<section class="box"><h4>最近の号</h4><ul class="side-list">${recent.slice(0, 5).map((r) => `<li><a href="${base}/news/${r.date}.html"><span>${jpDate(r.date).short}</span>${esc(plain(r.news[0].short_title || r.news[0].title))} ほか</a></li>`).join('')}</ul></section>` : ''}
@@ -93,7 +94,7 @@ ${cfg.analytics?.cloudflare ? `<script defer src="https://static.cloudflareinsig
 <header class="gh"><div class="gh-in">
   <a class="brand" href="${base}/">${LOGO}<span><b>${cfg.brandPrefix ? `<i class="bp">${esc(cfg.brandPrefix)}</i>${esc(cfg.brandMain)}` : esc(cfg.siteName)}</b><small>${esc(cfg.taglineShort || cfg.tagline)}</small></span></a>
   ${MASCOT}
-  <nav class="gnav"><a href="${base}/subject/rika.html">理科</a><a href="${base}/subject/shakai.html">社会</a><a href="${base}/archive.html">バックナンバー</a></nav>
+  <nav class="gnav"><a href="${base}/subject/rika.html">理科</a><a href="${base}/subject/shakai.html">社会</a><a href="${base}/matome/">時事まとめ</a><a href="${base}/archive.html">バックナンバー</a></nav>
 </div></header>
 <div class="page">
 <main>
@@ -104,7 +105,7 @@ ${sidebar(cfg, recent)}
 </div>
 <footer class="gf"><div class="gf-in">
   <div><b>${esc(cfg.siteName)}</b><br>${esc(cfg.tagline)}</div>
-  <nav><a href="${base}/glossary.html">用語集</a><a href="${base}/units.html">単元別</a><a href="${base}/about.html">このサイトについて・訂正の方針</a><a href="${base}/privacy.html">プライバシーポリシー</a><a href="${base}/contact.html">お問い合わせ</a></nav>
+  <nav><a href="${base}/matome/">時事まとめ</a><a href="${base}/glossary.html">用語集</a><a href="${base}/units.html">単元別</a><a href="${base}/about.html">このサイトについて・訂正の方針</a><a href="${base}/privacy.html">プライバシーポリシー</a><a href="${base}/contact.html">お問い合わせ</a></nav>
   <p>読み上げ音声：VOICEVOX:冥鳴ひまり</p>
   <p>記事はAIが報道をもとに下書きし、別のAIが出典と照らし合わせて確認してから公開しています。公開後も運営者が確認し、まちがいが見つかった場合は、記事の中に訂正内容と日付を示して直します。</p>
 </div></footer>

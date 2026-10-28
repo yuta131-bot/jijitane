@@ -5,7 +5,8 @@ import { articlePage, listPage, staticPage, newsPage, glossaryPage, unitsPage } 
 import { renderCard } from '../src/card.mjs';
 import { esc, plain, jpDate, setSayKeys } from '../src/markup.mjs';
 import { sayKeys } from '../src/readings.mjs';
-import { validate } from '../src/schema.mjs';
+import { validate, validateMatome } from '../src/schema.mjs';
+import { flatNews, examYearOf, mondayOf, addDays, hubPage, monthPage, yearPage, rankingPage, weekData, weeklyPage, printHtml } from '../src/matome.mjs';
 
 const cfg = JSON.parse(fs.readFileSync('site.config.json', 'utf8'));
 if (process.env.SITE_URL) cfg.siteUrl = process.env.SITE_URL;
@@ -21,6 +22,26 @@ const all = files.map((f) => {
 });
 const desc = [...all].reverse(); // 新しい順
 setSayKeys(await sayKeys(all));
+
+// まとめページの元になるデータ
+const flat = flatNews(all);
+const newsByKey = new Map(flat.map((x) => [x.key, x]));
+const examYear = desc[0] ? examYearOf(desc[0].date) : null;
+let year = null;
+const yf = path.join('content', 'matome', `${examYear}.json`);
+if (examYear && fs.existsSync(yf)) {
+  year = JSON.parse(fs.readFileSync(yf, 'utf8'));
+  const errs = validateMatome(year, new Set(newsByKey.keys()));
+  if (errs.length) { console.warn(`${yf} に問題があるため、年間まとめは出しません:\n- ${errs.join('\n- ')}`); year = null; }
+}
+const months = [...new Set(all.map((a) => a.date.slice(0, 7)))].sort();
+const weeks = [...new Set(all.map((a) => mondayOf(a.date)))].sort();
+cfg.matomeLinks = [
+  ...(year ? [[`/matome/${year.exam_year}.html`, `${year.exam_year}年入試 時事問題まとめ`], [`/matome/${year.exam_year}-ranking.html`, '出題予想ランキング TOP20']] : []),
+  ...(weeks.length ? [[`/weekly/${weeks[weeks.length - 1]}.html`, '今週のふり返り（1枚プリント）']] : []),
+  ...(months.length ? [[`/matome/${months[months.length - 1]}.html`, `${Number(months[months.length - 1].slice(5))}月の時事ニュースまとめ`]] : []),
+  ['/matome/', '時事まとめ一覧'],
+];
 
 fs.rmSync(OUT, { recursive: true, force: true });
 fs.mkdirSync(path.join(OUT, 'news'), { recursive: true });
@@ -46,6 +67,23 @@ const entries = [...gl.values()].sort((x, y) => x.term.localeCompare(y.term, 'ja
 fs.writeFileSync(path.join(OUT, 'glossary.html'), glossaryPage({ cfg, css, entries, recent: desc }));
 const units = [...un.values()].sort((x, y) => x.name.localeCompare(y.name, 'ja'));
 fs.writeFileSync(path.join(OUT, 'units.html'), unitsPage({ cfg, css, units, recent: desc }));
+
+// 時事まとめ（ハブ・月ごと・年間・ランキング・週ごと）
+fs.mkdirSync(path.join(OUT, 'matome'), { recursive: true });
+fs.mkdirSync(path.join(OUT, 'weekly'), { recursive: true });
+const monthInfo = months.map((ym) => ({ ym, items: flat.filter((x) => x.date.startsWith(ym)) }));
+monthInfo.forEach((m, k) => fs.writeFileSync(path.join(OUT, 'matome', `${m.ym}.html`), monthPage({ cfg, css, ym: m.ym, items: m.items, prev: months[k - 1], next: months[k + 1], year, recent: desc })));
+const weekInfo = weeks.map((mon) => weekData(mon, all));
+weekInfo.forEach((w, k) => {
+  fs.writeFileSync(path.join(OUT, 'weekly', `${w.mon}.html`), weeklyPage({ cfg, css, w, prev: weeks[k - 1], next: weeks[k + 1], recent: desc }));
+  fs.writeFileSync(path.join(OUT, 'weekly', `${w.mon}-print.html`), printHtml(cfg, w));
+});
+fs.writeFileSync(path.join(OUT, 'weekly', 'weeks.json'), JSON.stringify(weekInfo.map((w) => ({ mon: w.mon, end: addDays(w.mon, 6), count: w.items.length, main: w.main.map((x) => ({ key: x.key, title: plain(x.n.short_title || x.n.title) })) }))));
+if (year) {
+  fs.writeFileSync(path.join(OUT, 'matome', `${year.exam_year}.html`), yearPage({ cfg, css, year, newsByKey, recent: desc }));
+  fs.writeFileSync(path.join(OUT, 'matome', `${year.exam_year}-ranking.html`), rankingPage({ cfg, css, year, recent: desc }));
+}
+fs.writeFileSync(path.join(OUT, 'matome', 'index.html'), hubPage({ cfg, css, months: [...monthInfo].reverse().map((m) => ({ ym: m.ym, count: m.items.length })), weeks: [...weekInfo].reverse().map((w) => ({ mon: w.mon, count: w.items.length })), year, recent: desc }));
 
 // トップは最新号をそのまま見せる
 if (desc[0]) {
@@ -88,7 +126,7 @@ const rss = `<?xml version="1.0" encoding="UTF-8"?>
 ${desc.slice(0, 30).map((a) => `<item><title>${esc(jpDate(a.date).short + ' ' + a.news.map((n) => plain(n.short_title || n.title)).join('／'))}</title><link>${base}/news/${a.date}.html</link><guid>${base}/news/${a.date}.html</guid><pubDate>${new Date(a.date + 'T07:00:00+09:00').toUTCString()}</pubDate></item>`).join('\n')}
 </channel></rss>`;
 fs.writeFileSync(path.join(OUT, 'feed.xml'), rss);
-const urls = ['/', '/archive.html', '/glossary.html', '/units.html', '/subject/rika.html', '/subject/shakai.html', ...all.flatMap((a) => [`/news/${a.date}.html`, ...a.news.map((_, j) => `/news/${a.date}-${j + 1}.html`)])];
+const urls = ['/', '/matome/', ...(year ? [`/matome/${year.exam_year}.html`, `/matome/${year.exam_year}-ranking.html`] : []), ...months.map((m) => `/matome/${m}.html`), ...weeks.map((w) => `/weekly/${w}.html`), '/archive.html', '/glossary.html', '/units.html', '/subject/rika.html', '/subject/shakai.html', ...all.flatMap((a) => [`/news/${a.date}.html`, ...a.news.map((_, j) => `/news/${a.date}-${j + 1}.html`)])];
 fs.writeFileSync(path.join(OUT, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((u) => `<url><loc>${base}${u}</loc></url>`).join('\n')}\n</urlset>`);
 fs.writeFileSync(path.join(OUT, 'robots.txt'), `User-agent: *\nAllow: /\nSitemap: ${base}/sitemap.xml\n`);
 fs.writeFileSync(path.join(OUT, '.nojekyll'), '');

@@ -34,3 +34,38 @@ export function validate(a) {
   }
   return e;
 }
+
+// 年間まとめ（content/matome/入試の年.json）の形をチェックする
+const MATOME_CATS = ['seiji', 'kokusai', 'keizai', 'saigai', 'uchu', 'kankyo', 'kagaku', 'other'];
+export function validateMatome(m, newsKeys = null) {
+  const e = [];
+  if (!Number.isInteger(m?.exam_year)) e.push('exam_year（入試の年。例：2027）がありません');
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(m?.updated || '')) e.push('updated が YYYY-MM-DD ではありません');
+  for (const k of ['period', 'intro']) if (typeof m?.[k] !== 'string' || !m[k].trim()) e.push(`${k} がありません`);
+  if (!Array.isArray(m?.topics) || m.topics.length < 20) { e.push('topics が20個以上ありません'); return e; }
+  const ids = new Set();
+  m.topics.forEach((t, i) => {
+    const p = `topics[${i}]（${t?.id || '?'}）`;
+    if (typeof t.id !== 'string' || !/^[a-z0-9-]+$/.test(t.id)) e.push(`${p}.id は半角英小文字・数字・ハイフンで`);
+    else if (ids.has(t.id)) e.push(`${p}.id が重複しています`); else ids.add(t.id);
+    if (!MATOME_CATS.includes(t.cat)) e.push(`${p}.cat は ${MATOME_CATS.join(' / ')} のどれか`);
+    for (const k of ['title', 'when', 'why']) if (typeof t[k] !== 'string' || !t[k].trim()) e.push(`${p}.${k} がありません`);
+    if (!Array.isArray(t.points) || t.points.length < 2 || t.points.length > 4) e.push(`${p}.points は2〜4個`);
+    if (!Array.isArray(t.keywords)) e.push(`${p}.keywords がありません`);
+    if (![1, 2, 3].includes(t.stars)) e.push(`${p}.stars は 1〜3`);
+    if (t.related !== undefined && !Array.isArray(t.related)) e.push(`${p}.related は配列`);
+    if (newsKeys) for (const k of t.related || []) if (!newsKeys.has(k)) e.push(`${p}.related の「${k}」という記事はありません（YYYY-MM-DD-番号）`);
+    if ((JSON.stringify(t).match(/\{[^{}|"]*$/g) || []).length) e.push(`${p} のふりがな記法が閉じていない可能性があります`);
+  });
+  if (!Array.isArray(m.ranking) || m.ranking.length !== 20) e.push('ranking はちょうど20個');
+  else {
+    const seen = new Set();
+    m.ranking.forEach((r, i) => {
+      if (!ids.has(r?.id)) e.push(`ranking[${i}].id「${r?.id}」が topics にありません`);
+      if (seen.has(r?.id)) e.push(`ranking[${i}].id「${r?.id}」が重複しています`); seen.add(r?.id);
+      if (typeof r?.reason !== 'string' || !r.reason.trim()) e.push(`ranking[${i}].reason がありません`);
+    });
+  }
+  if (!Array.isArray(m.sources) || !m.sources.length) e.push('sources がありません');
+  return e;
+}

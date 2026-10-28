@@ -1,0 +1,52 @@
+# 毎週日曜の19時（日本時間）に、LINE 公式アカウントで「今週のふり返り号」を送る
+#   必要な Secrets：LINE_TOKEN（LINE Developers の Messaging API「チャネルアクセストークン（長期）」）
+name: LINEふり返り号
+on:
+  schedule:
+    - cron: "0 10 * * 0"   # UTC 10:00（日曜）= 日本時間 19:00（日曜）
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "送らずに中身だけ確かめる"
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency: line-weekly
+
+jobs:
+  line:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: 送る
+        id: send
+        env:
+          SITE_URL: ${{ vars.SITE_URL }}
+          LINE_TOKEN: ${{ secrets.LINE_TOKEN }}
+          DRY_RUN: ${{ inputs.dry_run }}
+          FORCE_POST: ${{ github.event_name == 'workflow_dispatch' && 'true' || 'false' }}
+        run: node scripts/post-line.mjs
+      - name: 失敗したら Issue で知らせる
+        if: failure() && steps.send.outcome == 'failure'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh issue create --title "⚠️ LINE のふり返り号を送れませんでした" --body "LINE への送信が失敗しました。よくある原因は、LINE_TOKEN（チャネルアクセストークン）の誤り・失効、または今月の無料メッセージ数の上限です。くわしいエラー：${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+      - name: 送った記録を残す
+        if: always()
+        run: |
+          if ! git diff --quiet state/ 2>/dev/null || [ -n "$(git ls-files --others state/)" ]; then
+            git config user.name "news-bot"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add state/
+            git commit -m "LINE送信記録 [skip ci]"
+            git pull --rebase -q origin main
+            git push
+          fi

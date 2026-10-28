@@ -262,3 +262,48 @@ svg text{font-family:"Zen Maru Gothic","Hiragino Maru Gothic ProN","Hiragino San
 .rd rt,.reading rt{background:none}
 .three.reading,.quiz.reading{background:var(--soft);box-shadow:none;outline:3px solid var(--read-line)}
 @media (prefers-reduced-motion:reduce){.reading{transition:none}}
+/* まとめページ */
+.mt-cards{display:grid;gap:12px;margin:0 0 18px}
+@media (min-width:640px){.mt-cards{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}}
+.mt-card{display:block;background:var(--marker);color:#1D2B44;border:2px solid var(--ink);border-radius:16px;padding:12px 16px;text-decoration:none;box-shadow:4px 4px 0 var(--ink)}
+.mt-card b{display:block;font-size:18px;font-weight:900;line-height:1.35}.mt-card span{font-size:14px;font-weight:700}
+.mt-card:hover{transform:translateY(-1px)}
+.mt-jump{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 16px}
+.mt-jump a{text-decoration:none;font-weight:900;font-size:14px;border:2px solid var(--ink);border-radius:999px;padding:2px 12px;background:var(--card);color:var(--ink)}
+.mt-jump small{margin-left:6px;color:var(--muted)}
+.mt-sec{margin:0 0 22px;scroll-margin-top:90px}
+.mt-sec>h2{font-size:22px;font-weight:900;margin:0 0 10px;padding-bottom:4px;border-bottom:3px solid var(--ink)}
+.mt-top>h2{background:linear-gradient(transparent 60%,var(--mark-bg) 60%);display:inline-block;border:0}
+.mt-list .mt{display:block;font-weight:900;font-size:17px;line-height:1.55;margin-top:2px}
+.mt-list .mp{display:block;font-size:14px;color:var(--muted);line-height:1.6;margin-top:2px}
+.mt-list .d{display:flex;gap:10px;align-items:center}
+.mt-list .exam{font-size:12px}
+.mt-upd{font-size:13px;color:var(--muted);margin:6px 0 0}
+.mt-topic{padding:16px 20px 14px;border-top-width:6px;scroll-margin-top:90px}
+.mt-topic h3{margin:4px 0 8px;font-size:20px;font-weight:900;line-height:1.5}
+.mt-when{font-size:13px;font-weight:900;border:2px solid var(--ink);border-radius:999px;padding:0 10px}
+.mt-pts{margin:0 0 8px;padding-left:1.2em}.mt-pts li{margin:2px 0;line-height:1.8}
+.mt-why{background:var(--soft);border-radius:10px;padding:8px 12px;margin:8px 0;line-height:1.8}
+.mt-why b{display:inline-block;background:var(--soc);color:#fff;border-radius:6px;font-size:12px;padding:0 8px;margin-right:8px}
+.mt-kw{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}.mt-kw span{border:2px dashed var(--line);border-radius:8px;padding:0 8px;font-size:14px;font-weight:700}
+.mt-rel{font-size:14px;margin-top:6px;display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline}.mt-rel b{font-size:12px;color:var(--muted)}
+.mt-rank{list-style:none;margin:0 0 18px;padding:0}
+.mt-rank li{display:flex;gap:12px;align-items:flex-start;background:var(--card);border:2px solid var(--ink);border-radius:14px;padding:10px 14px;margin-bottom:10px}
+.mt-rank .rk{flex:none;width:38px;height:38px;border-radius:50%;border:2px solid var(--ink);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:17px;background:var(--card)}
+.mt-rank .rk-top{background:var(--marker);color:#1D2B44}
+.mt-rank a{text-decoration:none}.mt-rank b{font-size:17px;line-height:1.5}
+.mt-rank .rk-meta{display:flex;gap:8px;align-items:center;font-size:12px;color:var(--muted);font-weight:700;margin-top:2px}
+.mt-rank p{margin:4px 0 0;font-size:14.5px;line-height:1.7}
+.mt-note{font-size:12.5px;color:var(--muted)}
+.wk-dl{margin-top:12px;display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center}.wk-dl span{font-size:13px;color:var(--muted)}
+.wk-btn{display:inline-block;margin:0;padding:10px 20px;font-size:16px}
+.wk-sheet{background:#fff;border:2px solid var(--ink);border-radius:12px;padding:16px;margin:0 0 18px;overflow-x:auto}
+.side .mt-side a{display:block;text-decoration:none;font-weight:900;padding:6px 0;border-top:1px dashed var(--line)}.side .mt-side a:first-of-type{border-top:0}
+.mt-sec>h2 small{font-size:14px;color:var(--muted);margin-left:8px}
+.mt-rows{list-style:none;margin:0;padding:0;background:var(--card);border:2px solid var(--ink);border-radius:14px;overflow:hidden}
+.mt-rows li+li{border-top:1px dashed var(--line)}
+.mt-rows a{display:flex;gap:10px;align-items:baseline;padding:8px 14px;text-decoration:none;color:var(--ink)}
+.mt-rows a:hover{background:var(--soft)}
+.mt-rows .d{flex:none;width:58px;font-size:13px;font-weight:700;color:var(--muted)}
+.mt-rows .t{flex:1;font-weight:700;line-height:1.5}
+.mt-rows .exam{flex:none;font-size:12px}
