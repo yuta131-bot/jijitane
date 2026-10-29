@@ -43,6 +43,7 @@ jobs:
           sed -e "s/{{EXAM_YEAR}}/$E/g" -e "s/{{TODAY}}/$T/g" -e "s/{{PERIOD}}/$((E-2))年9月〜$((10#${T:0:4}))年${M}月/g" prompts/matome.md > .review/matome-prompt.md
 
       - name: まとめを作る
+        continue-on-error: true   # 許可していない道具を一度でも試すと「失敗」扱いになるため。できたかどうかは次の「形のチェック」で判断する
         uses: anthropics/claude-code-action@v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
@@ -52,7 +53,7 @@ jobs:
             書き出したら node scripts/validate-matome.mjs content/matome/${{ steps.y.outputs.exam }}.json を実行し、「OK」が出るまで直してください。
             ほかのファイルは変更しないでください。
           claude_args: |
-            --allowedTools "WebSearch,WebFetch,Read,Write,Edit,Glob,Grep,Bash(node scripts/validate-matome.mjs:*)"
+            --allowedTools "WebSearch,WebFetch,Read,Write,Edit,Glob,Grep,Bash(node scripts/validate-matome.mjs:*),Bash(ls:*),Bash(mkdir:*)"
             --max-turns 100
 
       - name: 形のチェック
@@ -84,6 +85,7 @@ jobs:
 
       - name: まちがいを直す
         if: steps.fc.outputs.bad != '0' && steps.fc.outputs.bad != '-1'
+        continue-on-error: true
         uses: anthropics/claude-code-action@v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
