@@ -1,5 +1,6 @@
 # 毎週月曜 8:00（日本時間）に、先週のアクセス数を集めて Claude が週次レポートを書く
 #   必要な Secrets：CF_API_TOKEN、CF_ACCOUNT_ID、CLAUDE_CODE_OAUTH_TOKEN
+#   SNSの数字（あるものだけ）：X_ の4つ、THREADS_TOKEN、IG_TOKEN、YT_API_KEY、LINE_TOKEN
 #   レポートは reports/ に保存し、GitHub の Issue としても届く（スマホに通知）
 name: 週次レポート
 on:
@@ -23,6 +24,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+          cache: npm
+      - run: npm ci
 
       - name: アクセス数を集める
         id: stats
@@ -32,6 +35,20 @@ jobs:
         run: |
           node scripts/weekly-stats.mjs
           echo "date=$(TZ=Asia/Tokyo date +%F)" >> "$GITHUB_OUTPUT"
+
+      - name: SNSの数字を集める
+        continue-on-error: true   # 取れなくてもレポートは書く
+        env:
+          X_API_KEY: ${{ secrets.X_API_KEY }}
+          X_API_SECRET: ${{ secrets.X_API_SECRET }}
+          X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
+          X_ACCESS_SECRET: ${{ secrets.X_ACCESS_SECRET }}
+          THREADS_TOKEN: ${{ secrets.THREADS_TOKEN }}
+          IG_TOKEN: ${{ secrets.IG_TOKEN }}
+          YT_API_KEY: ${{ secrets.YT_API_KEY }}
+          YT_HANDLE: ${{ vars.YT_HANDLE }}
+          LINE_TOKEN: ${{ secrets.LINE_TOKEN }}
+        run: node scripts/sns-stats.mjs
 
       - name: X のクレジットが少なければ知らせる
         env:
@@ -64,7 +81,9 @@ jobs:
             ## よく読まれた記事 トップ5（記事の見出しで。ページのパスから日付と番号を読み取る）
             ## どこから来たか（流入元・スマホ/PC の割合）
             ## 気になる点（課題）
-            ## 改善案（すぐできるもの3つ。具体的に。作成ルール prompts/system.md の直し方の提案も可）
+            ## 改善案（すぐできるもの3つ。具体的に。サイトだけでなく SNS の投稿の工夫も含める。作成ルール prompts/system.md の直し方の提案も可）
+            ## SNS（sns の中身。X・Threads・Instagram・YouTube・LINE ごとに、フォロワー／登録者／友だち数と、今週・先週の表示回数（views / impressions）・いいね・保存などを表で。いちばん伸びた投稿と、その理由の見立ても。sns.errors にあるものは「取れませんでした」と理由を一言）
+            ## SNS からサイトへの流入（流入元の t.co・threads.net・instagram.com・youtube.com・line.me などを SNS ごとにまとめ、どの SNS がサイトへの入口として効いているか。SNS の表示回数に対するサイト流入の割合も、計算できれば）
             ## X の投稿と費用（x_posts：今週の投稿回数、おおよその費用、クレジットの残りの見込み est_remaining_usd と残り日数 est_days_left。「X の残高は developer.x.com の Developer Console で確かめてください」と一言そえる）
             ## 来週やること（チェックリスト）
 
