@@ -69,13 +69,19 @@ async function instagram() {
   const st = readJson('state/meta-posted.json');
   const posts = [];
   for (const [d, v] of Object.entries(st)) {
-    if (d < since || !v.instagram?.id) continue;
-    const j = await getJson(`https://graph.instagram.com/v23.0/${v.instagram.id}/insights?metric=views,reach,likes,comments,saved,shares,total_interactions&access_token=${tk}`);
-    const m = Object.fromEntries((j.data || []).map((x) => [x.name, x.values?.[0]?.value ?? x.total_value?.value ?? 0]));
-    posts.push({ date: d, ...m });
+    if (d < since) continue;
+    // 朝の3本まとめ（instagram）と、夕方のクイズ（instagram_quiz）
+    for (const [key, kind] of [['instagram', '朝のまとめ'], ['instagram_quiz', '夕方のクイズ']]) {
+      if (!v[key]?.id) continue;
+      const j = await getJson(`https://graph.instagram.com/v23.0/${v[key].id}/insights?metric=views,reach,likes,comments,saved,shares,total_interactions&access_token=${tk}`);
+      const m = Object.fromEntries((j.data || []).map((x) => [x.name, x.values?.[0]?.value ?? x.total_value?.value ?? 0]));
+      posts.push({ date: d, kind, ...m });
+    }
   }
   posts.sort((a, b) => a.date.localeCompare(b.date));
-  return { followers: me.followers_count, media_count: me.media_count, posts, ...weeks(posts, ['views', 'reach', 'likes', 'saved', 'shares']) };
+  const keys = ['views', 'reach', 'likes', 'comments', 'saved', 'shares'];
+  const by_kind = Object.fromEntries(['朝のまとめ', '夕方のクイズ'].map((k) => [k, weeks(posts.filter((p) => p.kind === k), keys)]));
+  return { followers: me.followers_count, media_count: me.media_count, posts, ...weeks(posts, keys), by_kind };
 }
 
 // ---------- YouTube（公開されている数字：再生数・いいね・登録者数） ----------

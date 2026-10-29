@@ -112,7 +112,7 @@ def scene_news(n, i, svg, date_long):
             f'<div class="h">{esc(disp(n["title"]))}</div><div class="fig">{svg}</div></div>')
     return body
 
-def scene_quiz(q, date_long, reveal=None, count=None):
+def scene_quiz(q, date_long, reveal=None, count=None, label='クイズ'):
     letters = 'ABCD'
     ch = ''
     for j, c in enumerate(q['choices']):
@@ -121,8 +121,21 @@ def scene_quiz(q, date_long, reveal=None, count=None):
     big = f'<div class="big">{count}</div>' if count else ''
     body = (top(date_long) + f'<div class="main"><div style="display:flex;align-items:flex-start;gap:20px">'
             f'<div style="flex:none">{use("ch-fuku", 220, 242)}</div>'
-            f'<div><span class="tag" style="background:#DB7420">クイズ</span><div class="h" style="font-size:54px;margin-top:14px">{esc(disp(q["q"]))}</div></div></div>'
+            f'<div><span class="tag" style="background:#DB7420">{esc(label)}</span><div class="h" style="font-size:54px;margin-top:14px">{esc(disp(q["q"]))}</div></div></div>'
             f'<div style="display:flex;flex-direction:column;gap:26px;margin-top:20px">{ch}</div></div>{big}')
+    return body
+
+def scene_quiz_open(a, date_long):
+    body = (top(date_long) + '<div class="main" style="align-items:center;justify-content:center;gap:44px;text-align:center">'
+            f'{use("ch-fuku", 360, 396)}<div class="h" style="font-size:96px;line-height:1.25">きょうの<br>ニュースクイズ</div>'
+            '<div style="font-size:60px;font-weight:900;background:#FFE36E;border:4px solid #1D2B44;border-radius:999px;padding:10px 40px">全3問・何問わかる？</div></div>')
+    return body
+
+def scene_quiz_end(date_long):
+    body = (top(date_long) + '<div class="main" style="align-items:center;justify-content:center;gap:40px;text-align:center">'
+            f'{use("ch-poppo", 320, 330)}<div class="h" style="font-size:72px">何問わかった？<br>コメントで教えてね</div>'
+            '<div style="font-size:48px;font-weight:700">ニュースの図解とくわしい解説は</div>'
+            '<div style="font-size:96px;font-weight:900;color:#2E78C9">jijitane.com</div></div>')
     return body
 
 def scene_end(date_long):
@@ -141,9 +154,12 @@ def main():
     ap.add_argument('--date', required=True)
     ap.add_argument('--out', default='dist-video')
     ap.add_argument('--voicevox', default='')
+    ap.add_argument('--mode', default='news', choices=['news', 'quiz'], help='news：朝の3本まとめ／quiz：夕方の3問クイズ')
     args = ap.parse_args()
+    quiz_mode = args.mode == 'quiz'
+    stem = f'short-{args.date}' + ('-quiz' if quiz_mode else '')
     a = json.loads((ROOT / 'content' / f'{args.date}.json').read_text(encoding='utf-8'))
-    out = (ROOT / args.out).resolve(); work = out / f'work-{args.date}'
+    out = (ROOT / args.out).resolve(); work = out / f'work-{stem}'
     shutil.rmtree(work, ignore_errors=True); work.mkdir(parents=True)
     date_short, date_long = jp_date(args.date)
 
@@ -155,20 +171,29 @@ def main():
 
     # 場面ごとに（画面, [(画面に出す字幕, 読み上げる文)], 固定の秒数）
     scenes = []
-    scenes.append((scene_open(a, date_short, date_long),
+    def quiz_block(q, label, intro_sub, intro_say):
+        scenes.append((scene_quiz(q, date_long, label=label), [(intro_sub, intro_say)]))
+        for k in (3, 2, 1):
+            scenes.append((scene_quiz(q, date_long, count=k, label=label), [('', None, 1.0, 'beep')]))
+        ans = int(q.get('answer', 0))
+        scenes.append((scene_quiz(q, date_long, reveal=ans, label=label),
+                       [(f'正解は {disp(q["choices"][ans])}！', f'正解は、{say(q["choices"][ans])}！', None, 'chime'), (disp(first_sentence(q.get('a'))), say(first_sentence(q.get('a'))))]))
+    if quiz_mode:
+        qs = [n['quiz'] for n in a['news'] if isinstance(n.get('quiz', {}).get('choices'), list) and len(n['quiz']['choices']) >= 2]
+        scenes.append((scene_quiz_open(a, date_long), [('きょうのニュースから、3問クイズ！', 'きょうのニュースから、3問クイズ！'), ('全部わかるかな？', '全部わかるかな？')]))
+        for j, q in enumerate(qs[:3]):
+            quiz_block(q, f'第{j+1}問', f'第{j+1}問！', f'第{j+1}問！ {say(q["q"])}')
+        scenes.append((scene_quiz_end(date_long), [('何問わかった？ コメントで教えてね！', '何問わかった？ コメントで教えてね！')]))
+    else:
+      scenes.append((scene_open(a, date_short, date_long),
                    [(f'{date_short}のじじたね！', f'{date_short}の、じじたね！'), ('きょうの3本を紹介するよ。', 'きょうの3本を、紹介するよ。')]))
-    for i, n in enumerate(a['news']):
-        lines = [(f'{i+1}本目。{disp(n["title"])}', f'{i+1}本目。{say(n["title"])}。')]
-        lines += [(disp(p), say(p)) for p in n['points']]
-        scenes.append((scene_news(n, i, svgs[i], date_long), lines))
-    q = a['news'][0]['quiz']
-    scenes.append((scene_quiz(q, date_long), [('クイズ！ わかるかな？', f'クイズ！ {say(q["q"])}')]))
-    for k in (3, 2, 1):
-        scenes.append((scene_quiz(q, date_long, count=k), [('', None, 1.0, 'beep')]))
-    ans = int(q.get('answer', 0))
-    scenes.append((scene_quiz(q, date_long, reveal=ans),
-                   [(f'正解は {disp(q["choices"][ans])}！', f'正解は、{say(q["choices"][ans])}！', None, 'chime'), (disp(first_sentence(q.get('a'))), say(first_sentence(q.get('a'))))]))
-    scenes.append((scene_end(date_long), [('くわしくは、サイトで読んでね！', 'くわしくは、じじたねのサイトで読んでね！')]))
+      for i, n in enumerate(a['news']):
+          lines = [(f'{i+1}本目。{disp(n["title"])}', f'{i+1}本目。{say(n["title"])}。')]
+          lines += [(disp(p), say(p)) for p in n['points']]
+          scenes.append((scene_news(n, i, svgs[i], date_long), lines))
+      q = a['news'][0]['quiz']
+      quiz_block(q, 'クイズ', 'クイズ！ わかるかな？', f'クイズ！ {say(q["q"])}')
+      scenes.append((scene_end(date_long), [('くわしくは、サイトで読んでね！', 'くわしくは、じじたねのサイトで読んでね！')]))
 
     # 音声と長さ
     if args.voicevox:
@@ -242,12 +267,14 @@ def main():
         for it in items:
             f.write(f"file '{it[2].name}'\nfile '{it[3].name}'\n")
     out.mkdir(parents=True, exist_ok=True)
-    mp4 = out / f'short-{args.date}.mp4'
+    mp4 = out / f'{stem}.mp4'
     subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-f', 'concat', '-safe', '0', '-i', 'v.txt', '-f', 'concat', '-safe', '0', '-i', 'a.txt',
                     '-r', '30', '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-preset', 'medium', '-crf', '20',
                     '-c:a', 'aac', '-b:a', '160k', '-ar', '48000', '-shortest', str(mp4)], cwd=work, check=True)
-    shutil.copy(work / frames[0][0], out / f'short-{args.date}-thumb.png')
+    shutil.copy(work / frames[0][0], out / f'{stem}-thumb.png')
     total = sum(it[4] for it in items)
+    if quiz_mode:
+        print(f'OK: {mp4}（{total:.1f}秒）'); return
     desc = (f'中学受験生の保護者の方へ。入試に出そうな時事ニュースを、毎朝1分の動画にまとめています。お子さんと一緒に見て、会話のきっかけにどうぞ。\n\n'
             f'{date_long}の3本\n' + '\n'.join(f'{"①②③"[i]}{disp(n.get("short_title") or n["title"])}' for i, n in enumerate(a['news']))
             + f'\n\n図解つきのくわしい解説はサイトで（ふりがな付きなので、お子さんも読めます）\nhttps://jijitane.com/news/{args.date}.html\n\n'

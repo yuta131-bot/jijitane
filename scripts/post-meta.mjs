@@ -13,11 +13,14 @@ const date = process.env.TARGET_DATE || todayJst();
 const force = process.env.FORCE_POST === 'true';
 const repo = process.env.GITHUB_REPOSITORY || 'yuta131-bot/jijitane';
 const STATE = path.join('state', 'meta-posted.json');
+// POST_MODE=quiz のときは、夕方のクイズ動画を Instagram だけに投稿する
+const quiz = process.env.POST_MODE === 'quiz';
 
 const file = path.join('content', `${date}.json`);
 if (!fs.existsSync(file)) { console.log(`${date} の号はまだありません`); process.exit(0); }
 const nowH = (() => { const d = new Date(Date.now() + 9 * 3600e3); return d.getUTCHours() + d.getUTCMinutes() / 60; })();
-if (nowH < (Number(cfg.postHourJst) || 7) && !force) { console.log('投稿は X と同じ時刻以降に行います'); process.exit(0); }
+const startH = quiz ? (Number(cfg.quizHourJst) || 18) : (Number(cfg.postHourJst) || 7);
+if (nowH < startH && !force) { console.log(`投稿は ${startH} 時以降に行います`); process.exit(0); }
 
 const state = fs.existsSync(STATE) ? JSON.parse(fs.readFileSync(STATE, 'utf8')) : {};
 state[date] = state[date] || {};
@@ -36,7 +39,8 @@ async function call(url, params, method = 'POST') {
 const errors = [];
 
 // ---------- Threads ----------
-if (process.env.THREADS_TOKEN && (!state[date].threads || force)) {
+if (quiz) console.log('クイズ動画は Instagram だけに投稿します');
+else if (process.env.THREADS_TOKEN && (!state[date].threads || force)) {
   try {
     const T = 'https://graph.threads.net/v1.0';
     const token = process.env.THREADS_TOKEN;
@@ -50,14 +54,17 @@ if (process.env.THREADS_TOKEN && (!state[date].threads || force)) {
 } else console.log(process.env.THREADS_TOKEN ? 'Threads は投稿済みです' : 'THREADS_TOKEN がないので Threads は投稿しません');
 
 // ---------- Instagram（リール） ----------
-if (process.env.IG_TOKEN && (!state[date].instagram || force)) {
+const igKey = quiz ? 'instagram_quiz' : 'instagram';
+if (process.env.IG_TOKEN && (!state[date][igKey] || force)) {
   try {
     const G = 'https://graph.instagram.com/v23.0';
     const token = process.env.IG_TOKEN;
-    const video = `https://github.com/${repo}/releases/download/short-${date}/short-${date}.mp4`;
+    const video = `https://github.com/${repo}/releases/download/short-${date}/short-${date}${quiz ? '-quiz' : ''}.mp4`;
     const head = await fetch(video, { method: 'HEAD', redirect: 'follow' });
-    if (!head.ok) throw new Error(`今日のショート動画がまだありません（${head.status}）。Actions の「ショート動画を作る」を確認してください`);
-    const caption = `${dt.short}の${cfg.siteName}🌱\n${lines}\n\nくわしい解説・図解・ふりがなは、プロフィールのリンク（jijitane.com）から\n音声：VOICEVOX:冥鳴ひまり\n\n#中学受験 #時事問題 #中受 #小学生の勉強 #ニュース解説 #家庭学習`;
+    if (!head.ok) throw new Error(`今日の${quiz ? 'クイズ' : 'ショート'}動画がまだありません（${head.status}）。Actions の「ショート動画を作る」を確認してください`);
+    const caption = quiz
+      ? `${dt.short}のニュースクイズ🌱 全3問、何問わかるかな？\n答えを見る前に、コメントで予想してみてね！\n\nきょうのニュース\n${lines}\n\n図解つきの解説は、プロフィールのリンク（jijitane.com）から\n音声：VOICEVOX:冥鳴ひまり\n\n#中学受験 #時事問題 #中受 #クイズ #小学生の勉強 #家庭学習`
+      : `${dt.short}の${cfg.siteName}🌱\n${lines}\n\nくわしい解説・図解・ふりがなは、プロフィールのリンク（jijitane.com）から\n音声：VOICEVOX:冥鳴ひまり\n\n#中学受験 #時事問題 #中受 #小学生の勉強 #ニュース解説 #家庭学習`;
     const me = await call(`${G}/me`, { fields: 'user_id,username', access_token: token }, 'GET');
     const id = me.user_id || me.id;
     const c = await call(`${G}/${id}/media`, { media_type: 'REELS', video_url: video, caption, share_to_feed: 'true', access_token: token });
@@ -69,10 +76,10 @@ if (process.env.IG_TOKEN && (!state[date].instagram || force)) {
     }
     if (st !== 'FINISHED') throw new Error(`動画の処理が終わりませんでした（${st}）`);
     const p = await call(`${G}/${id}/media_publish`, { creation_id: c.id, access_token: token });
-    state[date].instagram = { id: p.id, at: new Date().toISOString() };
+    state[date][igKey] = { id: p.id, at: new Date().toISOString() };
     console.log('Instagram にリールを投稿しました:', p.id);
   } catch (e) { errors.push(`Instagram：${e.message}`); }
-} else console.log(process.env.IG_TOKEN ? 'Instagram は投稿済みです' : 'IG_TOKEN がないので Instagram は投稿しません');
+} else console.log(process.env.IG_TOKEN ? `Instagram（${igKey}）は投稿済みです` : 'IG_TOKEN がないので Instagram は投稿しません');
 
 fs.mkdirSync('state', { recursive: true });
 fs.writeFileSync(STATE, JSON.stringify(state, null, 1) + '\n');

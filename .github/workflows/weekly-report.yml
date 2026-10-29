@@ -82,7 +82,7 @@ jobs:
             ## どこから来たか（流入元・スマホ/PC の割合）
             ## 気になる点（課題）
             ## 改善案（すぐできるもの3つ。具体的に。サイトだけでなく SNS の投稿の工夫も含める。作成ルール prompts/system.md の直し方の提案も可）
-            ## SNS（sns の中身。X・Threads・Instagram・YouTube・LINE ごとに、フォロワー／登録者／友だち数と、今週・先週の表示回数（views / impressions）・いいね・保存などを表で。いちばん伸びた投稿と、その理由の見立ても。sns.errors にあるものは「取れませんでした」と理由を一言）
+            ## SNS（sns の中身。X・Threads・Instagram・YouTube・LINE ごとに、フォロワー／登録者／友だち数と、今週・先週の表示回数（views / impressions）・いいね・保存などを表で。いちばん伸びた投稿と、その理由の見立ても。Instagram は by_kind で「朝のまとめ」と「夕方のクイズ」を比べ、1本あたりの表示・コメント・保存でどちらがよいかも書く。sns.errors にあるものは「取れませんでした」と理由を一言）
             ## SNS からサイトへの流入（流入元の t.co・threads.net・instagram.com・youtube.com・line.me などを SNS ごとにまとめ、どの SNS がサイトへの入口として効いているか。SNS の表示回数に対するサイト流入の割合も、計算できれば）
             ## X の投稿と費用（x_posts：今週の投稿回数、おおよその費用、クレジットの残りの見込み est_remaining_usd と残り日数 est_days_left。「X の残高は developer.x.com の Developer Console で確かめてください」と一言そえる）
             ## 来週やること（チェックリスト）

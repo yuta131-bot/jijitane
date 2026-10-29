@@ -52,6 +52,10 @@ jobs:
       - name: 動画を作る
         if: steps.has.outputs.ok == 'true'
         run: python scripts/make_short.py --date "${{ steps.d.outputs.date }}" --out dist-video --voicevox http://localhost:50021
+      - name: 夕方のクイズ動画を作る（Instagram 用）
+        if: steps.has.outputs.ok == 'true'
+        continue-on-error: true
+        run: python scripts/make_short.py --date "${{ steps.d.outputs.date }}" --out dist-video --voicevox http://localhost:50021 --mode quiz
       - name: Releases にのせる
         if: steps.has.outputs.ok == 'true'
         env:
@@ -62,5 +66,5 @@ jobs:
           gh release delete "$T" --yes --cleanup-tag 2>/dev/null || true
           { echo "タイトル：$(cat dist-video/short-$D-title.txt)"; echo; echo "説明："; cat "dist-video/short-$D.txt"; } > notes.txt
           gh release create "$T" --prerelease --title "ショート動画 $D" --notes-file notes.txt \
-            "dist-video/short-$D.mp4" "dist-video/short-$D-thumb.png"
+            "dist-video/short-$D.mp4" "dist-video/short-$D-thumb.png" $(ls dist-video/short-$D-quiz.mp4 dist-video/short-$D-quiz-thumb.png 2>/dev/null)
           echo "動画：${{ github.server_url }}/${{ github.repository }}/releases/tag/$T" >> "$GITHUB_STEP_SUMMARY"
