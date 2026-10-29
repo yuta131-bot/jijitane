@@ -11,6 +11,13 @@ const base = (process.env.SITE_URL || cfg.siteUrl).replace(/\/$/, '');
 const START = '2026-11-01'; // この日から配信を始める
 const today = process.env.TARGET_DATE || todayJst();
 const dry = process.env.DRY_RUN === 'true';
+// お試し（DRY_RUN）のときは、LINE_TOKEN が正しいかだけ確かめる（メッセージは送らない）
+if (dry && process.env.LINE_TOKEN) {
+  const r = await fetch('https://api.line.me/v2/bot/info', { headers: { Authorization: `Bearer ${process.env.LINE_TOKEN}` } });
+  const j = await r.json().catch(() => ({}));
+  if (!r.ok) { console.error(`LINE_TOKEN が使えません（${r.status}）: ${JSON.stringify(j)}`); process.exit(1); }
+  console.log(`LINE_TOKEN OK：${j.displayName}（${j.basicId}）`);
+}
 if (today < START && !dry) { console.log(`${START} から配信します`); process.exit(0); }
 
 const all = fs.readdirSync('content').filter((f) => /^\d{4}-\d{2}-\d{2}\.json$/.test(f)).sort().map((f) => JSON.parse(fs.readFileSync(`content/${f}`, 'utf8')));
