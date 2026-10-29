@@ -42,6 +42,9 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      - uses: actions/setup-python@v5   # 見直し用に図を画像にするため
+        with:
+          python-version: "3.12"
       - uses: actions/cache@v4
         with:
           path: fonts
@@ -92,6 +95,40 @@ jobs:
           node scripts/validate.mjs "content/$TARGET_DATE.json"
           node scripts/review.mjs
 
+      - name: 図の機械チェックと、見直し用の図の画像
+        if: steps.d.outputs.skip == 'false' && env.USE_SUB == 'true'
+        continue-on-error: true
+        env:
+          D: ${{ steps.d.outputs.date }}
+        run: |
+          node scripts/check-figs.mjs "$D"
+          pip install -q playwright==1.49.1 && python -m playwright install --with-deps chromium >/dev/null
+          sudo apt-get install -y -qq fonts-noto-cjk >/dev/null || true
+          python3 scripts/render_figs.py --date "$D"
+
+      - name: 図と読み・誤字の確認（サブスク版）
+        if: steps.d.outputs.skip == 'false' && env.USE_SUB == 'true'
+        continue-on-error: true
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          github_token: ${{ github.token }}
+          prompt: |
+            あなたは子ども向けニュースサイトの「図と言葉の係」の校閲者です。事実の確認は別の係がするので、ここでは次の3つだけを見てください。
+            1. 図：.review/figs/${{ steps.d.outputs.date }}-1.png〜3.png（サイトでの見た目）を Read で画像として開き、content/${{ steps.d.outputs.date }}.json の各ニュースと見比べる。
+               - 地図の上の地点・矢印・台風の位置などが、実際の場所（都市・県・海の名前）と合っているか。たとえば「札幌」の点が北海道の札幌のあたりにあるか
+               - 文字どうしの重なり、図からのはみ出し、読めないほど小さい・うすい文字がないか
+               - 図の中の数字・名前が、本文と同じか
+            2. 読み：ふりがな {漢字|よみ} の読みが正しいか。特に人名・地名・団体名・専門用語は、WebSearch で読み方を確かめる。韓国・北朝鮮の人名は現地読みのカタカナ、中国の人名は音読みのひらがなというルールも確認する。
+            3. 誤字・脱字・文のねじれ、同じ記事の中での表記ゆれ。
+            .review/${{ steps.d.outputs.date }}-auto.json に機械チェックの結果があれば参考にしてください。
+            結果は .review/${{ steps.d.outputs.date }}-fig.json に、次の形の JSON 配列だけで書き出してください。問題がなくても、確認した主なところを ok として入れてください。
+            [{"news": 番号(1〜3), "claim": "確認したところ", "verdict": "ok か wrong か unclear", "detail": "根拠や問題点（短く）", "fix": "直し方（wrong / unclear のとき。図なら svg のどこをどう直すか具体的に）"}]
+            記事ファイルそのものは変更しないでください。
+          claude_args: |
+            --allowedTools "WebSearch,WebFetch,Read,Write,Glob"
+            --max-turns 30
+
       - name: 事実確認（サブスク版）
         if: steps.d.outputs.skip == 'false' && env.USE_SUB == 'true'
         continue-on-error: true
@@ -101,14 +138,16 @@ jobs:
           github_token: ${{ github.token }}
           prompt: |
             あなたは子ども向けニュースサイトの校閲者です。content/${{ steps.d.outputs.date }}.json の記事を読み、事実（数字・日付・人名・地名・できごとの順番・だれが何を言ったか）を WebSearch と WebFetch で、信頼できる報道や公的機関の情報と照らして確認してください。意見や書き方の好みには触れません。
-            確認すべき記述は、各ニュース3〜6個を目安に、数字や固有名詞を優先してください。
+            本文・3行まとめ・図（svg の中の文字）・説明文・クイズに出てくる、数字・日付・人名・地名・組織名・「初めて」「過去最高」などの言い切りを**すべて**一覧にし、1つずつ確かめてください。
+            確かめるときは、2つ以上の報道機関の記事、または公的機関（政府・自治体・気象庁など）の発表と照らしてください。報道どうしで食い違うときは公的機関を優先し、それでも決められないものは unclear にします。
+            .review/${{ steps.d.outputs.date }}-auto.json に機械チェックで見つかった「図にしかない数字」などがあれば、それも必ず確かめてください。
             "math"（ニュースで算数）がある場合は、問題に使った数字が記事と合っているかと、答えと計算の式が正しいかを自分で計算して確かめ、結果に news: 0 として加えてください。
             結果は .review/${{ steps.d.outputs.date }}-fact.json に、次の形の JSON 配列だけで書き出してください。
             [{"news": 番号(1〜3。算数の問題は0), "claim": "確認した記述", "verdict": "ok か wrong か unclear", "detail": "根拠や問題点（短く）", "fix": "直し方（wrong / unclear のとき）"}]
             記事ファイルそのものは変更しないでください。
           claude_args: |
             --allowedTools "WebSearch,WebFetch,Read,Write,Glob"
-            --max-turns 40
+            --max-turns 60
 
       - name: 二重チェックのまとめ（ふりがな＋事実確認）
         if: steps.d.outputs.skip == 'false'
@@ -127,7 +166,7 @@ jobs:
           F=".review/$D-fact.json"
           if [ -f "$F" ]; then
             echo "has=true" >> "$GITHUB_OUTPUT"
-            BAD=$(node -e "try{const a=JSON.parse(require('fs').readFileSync('$F','utf8'));console.log(a.filter(x=>x.verdict!=='ok').length)}catch(e){console.log(0)}")
+            BAD=$(node -e "let n=0;for(const f of ['$F','.review/$D-fig.json','.review/$D-auto.json']){try{n+=JSON.parse(require('fs').readFileSync(f,'utf8')).filter(x=>x.verdict!=='ok').length}catch(e){}}console.log(n)")
             echo "bad=$BAD" >> "$GITHUB_OUTPUT"
           else
             echo "has=false" >> "$GITHUB_OUTPUT"; echo "bad=0" >> "$GITHUB_OUTPUT"
@@ -141,7 +180,10 @@ jobs:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           github_token: ${{ github.token }}
           prompt: |
-            .review/${{ steps.d.outputs.date }}-fact.json は、content/${{ steps.d.outputs.date }}.json の事実確認の結果です。
+            content/${{ steps.d.outputs.date }}.json の見直し結果が3つあります（ないファイルはとばしてください）。
+            - .review/${{ steps.d.outputs.date }}-fact.json：事実確認
+            - .review/${{ steps.d.outputs.date }}-fig.json：図・読み・誤字の確認（図の見た目は .review/figs/${{ steps.d.outputs.date }}-番号.png）
+            - .review/${{ steps.d.outputs.date }}-auto.json：機械チェック（図にしかない数字は、事実確認で確かめられていれば ok とみなす）
             verdict が "wrong" の項目は、detail と fix に従って記事の該当箇所を正しく直してください。必要なら WebSearch で確かめてください。
             verdict が "unclear" の項目は、確かめられた場合だけ直し、確かめられない場合はその記述を記事から外すか、断定しない言い方に変えてください（数字は消す）。
             直すときは、ふりがな記法 {漢字|よみ}・==強調==・子ども向けの文体を保ってください。図（svg）の中の同じ数字や言葉も合わせて直してください。
