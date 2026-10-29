@@ -85,7 +85,7 @@ jobs:
             ほかのファイルは変更しないでください。
           claude_args: |
             --allowedTools "WebSearch,WebFetch,Read,Write,Edit,Glob,Grep,Bash(node scripts/validate.mjs:*)"
-            --max-turns 80
+            --max-turns 100
 
       - name: 形のチェックと確認メモ（サブスク版）
         if: steps.d.outputs.skip == 'false' && env.USE_SUB == 'true'
