@@ -274,6 +274,13 @@ def main():
     shutil.copy(work / frames[0][0], out / f'{stem}-thumb.png')
     total = sum(it[4] for it in items)
     if quiz_mode:
+        # 夕方に YouTube へ上げるときのタイトルと説明文
+        qdesc = (f'きょうのニュースから3問クイズ！ 全部わかるかな？ 答えは動画の中で。\n\n'
+                 f'{date_long}のニュース\n' + '\n'.join(f'{"①②③"[i]}{disp(n.get("short_title") or n["title"])}' for i, n in enumerate(a['news']))
+                 + f'\n\n図解つきのくわしい解説はサイトで（ふりがな付き）\nhttps://jijitane.com/news/{args.date}.html\n\n'
+                 f'音声：{SPEAKER_CREDIT}\n\n#中学受験 #時事問題 #クイズ #Shorts')
+        (out / f'{stem}.txt').write_text(qdesc, encoding='utf-8')
+        (out / f'{stem}-title.txt').write_text(f'【中学受験・時事クイズ】{date_short}の3問｜全部わかるかな？ #shorts', encoding='utf-8')
         print(f'OK: {mp4}（{total:.1f}秒）'); return
     desc = (f'中学受験生の保護者の方へ。入試に出そうな時事ニュースを、毎朝1分の動画にまとめています。お子さんと一緒に見て、会話のきっかけにどうぞ。\n\n'
             f'{date_long}の3本\n' + '\n'.join(f'{"①②③"[i]}{disp(n.get("short_title") or n["title"])}' for i, n in enumerate(a['news']))

@@ -1,5 +1,5 @@
-# 毎日18時（日本時間）に、夕方のクイズ動画を Instagram のリールに投稿する
-#   動画は朝6時の「ショート動画を作る」で作っておく（Releases の short-日付-quiz.mp4）
+# 毎日18時（日本時間）に、夕方のクイズ動画を Instagram のリールと YouTube ショートに投稿する
+#   動画は朝の「ショート動画を作る」で作っておく（Releases の short-日付-quiz.mp4）
 name: 夕方のクイズ動画を投稿
 on:
   schedule:
@@ -34,6 +34,27 @@ jobs:
           FORCE_POST: ${{ inputs.force_post }}
           IG_TOKEN: ${{ secrets.IG_TOKEN }}
         run: node scripts/post-meta.mjs
+      - name: YouTube に上げる（公開・子ども向け）
+        id: yt
+        if: always() && (github.event_name == 'schedule' || inputs.force_post)
+        env:
+          GH_TOKEN: ${{ github.token }}
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+        run: |
+          D="$(TZ=Asia/Tokyo date +%F)"
+          if [ ! -f "content/$D.json" ]; then echo "$D の号はまだありません"; exit 0; fi
+          gh release download "short-$D" -p "short-$D-quiz.mp4" -p "short-$D-quiz.txt" -p "short-$D-quiz-title.txt" -D dist-video
+          python3 scripts/upload_youtube.py --date "$D" --dir dist-video --privacy public --quiz --state state/youtube-posted.json
+      - name: YouTube に上げられなかったら Issue で知らせる
+        if: failure() && steps.yt.outcome == 'failure'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          D="$(TZ=Asia/Tokyo date +%F)"
+          gh issue create --title "⚠️ 夕方のクイズ動画を YouTube に上げられませんでした（$D）" \
+            --body "くわしいエラー：${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
       - name: 失敗したら Issue で知らせる
         if: failure() && steps.ig.outcome == 'failure'
         env:
@@ -47,7 +68,7 @@ jobs:
       - name: 投稿の記録を残す
         if: always()
         run: |
-          if ! git diff --quiet state/; then
+          if [ -n "$(git status --porcelain state/)" ]; then
             git config user.name "news-bot"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git add state/

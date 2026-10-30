@@ -55,12 +55,23 @@ def main():
     p.add_argument('--date', required=True)
     p.add_argument('--dir', default='dist-video')
     p.add_argument('--privacy', choices=['private', 'unlisted', 'public'], default='unlisted')
+    p.add_argument('--quiz', action='store_true', help='夕方のクイズ動画（short-日付-quiz）を上げる')
+    p.add_argument('--state', help='上げた記録の JSON（同じ動画を二度上げないため）。例：state/youtube-posted.json')
     args = p.parse_args()
 
+    key = f'{args.date}{"-quiz" if args.quiz else ""}'
+    state = {}
+    if args.state and Path(args.state).exists():
+        state = json.loads(Path(args.state).read_text(encoding='utf-8'))
+        if key in state:
+            print(f'{key} は YouTube に上げ済みです：https://youtube.com/shorts/{state[key]["id"]}')
+            return
+
     d = Path(args.dir)
-    mp4 = d / f'short-{args.date}.mp4'
-    title = clean((d / f'short-{args.date}-title.txt').read_text(encoding='utf-8'), 100)
-    desc = clean((d / f'short-{args.date}.txt').read_text(encoding='utf-8'), 5000)
+    stem = f'short-{args.date}' + ('-quiz' if args.quiz else '')
+    mp4 = d / f'{stem}.mp4'
+    title = clean((d / f'{stem}-title.txt').read_text(encoding='utf-8'), 100)
+    desc = clean((d / f'{stem}.txt').read_text(encoding='utf-8'), 5000)
 
     meta = {
         'snippet': {
@@ -104,6 +115,10 @@ def main():
     got = status.get('privacyStatus')
 
     url = f'https://youtube.com/shorts/{vid}'
+    if args.state:
+        state[key] = {'id': vid, 'privacy': got}
+        Path(args.state).parent.mkdir(parents=True, exist_ok=True)
+        Path(args.state).write_text(json.dumps(state, ensure_ascii=False, indent=1) + '\n', encoding='utf-8')
     lines = [
         f'YouTube に上げました：{url}',
         f'公開範囲：指定 {args.privacy} → 実際 {got}',
