@@ -4,12 +4,20 @@
 name: ショート動画を作る
 on:
   schedule:
-    - cron: "0 21 * * *"   # UTC 21:00 = 日本時間 6:00（朝5時の記事が公開されたあと）
+    - cron: "45 21 * * *"   # UTC 21:45 = 日本時間 6:45（下書きのマージを待つ。7:30 の Instagram 投稿より前に作り終える）
   workflow_dispatch:
     inputs:
       date:
         description: "日付（空なら今日）例：2026-10-27"
         required: false
+      youtube:
+        description: "YouTube に上げる（手動のとき。毎朝の自動実行では、いつも公開で上げる）"
+        type: choice
+        options:
+          - しない
+          - 限定公開で上げる
+          - 公開で上げる
+        default: しない
 
 permissions:
   contents: write
@@ -66,5 +74,15 @@ jobs:
           gh release delete "$T" --yes --cleanup-tag 2>/dev/null || true
           { echo "タイトル：$(cat dist-video/short-$D-title.txt)"; echo; echo "説明："; cat "dist-video/short-$D.txt"; } > notes.txt
           gh release create "$T" --prerelease --title "ショート動画 $D" --notes-file notes.txt \
-            "dist-video/short-$D.mp4" "dist-video/short-$D-thumb.png" $(ls dist-video/short-$D-quiz.mp4 dist-video/short-$D-quiz-thumb.png 2>/dev/null)
+            "dist-video/short-$D.mp4" "dist-video/short-$D-thumb.png" \
+            $(ls dist-video/short-$D-quiz.mp4 dist-video/short-$D-quiz-thumb.png dist-video/short-$D-quiz.txt dist-video/short-$D-quiz-title.txt 2>/dev/null)
           echo "動画：${{ github.server_url }}/${{ github.repository }}/releases/tag/$T" >> "$GITHUB_STEP_SUMMARY"
+      - name: YouTube に上げる（子ども向け）
+        # 毎朝の自動実行：公開で上げる／手動：選んだときだけ上げる
+        if: steps.has.outputs.ok == 'true' && (github.event_name == 'schedule' || inputs.youtube == '限定公開で上げる' || inputs.youtube == '公開で上げる')
+        env:
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+          PRIVACY: ${{ (github.event_name == 'schedule' || inputs.youtube == '公開で上げる') && 'public' || 'unlisted' }}
+        run: python scripts/upload_youtube.py --date "${{ steps.d.outputs.date }}" --dir dist-video --privacy "$PRIVACY"

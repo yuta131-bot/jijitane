@@ -133,7 +133,7 @@ def scene_quiz_open(a, date_long):
 
 def scene_quiz_end(date_long):
     body = (top(date_long) + '<div class="main" style="align-items:center;justify-content:center;gap:40px;text-align:center">'
-            f'{use("ch-poppo", 320, 330)}<div class="h" style="font-size:72px">何問わかった？<br>コメントで教えてね</div>'
+            f'{use("ch-poppo", 320, 330)}<div class="h" style="font-size:72px">何問わかった？<br>くわしくはサイトで！</div>'
             '<div style="font-size:48px;font-weight:700">ニュースの図解とくわしい解説は</div>'
             '<div style="font-size:96px;font-weight:900;color:#2E78C9">jijitane.com</div></div>')
     return body
@@ -183,7 +183,7 @@ def main():
         scenes.append((scene_quiz_open(a, date_long), [('きょうのニュースから、3問クイズ！', 'きょうのニュースから、3問クイズ！'), ('全部わかるかな？', '全部わかるかな？')]))
         for j, q in enumerate(qs[:3]):
             quiz_block(q, f'第{j+1}問', f'第{j+1}問！', f'第{j+1}問！ {say(q["q"])}')
-        scenes.append((scene_quiz_end(date_long), [('何問わかった？ コメントで教えてね！', '何問わかった？ コメントで教えてね！')]))
+        scenes.append((scene_quiz_end(date_long), [('何問わかった？ くわしくは、サイトで読んでね！', '何問わかった？ くわしくは、じじたねのサイトで読んでね！')]))
     else:
       scenes.append((scene_open(a, date_short, date_long),
                    [(f'{date_short}のじじたね！', f'{date_short}の、じじたね！'), ('きょうの3本を紹介するよ。', 'きょうの3本を、紹介するよ。')]))
@@ -274,6 +274,13 @@ def main():
     shutil.copy(work / frames[0][0], out / f'{stem}-thumb.png')
     total = sum(it[4] for it in items)
     if quiz_mode:
+        # 夕方に YouTube へ上げるときのタイトルと説明文
+        qdesc = (f'きょうのニュースから3問クイズ！ 全部わかるかな？ 答えは動画の中で。\n\n'
+                 f'{date_long}のニュース\n' + '\n'.join(f'{"①②③"[i]}{disp(n.get("short_title") or n["title"])}' for i, n in enumerate(a['news']))
+                 + f'\n\n図解つきのくわしい解説はサイトで（ふりがな付き）\nhttps://jijitane.com/news/{args.date}.html\n\n'
+                 f'音声：{SPEAKER_CREDIT}\n\n#中学受験 #時事問題 #クイズ #Shorts')
+        (out / f'{stem}.txt').write_text(qdesc, encoding='utf-8')
+        (out / f'{stem}-title.txt').write_text(f'【中学受験・時事クイズ】{date_short}の3問｜全部わかるかな？ #shorts', encoding='utf-8')
         print(f'OK: {mp4}（{total:.1f}秒）'); return
     desc = (f'中学受験生の保護者の方へ。入試に出そうな時事ニュースを、毎朝1分の動画にまとめています。お子さんと一緒に見て、会話のきっかけにどうぞ。\n\n'
             f'{date_long}の3本\n' + '\n'.join(f'{"①②③"[i]}{disp(n.get("short_title") or n["title"])}' for i, n in enumerate(a['news']))
