@@ -10,6 +10,14 @@ on:
       date:
         description: "日付（空なら今日）例：2026-10-27"
         required: false
+      youtube:
+        description: "YouTube に上げる（手動のときだけ。毎朝の自動実行では上げない）"
+        type: choice
+        options:
+          - しない
+          - 限定公開で上げる
+          - 公開で上げる
+        default: しない
 
 permissions:
   contents: write
@@ -68,3 +76,11 @@ jobs:
           gh release create "$T" --prerelease --title "ショート動画 $D" --notes-file notes.txt \
             "dist-video/short-$D.mp4" "dist-video/short-$D-thumb.png" $(ls dist-video/short-$D-quiz.mp4 dist-video/short-$D-quiz-thumb.png 2>/dev/null)
           echo "動画：${{ github.server_url }}/${{ github.repository }}/releases/tag/$T" >> "$GITHUB_STEP_SUMMARY"
+      - name: YouTube に上げる（子ども向け）
+        if: steps.has.outputs.ok == 'true' && (inputs.youtube == '限定公開で上げる' || inputs.youtube == '公開で上げる')
+        env:
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+          PRIVACY: ${{ inputs.youtube == '公開で上げる' && 'public' || 'unlisted' }}
+        run: python scripts/upload_youtube.py --date "${{ steps.d.outputs.date }}" --dir dist-video --privacy "$PRIVACY"
