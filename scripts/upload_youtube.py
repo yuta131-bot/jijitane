@@ -4,7 +4,7 @@
   python scripts/upload_youtube.py --date 2026-10-30 --dir dist-video --privacy unlisted
 
 必要な環境変数（GitHub の Secrets）：YT_CLIENT_ID / YT_CLIENT_SECRET / YT_REFRESH_TOKEN
-動画は「子ども向け」として上げる。上げたあとの公開範囲を読み直して表示する
+動画は「子ども向け」として上げる。アップロードの返事にある公開範囲を表示する
 （審査前のプロジェクトでは「非公開」に固定されることがあるため）。
 """
 import argparse
@@ -18,7 +18,6 @@ from pathlib import Path
 
 TOKEN_URL = 'https://oauth2.googleapis.com/token'
 UPLOAD_URL = 'https://www.googleapis.com/upload/youtube/v3/videos?uploadType=resumable&part=snippet,status'
-VIDEOS_URL = 'https://www.googleapis.com/youtube/v3/videos'
 
 
 def request(url, data=None, headers=None, method=None):
@@ -99,10 +98,9 @@ def main():
     video = json.loads(body)
     vid = video['id']
 
-    # 公開範囲を読み直す（審査前だと「非公開」に固定されることがある）
-    _, _, body = request(f'{VIDEOS_URL}?part=status&id={vid}', headers={'Authorization': f'Bearer {token}'})
-    items = json.loads(body).get('items', [])
-    status = items[0]['status'] if items else video.get('status', {})
+    # 返ってきた公開範囲を確かめる（審査前だと「非公開」に固定されることがある）。
+    # youtube.upload の許可では videos.list が使えないので、アップロードの返事を見る。
+    status = video.get('status', {})
     got = status.get('privacyStatus')
 
     url = f'https://youtube.com/shorts/{vid}'
@@ -113,6 +111,7 @@ def main():
     ]
     if got != args.privacy:
         lines.append('指定と違う公開範囲になっています。「非公開」に固定された場合は、YouTube API の監査の申請が必要です。')
+    lines.append('少しあとに「非公開（ロック）」に変わることもあるので、YouTube Studio でも確かめてください。')
     print('\n'.join(lines))
     summary = os.environ.get('GITHUB_STEP_SUMMARY')
     if summary:
