@@ -133,7 +133,7 @@ def scene_quiz_open(a, date_long):
 
 def scene_quiz_end(date_long):
     body = (top(date_long) + '<div class="main" style="align-items:center;justify-content:center;gap:40px;text-align:center">'
-            f'{use("ch-poppo", 320, 330)}<div class="h" style="font-size:72px">何問わかった？<br>コメントで教えてね</div>'
+            f'{use("ch-poppo", 320, 330)}<div class="h" style="font-size:72px">何問わかった？<br>くわしくはサイトで！</div>'
             '<div style="font-size:48px;font-weight:700">ニュースの図解とくわしい解説は</div>'
             '<div style="font-size:96px;font-weight:900;color:#2E78C9">jijitane.com</div></div>')
     return body
@@ -183,7 +183,7 @@ def main():
         scenes.append((scene_quiz_open(a, date_long), [('きょうのニュースから、3問クイズ！', 'きょうのニュースから、3問クイズ！'), ('全部わかるかな？', '全部わかるかな？')]))
         for j, q in enumerate(qs[:3]):
             quiz_block(q, f'第{j+1}問', f'第{j+1}問！', f'第{j+1}問！ {say(q["q"])}')
-        scenes.append((scene_quiz_end(date_long), [('何問わかった？ コメントで教えてね！', '何問わかった？ コメントで教えてね！')]))
+        scenes.append((scene_quiz_end(date_long), [('何問わかった？ くわしくは、サイトで読んでね！', '何問わかった？ くわしくは、じじたねのサイトで読んでね！')]))
     else:
       scenes.append((scene_open(a, date_short, date_long),
                    [(f'{date_short}のじじたね！', f'{date_short}の、じじたね！'), ('きょうの3本を紹介するよ。', 'きょうの3本を、紹介するよ。')]))
