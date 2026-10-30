@@ -11,7 +11,7 @@ on:
         description: "日付（空なら今日）例：2026-10-27"
         required: false
       youtube:
-        description: "YouTube に上げる（手動のときだけ。毎朝の自動実行では上げない）"
+        description: "YouTube に上げる（手動のとき。毎朝の自動実行では、いつも公開で上げる）"
         type: choice
         options:
           - しない
@@ -77,10 +77,11 @@ jobs:
             "dist-video/short-$D.mp4" "dist-video/short-$D-thumb.png" $(ls dist-video/short-$D-quiz.mp4 dist-video/short-$D-quiz-thumb.png 2>/dev/null)
           echo "動画：${{ github.server_url }}/${{ github.repository }}/releases/tag/$T" >> "$GITHUB_STEP_SUMMARY"
       - name: YouTube に上げる（子ども向け）
-        if: steps.has.outputs.ok == 'true' && (inputs.youtube == '限定公開で上げる' || inputs.youtube == '公開で上げる')
+        # 毎朝の自動実行：公開で上げる／手動：選んだときだけ上げる
+        if: steps.has.outputs.ok == 'true' && (github.event_name == 'schedule' || inputs.youtube == '限定公開で上げる' || inputs.youtube == '公開で上げる')
         env:
           YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
           YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
           YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
-          PRIVACY: ${{ inputs.youtube == '公開で上げる' && 'public' || 'unlisted' }}
+          PRIVACY: ${{ (github.event_name == 'schedule' || inputs.youtube == '公開で上げる') && 'public' || 'unlisted' }}
         run: python scripts/upload_youtube.py --date "${{ steps.d.outputs.date }}" --dir dist-video --privacy "$PRIVACY"
