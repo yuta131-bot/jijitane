@@ -79,3 +79,13 @@
 @KokaGakuen  2026-11-01  晃華学園中学校高等学校 公式
 @seisen_jsh  2026-11-01  清泉女学院中学高等学校
 @Edogawa_Girls  2026-11-01  江戸川女子中学高等学校 公式
+@NozomiEast  2026-11-02  希学園（首都圏）公式
+@NozomiWest  2026-11-02  希学園（関西）公式
+@yamasakinozomiE  2026-11-02  山﨑信之亮（希学園首都圏 学園長）
+@saikyoujuku  2026-11-02  最強塾（灘中目標の塾）
+@yukimiura1984  2026-11-02  ユウキ先生（中学受験ThreeStars代表）
+@studytown_chuju  2026-11-02  スタディ・タウン小学生（中学受験・時事）
+@kodomonokagaku  2026-11-02  雑誌『子供の科学』
+@ZUKAN_NEO_PR  2026-11-02  小学館の図鑑NEO
+@kagaku_gakken  2026-11-02  学研の科学と学習 公式
+@takusannofusigi  2026-11-02  たくさんのふしぎ編集部（小学生向け月刊誌）
