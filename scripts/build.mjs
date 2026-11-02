@@ -6,7 +6,7 @@ import { renderCard } from '../src/card.mjs';
 import { esc, plain, jpDate, setSayKeys } from '../src/markup.mjs';
 import { sayKeys } from '../src/readings.mjs';
 import { validate, validateMatome } from '../src/schema.mjs';
-import { flatNews, examYearOf, mondayOf, addDays, hubPage, monthPage, yearPage, rankingPage, weekData, weeklyPage, printHtml } from '../src/matome.mjs';
+import { flatNews, examYearOf, mondayOf, addDays, hubPage, monthPage, yearPage, rankingPage, weekData, weeklyPage, printHtml, rankPrintHtml } from '../src/matome.mjs';
 
 const cfg = JSON.parse(fs.readFileSync('site.config.json', 'utf8'));
 if (process.env.SITE_URL) cfg.siteUrl = process.env.SITE_URL;
@@ -82,6 +82,9 @@ fs.writeFileSync(path.join(OUT, 'weekly', 'weeks.json'), JSON.stringify(weekInfo
 if (year) {
   fs.writeFileSync(path.join(OUT, 'matome', `${year.exam_year}.html`), yearPage({ cfg, css, year, newsByKey, recent: desc }));
   fs.writeFileSync(path.join(OUT, 'matome', `${year.exam_year}-ranking.html`), rankingPage({ cfg, css, year, recent: desc }));
+  // DM・LINEで配る1枚プリント（サイトからはリンクしない。検索にも出さない）
+  fs.mkdirSync(path.join(OUT, 'gift'), { recursive: true });
+  fs.writeFileSync(path.join(OUT, 'gift', `top20-${year.exam_year}-print.html`), rankPrintHtml(cfg, year));
 }
 fs.writeFileSync(path.join(OUT, 'matome', 'index.html'), hubPage({ cfg, css, months: [...monthInfo].reverse().map((m) => ({ ym: m.ym, count: m.items.length })), weeks: [...weekInfo].reverse().map((w) => ({ mon: w.mon, count: w.items.length })), year, recent: desc }));
 
@@ -128,6 +131,6 @@ ${desc.slice(0, 30).map((a) => `<item><title>${esc(jpDate(a.date).short + ' ' + 
 fs.writeFileSync(path.join(OUT, 'feed.xml'), rss);
 const urls = ['/', '/matome/', ...(year ? [`/matome/${year.exam_year}.html`, `/matome/${year.exam_year}-ranking.html`] : []), ...months.map((m) => `/matome/${m}.html`), ...weeks.map((w) => `/weekly/${w}.html`), '/archive.html', '/glossary.html', '/units.html', '/subject/rika.html', '/subject/shakai.html', ...all.flatMap((a) => [`/news/${a.date}.html`, ...a.news.map((_, j) => `/news/${a.date}-${j + 1}.html`)])];
 fs.writeFileSync(path.join(OUT, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((u) => `<url><loc>${base}${u}</loc></url>`).join('\n')}\n</urlset>`);
-fs.writeFileSync(path.join(OUT, 'robots.txt'), `User-agent: *\nAllow: /\nSitemap: ${base}/sitemap.xml\n`);
+fs.writeFileSync(path.join(OUT, 'robots.txt'), `User-agent: *\nAllow: /\nDisallow: /gift/\nSitemap: ${base}/sitemap.xml\n`);
 fs.writeFileSync(path.join(OUT, '.nojekyll'), '');
 console.log(`${all.length} 号分を dist/ に書き出しました`);

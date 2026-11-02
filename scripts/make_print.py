@@ -13,15 +13,16 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--dist', default='dist')
     args = ap.parse_args()
-    wk = Path(args.dist).resolve() / 'weekly'
-    pages = sorted(wk.glob('*-print.html'))
+    dist = Path(args.dist).resolve()
+    # 週ごとの1枚プリント（weekly/）と、DM・LINEで配る出題予想TOP20（gift/）
+    pages = sorted(dist.glob('weekly/*-print.html')) + sorted(dist.glob('gift/*-print.html'))
     with sync_playwright() as p:
         b = p.chromium.launch()
         pg = b.new_page()
         for f in pages:
             pg.goto(f.as_uri(), wait_until='networkidle')
             pg.evaluate('document.fonts.ready')
-            out = wk / (f.name.replace('-print.html', '') + '.pdf')
+            out = f.parent / (f.name.replace('-print.html', '') + '.pdf')
             pg.pdf(path=str(out), format='A4', print_background=True, prefer_css_page_size=True)
             print('作成：', out.name)
         b.close()

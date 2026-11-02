@@ -191,6 +191,43 @@ export function printHtml(cfg, w) {
 <style>@page{size:A4;margin:9mm 10mm}html,body{margin:0;background:#fff}${SHEET_CSS}</style></head><body>${sheetHtml(cfg, w)}</body></html>`;
 }
 
+// ---------- DM・LINEで配る「出題予想 TOP20」1枚プリント（サイト内からはリンクしない） ----------
+const RANK_CSS = `
+.sheet .rk-lead{margin:0 0 6px;font-size:9.4pt;color:var(--m)}
+.sheet .rk-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:repeat(10,auto);grid-auto-flow:column;gap:5px 10px}
+.sheet .rk-list>li{display:grid;grid-template-columns:8.5mm 1fr 5mm;gap:0 5px;align-items:start;border:1.5px solid var(--k);border-radius:8px;padding:4px 6px;break-inside:avoid}
+.sheet .rk-no{width:8mm;height:8mm;border-radius:50%;border:1.5px solid var(--k);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:11pt;background:#fff}
+.sheet .rk-no.top{background:var(--y)}
+.sheet .rk-t{display:block;font-weight:900;font-size:9.6pt;line-height:1.75}
+.sheet .rk-m{display:block;font-size:8pt;color:var(--m);font-weight:700}.sheet .rk-m .st{color:#E8A400;letter-spacing:1px;margin-left:4px}
+.sheet .rk-kw{display:flex;flex-wrap:wrap;gap:1px 4px;margin-top:1px;font-size:8pt}
+.sheet .rk-kw span{border:1px solid var(--l);border-radius:4px;padding:0 3px;background:#F6F9FC}
+.sheet .rk-ck{width:4.5mm;height:4.5mm;border:1.5px solid var(--k);border-radius:2px;margin-top:2px}
+.sheet .rk-note{margin-top:6px;font-size:8.2pt;color:var(--m)}
+.sheet .rk-cta{margin-top:6px;border:2px dashed var(--g);border-radius:8px;padding:4px 8px;font-size:8.8pt;display:flex;justify-content:space-between;gap:10px;align-items:center}
+.sheet .rk-cta b{color:var(--g)}
+`;
+
+function rankSheetHtml(cfg, year) {
+  const base = baseOf(cfg).replace(/^https?:\/\//, '');
+  const byId = new Map(year.topics.map((t) => [t.id, t]));
+  const rows = year.ranking.map((r, i) => ({ t: byId.get(r.id), no: i + 1 })).filter((x) => x.t);
+  const line = (cfg.lineUrl || '').replace(/^https?:\/\//, '');
+  return `<div class="sheet">
+<div class="sh-head"><div><div class="sh-brand"><i>${esc(cfg.brandPrefix || '')}</i>${esc(cfg.brandMain || cfg.siteName)}</div><div class="sh-title">${year.exam_year}年入試 時事問題 出題予想 TOP20<small>これだけはおさえたい！ 出そうな順に20のニュース</small></div></div><div class="sh-name">名前<span></span></div></div>
+<p class="rk-lead">対象：${esc(year.period || '')}　／　おぼえたら □ にチェック。くわしい説明は ${esc(base)}/matome/${year.exam_year}.html</p>
+<ol class="rk-list">${rows.map(({ t, no }) => `<li><span class="rk-no${no <= 3 ? ' top' : ''}">${no}</span><div><span class="rk-t">${inline(t.title)}</span><span class="rk-m">${esc(CAT_NAME[t.cat] || '')}・${esc(t.when || '')}<span class="st">${'★'.repeat(Math.max(0, Math.min(3, Number(t.stars) || 0)))}</span></span><div class="rk-kw">${(t.keywords || []).slice(0, 3).map((k) => `<span>${inline(k)}</span>`).join('')}</div></div><span class="rk-ck"></span></li>`).join('')}</ol>
+<div class="rk-cta"><div><b>毎週日曜は LINE で「今週のふり返り号」</b>　6つの重要ニュースと確認テストが、1枚で届きます。</div>${line ? `<div>${esc(line)}</div>` : ''}</div>
+<div class="rk-note">※ランキングは、じじたね編集部（AI）による予想です。実際の出題を保証するものではありません。　最終更新：${esc(jpDate(year.updated).label)}　家庭・塾・学校での印刷・配布は自由です（内容の改変・販売はご遠慮ください）。</div>
+</div>`;
+}
+
+export function rankPrintHtml(cfg, year) {
+  return `<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="robots" content="noindex"><title>${year.exam_year}年入試 時事問題 出題予想TOP20 1枚プリント</title>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&display=swap" rel="stylesheet">
+<style>@page{size:A4;margin:9mm 10mm}html,body{margin:0;background:#fff}${SHEET_CSS}${RANK_CSS}</style></head><body>${rankSheetHtml(cfg, year)}</body></html>`;
+}
+
 export function weeklyPage({ cfg, css, w, prev, next, recent }) {
   const base = baseOf(cfg);
   const label = weekLabel(w.mon);
