@@ -1,0 +1,96 @@
+# 毎日12時（日本時間）に、「覚えるシート」を1種類ずつ X と Instagram（カルーセル）で紹介する
+#   出すシートは、いちばん長く出していないもの（8種が順番にまわる）
+#   画像は、シートのPDFからその場で作り、Releases（sheet-promo）にのせる（Instagram がそこから読み込む）
+name: 覚えるシートを紹介
+on:
+  schedule:
+    - cron: "0 3 * * *"   # UTC 3:00 = 日本時間 12:00
+  workflow_dispatch:
+    inputs:
+      sheet_id:
+        description: "シートのID（空ならじゅん番）例：zukei"
+        required: false
+      dry_run:
+        description: "投稿せずに、文面だけ確かめる"
+        type: boolean
+        default: false
+      force_post:
+        description: "今日すでに投稿していても、もう一度投稿する"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency: publish-post
+
+jobs:
+  promo:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/cache@v4
+        with:
+          path: fonts
+          key: fonts-zen-maru-v1
+      - name: サイトを作る（シートの印刷用ページ）
+        run: node scripts/build.mjs
+        env:
+          SITE_URL: ${{ vars.SITE_URL }}
+      - name: シートのPDFと、SNS用の画像を作る
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq fonts-noto-cjk poppler-utils >/dev/null
+          pip install -q playwright==1.49.1 pillow && python -m playwright install --with-deps chromium >/dev/null
+          python3 scripts/make_print.py --dist dist
+          python3 scripts/make_promo.py --dist dist --out promo
+      - name: 画像を Releases にのせる
+        if: ${{ !inputs.dry_run }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release view sheet-promo >/dev/null 2>&1 || gh release create sheet-promo --title "覚えるシートのSNS用画像" --notes "SNS投稿用の画像（自動で作り直されます）"
+          gh release upload sheet-promo promo/*.jpg --clobber
+      - name: X と Instagram に投稿
+        id: post
+        env:
+          SITE_URL: ${{ vars.SITE_URL }}
+          SHEET_ID: ${{ inputs.sheet_id }}
+          DRY_RUN: ${{ inputs.dry_run }}
+          FORCE_POST: ${{ inputs.force_post }}
+          IG_TOKEN: ${{ secrets.IG_TOKEN }}
+          X_API_KEY: ${{ secrets.X_API_KEY }}
+          X_API_SECRET: ${{ secrets.X_API_SECRET }}
+          X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
+          X_ACCESS_SECRET: ${{ secrets.X_ACCESS_SECRET }}
+        run: node scripts/post-sheet.mjs
+      - name: 失敗したら Issue で知らせる
+        if: failure() && steps.post.outcome == 'failure'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          D="$(TZ=Asia/Tokyo date +%F)"
+          { echo "覚えるシートの紹介投稿がうまくいきませんでした。"; echo; echo '```'; cat sheet-errors.txt 2>/dev/null; echo '```'; echo; \
+            echo "直したあと、Actions →「覚えるシートを紹介」→「Run workflow」で、今日の分をやり直せます（Xだけ成功していた場合は、成功した分はくり返しません）。"; \
+            echo; echo "くわしいエラー：${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"; } > body.txt
+          gh issue create --title "⚠️ 覚えるシートの紹介を投稿できませんでした（$D）" --body-file body.txt
+      - name: 投稿の記録を残す
+        if: always() && !inputs.dry_run
+        run: |
+          if [ -n "$(git status --porcelain state/)" ]; then
+            git config user.name "news-bot"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add state/
+            git commit -m "投稿記録（覚えるシート） [skip ci]"
+            git pull --rebase -q origin main
+            git push
+          fi
