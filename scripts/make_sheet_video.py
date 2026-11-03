@@ -128,7 +128,7 @@ def scene_bg(brand, label, caption, card=None):
 
 
 class Scene:
-    def __init__(self, bg, src, box, dur, zoom=0.10):
+    def __init__(self, bg, src, box, dur, zoom=0):
         self.bg, self.src, self.box, self.dur, self.zoom = bg, src, box, dur, zoom   # box = src 上の切り取り範囲 (x0,y0,x1,y1)
         x0, y0, x1, y1 = box
         cw, ch = x1 - x0, y1 - y0
@@ -138,14 +138,15 @@ class Scene:
         n = max(1, round(self.dur * FPS))
         tw, th = disp
         x0, y0, x1, y1 = self.box
-        cx, cy, cw, ch = (x0 + x1) / 2, (y0 + y1) / 2, x1 - x0, y1 - y0
         ox, oy = (W - tw) // 2, IMG_TOP + (IMG_BOT - IMG_TOP - th) // 2
+        full = self.src.resize((tw, th), Image.LANCZOS, box=(x0, y0, x1, y1))   # 切り取った範囲を、はみ出さずにそのまま見せる
         for i in range(n):
-            z = 1 + self.zoom * (i / n)
-            vw, vh = cw / z, ch / z
-            view = self.src.resize((tw, th), Image.BILINEAR, box=(cx - vw / 2, cy - vh / 2, cx + vw / 2, cy + vh / 2))
+            # 場面の頭の0.3秒だけ、少し小さい所から ふわっと大きくなる（見切れないよう、拡大はしない）
+            t = min(1.0, i / (FPS * 0.3))
+            k = 0.94 + 0.06 * (1 - (1 - t) ** 2)
+            view = full if k >= 0.999 else full.resize((round(tw * k), round(th * k)), Image.BILINEAR)
             fr = self.bg.copy()
-            fr.paste(view, (ox, oy))
+            fr.paste(view, (ox + (tw - view.width) // 2, oy + (th - view.height) // 2))
             yield fr
 
 
