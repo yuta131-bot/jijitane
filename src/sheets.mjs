@@ -4,13 +4,15 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { esc, inline, plain, jpDate } from './markup.mjs';
 import { layout } from './templates.mjs';
+import { fig, FIG_NAMES } from './figs.mjs';
 
 const baseOf = (cfg) => cfg.siteUrl.replace(/\/$/, '');
 export const GROUPS = [
   ['jiji', '時事の覚えるシート', 'ニュースを読むときの「ものさし」になる、政治・国際・環境の基本'],
   ['kihon', '基本の覚えるシート', '算数・社会・国語で、毎日ひらく「手元の1枚」'],
 ];
-const BLOCKS = new Set(['table', 'cards', 'kanji', 'tips', 'quiz', 'list', 'text']);
+const BLOCKS = new Set(['table', 'cards', 'kanji', 'tips', 'quiz', 'list', 'text', 'figs', 'test', 'map', 'memo']);
+const PREF = JSON.parse(fs.readFileSync(new URL('./japan-pref.json', import.meta.url), 'utf8'));
 
 export function loadSheets(dir = 'content/sheets') {
   if (!fs.existsSync(dir)) return [];
@@ -35,6 +37,9 @@ export function validateSheet(s) {
       if (!Array.isArray(b.head) || !Array.isArray(b.rows)) errs.push(`${where}：table に head / rows がありません`);
       else for (const r of b.rows) if (r.length !== b.head.length) errs.push(`${where}「${b.title || ''}」：列の数がちがう行があります（${r.join(' / ')}）`);
     }
+    const figOk = (f) => !f || FIG_NAMES.includes(f[0]);
+    if (b.t === 'figs' && !(b.items || []).every((x) => figOk(x.fig))) errs.push(`${where}：知らない図形があります`);
+    if (b.t === 'test' && !(b.items || []).every((x) => x.q && x.a != null && figOk(x.fig))) errs.push(`${where}：test の items は {q, a, fig?} です`);
     if (b.t === 'kanji' && !(b.items || []).every((x) => Array.isArray(x) && x.length === 3)) errs.push(`${where}：kanji の items は [字, 名前, 例] です`);
   };
   (s.pages || []).forEach((p, i) => (p.blocks || []).forEach((b, j) => (Array.isArray(b) ? b : [b]).forEach((x) => check(x, `${i + 1}ページ目の${j + 1}番目`))));
@@ -62,8 +67,38 @@ function quiz(b) {
 function list(b) {
   return `<section class="sx-b"><h4>${cell(b.title)}</h4><ul class="sx-l">${b.items.map((i) => `<li>${cell(i)}</li>`).join('')}</ul></section>`;
 }
+
+// ---------- 図形カード・確認テスト・日本地図 ----------
+const CIRC = ['①', '②', '③', '④', '⑤', '⑥', '⑦', '⑧', '⑨', '⑩', '⑪', '⑫'];
+function figs(b) {
+  return `<section class="sx-b"><h4>${cell(b.title)}${b.note ? `<small>${cell(b.note)}</small>` : ''}</h4><div class="sx-figs" style="--cols:${b.cols || 4}">${b.items.map((it) => `<div class="sx-fc"><div class="fg">${fig(it.fig)}</div><b>${cell(it.cap)}</b>${it.f ? `<span>${cell(it.f)}</span>` : ''}${it.g ? `<span>${cell(it.g)}</span>` : ''}</div>`).join('')}</div></section>`;
+}
+function test(b) {
+  return `<section class="sx-b sx-test"><h4>${cell(b.title || '確認テスト')}${b.note ? `<small>${cell(b.note)}</small>` : ''}</h4><div class="sx-tg" style="--cols:${b.cols || 2}">${b.items.map((it, i) => `<div class="sx-ti"><span class="no">${CIRC[i] || i + 1}</span>${it.fig ? `<div class="tf">${fig(it.fig)}</div>` : ''}<div class="tb"><span class="tq">${cell(it.q)}</span><span class="tl">答え <i></i>${it.u ? cell(it.u) : ''}</span></div></div>`).join('')}</div><p class="sx-ans">こたえ：${b.items.map((it, i) => `${CIRC[i] || i + 1} ${cell(it.a)}`).join('　')}</p></section>`;
+}
+const REGIONS = ['北海道', '東北', '関東', '中部', '近畿', '中国', '四国', '九州・沖縄'];
+const REGION_FILL = ['#BFE3F5', '#CDEBC8', '#FFE3A3', '#F5C9D8', '#D9CCF0', '#FFD2AE', '#BFE8E0', '#F0C9C0'];
+function prefSvg(blank) {
+  const { W, H, inset, prefs } = PREF;
+  return `<svg class="sx-mapsvg" viewBox="0 0 ${W} ${H}" role="img" aria-label="日本地図（都道府県）"><rect width="${W}" height="${H}" rx="10" fill="#EEF6FC"/>`
+    + `<rect x="${inset.x}" y="${inset.y}" width="${inset.w}" height="${inset.h}" rx="6" fill="#fff" stroke="#9BB0C6" stroke-dasharray="4 3"/><text x="${inset.x + 6}" y="${inset.y + 12}" font-size="10" font-weight="700" fill="#56677F">南西諸島</text>`
+    + prefs.map((p) => `<path d="${p.d}" fill="${blank ? '#FFFFFF' : REGION_FILL[p.region - 1]}" stroke="#1D2B44" stroke-width="0.9" stroke-linejoin="round" fill-rule="evenodd"/>`).join('')
+    + prefs.map((p) => `<text x="${p.lx}" y="${p.ly + 3.6}" text-anchor="middle" font-size="${p.code === 13 || p.code === 27 || p.code === 37 || p.code === 26 || p.code === 28 || p.code === 25 || p.code === 29 || p.code === 30 || p.code === 14 || p.code === 11 || p.code === 12 ? 9 : 10.5}" font-weight="900" fill="#1D2B44">${p.code}</text>`).join('')
+    + `</svg>`;
+}
+function map(b) {
+  const { prefs } = PREF;
+  if (b.mode === 'blank') {
+    const half = Math.ceil(prefs.length / 2);
+    const col = (xs) => `<div class="sx-ac">${xs.map((p) => `<div class="sx-ar"><span class="n">${p.code}</span><i></i></div>`).join('')}</div>`;
+    return `<section class="sx-b sx-map blank"><h4>${cell(b.title)}${b.note ? `<small>${cell(b.note)}</small>` : ''}</h4><div class="sx-mw"><div class="sx-mp">${prefSvg(true)}</div><div class="sx-al">${col(prefs.slice(0, half))}${col(prefs.slice(half))}</div></div><p class="sx-ans">こたえ：${prefs.map((p) => `${p.code} ${esc(p.name)}`).join('　')}</p></section>`;
+  }
+  const legend = REGIONS.map((r, i) => `<div class="sx-rg"><b style="background:${REGION_FILL[i]}">${esc(r)}</b><span>${prefs.filter((p) => p.region === i + 1).map((p) => `<i><em>${p.code}</em>${esc(p.name.replace(/[都府県]$/, ''))}</i>`).join('')}</span></div>`).join('');
+  return `<section class="sx-b sx-map"><h4>${cell(b.title)}${b.note ? `<small>${cell(b.note)}</small>` : ''}</h4><div class="sx-mw"><div class="sx-mp">${prefSvg(false)}</div><div class="sx-ml">${legend}</div></div></section>`;
+}
+const memo = (b) => `<section class="sx-b"><h4>${cell(b.title)}</h4><div class="sx-memo">${'<div></div>'.repeat(b.lines || 5)}</div></section>`;
 const text = (b) => `<p class="sx-text">${cell(b.text)}</p>`;
-const RENDER = { table, cards, kanji, tips, quiz, list, text };
+const RENDER = { table, cards, kanji, tips, quiz, list, text, figs, test, map, memo };
 const block = (b) => (Array.isArray(b) ? `<div class="sx-row n${b.length}">${b.map((x) => RENDER[x.t](x)).join('')}</div>` : RENDER[b.t](b));
 
 const footNote = (cfg, s) => {
@@ -110,6 +145,28 @@ const SX_CSS = `
 .sx .sx-q .qk{font-size:20pt;font-weight:900;line-height:1.1;background:#FFF0C2;border-radius:6px;padding:0 6px}
 .sx .sx-q .ql{display:flex;flex-direction:column;font-size:7.4pt;color:var(--m);line-height:1.9;white-space:nowrap}.sx .sx-q .ql i{display:inline-block;width:11mm;border-bottom:1px solid var(--k)}
 .sx .sx-ans{margin:3px 0 0;font-size:7pt;color:var(--m);transform:rotate(180deg);text-align:left}
+
+.sx .sx-figs{display:grid;grid-template-columns:repeat(var(--cols,4),1fr);gap:5px}
+.sx .sx-fc{border:1.5px solid var(--k);border-radius:8px;background:#fff;text-align:center;padding:2px 4px 4px;break-inside:avoid}
+.sx .sx-fc .fg{display:flex;justify-content:center}.sx .sx-fc svg{width:100%;max-width:34mm;height:auto}
+.sx .sx-fc b{display:block;font-size:8.6pt;line-height:1.25}.sx .sx-fc span{display:block;font-size:7.8pt;color:#8A4A10;font-weight:700;line-height:1.3}
+.sx .sx-fig text{font-family:"Zen Maru Gothic","Noto Sans JP",sans-serif}
+.sx .sx-tg{display:grid;grid-template-columns:repeat(var(--cols,2),1fr);gap:4px 8px}
+.sx .sx-ti{display:flex;align-items:center;gap:6px;border:1.5px dashed var(--l);border-radius:8px;padding:3px 6px;break-inside:avoid}
+.sx .sx-ti .no{flex:none;width:5.2mm;height:5.2mm;border-radius:50%;background:var(--k);color:#fff;font-size:7pt;font-weight:900;display:flex;align-items:center;justify-content:center}
+.sx .sx-ti .tf{flex:none;width:24mm}.sx .sx-ti .tf svg{width:100%;height:auto}
+.sx .sx-ti .tb{flex:1}.sx .sx-ti .tq{display:block;font-size:8.2pt;line-height:1.4}
+.sx .sx-ti .tl{display:block;margin-top:3px;color:var(--m);font-size:7.6pt}.sx .sx-ti .tl i{display:inline-block;width:22mm;border-bottom:1px solid var(--k);margin:0 2px}
+.sx .sx-mw{display:grid;grid-template-columns:1.5fr 1fr;gap:8px;align-items:start}
+.sx .sx-mapsvg{width:100%;height:auto;display:block}
+.sx .sx-ml{display:flex;flex-direction:column;gap:3px}
+.sx .sx-rg{border:1.5px solid var(--k);border-radius:6px;overflow:hidden;break-inside:avoid}
+.sx .sx-rg b{display:block;padding:0 6px;font-size:8pt;border-bottom:1px solid var(--k)}
+.sx .sx-rg span{display:flex;flex-wrap:wrap;gap:0 7px;padding:1px 6px 2px;font-size:7.6pt;line-height:1.5}
+.sx .sx-rg i{font-style:normal;white-space:nowrap}.sx .sx-rg em{font-style:normal;font-weight:900;color:var(--m);margin-right:1px;font-size:6.6pt}
+.sx .sx-al{display:grid;grid-template-columns:1fr 1fr;gap:0 10px}
+.sx .sx-ar{display:flex;align-items:flex-end;gap:3px;height:6.4mm}.sx .sx-ar .n{width:5mm;text-align:right;font-weight:900;font-size:8pt;color:var(--m)}.sx .sx-ar i{flex:1;border-bottom:1px solid var(--k);height:4.4mm}
+.sx .sx-memo div{border-bottom:1px solid var(--l);height:8.5mm}
 .sx .sx-pg{background:#fff}
 .sx .sh-head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:3px solid var(--k);padding-bottom:3px;margin-bottom:4px}
 .sx .sh-brand{font-weight:900;font-size:10pt}.sx .sh-brand i{font-style:normal;border:1.5px solid var(--k);border-radius:4px;padding:0 3px;margin-right:4px;font-size:8.5pt}
@@ -117,6 +174,10 @@ const SX_CSS = `
 .sx .sh-name{font-size:9pt;color:var(--m);text-align:right;white-space:nowrap}.sx .sh-name span{display:inline-block;width:38mm;border-bottom:1px solid var(--k);margin-left:4px}
 .sx .sh-foot{margin-top:6px;border-top:2px dashed var(--l);padding-top:3px;display:flex;justify-content:space-between;gap:10px;font-size:7.4pt;color:var(--m)}.sx .sh-foot b{color:var(--k)}
 @media (max-width:700px){
+
+ .sx-site .sx-figs{grid-template-columns:repeat(2,1fr)}.sx-site .sx-fc svg{max-width:150px}
+ .sx-site .sx-tg{grid-template-columns:1fr}.sx-site .sx-ti .tf{width:110px}.sx-site .sx-memo div{height:30px}
+ .sx-site .sx-mw{grid-template-columns:1fr}.sx-site .sx-al{grid-template-columns:1fr 1fr}
  .sx-site .sx-row.n2,.sx-site .sx-row.n3{grid-template-columns:1fr}
  .sx-site .sx-cards{grid-template-columns:1fr}
  .sx-site .sx-kg{grid-template-columns:repeat(auto-fill,minmax(66px,1fr))}
@@ -125,19 +186,19 @@ const SX_CSS = `
  .sx-site table.sx-t{font-size:12.5px}.sx-site .sx-l,.sx-site .sx-card ul{font-size:13px}.sx-site .sx-n,.sx-site .sx-text{font-size:12px}
  .sx-site .sx-t.first td:first-child{white-space:normal}
 }
-@media screen and (min-width:701px){.sx-site .sx-kc .c{font-size:22px}.sx-site .sx-kc .n{font-size:10.5px}.sx-site .sx-kc .e{font-size:12.5px}.sx-site table.sx-t{font-size:13.5px}.sx-site .sx-l,.sx-site .sx-card ul{font-size:13.5px}.sx-site .sx-card>b{font-size:14px}.sx-site h4{font-size:16px}.sx-site h4 small{font-size:12px}.sx-site .sx-n,.sx-site .sx-text{font-size:12.5px}.sx-site .sx-q .qk{font-size:30px}.sx-site .sx-q .ql{font-size:11.5px}.sx-site .sx-ans{font-size:11.5px}.sx-site .sx-kc.sdg .c{font-size:18px}.sx-site .sx-kc.sdg .n{font-size:13px}}
+@media screen and (min-width:701px){.sx-site .sx-fc b{font-size:14px}.sx-site .sx-fc span{font-size:12.5px}.sx-site .sx-ti .tq{font-size:13.5px}.sx-site .sx-ti .tl{font-size:12.5px}.sx-site .sx-ti .no{width:22px;height:22px;font-size:12px}.sx-site .sx-rg b{font-size:13px}.sx-site .sx-rg span{font-size:12.5px}.sx-site .sx-rg em{font-size:11px}.sx-site .sx-ar .n{font-size:13px}.sx-site .sx-ar{height:26px}.sx-site .sx-ar i{height:18px}.sx-site .sx-ti .tf{width:130px}.sx-site .sx-kc .c{font-size:22px}.sx-site .sx-kc .n{font-size:10.5px}.sx-site .sx-kc .e{font-size:12.5px}.sx-site table.sx-t{font-size:13.5px}.sx-site .sx-l,.sx-site .sx-card ul{font-size:13.5px}.sx-site .sx-card>b{font-size:14px}.sx-site h4{font-size:16px}.sx-site h4 small{font-size:12px}.sx-site .sx-n,.sx-site .sx-text{font-size:12.5px}.sx-site .sx-q .qk{font-size:30px}.sx-site .sx-q .ql{font-size:11.5px}.sx-site .sx-ans{font-size:11.5px}.sx-site .sx-kc.sdg .c{font-size:18px}.sx-site .sx-kc.sdg .n{font-size:13px}}
 `;
 
 function pageHtml(cfg, s, p, i, print) {
   const base = baseOf(cfg).replace(/^https?:\/\//, '');
   const body = (p.blocks || []).map(block).join('');
   if (!print) return `<div class="sx-pg"><h3 class="month">${esc(p.label)}</h3>${body}</div>`;
-  const z = p.scale ? ` data-fixed="1" style="zoom:${p.scale}"` : '';
+  const z = p.scale ? ` data-fixed="1" style="zoom:${p.scale}"` : p.maxz ? ` data-maxz="${p.maxz}"` : '';
   return `<div class="sx sx-pg"${z}><div class="sh-head"><div><div class="sh-brand"><i>${esc(cfg.brandPrefix || '')}</i>${esc(cfg.brandMain || cfg.siteName)}</div><div class="sh-title">${esc(s.title)}<span class="sx-pg-label">${esc(p.label)}</span><small>${esc(s.sub)}</small></div></div><div class="sh-name">名前<span></span></div></div>${body}${footNote(cfg, s)}</div>`;
 }
 
 // A4の1ページにちょうど収まる大きさまで、文字や表を広げる（印刷・PDFのときだけ動く）
-const FIT_JS = `(function(){document.body.style.width='192mm';var AV=Math.floor((297-16)/25.4*96);function fit(){document.querySelectorAll('.sx-pg').forEach(function(el){if(el.getAttribute('data-fixed'))return;var z=1.7;el.style.zoom=z;while(z>1&&el.getBoundingClientRect().height>AV*0.97){z=Math.round((z-0.02)*100)/100;el.style.zoom=z;}});}
+const FIT_JS = `(function(){document.body.style.width='192mm';var AV=Math.floor((297-16)/25.4*96);function fit(){document.querySelectorAll('.sx-pg').forEach(function(el){if(el.getAttribute('data-fixed'))return;var z=parseFloat(el.getAttribute('data-maxz'))||1.5;el.style.zoom=z;while(z>0.75&&el.getBoundingClientRect().height>AV*0.97){z=Math.round((z-0.02)*100)/100;el.style.zoom=z;}});}
 window.__fit=fit;if(document.fonts&&document.fonts.ready){document.fonts.ready.then(fit);}else{window.addEventListener('load',fit);}})();`;
 
 export function sheetPrintHtml(cfg, s) {
