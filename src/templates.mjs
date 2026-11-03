@@ -165,7 +165,7 @@ ${sources.length ? `<div class="sources"><b>参考にした報道</b><ul>${sourc
     title: `${dt.short} ${a.news.map((n) => plain(n.short_title || n.title)).join('／')}｜${cfg.siteName}`,
     desc: `${dt.label}の時事ニュース3本を小学生向けにやさしく図解。` + a.news.map((n) => plain(n.title)).join('、'),
     path: top ? '/' : `/news/${a.date}.html`,
-    ogImage: `/og/${a.date}.png`,
+    ogImage: top ? '/og/site.png' : `/og/${a.date}.png`,   // トップは日付なしのサイト紹介カード（Xなどのリンクカードに日付が残らないように）
   });
 }
 

@@ -2,7 +2,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { articlePage, listPage, staticPage, newsPage, glossaryPage, unitsPage } from '../src/templates.mjs';
-import { renderCard } from '../src/card.mjs';
+import { renderCard, renderSiteCard } from '../src/card.mjs';
 import { esc, plain, jpDate, setSayKeys } from '../src/markup.mjs';
 import { sayKeys } from '../src/readings.mjs';
 import { validate, validateMatome } from '../src/schema.mjs';
@@ -87,6 +87,8 @@ if (year) {
   fs.writeFileSync(path.join(OUT, 'gift', `top20-${year.exam_year}-print.html`), rankPrintHtml(cfg, year));
 }
 fs.writeFileSync(path.join(OUT, 'matome', 'index.html'), hubPage({ cfg, css, months: [...monthInfo].reverse().map((m) => ({ ym: m.ym, count: m.items.length })), weeks: [...weekInfo].reverse().map((w) => ({ mon: w.mon, count: w.items.length })), year, recent: desc }));
+
+await renderSiteCard(cfg, path.join(OUT, 'og', 'site.png'));
 
 // トップは最新号をそのまま見せる
 if (desc[0]) {
