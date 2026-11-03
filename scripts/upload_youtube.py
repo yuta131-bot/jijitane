@@ -56,10 +56,13 @@ def main():
     p.add_argument('--dir', default='dist-video')
     p.add_argument('--privacy', choices=['private', 'unlisted', 'public'], default='unlisted')
     p.add_argument('--quiz', action='store_true', help='夕方のクイズ動画（short-日付-quiz）を上げる')
+    p.add_argument('--stem', help='動画ファイルの名前（拡張子なし）。ふだんは short-日付 だが、覚えるシートなどは別の名前で上げる')
+    p.add_argument('--key', help='上げた記録の名前（--stem を使うとき）')
+    p.add_argument('--tags', help='タグをカンマ区切りで（省略時は時事ニュース用）')
     p.add_argument('--state', help='上げた記録の JSON（同じ動画を二度上げないため）。例：state/youtube-posted.json')
     args = p.parse_args()
 
-    key = f'{args.date}{"-quiz" if args.quiz else ""}'
+    key = args.key or f'{args.date}{"-quiz" if args.quiz else ""}'
     state = {}
     if args.state and Path(args.state).exists():
         state = json.loads(Path(args.state).read_text(encoding='utf-8'))
@@ -68,7 +71,7 @@ def main():
             return
 
     d = Path(args.dir)
-    stem = f'short-{args.date}' + ('-quiz' if args.quiz else '')
+    stem = args.stem or (f'short-{args.date}' + ('-quiz' if args.quiz else ''))
     mp4 = d / f'{stem}.mp4'
     title = clean((d / f'{stem}-title.txt').read_text(encoding='utf-8'), 100)
     desc = clean((d / f'{stem}.txt').read_text(encoding='utf-8'), 5000)
@@ -80,7 +83,7 @@ def main():
             'categoryId': '27',  # 教育
             'defaultLanguage': 'ja',
             'defaultAudioLanguage': 'ja',
-            'tags': ['中学受験', '時事問題', 'ニュース', 'Shorts'],
+            'tags': [t.strip() for t in args.tags.split(',')] if args.tags else ['中学受験', '時事問題', 'ニュース', 'Shorts'],
         },
         'status': {
             'privacyStatus': args.privacy,

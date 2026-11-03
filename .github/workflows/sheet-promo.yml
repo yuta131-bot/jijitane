@@ -1,4 +1,4 @@
-# 毎日12時（日本時間）に、「覚えるシート」を1種類ずつ X と Instagram（カルーセル）で紹介する
+# 毎日12時（日本時間）に、「覚えるシート」を1種類ずつ X・Instagram（カルーセル）・YouTube ショートで紹介する
 #   出すシートは、いちばん長く出していないもの（8種が順番にまわる）
 #   画像は、シートのPDFからその場で作り、Releases（sheet-promo）にのせる（Instagram がそこから読み込む）
 name: 覚えるシートを紹介
@@ -73,6 +73,29 @@ jobs:
           X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
           X_ACCESS_SECRET: ${{ secrets.X_ACCESS_SECRET }}
         run: node scripts/post-sheet.mjs
+      - name: YouTube ショートに上げる（公開・子ども向け・音声なしの紹介動画）
+        id: yt
+        if: always() && !inputs.dry_run && steps.post.outputs.sheet_id != ''
+        env:
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+          SITE_URL: ${{ vars.SITE_URL }}
+        run: |
+          ID="${{ steps.post.outputs.sheet_id }}"
+          D="$(TZ=Asia/Tokyo date +%F)"
+          sudo apt-get install -y -qq ffmpeg >/dev/null
+          python3 scripts/make_sheet_video.py --sheet "$ID" --promo promo --out dist-video
+          python3 scripts/upload_youtube.py --date "$D" --dir dist-video --stem "sheet-$ID" --key "sheet-$ID-$D" \
+            --tags "中学受験,覚えるシート,家庭学習,Shorts" --privacy public --state state/youtube-posted.json
+      - name: YouTube に上げられなかったら Issue で知らせる
+        if: failure() && steps.yt.outcome == 'failure'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          D="$(TZ=Asia/Tokyo date +%F)"
+          gh issue create --title "⚠️ 覚えるシートの紹介動画を YouTube に上げられませんでした（$D）" \
+            --body "くわしいエラー：${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
       - name: 失敗したら Issue で知らせる
         if: failure() && steps.post.outcome == 'failure'
         env:

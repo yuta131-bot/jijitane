@@ -34,6 +34,7 @@ const files = imgs(sheet.id);
 const title = plain(sheet.title), sub = plain(sheet.sub || '');
 state[sheet.id] = state[sheet.id] || {};
 state._today = { date: today, id: sheet.id };
+if (process.env.GITHUB_OUTPUT) fs.appendFileSync(process.env.GITHUB_OUTPUT, `sheet_id=${sheet.id}\n`);
 console.log(`今日のシート：${sheet.id}（${title}／${files.length}ページ）`);
 
 // ---------- 文面 ----------
