@@ -144,7 +144,7 @@ export function weekData(mon, all) {
   return { mon, days, items, main, quiz };
 }
 
-const SHEET_CSS = `
+export const SHEET_CSS = `
 .sheet{--k:#1D2B44;--m:#56677F;--l:#C9D8E6;--y:#FFE36E;--g:#1E9A72;--o:#DB7420;color:var(--k);font-family:"Zen Maru Gothic","Hiragino Maru Gothic ProN","Noto Sans JP",sans-serif;font-size:10.2pt;line-height:1.55;background:#fff}
 .sheet ruby rt{font-size:.5em}
 .sheet .sh-head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:3px solid var(--k);padding-bottom:4px;margin-bottom:8px}

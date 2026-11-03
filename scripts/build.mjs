@@ -6,6 +6,7 @@ import { renderCard, renderSiteCard } from '../src/card.mjs';
 import { esc, plain, jpDate, setSayKeys } from '../src/markup.mjs';
 import { sayKeys } from '../src/readings.mjs';
 import { validate, validateMatome } from '../src/schema.mjs';
+import { loadSheets, sheetsIndexPage, sheetPage, sheetPrintHtml } from '../src/sheets.mjs';
 import { flatNews, examYearOf, mondayOf, addDays, hubPage, monthPage, yearPage, rankingPage, weekData, weeklyPage, printHtml, rankPrintHtml } from '../src/matome.mjs';
 
 const cfg = JSON.parse(fs.readFileSync('site.config.json', 'utf8'));
@@ -36,11 +37,13 @@ if (examYear && fs.existsSync(yf)) {
 }
 const months = [...new Set(all.map((a) => a.date.slice(0, 7)))].sort();
 const weeks = [...new Set(all.map((a) => mondayOf(a.date)))].sort();
+const sheets = loadSheets();   // 覚えるシート（content/sheets/*.json）
 cfg.matomeLinks = [
   ...(year ? [[`/matome/${year.exam_year}.html`, `${year.exam_year}年入試 時事問題まとめ`], [`/matome/${year.exam_year}-ranking.html`, '出題予想ランキング TOP20']] : []),
   ...(weeks.length ? [[`/weekly/${weeks[weeks.length - 1]}.html`, '今週のふり返り（1枚プリント）']] : []),
   ...(months.length ? [[`/matome/${months[months.length - 1]}.html`, `${Number(months[months.length - 1].slice(5))}月の時事ニュースまとめ`]] : []),
   ['/matome/', '時事まとめ一覧'],
+  ...(sheets.length ? [['/sheets/', '覚えるシート（印刷OK）']] : []),
 ];
 
 fs.rmSync(OUT, { recursive: true, force: true });
@@ -88,6 +91,17 @@ if (year) {
 }
 fs.writeFileSync(path.join(OUT, 'matome', 'index.html'), hubPage({ cfg, css, months: [...monthInfo].reverse().map((m) => ({ ym: m.ym, count: m.items.length })), weeks: [...weekInfo].reverse().map((w) => ({ mon: w.mon, count: w.items.length })), year, recent: desc }));
 
+// 覚えるシート：サイトのページと、LINEなどで配る印刷用（PDFは公開の流れで作る）
+if (sheets.length) {
+  fs.mkdirSync(path.join(OUT, 'sheets'), { recursive: true });
+  fs.mkdirSync(path.join(OUT, 'gift'), { recursive: true });
+  fs.writeFileSync(path.join(OUT, 'sheets', 'index.html'), sheetsIndexPage({ cfg, css, sheets, recent: desc }));
+  for (const s of sheets) {
+    fs.writeFileSync(path.join(OUT, 'sheets', `${s.id}.html`), sheetPage({ cfg, css, s, sheets, recent: desc }));
+    fs.writeFileSync(path.join(OUT, 'gift', `sheet-${s.id}-print.html`), sheetPrintHtml(cfg, s));
+  }
+}
+
 await renderSiteCard(cfg, path.join(OUT, 'og', 'site.png'));
 
 // トップは最新号をそのまま見せる
@@ -131,7 +145,7 @@ const rss = `<?xml version="1.0" encoding="UTF-8"?>
 ${desc.slice(0, 30).map((a) => `<item><title>${esc(jpDate(a.date).short + ' ' + a.news.map((n) => plain(n.short_title || n.title)).join('／'))}</title><link>${base}/news/${a.date}.html</link><guid>${base}/news/${a.date}.html</guid><pubDate>${new Date(a.date + 'T07:00:00+09:00').toUTCString()}</pubDate></item>`).join('\n')}
 </channel></rss>`;
 fs.writeFileSync(path.join(OUT, 'feed.xml'), rss);
-const urls = ['/', '/matome/', ...(year ? [`/matome/${year.exam_year}.html`, `/matome/${year.exam_year}-ranking.html`] : []), ...months.map((m) => `/matome/${m}.html`), ...weeks.map((w) => `/weekly/${w}.html`), '/archive.html', '/glossary.html', '/units.html', '/subject/rika.html', '/subject/shakai.html', ...all.flatMap((a) => [`/news/${a.date}.html`, ...a.news.map((_, j) => `/news/${a.date}-${j + 1}.html`)])];
+const urls = ['/', '/matome/', ...(sheets.length ? ['/sheets/', ...sheets.map((s) => `/sheets/${s.id}.html`)] : []), ...(year ? [`/matome/${year.exam_year}.html`, `/matome/${year.exam_year}-ranking.html`] : []), ...months.map((m) => `/matome/${m}.html`), ...weeks.map((w) => `/weekly/${w}.html`), '/archive.html', '/glossary.html', '/units.html', '/subject/rika.html', '/subject/shakai.html', ...all.flatMap((a) => [`/news/${a.date}.html`, ...a.news.map((_, j) => `/news/${a.date}-${j + 1}.html`)])];
 fs.writeFileSync(path.join(OUT, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((u) => `<url><loc>${base}${u}</loc></url>`).join('\n')}\n</urlset>`);
 fs.writeFileSync(path.join(OUT, 'robots.txt'), `User-agent: *\nAllow: /\nDisallow: /gift/\nSitemap: ${base}/sitemap.xml\n`);
 fs.writeFileSync(path.join(OUT, '.nojekyll'), '');

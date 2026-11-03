@@ -94,7 +94,7 @@ ${cfg.analytics?.cloudflare ? `<script defer src="https://static.cloudflareinsig
 <header class="gh"><div class="gh-in">
   <a class="brand" href="${base}/">${LOGO}<span><b>${cfg.brandPrefix ? `<i class="bp">${esc(cfg.brandPrefix)}</i>${esc(cfg.brandMain)}` : esc(cfg.siteName)}</b><small>${esc(cfg.taglineShort || cfg.tagline)}</small></span></a>
   ${MASCOT}
-  <nav class="gnav"><a href="${base}/subject/rika.html">理科</a><a href="${base}/subject/shakai.html">社会</a><a href="${base}/matome/">時事まとめ</a><a href="${base}/archive.html">バックナンバー</a></nav>
+  <nav class="gnav"><a href="${base}/subject/rika.html">理科</a><a href="${base}/subject/shakai.html">社会</a><a href="${base}/matome/">時事まとめ</a><a href="${base}/sheets/">覚えるシート</a><a href="${base}/archive.html">バックナンバー</a></nav>
 </div></header>
 <div class="page">
 <main>
@@ -105,7 +105,7 @@ ${sidebar(cfg, recent)}
 </div>
 <footer class="gf"><div class="gf-in">
   <div><b>${esc(cfg.siteName)}</b><br>${esc(cfg.tagline)}</div>
-  <nav><a href="${base}/matome/">時事まとめ</a><a href="${base}/glossary.html">用語集</a><a href="${base}/units.html">単元別</a><a href="${base}/about.html">このサイトについて・訂正の方針</a><a href="${base}/privacy.html">プライバシーポリシー</a><a href="${base}/contact.html">お問い合わせ</a></nav>
+  <nav><a href="${base}/matome/">時事まとめ</a><a href="${base}/sheets/">覚えるシート</a><a href="${base}/glossary.html">用語集</a><a href="${base}/units.html">単元別</a><a href="${base}/about.html">このサイトについて・訂正の方針</a><a href="${base}/privacy.html">プライバシーポリシー</a><a href="${base}/contact.html">お問い合わせ</a></nav>
   <p>読み上げ音声：VOICEVOX:冥鳴ひまり</p>
   <p>記事はAIが報道をもとに下書きし、別のAIが出典と照らし合わせて確認してから公開しています。公開後も運営者が確認し、まちがいが見つかった場合は、記事の中に訂正内容と日付を示して直します。</p>
 </div></footer>

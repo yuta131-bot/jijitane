@@ -22,6 +22,7 @@ def main():
         for f in pages:
             pg.goto(f.as_uri(), wait_until='networkidle')
             pg.evaluate('document.fonts.ready')
+            pg.evaluate('window.__fit && window.__fit()')   # 覚えるシート：フォントがそろってから、A4に合わせて大きさを決めなおす
             out = f.parent / (f.name.replace('-print.html', '') + '.pdf')
             pg.pdf(path=str(out), format='A4', print_background=True, prefer_css_page_size=True)
             print('作成：', out.name)
