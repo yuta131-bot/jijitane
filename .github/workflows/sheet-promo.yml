@@ -29,6 +29,11 @@ jobs:
   promo:
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    services:
+      voicevox:        # 動画の読み上げ（毎朝のショートと同じ声）
+        image: voicevox/voicevox_engine:cpu-latest
+        ports:
+          - 50021:50021
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -73,19 +78,29 @@ jobs:
           X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
           X_ACCESS_SECRET: ${{ secrets.X_ACCESS_SECRET }}
         run: node scripts/post-sheet.mjs
-      - name: YouTube ショートに上げる（公開・子ども向け・音声なしの紹介動画）
+      - name: 紹介動画を作る（声と音楽つき）
+        id: video
+        if: always() && steps.post.outputs.sheet_id != ''
+        run: |
+          sudo apt-get install -y -qq ffmpeg >/dev/null
+          for i in $(seq 1 60); do curl -sf http://localhost:50021/version >/dev/null && break; sleep 3; done
+          python3 scripts/make_sheet_video.py --sheet "${{ steps.post.outputs.sheet_id }}" --promo promo --out dist-video --voicevox http://localhost:50021
+      - name: 試運転の動画を保存する（確かめ用）
+        if: always() && inputs.dry_run && steps.video.outcome == 'success'
+        uses: actions/upload-artifact@v4
+        with:
+          name: sheet-video
+          path: dist-video/sheet-*.mp4
+      - name: YouTube ショートに上げる（公開・子ども向け）
         id: yt
-        if: always() && !inputs.dry_run && steps.post.outputs.sheet_id != ''
+        if: ${{ !inputs.dry_run && steps.video.outcome == 'success' }}
         env:
           YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
           YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
           YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
-          SITE_URL: ${{ vars.SITE_URL }}
         run: |
           ID="${{ steps.post.outputs.sheet_id }}"
           D="$(TZ=Asia/Tokyo date +%F)"
-          sudo apt-get install -y -qq ffmpeg >/dev/null
-          python3 scripts/make_sheet_video.py --sheet "$ID" --promo promo --out dist-video
           python3 scripts/upload_youtube.py --date "$D" --dir dist-video --stem "sheet-$ID" --key "sheet-$ID-$D" \
             --tags "中学受験,覚えるシート,家庭学習,Shorts" --privacy public --state state/youtube-posted.json
       - name: YouTube に上げられなかったら Issue で知らせる
