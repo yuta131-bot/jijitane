@@ -67,14 +67,22 @@ if (process.env.IG_TOKEN && (!state[date][igKey] || force)) {
       : `${dt.short}の${cfg.siteName}🌱\n${lines}\n\nくわしい解説・図解・ふりがなは、プロフィールのリンク（jijitane.com）から\n音声：VOICEVOX:冥鳴ひまり\n\n#中学受験 #時事問題 #中受 #小学生の勉強 #ニュース解説 #家庭学習`;
     const me = await call(`${G}/me`, { fields: 'user_id,username', access_token: token }, 'GET');
     const id = me.user_id || me.id;
-    const c = await call(`${G}/${id}/media`, { media_type: 'REELS', video_url: video, caption, share_to_feed: 'true', access_token: token });
-    let st = '';
-    for (let i = 0; i < 40; i++) { // 動画の処理を最大10分待つ
-      await sleep(15000);
-      st = (await call(`${G}/${c.id}`, { fields: 'status_code,status', access_token: token }, 'GET')).status_code;
-      if (st === 'FINISHED' || st === 'ERROR' || st === 'EXPIRED') break;
+    // Meta 側の一時的な取り込み失敗（ERROR）が時々あるので、1回だけやり直す
+    let c, st = '', detail = '';
+    for (let attempt = 1; attempt <= 2; attempt++) {
+      c = await call(`${G}/${id}/media`, { media_type: 'REELS', video_url: video, caption, share_to_feed: 'true', access_token: token });
+      st = '';
+      for (let i = 0; i < 40; i++) { // 動画の処理を最大10分待つ
+        await sleep(15000);
+        const r = await call(`${G}/${c.id}`, { fields: 'status_code,status', access_token: token }, 'GET');
+        st = r.status_code; detail = r.status || '';
+        if (st === 'FINISHED' || st === 'ERROR' || st === 'EXPIRED') break;
+      }
+      if (st === 'FINISHED') break;
+      console.log(`Instagram 動画の処理：${st}（${attempt}回目）${detail}`);
+      if (st !== 'ERROR' && st !== 'EXPIRED') break;
     }
-    if (st !== 'FINISHED') throw new Error(`動画の処理が終わりませんでした（${st}）`);
+    if (st !== 'FINISHED') throw new Error(`動画の処理が終わりませんでした（${st}）${detail}`);
     const p = await call(`${G}/${id}/media_publish`, { creation_id: c.id, access_token: token });
     state[date][igKey] = { id: p.id, at: new Date().toISOString() };
     console.log('Instagram にリールを投稿しました:', p.id);
