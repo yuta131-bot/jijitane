@@ -1,0 +1,87 @@
+# 毎週土曜 11時（日本時間）に、「今週の時事 6問チャレンジ」を Instagram のカルーセルで投稿する
+#   その週の記事（毎日の3択クイズ）から6問を選ぶ。答えは同じ投稿の8ページ目、最後にLINEの案内
+name: 今週の時事チャレンジを投稿
+on:
+  schedule:
+    - cron: "0 2 * * 6"   # UTC 土 2:00 = 日本時間 土 11:00
+  workflow_dispatch:
+    inputs:
+      end_date:
+        description: "最後の日（空なら今日）例：2026-11-07"
+        required: false
+      dry_run:
+        description: "投稿せずに、画像と文面だけ作る（画像は Artifacts に保存）"
+        type: boolean
+        default: false
+      force_post:
+        description: "投稿済みでも、もう一度投稿する"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency: publish-post
+
+jobs:
+  quiz:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: 画像を作る
+        id: img
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq fonts-noto-cjk >/dev/null
+          pip install -q pillow
+          E="${{ inputs.end_date }}"; [ -z "$E" ] && E="$(TZ=Asia/Tokyo date +%F)"
+          echo "end=$E" >> "$GITHUB_OUTPUT"
+          python3 scripts/make_quiz_carousel.py --end "$E" --out quiz-promo
+      - name: 試運転の画像を保存する（確かめ用）
+        if: inputs.dry_run
+        uses: actions/upload-artifact@v4
+        with:
+          name: quiz-carousel
+          path: quiz-promo
+      - name: 画像を Releases にのせる
+        if: ${{ !inputs.dry_run }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release view quiz-promo >/dev/null 2>&1 || gh release create quiz-promo --title "時事チャレンジのSNS用画像" --notes "SNS投稿用の画像（自動で作り直されます）"
+          gh release upload quiz-promo quiz-promo/*.jpg --clobber
+      - name: Instagram に投稿
+        id: post
+        if: ${{ !inputs.dry_run }}
+        env:
+          END_DATE: ${{ steps.img.outputs.end }}
+          FORCE_POST: ${{ inputs.force_post }}
+          IG_TOKEN: ${{ secrets.IG_TOKEN }}
+        run: node scripts/post-quiz-carousel.mjs
+      - name: 失敗したら Issue で知らせる
+        if: failure() && steps.post.outcome == 'failure'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          { echo "今週の時事チャレンジの Instagram 投稿がうまくいきませんでした。"; echo; echo '```'; cat quiz-errors.txt 2>/dev/null; echo '```'; echo; \
+            echo "直したあと、Actions →「今週の時事チャレンジを投稿」→「Run workflow」でやり直せます。"; \
+            echo; echo "くわしいエラー：${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"; } > body.txt
+          gh issue create --title "⚠️ 今週の時事チャレンジを投稿できませんでした（${{ steps.img.outputs.end }}）" --body-file body.txt
+      - name: 投稿の記録を残す
+        if: always() && !inputs.dry_run
+        run: |
+          if [ -n "$(git status --porcelain state/)" ]; then
+            git config user.name "news-bot"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add state/
+            git commit -m "投稿記録（時事チャレンジ） [skip ci]"
+            git pull --rebase -q origin main
+            git push
+          fi
