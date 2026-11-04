@@ -113,6 +113,7 @@ export const art = (name, cls = 'sx-ic') => A[name] ? `<svg class="${cls}" viewB
 
 // 見出し・カードの文字から、ふさわしい絵をえらぶ（上から順に先に当たったもの）
 const RULES = [
+  [/同じ大きさ/, 'pie'], [/へんしん/, 'rocket'], [/歩合の読み方/, 'book'], [/間違い|まちがい/, 'bulb'],
   [/クイズ|チャレンジ/, 'pencil'], [/まちがえやすい/, 'bulb'],
   [/国連の主な機関/, 'kantei'], [/専門機関/, 'bulb'],
   [/SDGs/, 'sprout'], [/北海道|東北/, 'snow'], [/関東/, 'tower'], [/中部/, 'mountain'], [/近畿/, 'castle'], [/中国・四国/, 'wave'], [/九州|沖縄/, 'sun'],

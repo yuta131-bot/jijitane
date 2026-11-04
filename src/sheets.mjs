@@ -12,7 +12,7 @@ export const GROUPS = [
   ['jiji', '時事の覚えるシート', 'ニュースを読むときの「ものさし」になる、政治・国際・環境の基本'],
   ['kihon', '基本の覚えるシート', '算数・社会・国語で、毎日ひらく「手元の1枚」'],
 ];
-const BLOCKS = new Set(['table', 'cards', 'kanji', 'tips', 'quiz', 'list', 'text', 'figs', 'test', 'map', 'memo']);
+const BLOCKS = new Set(['table', 'cards', 'kanji', 'tips', 'quiz', 'list', 'text', 'figs', 'test', 'map', 'memo', 'ratio', 'flow']);
 const PREF = JSON.parse(fs.readFileSync(new URL('./japan-pref.json', import.meta.url), 'utf8'));
 
 export function loadSheets(dir = 'content/sheets') {
@@ -77,6 +77,16 @@ function figs(b) {
 function test(b) {
   return `<section class="sx-b sx-test"><h4>${cell(b.title || '確認テスト')}${b.note ? `<small>${cell(b.note)}</small>` : ''}</h4><div class="sx-tg" style="--cols:${b.cols || 2}">${b.items.map((it, i) => `<div class="sx-ti"><span class="no">${CIRC[i] || i + 1}</span>${it.fig ? `<div class="tf">${fig(it.fig)}</div>` : ''}<div class="tb"><span class="tq">${cell(it.q)}</span><span class="tl">答え <i></i>${it.u ? cell(it.u) : ''}</span></div></div>`).join('')}</div><p class="sx-ans">こたえ：${b.items.map((it, i) => `${CIRC[i] || i + 1} ${cell(it.a)}`).join('　')}</p></section>`;
 }
+// ---------- 割合のずかい（図でわかる） ----------
+// ratio：全体を10こに分けた「ぼう」で、分数・小数・歩合・百分率が同じ大きさだとしめす
+function ratio(b) {
+  const head = b.head || ['分数', '図（全体＝1を10こに分けたよ）', '小数', '歩合（割）', '百分率（％）'];
+  return `<section class="sx-b sx-ratio"><h4>${cell(b.title)}${b.note ? `<small>${cell(b.note)}</small>` : ''}</h4><div class="sx-rg"><div class="rh">${head.map((x) => `<span>${cell(x)}</span>`).join('')}</div>${b.rows.map(([fr, dec, wari, pct, p]) => `<div class="rr"><span class="fr">${cell(fr)}</span><span class="bar" style="--p:${p}%"><i>${cell(pct)}</i></span><span>${cell(dec)}</span><span>${cell(wari)}</span><span class="pc">${cell(pct)}</span></div>`).join('')}</div></section>`;
+}
+// flow：ぼうで、たがいに「へんしん」するやり方を、矢じるしでしめす
+function flow(b) {
+  return `<section class="sx-b sx-flow"><h4>${cell(b.title)}${b.note ? `<small>${cell(b.note)}</small>` : ''}</h4>${b.lines.map((ln) => `<div class="sx-fl">${ln.map((st, i) => (i % 2 === 0 ? `<span class="bx c-${st[1] || 'b'}">${cell(st[0])}</span>` : `<span class="ar"><em>${cell(st[0])}</em><b>→</b></span>`)).join('')}</div>`).join('')}${b.foot ? `<p class="sx-n">${cell(b.foot)}</p>` : ''}</section>`;
+}
 const REGIONS = ['北海道', '東北', '関東', '中部', '近畿', '中国', '四国', '九州・沖縄'];
 const REGION_FILL = ['#BFE3F5', '#CDEBC8', '#FFE3A3', '#F5C9D8', '#D9CCF0', '#FFD2AE', '#BFE8E0', '#F0C9C0'];
 function prefSvg(blank) {
@@ -99,7 +109,7 @@ function map(b) {
 }
 const memo = (b) => `<section class="sx-b"><h4>${cell(b.title)}</h4><div class="sx-memo">${'<div></div>'.repeat(b.lines || 5)}</div></section>`;
 const text = (b) => `<p class="sx-text">${cell(b.text)}</p>`;
-const RENDER = { table, cards, kanji, tips, quiz, list, text, figs, test, map, memo };
+const RENDER = { table, cards, kanji, tips, quiz, list, text, figs, test, map, memo, ratio, flow };
 // 見出し（h4）の左に、内容に合った絵を入れる。カードは見出し文字から絵をえらぶ
 const ICON_SKIP = new Set(['text', 'memo', 'map']);
 function one(b) {
@@ -179,6 +189,17 @@ const SX_CSS = `
 .sx .sx-rg i{font-style:normal;white-space:nowrap}.sx .sx-rg em{font-style:normal;font-weight:900;color:var(--m);margin-right:1px;font-size:6.6pt}
 .sx .sx-al{display:grid;grid-template-columns:1fr 1fr;gap:0 10px}
 .sx .sx-ar{display:flex;align-items:flex-end;gap:3px;height:6.4mm}.sx .sx-ar .n{width:5mm;text-align:right;font-weight:900;font-size:8pt;color:var(--m)}.sx .sx-ar i{flex:1;border-bottom:1px solid var(--k);height:4.4mm}
+.sx .sx-rg{border:1.5px solid var(--k);border-radius:8px;overflow:hidden;background:#fff}
+.sx .sx-rg .rh,.sx .sx-rg .rr{display:grid;grid-template-columns:15mm 1fr 15mm 22mm 17mm;gap:0 2mm;align-items:center;padding:1.1mm 3mm}
+.sx .sx-rg .rh{background:#E6EEF8;font-size:7.6pt;font-weight:900;color:var(--m)}.sx .sx-rg .rr{font-size:11pt;font-weight:800;border-top:1px solid var(--l)}
+.sx .sx-rg .rr .fr{font-size:12.5pt;color:var(--o)}.sx .sx-rg .rr .pc{color:#1E7DBF}
+.sx .sx-rg .bar{position:relative;display:block;height:6.2mm;border:1.5px solid var(--k);border-radius:3px;background:linear-gradient(90deg,#FFC93C var(--p),#fff var(--p));overflow:hidden}
+.sx .sx-rg .bar::after{content:"";position:absolute;inset:0;background-image:linear-gradient(90deg,transparent calc(100% - 1.2px),rgba(29,43,68,.5) 0);background-size:10% 100%}
+.sx .sx-rg .bar i{display:none}
+.sx .sx-fl{display:flex;align-items:center;justify-content:center;gap:1.5mm;margin:2mm 0;flex-wrap:nowrap}
+.sx .sx-fl .bx{border:1.5px solid var(--k);border-radius:8px;padding:1.6mm 3mm;font-size:10pt;font-weight:900;background:#EAF3FB;white-space:nowrap}
+.sx .sx-fl .bx.c-o{background:#FFE9CF}.sx .sx-fl .bx.c-g{background:#DDF3E8}.sx .sx-fl .bx.c-y{background:#FFF4B8}
+.sx .sx-fl .ar{display:flex;flex-direction:column;align-items:center;font-size:8pt;font-weight:900;color:var(--o);line-height:1.1}.sx .sx-fl .ar b{font-size:14pt;color:var(--k);line-height:.9}.sx .sx-fl .ar em{font-style:normal;white-space:nowrap}
 .sx .sx-memo div{border-bottom:1px solid var(--l);height:8.5mm}
 .sx .sx-pg{background:#fff}
 .sx .sh-head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:3px solid var(--k);padding-bottom:3px;margin-bottom:4px}
