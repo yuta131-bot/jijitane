@@ -47,6 +47,16 @@ const A = {
   kanji: `<rect x="6" y="8" width="38" height="38" rx="4" fill="#fff" ${S}/><path d="M25 8 V46 M6 27 H44" stroke="#F2A5A5" stroke-width="1.4" stroke-dasharray="3 3"/><text x="25" y="38" text-anchor="middle" font-size="28" font-weight="900" fill="${K}" font-family="Zen Maru Gothic, Noto Sans JP, sans-serif">漢</text><path d="M46 56 L58 28 L62 30 L52 58 Z" fill="#E7B66B" ${S} stroke-width="1.6"/>`,
   // えんぴつ（テスト・メモ）
   pencil: `<path d="M10 54 L14 40 L46 8 L56 18 L24 50 Z" fill="#FFE27A" ${S}/><path d="M46 8 L56 18 L60 14 Q62 10 58 6 Q54 2 50 4 Z" fill="#F29BB0" ${S}/><path d="M10 54 L14 40 L24 50 Z" fill="#F7E4C6" ${S}/><path d="M10 54 L12 48 L16 52 Z" fill="${K}"/>`,
+  // はかり（重さ）
+  weight: `<path d="M10 56 H54 L50 22 H14 Z" fill="#8FD19E" ${S}/><circle cx="32" cy="30" r="12" fill="#fff" ${S}/><path d="M32 30 L38 22" stroke="#E5484D" stroke-width="2.4" stroke-linecap="round"/><path d="M24 22 Q32 14 40 22" fill="none" ${S} stroke-width="1.4"/><circle cx="32" cy="30" r="1.8" fill="${K}"/><rect x="20" y="44" width="24" height="6" rx="3" fill="#fff" ${S} stroke-width="1.6"/>`,
+  // 面積（マス目）
+  area: `<rect x="8" y="8" width="48" height="48" rx="3" fill="#CFE6FA" ${S}/><path d="M24 8 V56 M40 8 V56 M8 24 H56 M8 40 H56" ${S} stroke-width="1.5"/><rect x="24" y="24" width="16" height="16" fill="#FFE27A" ${S} stroke-width="1.8"/>`,
+  // コップ（かさ・体積）
+  cup: `<path d="M14 8 H50 L45 56 H19 Z" fill="#E6F4FD" ${S}/><path d="M16 28 H48 L45 56 H19 Z" fill="#8CCBF2" ${S}/><path d="M14 18 H22 M14 28 H24 M14 38 H22" ${S} stroke-width="1.6"/><circle cx="34" cy="38" r="2" fill="#fff"/><circle cx="40" cy="46" r="1.6" fill="#fff"/>`,
+  // 2乗
+  sq2: `<rect x="6" y="14" width="36" height="36" rx="3" fill="#FFD6A5" ${S}/><text x="24" y="40" text-anchor="middle" font-size="22" font-weight="900" fill="${K}" font-family="Zen Maru Gothic, Noto Sans JP, sans-serif">n</text><text x="48" y="26" text-anchor="middle" font-size="20" font-weight="900" fill="#E5484D" font-family="Zen Maru Gothic, Noto Sans JP, sans-serif">2</text>`,
+  // 円（円周率）
+  circle: `<circle cx="30" cy="34" r="22" fill="#FFE27A" ${S}/><path d="M30 34 H52" stroke="#E5484D" stroke-width="2.4" stroke-linecap="round"/><circle cx="30" cy="34" r="2.2" fill="${K}"/><text x="26" y="26" text-anchor="middle" font-size="12" font-weight="900" fill="${K}" font-family="Zen Maru Gothic, Noto Sans JP, sans-serif">3.14</text>`,
   // カレンダー
   calendar: `<rect x="8" y="12" width="48" height="44" rx="5" fill="#fff" ${S}/><path d="M8 26 V17 Q8 12 13 12 H51 Q56 12 56 17 V26 Z" fill="#E5846B" ${S}/><path d="M20 6 V16 M44 6 V16" ${S}/><g fill="#8FB4E3"><rect x="14" y="31" width="8" height="7" rx="1.5"/><rect x="28" y="31" width="8" height="7" rx="1.5"/><rect x="42" y="31" width="8" height="7" rx="1.5"/><rect x="14" y="43" width="8" height="7" rx="1.5"/><rect x="28" y="43" width="8" height="7" rx="1.5" fill="#F6C945"/></g>`,
   // ニュース（新聞）
@@ -62,7 +72,7 @@ const RULES = [
   [/温室効果ガス|ガス/, 'factory'], [/目標/, 'calendar'], [/温暖化|地球/, 'earth'], [/エネルギー/, 'wind'], [/SDGs/, 'sprout'], [/科学|宇宙/, 'rocket'],
   [/国連|国際連合|専門機関/, 'un'], [/集まり|つながり|条約/, 'hands'],
   [/縄文|鎌倉|江戸|明治|昭和/, 'castle'], [/年表/, 'scroll'],
-  [/長さ|重さ|面積|体積/, 'ruler'], [/分数|割合|百分率|歩合/, 'pie'], [/平方/, 'cube'],
+  [/重さ/, 'weight'], [/面積/, 'area'], [/体積|かさ/, 'cup'], [/長さ/, 'ruler'], [/円周率/, 'circle'], [/分数|割合|百分率|歩合/, 'pie'], [/平方|素数/, 'sq2'],
   [/地図|地方|産業|地理|都道府県/, 'pin'], [/部首|へん|つくり|かんむり|漢字/, 'kanji'], [/公式|図形|立体|表面積|三角形|四角形/, 'cube'],
   [/確認テスト|クイズ|チャレンジ|メモ/, 'pencil'], [/コツ|ポイント/, 'bulb'],
 ];
