@@ -5,6 +5,7 @@ import path from 'node:path';
 import { esc, inline, plain, jpDate } from './markup.mjs';
 import { layout } from './templates.mjs';
 import { fig, FIG_NAMES } from './figs.mjs';
+import { art, pickArt } from './art.mjs';
 
 const baseOf = (cfg) => cfg.siteUrl.replace(/\/$/, '');
 export const GROUPS = [
@@ -99,7 +100,17 @@ function map(b) {
 const memo = (b) => `<section class="sx-b"><h4>${cell(b.title)}</h4><div class="sx-memo">${'<div></div>'.repeat(b.lines || 5)}</div></section>`;
 const text = (b) => `<p class="sx-text">${cell(b.text)}</p>`;
 const RENDER = { table, cards, kanji, tips, quiz, list, text, figs, test, map, memo };
-const block = (b) => (Array.isArray(b) ? `<div class="sx-row n${b.length}">${b.map((x) => RENDER[x.t](x)).join('')}</div>` : RENDER[b.t](b));
+// 見出し（h4）の左に、内容に合った絵を入れる。カードは見出し文字から絵をえらぶ
+const ICON_SKIP = new Set(['text', 'memo', 'map']);
+function one(b) {
+  let h = RENDER[b.t](b);
+  if (ICON_SKIP.has(b.t) || b.ic === false) return h;
+  const n = b.ic || pickArt(b.title);
+  if (n) h = h.replace('<h4>', `<h4 class="hi">${art(n)}`);
+  if (b.t === 'cards') h = h.replace(/<div class="sx-card c-(\w+)"><b>([^<]*)/g, (m, c, t) => { const a = pickArt(t); return a ? `<div class="sx-card c-${c}"><b class="hc">${art(a, 'sx-ci')}${t}` : m; });
+  return h;
+}
+const block = (b) => (Array.isArray(b) ? `<div class="sx-row n${b.length}">${b.map((x) => one(x)).join('')}</div>` : one(b));
 
 const footNote = (cfg, s) => {
   const base = baseOf(cfg).replace(/^https?:\/\//, '');
@@ -112,6 +123,8 @@ const SX_CSS = `
 .sx{--k:#1D2B44;--m:#56677F;--l:#C9D8E6;--y:#FFE36E;--g:#1E9A72;--o:#DB7420;color:var(--k);font-family:"Zen Maru Gothic","Hiragino Maru Gothic ProN","Noto Sans JP",sans-serif;line-height:1.45}
 .sx h4{margin:7px 0 3px;font-size:10.5pt;font-weight:900;display:flex;align-items:baseline;flex-wrap:wrap;gap:2px 8px}
 .sx h4::before{content:"";align-self:center;width:6px;height:13px;background:var(--y);border:1.5px solid var(--k);border-radius:2px}
+.sx h4.hi::before{display:none}.sx h4.hi{align-items:center;flex-wrap:nowrap}.sx h4.hi small{flex:1 1 0;min-width:0}.sx .sx-ic{width:11mm;height:11mm;flex:none;margin-right:-2px}
+.sx .sx-card b.hc{display:flex;align-items:center;gap:6px}.sx .sx-ci{width:6mm;height:6mm;margin:-.4mm 0;flex:none;background:#fff;border-radius:50%;padding:.6mm;box-sizing:content-box}
 .sx h4 small{font-size:7.8pt;color:var(--m);font-weight:700}
 .sx .sx-pg-label{display:inline-block;margin-left:6px;font-size:9pt;background:var(--k);color:#fff;border-radius:999px;padding:0 9px;vertical-align:middle}
 .sx .sx-b{break-inside:avoid;margin:0}.sx .sx-b>h4:first-child{margin-top:6px}

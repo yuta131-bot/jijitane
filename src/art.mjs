@@ -1,0 +1,69 @@
+// 覚えるシートの、ちいさなイラスト（SVG・64x64）。見出しやカードの横に置いて、小学生が親しみやすい雰囲気にする
+const K = '#1D2B44';
+const S = `stroke="${K}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"`;
+const face = (x, y, s = 1) => `<circle cx="${x - 5 * s}" cy="${y}" r="${1.6 * s}" fill="${K}"/><circle cx="${x + 5 * s}" cy="${y}" r="${1.6 * s}" fill="${K}"/><path d="M${x - 3 * s} ${y + 3.5 * s} Q${x} ${y + 7 * s} ${x + 3 * s} ${y + 3.5 * s}" fill="none" ${S} stroke-width="1.6"/><circle cx="${x - 9 * s}" cy="${y + 4 * s}" r="${2.2 * s}" fill="#FFB7C5" opacity=".8"/><circle cx="${x + 9 * s}" cy="${y + 4 * s}" r="${2.2 * s}" fill="#FFB7C5" opacity=".8"/>`;
+const A = {
+  // 国会議事堂
+  kokkai: `<rect x="6" y="40" width="52" height="16" rx="2" fill="#F3EBD8" ${S}/><rect x="22" y="30" width="20" height="26" fill="#F8F2E4" ${S}/><path d="M26 30 V22 H38 V30" fill="#F3EBD8" ${S}/><path d="M24 22 L32 8 L40 22 Z" fill="#7DC4A0" ${S}/><path d="M12 40 V34 H20 V40 M44 40 V34 H52 V40" fill="#F8F2E4" ${S}/><g fill="${K}"><rect x="29" y="44" width="6" height="12"/><rect x="11" y="45" width="4" height="6"/><rect x="19" y="45" width="4" height="6"/><rect x="41" y="45" width="4" height="6"/><rect x="49" y="45" width="4" height="6"/><rect x="28" y="32" width="3" height="5"/><rect x="33" y="32" width="3" height="5"/></g><path d="M32 8 V3" ${S}/>`,
+  // 内閣・首相官邸（旗の立つ建物）
+  kantei: `<rect x="8" y="30" width="48" height="26" rx="2" fill="#E6EEF8" ${S}/><path d="M6 30 L32 16 L58 30 Z" fill="#8FB4E3" ${S}/><g fill="${K}"><rect x="29" y="42" width="6" height="14"/><rect x="13" y="37" width="6" height="7"/><rect x="45" y="37" width="6" height="7"/><rect x="21" y="37" width="6" height="7"/><rect x="37" y="37" width="6" height="7"/></g><path d="M32 16 V5" ${S}/><path d="M32 5 H44 L40 9 L44 13 H32" fill="#E5484D" ${S} stroke-width="1.6"/>`,
+  // 裁判所・天秤
+  saiban: `<path d="M32 10 V52 M20 54 H44" ${S}/><circle cx="32" cy="9" r="3" fill="#F6C945" ${S}/><path d="M10 20 H54" ${S}/><path d="M10 20 L4 36 H16 Z M54 20 L48 36 H60 Z" fill="#FFE9A8" ${S}/><path d="M4 36 Q10 43 16 36 M48 36 Q54 43 60 36" fill="#F6C945" ${S}/>`,
+  // 憲法・本
+  book: `<path d="M8 12 H30 Q32 12 32 14 V54 Q32 52 30 52 H8 Z M56 12 H34 Q32 12 32 14 V54 Q32 52 34 52 H56 Z" fill="#CFE6FA" ${S}/><path d="M13 22 H26 M13 29 H26 M13 36 H26 M38 22 H51 M38 29 H51 M38 36 H51" ${S} stroke-width="1.6"/><path d="M40 42 L44 46 L52 38" fill="none" stroke="#E5484D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>`,
+  // 選挙・投票箱
+  vote: `<rect x="10" y="26" width="44" height="28" rx="3" fill="#8FB4E3" ${S}/><rect x="22" y="26" width="20" height="4" fill="${K}"/><g transform="rotate(-8 32 14)"><rect x="20" y="4" width="24" height="18" rx="2" fill="#fff" ${S}/><path d="M26 13 L30 17 L38 8" fill="none" stroke="#E5484D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g><circle cx="32" cy="42" r="5" fill="#FFE9A8" ${S} stroke-width="1.6"/>`,
+  // 工場と煙
+  factory: `<path d="M8 56 V30 L24 40 V30 L40 40 V20 H52 V56 Z" fill="#E9D5C0" ${S}/><rect x="42" y="12" width="8" height="8" fill="#C9B29B" ${S}/><g fill="#fff" ${S} stroke-width="1.6"><circle cx="46" cy="9" r="5"/><circle cx="53" cy="5" r="4.5"/><circle cx="59" cy="9" r="3.6"/></g><g fill="#8FB4E3" ${S} stroke-width="1.4"><rect x="14" y="44" width="6" height="6"/><rect x="26" y="46" width="6" height="6"/><rect x="42" y="30" width="6" height="6"/><rect x="42" y="42" width="6" height="6"/></g>`,
+  // 地球（かお付き）
+  earth: `<circle cx="32" cy="32" r="24" fill="#8CCBF2" ${S}/><path d="M16 22 Q24 14 32 20 Q28 28 20 28 Q14 30 16 22 Z M38 36 Q48 30 52 40 Q46 52 38 46 Z" fill="#8FD19E" ${S} stroke-width="1.6"/>${face(30, 33, 0.9)}`,
+  // 風車
+  wind: `<path d="M32 56 L29 28 H35 Z" fill="#fff" ${S}/><circle cx="32" cy="26" r="3.5" fill="#F6C945" ${S}/><path d="M32 26 L28 4 L36 6 Z M32 26 L52 38 L47 44 Z M32 26 L12 38 L17 44 Z" fill="#fff" ${S}/><path d="M12 56 H52" stroke="#8FD19E" stroke-width="3" stroke-linecap="round"/>`,
+  // 電球
+  bulb: `<path d="M32 6 C20 6 14 15 14 24 C14 33 22 36 24 44 H40 C42 36 50 33 50 24 C50 15 44 6 32 6 Z" fill="#FFE27A" ${S}/><rect x="24" y="44" width="16" height="6" rx="2" fill="#C9D3DF" ${S}/><rect x="26" y="50" width="12" height="5" rx="2" fill="#C9D3DF" ${S}/><path d="M28 22 L32 30 L36 22" fill="none" ${S} stroke-width="1.8"/><path d="M6 14 L10 17 M58 14 L54 17 M4 28 H9 M55 28 H60" ${S} stroke-width="1.8"/>`,
+  // ロケット
+  rocket: `<path d="M32 4 C42 12 44 28 40 44 H24 C20 28 22 12 32 4 Z" fill="#fff" ${S}/><circle cx="32" cy="24" r="6" fill="#8CCBF2" ${S}/><path d="M24 34 L12 46 L24 44 Z M40 34 L52 46 L40 44 Z" fill="#E5484D" ${S}/><path d="M27 44 Q32 60 37 44 Z" fill="#FFB347" ${S}/>`,
+  // SDGs・芽
+  sprout: `<path d="M32 56 V32" ${S}/><path d="M32 36 C20 36 14 28 14 18 C26 18 32 24 32 36 Z" fill="#8FD19E" ${S}/><path d="M32 30 C32 20 38 12 50 12 C50 24 44 30 32 30 Z" fill="#6CC08B" ${S}/><path d="M16 56 H48" stroke="#B88A5C" stroke-width="4" stroke-linecap="round"/>`,
+  // 国連・世界（旗つき）
+  un: `<circle cx="32" cy="30" r="20" fill="#8CCBF2" ${S}/><path d="M12 30 H52 M32 10 Q22 30 32 50 M32 10 Q42 30 32 50 M16 20 H48 M16 40 H48" fill="none" ${S} stroke-width="1.4"/><path d="M6 24 Q4 42 20 54 M58 24 Q60 42 44 54" fill="none" stroke="#6CC08B" stroke-width="3" stroke-linecap="round"/>`,
+  // 世界のあくしゅ
+  hands: `<path d="M4 30 L18 22 L30 28 L40 22 L60 30 L52 44 L40 48 L30 52 L20 46 L10 42 Z" fill="#FFD9B8" ${S}/><path d="M18 22 L30 28 M40 22 L30 34 M24 38 L34 44 M30 52 L22 46" fill="none" ${S} stroke-width="1.6"/><rect x="2" y="26" width="8" height="18" rx="2" fill="#6B8BD6" ${S} stroke-width="1.6" transform="rotate(-14 6 35)"/><rect x="54" y="26" width="8" height="18" rx="2" fill="#E5846B" ${S} stroke-width="1.6" transform="rotate(14 58 35)"/>`,
+  // お城
+  castle: `<rect x="12" y="40" width="40" height="16" fill="#F4EEDD" ${S}/><path d="M16 40 L20 32 H44 L48 40 Z" fill="#6B8BD6" ${S}/><rect x="20" y="22" width="24" height="10" fill="#F4EEDD" ${S}/><path d="M17 22 L32 10 L47 22 Z" fill="#6B8BD6" ${S}/><path d="M30 10 L32 4 L34 10" fill="#F6C945" ${S} stroke-width="1.6"/><rect x="28" y="46" width="8" height="10" fill="${K}"/><rect x="29" y="24" width="6" height="6" fill="${K}"/>`,
+  // 巻物（年表）
+  scroll: `<path d="M12 12 H48 V50 H16 Q10 50 10 44 V14 Z" fill="#F7EBCB" ${S}/><path d="M48 12 Q56 12 56 18 Q56 24 48 24" fill="#E7D3A0" ${S}/><path d="M18 22 H40 M18 30 H40 M18 38 H34" ${S} stroke-width="1.8"/><circle cx="44" cy="40" r="5" fill="#E5484D" ${S} stroke-width="1.6"/>`,
+  // ものさし
+  ruler: `<rect x="4" y="22" width="56" height="20" rx="3" fill="#FFE27A" ${S}/><path d="M12 22 V32 M20 22 V28 M28 22 V32 M36 22 V28 M44 22 V32 M52 22 V28" ${S} stroke-width="1.8"/>`,
+  // 円グラフ（わりあい）
+  pie: `<circle cx="32" cy="32" r="24" fill="#FFE27A" ${S}/><path d="M32 32 V8 A24 24 0 0 1 56 32 Z" fill="#E5846B" ${S}/><path d="M32 32 L56 32 A24 24 0 0 1 38 55 Z" fill="#8FB4E3" ${S}/>`,
+  // 日本・ピン
+  pin: `<path d="M32 58 C20 42 14 34 14 24 A18 18 0 0 1 50 24 C50 34 44 42 32 58 Z" fill="#E5484D" ${S}/><circle cx="32" cy="24" r="7" fill="#fff" ${S}/>`,
+  // 山
+  mountain: `<path d="M2 54 L22 18 L34 38 L42 26 L62 54 Z" fill="#8FD19E" ${S}/><path d="M22 18 L16 29 L22 26 L27 30 Z" fill="#fff" ${S} stroke-width="1.6"/><circle cx="50" cy="12" r="6" fill="#FFD36B" ${S}/>`,
+  // 立体（図形）
+  cube: `<path d="M8 22 L32 10 L56 22 L32 34 Z" fill="#CFE6FA" ${S}/><path d="M8 22 V44 L32 56 V34 Z" fill="#8FB4E3" ${S}/><path d="M56 22 V44 L32 56 V34 Z" fill="#6B8BD6" ${S}/>`,
+  // 筆・漢字
+  kanji: `<rect x="6" y="8" width="38" height="38" rx="4" fill="#fff" ${S}/><path d="M25 8 V46 M6 27 H44" stroke="#F2A5A5" stroke-width="1.4" stroke-dasharray="3 3"/><text x="25" y="38" text-anchor="middle" font-size="28" font-weight="900" fill="${K}" font-family="Zen Maru Gothic, Noto Sans JP, sans-serif">漢</text><path d="M46 56 L58 28 L62 30 L52 58 Z" fill="#E7B66B" ${S} stroke-width="1.6"/>`,
+  // えんぴつ（テスト・メモ）
+  pencil: `<path d="M10 54 L14 40 L46 8 L56 18 L24 50 Z" fill="#FFE27A" ${S}/><path d="M46 8 L56 18 L60 14 Q62 10 58 6 Q54 2 50 4 Z" fill="#F29BB0" ${S}/><path d="M10 54 L14 40 L24 50 Z" fill="#F7E4C6" ${S}/><path d="M10 54 L12 48 L16 52 Z" fill="${K}"/>`,
+  // カレンダー
+  calendar: `<rect x="8" y="12" width="48" height="44" rx="5" fill="#fff" ${S}/><path d="M8 26 V17 Q8 12 13 12 H51 Q56 12 56 17 V26 Z" fill="#E5846B" ${S}/><path d="M20 6 V16 M44 6 V16" ${S}/><g fill="#8FB4E3"><rect x="14" y="31" width="8" height="7" rx="1.5"/><rect x="28" y="31" width="8" height="7" rx="1.5"/><rect x="42" y="31" width="8" height="7" rx="1.5"/><rect x="14" y="43" width="8" height="7" rx="1.5"/><rect x="28" y="43" width="8" height="7" rx="1.5" fill="#F6C945"/></g>`,
+  // ニュース（新聞）
+  news: `<rect x="8" y="10" width="44" height="42" rx="3" fill="#fff" ${S}/><path d="M52 22 H58 V46 Q58 52 52 52" fill="#E6EEF8" ${S}/><rect x="14" y="16" width="14" height="12" fill="#8CCBF2" ${S} stroke-width="1.6"/><path d="M32 18 H46 M32 24 H46 M14 34 H46 M14 40 H46 M14 46 H38" ${S} stroke-width="1.6"/>`,
+};
+export const ART_NAMES = Object.keys(A);
+export const art = (name, cls = 'sx-ic') => A[name] ? `<svg class="${cls}" viewBox="0 0 64 64" aria-hidden="true">${A[name]}</svg>` : '';
+
+// 見出し・カードの文字から、ふさわしい絵をえらぶ（上から順に先に当たったもの）
+const RULES = [
+  [/国会（|国会＝/, 'kokkai'], [/国会の種類/, 'calendar'], [/国会/, 'kokkai'], [/内閣|行政|首相/, 'kantei'], [/裁判|司法/, 'saiban'], [/憲法/, 'book'], [/選挙|投票/, 'vote'],
+  [/三権/, 'saiban'], [/衆議院|参議院/, 'kokkai'], [/おたがい|チェック/, 'hands'], [/ニュース/, 'news'],
+  [/温室効果ガス|ガス/, 'factory'], [/目標/, 'calendar'], [/温暖化|地球/, 'earth'], [/エネルギー/, 'wind'], [/SDGs/, 'sprout'], [/科学|宇宙/, 'rocket'],
+  [/国連|国際連合|専門機関/, 'un'], [/集まり|つながり|条約/, 'hands'],
+  [/縄文|鎌倉|江戸|明治|昭和/, 'castle'], [/年表/, 'scroll'],
+  [/長さ|重さ|面積|体積/, 'ruler'], [/分数|割合|百分率|歩合/, 'pie'], [/平方/, 'cube'],
+  [/地図|地方|産業|地理|都道府県/, 'pin'], [/部首|へん|つくり|かんむり|漢字/, 'kanji'], [/公式|図形|立体|表面積|三角形|四角形/, 'cube'],
+  [/確認テスト|クイズ|チャレンジ|メモ/, 'pencil'], [/コツ|ポイント/, 'bulb'],
+];
+export const pickArt = (text) => { const t = String(text || ''); for (const [re, n] of RULES) if (re.test(t)) return n; return ''; };
