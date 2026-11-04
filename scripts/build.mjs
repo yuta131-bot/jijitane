@@ -147,6 +147,7 @@ ${desc.slice(0, 30).map((a) => `<item><title>${esc(jpDate(a.date).short + ' ' + 
 fs.writeFileSync(path.join(OUT, 'feed.xml'), rss);
 const urls = ['/', '/matome/', ...(sheets.length ? ['/sheets/', ...sheets.map((s) => `/sheets/${s.id}.html`)] : []), ...(year ? [`/matome/${year.exam_year}.html`, `/matome/${year.exam_year}-ranking.html`] : []), ...months.map((m) => `/matome/${m}.html`), ...weeks.map((w) => `/weekly/${w}.html`), '/archive.html', '/glossary.html', '/units.html', '/subject/rika.html', '/subject/shakai.html', ...all.flatMap((a) => [`/news/${a.date}.html`, ...a.news.map((_, j) => `/news/${a.date}-${j + 1}.html`)])];
 fs.writeFileSync(path.join(OUT, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((u) => `<url><loc>${base}${u}</loc></url>`).join('\n')}\n</urlset>`);
+if (cfg.ads?.client) fs.writeFileSync(path.join(OUT, 'ads.txt'), `google.com, ${cfg.ads.client.replace('ca-pub-', 'pub-')}, DIRECT, f08c47fec0942fa0\n`);
 fs.writeFileSync(path.join(OUT, 'robots.txt'), `User-agent: *\nAllow: /\nDisallow: /gift/\nSitemap: ${base}/sitemap.xml\n`);
 fs.writeFileSync(path.join(OUT, '.nojekyll'), '');
 console.log(`${all.length} 号分を dist/ に書き出しました`);

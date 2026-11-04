@@ -64,7 +64,8 @@ export function layout({ cfg, title, desc, path, ogImage, main, css, recent = []
   const base = baseOf(cfg);
   const url = base + path;
   const img = ogImage ? base + ogImage : '';
-  const adsHead = cfg.ads?.enabled && cfg.ads?.client ? `<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${esc(cfg.ads.client)}" crossorigin="anonymous"></script>` : '';
+  const adsHead = cfg.ads?.client ?   // 審査用：広告枠（enabled）をオフでも、AdSense のコードは全ページに入れる
+     `<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${esc(cfg.ads.client)}" crossorigin="anonymous"></script>` : '';
   return `<!DOCTYPE html>
 <html lang="ja">
 <head>
