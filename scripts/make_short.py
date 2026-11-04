@@ -134,7 +134,7 @@ def scene_quiz_open(a, date_long):
 def scene_quiz_end(date_long):
     body = (top(date_long) + '<div class="main" style="align-items:center;justify-content:center;gap:40px;text-align:center">'
             f'{use("ch-poppo", 280, 287)}<div class="h" style="font-size:72px">何問わかった？</div>'
-            '<div style="font-size:56px;font-weight:900;background:#FFE36E;border:4px solid #1D2B44;border-radius:28px;padding:18px 36px;line-height:1.5">インスタのDMに<span style="color:#C2410C">「時事」</span>と送ると<br>出題予想ランキングの<br>プリントをプレゼント！</div>'
+            '<div style="font-size:56px;font-weight:900;background:#FFE36E;border:4px solid #1D2B44;border-radius:28px;padding:18px 36px;line-height:1.5">LINEで<span style="color:#C2410C">「時事」</span>と送ると<br>出題予想ランキングの<br>プリントをプレゼント！</div>'
             '<div style="font-size:44px;font-weight:700">くわしい解説は</div>'
             '<div style="font-size:88px;font-weight:900;color:#2E78C9">jijitane.com</div></div>')
     return body
@@ -143,7 +143,7 @@ def scene_end(date_long):
     body = (top(date_long) + '<div class="main" style="align-items:center;justify-content:center;gap:40px;text-align:center">'
             f'{use("ch-poppo", 280, 287)}<div class="h" style="font-size:66px">図解とくわしい解説は<br>サイトで読めるよ</div>'
             '<div style="font-size:88px;font-weight:900;color:#2E78C9">jijitane.com</div>'
-            '<div style="font-size:52px;font-weight:900;background:#FFE36E;border:4px solid #1D2B44;border-radius:28px;padding:16px 34px;line-height:1.5">インスタのDMに<span style="color:#C2410C">「時事」</span>と送ると<br>出題予想ランキングの<br>プリントをプレゼント！</div></div>')
+            '<div style="font-size:52px;font-weight:900;background:#FFE36E;border:4px solid #1D2B44;border-radius:28px;padding:16px 34px;line-height:1.5">LINEで<span style="color:#C2410C">「時事」</span>と送ると<br>出題予想ランキングの<br>プリントをプレゼント！</div></div>')
     return body
 
 # ---------- 音声（VOICEVOX：scripts/voicevox.py と同じ声・同じ読み方） ----------
@@ -184,7 +184,7 @@ def main():
         scenes.append((scene_quiz_open(a, date_long), [('きょうのニュースから、3問クイズ！', 'きょうのニュースから、3問クイズ！'), ('全部わかるかな？', '全部わかるかな？')]))
         for j, q in enumerate(qs[:3]):
             quiz_block(q, f'第{j+1}問', f'第{j+1}問！', f'第{j+1}問！ {say(q["q"])}')
-        scenes.append((scene_quiz_end(date_long), [('何問わかった？ くわしくは、サイトで読んでね！', '何問わかった？ くわしくは、じじたねのサイトで読んでね！'), ('インスタのDMに「時事」と送ると、プリントをプレゼント！', 'インスタのDMに、じじ、と送ると、出題予想ランキングの、プリントをプレゼント！')]))
+        scenes.append((scene_quiz_end(date_long), [('何問わかった？ くわしくは、サイトで読んでね！', '何問わかった？ くわしくは、じじたねのサイトで読んでね！'), ('LINEで「時事」と送ると、プリントをプレゼント！', 'ラインで、じじ、と送ると、出題予想ランキングの、プリントをプレゼント！')]))
     else:
       scenes.append((scene_open(a, date_short, date_long),
                    [(f'{date_short}のじじたね！', f'{date_short}の、じじたね！'), ('きょうの3本を紹介するよ。', 'きょうの3本を、紹介するよ。')]))
@@ -194,7 +194,7 @@ def main():
           scenes.append((scene_news(n, i, svgs[i], date_long), lines))
       q = a['news'][0]['quiz']
       quiz_block(q, 'クイズ', 'クイズ！ わかるかな？', f'クイズ！ {say(q["q"])}')
-      scenes.append((scene_end(date_long), [('くわしくは、サイトで読んでね！', 'くわしくは、じじたねのサイトで読んでね！'), ('インスタのDMに「時事」と送ると、プリントをプレゼント！', 'インスタのDMに、じじ、と送ると、出題予想ランキングの、プリントをプレゼント！')]))
+      scenes.append((scene_end(date_long), [('くわしくは、サイトで読んでね！', 'くわしくは、じじたねのサイトで読んでね！'), ('LINEで「時事」と送ると、プリントをプレゼント！', 'ラインで、じじ、と送ると、出題予想ランキングの、プリントをプレゼント！')]))
 
     # 音声と長さ
     if args.voicevox:

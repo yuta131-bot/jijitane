@@ -181,7 +181,7 @@ def main():
     letters = ' '.join(f'Q{i}={LET[it["ans"]]}' for i, it in enumerate(qs, 1))
     caption = (f'【今週の時事チャレンジ】{span}のニュースから、3択クイズ6問！\n6問中、何問わかるかな？ 答えは8ページ目にあります。\n\n'
                + '\n'.join(f'Q{i} {it["q"]}' for i, it in enumerate(qs, 1))
-               + f'\n\n親子で考えて、コメントで答えを教えてね。\n覚えるシート（全8種・印刷OKのPDF）は、LINEで「シート」と送ると届きます。LINEは、プロフィールのリンク（jijitane.com）から友だち追加できます。\n'
+               + f'\n\n親子で考えて、コメントで答えを教えてね。\n覚えるシート（全8種・印刷OKのPDF）は、LINEで「シート」と送ると届きます。LINEの友だち追加は、プロフィールのリンクからできます。\n'
                + '\n#中学受験 #中受 #時事問題 #時事クイズ #小学生の勉強 #家庭学習 #親子で学ぶ')
     (out / f'quiz-{args.end}.json').write_text(json.dumps(dict(end=args.end, span=span, caption=caption, answers=letters, count=len(imgs),
                                                                  questions=[dict(day=q['day'], q=q['q'], ch=q['ch'], ans=q['ans']) for q in qs]), ensure_ascii=False, indent=1), encoding='utf-8')

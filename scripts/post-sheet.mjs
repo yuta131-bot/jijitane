@@ -44,7 +44,7 @@ const xText = (() => {
   const w = (t) => weight(t.replace(cfg.lineUrl, 'x'.repeat(23)));   // URL は長さに関係なく23と数える
   return w(mk(true)) > 280 ? mk(false) : mk(true);
 })();
-const igCaption = `【覚えるシート】${title}\n${sub}\n\n保存して、見返してね。印刷できるPDF（A4）は、LINEで「シート」と送ると届きます。\nLINEは、プロフィールのリンク（jijitane.com）の「覚えるシート」から友だち追加できます。\n\n全${sheets.length}種類の覚えるシートを、1日1つずつ紹介しています。\n\n#中学受験 #中受 #家庭学習 #小学生の勉強 #受験勉強 #覚えるシート`;
+const igCaption = `【覚えるシート】${title}\n${sub}\n\n保存して、見返してね。印刷できるPDF（A4）は、LINEで「シート」と送ると届きます。\nLINEの友だち追加は、プロフィールのリンクからできます。\n\n全${sheets.length}種類の覚えるシートを、1日1つずつ紹介しています。\n\n#中学受験 #中受 #家庭学習 #小学生の勉強 #受験勉強 #覚えるシート`;
 console.log('--- X ---\n' + xText + '\n--- Instagram ---\n' + igCaption);
 if (dry) { console.log('DRY_RUN のため投稿しません'); process.exit(0); }
 

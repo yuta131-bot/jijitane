@@ -63,8 +63,8 @@ if (process.env.IG_TOKEN && (!state[date][igKey] || force)) {
     const head = await fetch(video, { method: 'HEAD', redirect: 'follow' });
     if (!head.ok) throw new Error(`今日の${quiz ? 'クイズ' : 'ショート'}動画がまだありません（${head.status}）。Actions の「ショート動画を作る」を確認してください`);
     const caption = quiz
-      ? `${dt.short}のニュースクイズ🌱 全3問、何問わかるかな？\n答えを見る前に、コメントで予想してみてね！\n\nきょうのニュース\n${lines}\n\nDMに「時事」と送ると、出題予想ランキングのプリント（無料）を自動でお送りします\n図解つきの解説は、プロフィールのリンク（jijitane.com）から\n音声：VOICEVOX:冥鳴ひまり\n\n#中学受験 #時事問題 #中受 #クイズ #小学生の勉強 #家庭学習`
-      : `${dt.short}の${cfg.siteName}🌱\n${lines}\n\nDMに「時事」と送ると、出題予想ランキングのプリント（無料）を自動でお送りします\nくわしい解説・図解・ふりがなは、プロフィールのリンク（jijitane.com）から\n音声：VOICEVOX:冥鳴ひまり\n\n#中学受験 #時事問題 #中受 #小学生の勉強 #ニュース解説 #家庭学習`;
+      ? `${dt.short}のニュースクイズ🌱 全3問、何問わかるかな？\n答えを見る前に、コメントで予想してみてね！\n\nきょうのニュース\n${lines}\n\nLINEで「時事」と送ると、出題予想ランキングのプリント（無料）が届きます\n友だち追加と図解つきの解説は、プロフィールのリンクから\n音声：VOICEVOX:冥鳴ひまり\n\n#中学受験 #時事問題 #中受 #クイズ #小学生の勉強 #家庭学習`
+      : `${dt.short}の${cfg.siteName}🌱\n${lines}\n\nLINEで「時事」と送ると、出題予想ランキングのプリント（無料）が届きます\n友だち追加と、くわしい解説・図解・ふりがなは、プロフィールのリンクから\n音声：VOICEVOX:冥鳴ひまり\n\n#中学受験 #時事問題 #中受 #小学生の勉強 #ニュース解説 #家庭学習`;
     const me = await call(`${G}/me`, { fields: 'user_id,username', access_token: token }, 'GET');
     const id = me.user_id || me.id;
     // Meta 側の一時的な取り込み失敗（ERROR）が時々あるので、1回だけやり直す
