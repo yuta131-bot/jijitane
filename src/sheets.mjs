@@ -5,7 +5,7 @@ import path from 'node:path';
 import { esc, inline, plain, jpDate } from './markup.mjs';
 import { layout } from './templates.mjs';
 import { fig, FIG_NAMES } from './figs.mjs';
-import { art, pickArt } from './art.mjs';
+import { art, pickArt, CARD_ART } from './art.mjs';
 
 const baseOf = (cfg) => cfg.siteUrl.replace(/\/$/, '');
 export const GROUPS = [
@@ -107,7 +107,7 @@ function one(b) {
   if (ICON_SKIP.has(b.t) || b.ic === false) return h;
   const n = b.ic || pickArt(b.title);
   if (n) h = h.replace('<h4>', `<h4 class="hi">${art(n)}`);
-  if (b.t === 'cards') h = h.replace(/<div class="sx-card c-(\w+)"><b>([^<]*)/g, (m, c, t) => { const a = pickArt(t); return a ? `<div class="sx-card c-${c}"><b class="hc">${art(a, 'sx-ci')}${t}` : m; });
+  if (b.t === 'cards') h = h.replace(/<div class="sx-card c-(\w+)"><b>([^<]*)/g, (m, c, t) => { const a = pickArt(t); return CARD_ART.has(a) ? `<div class="sx-card c-${c}"><b class="hc">${art(a, 'sx-ci')}${t}` : m; });
   return h;
 }
 const block = (b) => (Array.isArray(b) ? `<div class="sx-row n${b.length}">${b.map((x) => one(x)).join('')}</div>` : one(b));
