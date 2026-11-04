@@ -126,7 +126,7 @@ export function rankingPage({ cfg, css, year, recent }) {
 <section class="hero hero-list"><div class="hero-tx"><h1>${title}</h1><p class="lead">${year.exam_year}年の中学入試に出そうな時事ニュースを、ニュースの大きさ・教科書とのつながり・入試でのよく出るテーマをもとに予想して並べました。上から順におさえていきましょう。</p><p class="mt-upd">最終更新：${esc(jpDate(year.updated).label)}（毎月更新）</p></div></section>
 <ol class="mt-rank">${rows.map(({ r, t, no }) => `<li><span class="rk${no <= 3 ? ' rk-top' : ''}">${no}</span><div><a href="${base}/matome/${year.exam_year}.html#${esc(t.id)}"><b>${inline(t.title)}</b></a><span class="rk-meta">${esc(CAT_NAME[t.cat] || '')}・${esc(t.when || '')}${STAR(t.stars)}</span><p>${inline(r.reason || '')}</p></div></li>`).join('')}</ol>
 <div class="mt-cards"><a class="mt-card" href="${base}/matome/${year.exam_year}.html"><b>${year.exam_year}年入試 時事問題まとめ</b><span>くわしい説明とキーワードはこちら</span></a></div>
-<p class="mt-note">※ランキングは、じじたね編集部（AI）による予想です。実際の出題を保証するものではありません。</p>`;
+<p class="mt-note">※ランキングは、じじたね編集部による予想です。実際の出題を保証するものではありません。</p>`;
   return layout({ cfg, css, main, recent, title: `${title}｜${cfg.siteName}`, desc: `${year.exam_year}年中学入試の時事問題の出題予想ランキング。` + rows.slice(0, 5).map(({ t }) => plain(t.title)).join('、') + 'など。', path: `/matome/${year.exam_year}-ranking.html` });
 }
 
@@ -218,7 +218,7 @@ function rankSheetHtml(cfg, year) {
 <p class="rk-lead">対象：${esc(year.period || '')}　／　おぼえたら □ にチェック。くわしい説明は ${esc(base)}/matome/${year.exam_year}.html</p>
 <ol class="rk-list">${rows.map(({ t, no }) => `<li><span class="rk-no${no <= 3 ? ' top' : ''}">${no}</span><div><span class="rk-t">${inline(t.title)}</span><span class="rk-m">${esc(CAT_NAME[t.cat] || '')}・${esc(t.when || '')}<span class="st">${'★'.repeat(Math.max(0, Math.min(3, Number(t.stars) || 0)))}</span></span><div class="rk-kw">${(t.keywords || []).slice(0, 3).map((k) => `<span>${inline(k)}</span>`).join('')}</div></div><span class="rk-ck"></span></li>`).join('')}</ol>
 <div class="rk-cta"><div><b>毎週日曜は LINE で「今週のふり返り号」</b>　6つの重要ニュースと確認テストが、1枚で届きます。</div>${line ? `<div>${esc(line)}</div>` : ''}</div>
-<div class="rk-note">※ランキングは、じじたね編集部（AI）による予想です。実際の出題を保証するものではありません。　最終更新：${esc(jpDate(year.updated).label)}　家庭・塾・学校での印刷・配布は自由です（内容の改変・販売はご遠慮ください）。</div>
+<div class="rk-note">※ランキングは、じじたね編集部による予想です。実際の出題を保証するものではありません。　最終更新：${esc(jpDate(year.updated).label)}　家庭・塾・学校での印刷・配布は自由です（内容の改変・販売はご遠慮ください）。</div>
 </div>`;
 }
 

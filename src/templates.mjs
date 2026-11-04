@@ -108,7 +108,7 @@ ${sidebar(cfg, recent)}
   <div><b>${esc(cfg.siteName)}</b><br>${esc(cfg.tagline)}</div>
   <nav><a href="${base}/matome/">時事まとめ</a><a href="${base}/sheets/">覚えるシート</a><a href="${base}/glossary.html">用語集</a><a href="${base}/units.html">単元別</a><a href="${base}/about.html">このサイトについて・訂正の方針</a><a href="${base}/privacy.html">プライバシーポリシー</a><a href="${base}/contact.html">お問い合わせ</a></nav>
   <p>読み上げ音声：VOICEVOX:冥鳴ひまり</p>
-  <p>記事はAIが報道をもとに下書きし、別のAIが出典と照らし合わせて確認してから公開しています。公開後も運営者が確認し、まちがいが見つかった場合は、記事の中に訂正内容と日付を示して直します。</p>
+  <p>記事のつくり方と、まちがいが見つかったときの訂正の方針は、<a href="${base}/about.html">「このサイトについて・訂正の方針」</a>に書いています。</p>
 </div></footer>
 <script>${CLIENT_JS}</script>
 </body>
@@ -159,7 +159,7 @@ ${(a.briefs || []).length ? `<section class="briefs"><h3>ひとことニュー�
 ${a.extra ? `<div class="tonight">${inline(a.extra)}</div>` : ''}
 <div class="share"><span>この号をシェア</span><a href="${esc(xShare)}" target="_blank" rel="noopener">X</a><a href="${esc(lineShare)}" target="_blank" rel="noopener">LINE</a></div>
 <nav class="pager">${prev ? `<a class="prev" href="${base}/news/${prev}.html"><small>前の号</small>${jpDate(prev).short}</a>` : '<span></span>'}${next ? `<a class="next" href="${base}/news/${next}.html"><small>次の号</small>${jpDate(next).short}</a>` : '<span></span>'}</nav>
-${top ? `<section class="about"><h3>保護者の方へ</h3><p>入試の時事問題は、前年の秋ごろまでのニュースからよく出題されます。このサイトでは毎日3本を、小学5年生が一人で読める言葉・ふりがな・図解・入試を意識したクイズで紹介しています。記事はAIが下書きし、人が事実と表現を確認してから公開しています。</p></section>` : ''}
+${top ? `<section class="about"><h3>保護者の方へ</h3><p>入試の時事問題は、前年の秋ごろまでのニュースからよく出題されます。このサイトでは毎日3本を、小学5年生が一人で読める言葉・ふりがな・図解・入試を意識したクイズで紹介しています。出典と照らし合わせて確認してから公開しています。つくり方は「このサイトについて」をご覧ください。</p></section>` : ''}
 ${sources.length ? `<div class="sources"><b>参考にした報道</b><ul>${sources.map((s) => `<li><a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.title)}</a></li>`).join('')}</ul></div>` : ''}`;
   return layout({
     cfg, css, main, recent,
