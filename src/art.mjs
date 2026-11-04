@@ -31,6 +31,14 @@ const A = {
   hands: `<path d="M4 30 L18 22 L30 28 L40 22 L60 30 L52 44 L40 48 L30 52 L20 46 L10 42 Z" fill="#FFD9B8" ${S}/><path d="M18 22 L30 28 M40 22 L30 34 M24 38 L34 44 M30 52 L22 46" fill="none" ${S} stroke-width="1.6"/><rect x="2" y="26" width="8" height="18" rx="2" fill="#6B8BD6" ${S} stroke-width="1.6" transform="rotate(-14 6 35)"/><rect x="54" y="26" width="8" height="18" rx="2" fill="#E5846B" ${S} stroke-width="1.6" transform="rotate(14 58 35)"/>`,
   // お城
   castle: `<rect x="12" y="40" width="40" height="16" fill="#F4EEDD" ${S}/><path d="M16 40 L20 32 H44 L48 40 Z" fill="#6B8BD6" ${S}/><rect x="20" y="22" width="24" height="10" fill="#F4EEDD" ${S}/><path d="M17 22 L32 10 L47 22 Z" fill="#6B8BD6" ${S}/><path d="M30 10 L32 4 L34 10" fill="#F6C945" ${S} stroke-width="1.6"/><rect x="28" y="46" width="8" height="10" fill="${K}"/><rect x="29" y="24" width="6" height="6" fill="${K}"/>`,
+  // 土器（縄文〜平安）
+  doki: `<path d="M20 8 H44 L42 14 C54 20 56 38 46 50 Q42 56 32 56 Q22 56 18 50 C8 38 10 20 22 14 Z" fill="#E3A56F" ${S}/><path d="M16 26 Q32 34 48 26 M14 38 Q32 46 50 38" fill="none" ${S} stroke-width="1.8"/><path d="M24 20 L28 24 L32 20 L36 24 L40 20" fill="none" ${S} stroke-width="1.6"/>`,
+  // かぶと（鎌倉〜安土桃山）
+  kabuto: `<path d="M10 44 C8 24 20 12 32 12 C44 12 56 24 54 44 Z" fill="#6B7FB8" ${S}/><path d="M32 12 V4 M26 8 Q32 0 38 8" fill="none" stroke="#F6C945" stroke-width="3" stroke-linecap="round"/><path d="M8 44 H56 L52 54 H12 Z" fill="#E5484D" ${S}/><path d="M24 44 Q32 34 40 44" fill="#FFD9B8" ${S}/><path d="M20 22 Q32 28 44 22" fill="none" stroke="#F6C945" stroke-width="2.4"/>`,
+  // 蒸気機関車（明治〜大正）
+  train: `<rect x="8" y="26" width="30" height="20" rx="2" fill="#4A5568" ${S}/><rect x="38" y="16" width="16" height="30" rx="2" fill="#E5484D" ${S}/><rect x="42" y="20" width="8" height="8" fill="#CFE6FA" ${S} stroke-width="1.6"/><rect x="12" y="14" width="8" height="12" fill="#2D3748" ${S}/><circle cx="14" cy="8" r="4" fill="#fff" ${S} stroke-width="1.5"/><circle cx="22" cy="5" r="3" fill="#fff" ${S} stroke-width="1.5"/><circle cx="18" cy="50" r="7" fill="#F6C945" ${S}/><circle cx="46" cy="50" r="7" fill="#F6C945" ${S}/><path d="M4 57 H60" ${S}/>`,
+  // 東京タワー（昭和〜令和）
+  tower: `<path d="M32 4 L38 30 L46 58 H18 L26 30 Z" fill="#F08A5D" ${S}/><path d="M28 24 H36 M24 38 H40" ${S} stroke-width="1.8"/><path d="M26 30 H38 L36 24 H28 Z" fill="#fff" ${S} stroke-width="1.6"/><path d="M22 46 Q32 38 42 46" fill="none" ${S} stroke-width="1.6"/><path d="M32 4 V0" ${S}/>`,
   // 巻物（年表）
   scroll: `<path d="M12 12 H48 V50 H16 Q10 50 10 44 V14 Z" fill="#F7EBCB" ${S}/><path d="M48 12 Q56 12 56 18 Q56 24 48 24" fill="#E7D3A0" ${S}/><path d="M18 22 H40 M18 30 H40 M18 38 H34" ${S} stroke-width="1.8"/><circle cx="44" cy="40" r="5" fill="#E5484D" ${S} stroke-width="1.6"/>`,
   // ものさし
@@ -71,7 +79,7 @@ const RULES = [
   [/三権/, 'saiban'], [/衆議院|参議院/, 'kokkai'], [/おたがい|チェック/, 'hands'], [/ニュース/, 'news'],
   [/温室効果ガス|ガス/, 'factory'], [/目標/, 'calendar'], [/温暖化|地球/, 'earth'], [/エネルギー/, 'wind'], [/SDGs/, 'sprout'], [/科学|宇宙/, 'rocket'],
   [/国連|国際連合|専門機関/, 'un'], [/集まり|つながり|条約/, 'hands'],
-  [/縄文|鎌倉|江戸|明治|昭和/, 'castle'], [/年表/, 'scroll'],
+  [/縄文|平安/, 'doki'], [/鎌倉|室町|戦国|安土/, 'kabuto'], [/江戸/, 'castle'], [/明治|大正/, 'train'], [/昭和|平成|令和/, 'tower'], [/年表/, 'scroll'],
   [/重さ/, 'weight'], [/面積/, 'area'], [/体積|かさ/, 'cup'], [/長さ/, 'ruler'], [/円周率/, 'circle'], [/分数|割合|百分率|歩合/, 'pie'], [/平方|素数/, 'sq2'],
   [/地図|地方|産業|地理|都道府県/, 'pin'], [/部首|へん|つくり|かんむり|漢字/, 'kanji'], [/公式|図形|立体|表面積|三角形|四角形/, 'cube'],
   [/確認テスト|クイズ|チャレンジ|メモ/, 'pencil'], [/コツ|ポイント/, 'bulb'],
