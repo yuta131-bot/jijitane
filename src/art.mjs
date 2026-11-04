@@ -113,6 +113,7 @@ export const art = (name, cls = 'sx-ic') => A[name] ? `<svg class="${cls}" viewB
 
 // 見出し・カードの文字から、ふさわしい絵をえらぶ（上から順に先に当たったもの）
 const RULES = [
+  [/数直線/, 'ruler'], [/100マス/, 'area'], [/く・も・わ/, 'pencil'], [/割引き/, 'pie'],
   [/同じ大きさ/, 'pie'], [/へんしん/, 'rocket'], [/歩合の読み方/, 'book'], [/間違い|まちがい/, 'bulb'],
   [/クイズ|チャレンジ/, 'pencil'], [/まちがえやすい/, 'bulb'],
   [/国連の主な機関/, 'kantei'], [/専門機関/, 'bulb'],

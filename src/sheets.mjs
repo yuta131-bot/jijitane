@@ -12,12 +12,12 @@ export const GROUPS = [
   ['jiji', '時事の覚えるシート', 'ニュースを読むときの「ものさし」になる、政治・国際・環境の基本'],
   ['kihon', '基本の覚えるシート', '算数・社会・国語で、毎日ひらく「手元の1枚」'],
 ];
-const BLOCKS = new Set(['table', 'cards', 'kanji', 'tips', 'quiz', 'list', 'text', 'figs', 'test', 'map', 'memo', 'ratio', 'flow']);
+const BLOCKS = new Set(['table', 'cards', 'kanji', 'tips', 'quiz', 'list', 'text', 'figs', 'test', 'map', 'memo', 'ratio', 'flow', 'numline', 'grid100', 'kmw', 'segbar']);
 const PREF = JSON.parse(fs.readFileSync(new URL('./japan-pref.json', import.meta.url), 'utf8'));
 
 export function loadSheets(dir = 'content/sheets') {
   if (!fs.existsSync(dir)) return [];
-  const order = Object.fromEntries(['kenpo-sanken', 'kokusai', 'kankyo-kagaku', 'tani-wariai', 'zukei', 'nenpyo', 'todofuken', 'bushu'].map((k, i) => [k, i]));
+  const order = Object.fromEntries(['kenpo-sanken', 'kokusai', 'kankyo-kagaku', 'tani-wariai', 'wariai', 'zukei', 'nenpyo', 'todofuken', 'bushu'].map((k, i) => [k, i]));
   return fs.readdirSync(dir).filter((f) => f.endsWith('.json')).map((f) => {
     const s = JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8'));
     const errs = validateSheet(s);
@@ -87,6 +87,28 @@ function ratio(b) {
 function flow(b) {
   return `<section class="sx-b sx-flow"><h4>${cell(b.title)}${b.note ? `<small>${cell(b.note)}</small>` : ''}</h4>${b.lines.map((ln) => `<div class="sx-fl">${ln.map((st, i) => (i % 2 === 0 ? `<span class="bx c-${st[1] || 'b'}">${cell(st[0])}</span>` : `<span class="ar"><em>${cell(st[0])}</em><b>→</b></span>`)).join('')}</div>`).join('')}${b.foot ? `<p class="sx-n">${cell(b.foot)}</p>` : ''}</section>`;
 }
+// numline：0〜1の数直線に、分数・小数・割・％をならべる
+function numline(b) {
+  const W = 560, X0 = 40, X1 = 520;
+  const pts = b.points.map(([v, fr, dec, wari, pct]) => { const x = X0 + (X1 - X0) * v; return `<line x1="${x}" y1="52" x2="${x}" y2="64" stroke="#1D2B44" stroke-width="2"/><circle cx="${x}" cy="58" r="4.5" fill="#FFC93C" stroke="#1D2B44" stroke-width="1.6"/><text x="${x}" y="36" text-anchor="middle" font-size="17" font-weight="900" fill="#DB7420">${esc(fr)}</text><text x="${x}" y="90" text-anchor="middle" font-size="14" font-weight="800" fill="#1D2B44">${esc(dec)}</text><text x="${x}" y="108" text-anchor="middle" font-size="13" font-weight="800" fill="#1E7DBF">${esc(pct)}</text><text x="${x}" y="125" text-anchor="middle" font-size="12" font-weight="800" fill="#56677F">${esc(wari)}</text>`; }).join('');
+  return `<section class="sx-b"><h4>${cell(b.title)}${b.note ? `<small>${cell(b.note)}</small>` : ''}</h4><svg class="sx-nl" viewBox="0 0 ${W} 134"><rect x="${X0}" y="55" width="${X1 - X0}" height="6" rx="3" fill="#D5E6F5" stroke="#1D2B44" stroke-width="1.6"/>${pts}<text x="12" y="90" font-size="10" font-weight="800" fill="#56677F">小数</text><text x="12" y="108" font-size="10" font-weight="800" fill="#56677F">％</text><text x="12" y="125" font-size="10" font-weight="800" fill="#56677F">割</text><text x="12" y="36" font-size="10" font-weight="800" fill="#56677F">分数</text></svg></section>`;
+}
+// grid100：100マスで、％の大きさをつかむ
+function grid100(b) {
+  const one = ([n, cap, sub]) => { let r = ''; for (let i = 0; i < 100; i++) { const x = 4 + (i % 10) * 11, y = 4 + Math.floor(i / 10) * 11; r += `<rect x="${x}" y="${y}" width="10" height="10" rx="1.5" fill="${i < n ? '#FFC93C' : '#fff'}" stroke="#1D2B44" stroke-width=".9"/>`; } return `<div class="g1"><svg viewBox="0 0 118 118">${r}</svg><b>${cell(cap)}</b><span>${cell(sub)}</span></div>`; };
+  return `<section class="sx-b sx-g100"><h4>${cell(b.title)}${b.note ? `<small>${cell(b.note)}</small>` : ''}</h4><div class="g100">${b.items.map(one).join('')}</div></section>`;
+}
+// kmw：「く・も・わ」の図（くらべる量／もとにする量×割合）
+function kmw(b) {
+  const t = (x, y, s, sz = 15, c = '#1D2B44') => `<text x="${x}" y="${y}" text-anchor="middle" font-size="${sz}" font-weight="900" fill="${c}">${esc(s)}</text>`;
+  return `<section class="sx-b"><h4>${cell(b.title)}${b.note ? `<small>${cell(b.note)}</small>` : ''}</h4><div class="sx-kmw"><svg viewBox="0 0 200 130"><rect x="4" y="4" width="192" height="58" rx="10" fill="#FFE9CF" stroke="#1D2B44" stroke-width="2"/><rect x="4" y="62" width="96" height="64" rx="10" fill="#DDF3E8" stroke="#1D2B44" stroke-width="2"/><rect x="100" y="62" width="96" height="64" rx="10" fill="#E3EEFB" stroke="#1D2B44" stroke-width="2"/>${t(100, 28, 'く', 24, '#DB7420')}${t(100, 48, 'くらべる量', 12)}${t(52, 92, 'も', 24, '#1E9A72')}${t(52, 112, 'もとにする量', 11)}${t(148, 92, 'わ', 24, '#1E7DBF')}${t(148, 112, '割合', 12)}</svg><ul>${b.lines.map((l) => `<li>${cell(l)}</li>`).join('')}</ul></div></section>`;
+}
+// segbar：全体を10こに分けた棒を、色分けして見せる（割引き・ふえる など）
+function segbar(b) {
+  const COL = { o: '#FFC93C', b: '#8FB4E3', g: '#8FD19E', r: '#F4727F', w: '#fff' };
+  const row = (r) => { const W = 440, H = 30; let x = 0, parts = ''; r.parts.forEach(([n, lab, c]) => { const w = (W * n) / (r.total || 10); parts += `<rect x="${x + 2}" y="2" width="${w}" height="${H}" fill="${COL[c] || '#fff'}" stroke="#1D2B44" stroke-width="1.6"/><text x="${x + 2 + w / 2}" y="${H / 2 + 7}" text-anchor="middle" font-size="13" font-weight="900" fill="#1D2B44">${esc(lab)}</text>`; x += w; }); let ticks = ''; for (let i = 1; i < (r.total || 10); i++) ticks += `<line x1="${2 + (W * i) / (r.total || 10)}" y1="2" x2="${2 + (W * i) / (r.total || 10)}" y2="${H + 2}" stroke="#1D2B44" stroke-opacity=".35" stroke-width="1"/>`; return `<div class="sb"><b>${cell(r.head)}</b><svg viewBox="0 0 446 ${H + 4}">${parts}${ticks}</svg>${r.foot ? `<span>${cell(r.foot)}</span>` : ''}</div>`; };
+  return `<section class="sx-b sx-segbar"><h4>${cell(b.title)}${b.note ? `<small>${cell(b.note)}</small>` : ''}</h4>${b.rows.map(row).join('')}</section>`;
+}
 const REGIONS = ['北海道', '東北', '関東', '中部', '近畿', '中国', '四国', '九州・沖縄'];
 const REGION_FILL = ['#BFE3F5', '#CDEBC8', '#FFE3A3', '#F5C9D8', '#D9CCF0', '#FFD2AE', '#BFE8E0', '#F0C9C0'];
 function prefSvg(blank) {
@@ -109,7 +131,7 @@ function map(b) {
 }
 const memo = (b) => `<section class="sx-b"><h4>${cell(b.title)}</h4><div class="sx-memo">${'<div></div>'.repeat(b.lines || 5)}</div></section>`;
 const text = (b) => `<p class="sx-text">${cell(b.text)}</p>`;
-const RENDER = { table, cards, kanji, tips, quiz, list, text, figs, test, map, memo, ratio, flow };
+const RENDER = { table, cards, kanji, tips, quiz, list, text, figs, test, map, memo, ratio, flow, numline, grid100, kmw, segbar };
 // 見出し（h4）の左に、内容に合った絵を入れる。カードは見出し文字から絵をえらぶ
 const ICON_SKIP = new Set(['text', 'memo', 'map']);
 function one(b) {
@@ -200,6 +222,10 @@ const SX_CSS = `
 .sx .sx-fl .bx{border:1.5px solid var(--k);border-radius:8px;padding:1.6mm 3mm;font-size:10pt;font-weight:900;background:#EAF3FB;white-space:nowrap}
 .sx .sx-fl .bx.c-o{background:#FFE9CF}.sx .sx-fl .bx.c-g{background:#DDF3E8}.sx .sx-fl .bx.c-y{background:#FFF4B8}
 .sx .sx-fl .ar{display:flex;flex-direction:column;align-items:center;font-size:8pt;font-weight:900;color:var(--o);line-height:1.1}.sx .sx-fl .ar b{font-size:14pt;color:var(--k);line-height:.9}.sx .sx-fl .ar em{font-style:normal;white-space:nowrap}
+.sx .sx-nl{display:block;width:100%;height:auto;max-height:36mm}
+.sx .g100{display:flex;justify-content:space-around;gap:4mm}.sx .g1{text-align:center;flex:1}.sx .g1 svg{width:100%;max-width:34mm;height:auto}.sx .g1 b{display:block;font-size:11pt;color:var(--o);font-weight:900}.sx .g1 span{display:block;font-size:8.2pt;font-weight:800;color:var(--m)}
+.sx .sx-kmw{display:flex;align-items:center;gap:6mm;border:1.5px solid var(--k);border-radius:8px;padding:2mm 4mm;background:#fff}.sx .sx-kmw svg{width:50mm;height:auto;flex:none}.sx .sx-kmw ul{margin:0;padding-left:5mm;font-size:9pt;font-weight:800;line-height:1.7}
+.sx .sx-segbar .sb{margin:1.5mm 0}.sx .sx-segbar .sb b{display:block;font-size:9pt;font-weight:900;margin-bottom:.5mm}.sx .sx-segbar .sb svg{width:100%;height:auto;max-height:10mm}.sx .sx-segbar .sb span{display:block;font-size:8.2pt;font-weight:700;color:var(--m)}
 .sx .sx-memo div{border-bottom:1px solid var(--l);height:8.5mm}
 .sx .sx-pg{background:#fff}
 .sx .sh-head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:3px solid var(--k);padding-bottom:3px;margin-bottom:4px}
