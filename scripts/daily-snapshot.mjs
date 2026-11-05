@@ -20,7 +20,7 @@ try {
   const r = j.data.viewer.accounts[0]?.total?.[0];
   out.pv = { date: yday, pageviews: r?.count || 0, visits: r?.sum?.visits || 0 };
   if (out.pv.pageviews === 0) out.alerts.push(`きのう（${yday}）のPVが0です。サイトが表示されていないか、計測が止まっている可能性があります。`);
-} catch (e) { out.errors.pv = e.message; }
+} catch (e) { out.errors.pv = e.message; out.alerts.push(`PVの記録に失敗しました：${e.message}`); }
 
 // フォロワー数・登録者数（今日の時点の数字）
 const snap = {
