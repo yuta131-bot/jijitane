@@ -50,6 +50,18 @@ jobs:
           LINE_TOKEN: ${{ secrets.LINE_TOKEN }}
         run: node scripts/sns-stats.mjs
 
+      - name: 毎日の記録（analytics ブランチ）を取ってくる
+        continue-on-error: true   # まだ無くても続ける
+        uses: actions/checkout@v4
+        with:
+          ref: analytics
+          path: analytics-in
+
+      - name: 数字の表とグラフを作る
+        env:
+          D: ${{ steps.stats.outputs.date }}
+        run: node scripts/render-tables.mjs "reports/data/$D.json" analytics-in/daily > "reports/$D.tables.md"
+
       - name: X のクレジットが少なければ知らせる
         env:
           GH_TOKEN: ${{ github.token }}
@@ -74,15 +86,15 @@ jobs:
             reports/data/${{ steps.stats.outputs.date }}.json が先週のアクセスデータです（this_week と last_week、change_pct、人気ページ、流入元、端末）。
             content/ フォルダの記事（articles_published にある日付のファイル）を開いて、どんな記事がよく読まれたかも確かめてください。reports/ に前回のレポートがあれば、前回の改善案がどうなったかにも触れてください。
 
-            reports/${{ steps.stats.outputs.date }}.md に、日本語で、次の形のレポートを書いてください（保護者でもある運営者が、スマホで3分で読める長さ）。
+            reports/${{ steps.stats.outputs.date }}.tables.md には、数字の表とグラフが作ってあります（先に読んでください。中身は書き写さず、数字は変更しないこと）。
+            reports/${{ steps.stats.outputs.date }}.md に、日本語で、表やグラフの内容を読み解く文章のレポートを書いてください。数字をもう一度表にしないでください。保護者でもある運営者が、スマホで3分で読める長さにします。
             # 週次レポート（期間）
             ## 3行まとめ
-            ## 数字（ページビュー・訪問数・先週比。表で）
             ## よく読まれた記事 トップ5（記事の見出しで。ページのパスから日付と番号を読み取る）
             ## どこから来たか（流入元・スマホ/PC の割合）
             ## 気になる点（課題）
             ## 改善案（すぐできるもの3つ。具体的に。サイトだけでなく SNS の投稿の工夫も含める。作成ルール prompts/system.md の直し方の提案も可）
-            ## SNS（sns の中身。X・Threads・Instagram・YouTube・LINE ごとに、フォロワー／登録者／友だち数と、今週・先週の表示回数（views / impressions）・いいね・保存などを表で。いちばん伸びた投稿と、その理由の見立ても。Instagram は by_kind で「朝のまとめ」と「夕方のクイズ」を比べ、1本あたりの表示・コメント・保存でどちらがよいかも書く。sns.errors にあるものは「取れませんでした」と理由を一言）
+            ## SNS（数字の表は reports/${{ steps.stats.outputs.date }}.tables.md に別で作ってあるので、ここには書かない。いちばん伸びた投稿と、その理由の見立てだけ。Instagram は by_kind で「朝のまとめ」と「夕方のクイズ」を比べ、1本あたりの表示・コメント・保存でどちらがよいかも書く。sns.errors にあるものは「取れませんでした」と理由を一言）
             ## SNS からサイトへの流入（流入元の t.co・threads.net・instagram.com・youtube.com・line.me などを SNS ごとにまとめ、どの SNS がサイトへの入口として効いているか。SNS の表示回数に対するサイト流入の割合も、計算できれば）
             ## X の投稿と費用（x_posts：今週の投稿回数、おおよその費用、クレジットの残りの見込み est_remaining_usd と残り日数 est_days_left。「X の残高は developer.x.com の Developer Console で確かめてください」と一言そえる）
             ## 来週やること（チェックリスト）
@@ -103,5 +115,9 @@ jobs:
           git commit -m "週次レポート: $D" || echo "変更なし"
           git push
           if [ -f "reports/$D.md" ]; then
-            gh issue create --title "📊 週次レポート $D" --body-file "reports/$D.md"
+            # 先に表とグラフ、そのあとに文章
+            { cat "reports/$D.tables.md"; printf '\n---\n\n'; cat "reports/$D.md"; } > issue-body.md
+          else
+            cp "reports/$D.tables.md" issue-body.md
           fi
+          gh issue create --title "📊 週次レポート $D" --body-file issue-body.md

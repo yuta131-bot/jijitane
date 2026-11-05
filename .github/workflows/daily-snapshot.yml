@@ -1,0 +1,51 @@
+name: daily-snapshot
+# 毎日 日本時間 9:20 に、フォロワー数・登録者数と きのうのPV を analytics ブランチの daily/ に保存する。
+# 異常（PVゼロ・自動投稿の停止）があれば GitHub Issue（ラベル alert）で知らせる。
+on:
+  schedule:
+    - cron: "20 0 * * *"   # UTC 0:20 = 日本時間 9:20
+  workflow_dispatch:
+permissions:
+  contents: write
+  issues: write
+concurrency:
+  group: daily-snapshot
+  cancel-in-progress: false
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20, cache: npm }
+      - run: npm ci
+      - name: Record today's numbers
+        env:
+          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+          X_API_KEY: ${{ secrets.X_API_KEY }}
+          X_API_SECRET: ${{ secrets.X_API_SECRET }}
+          X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
+          X_ACCESS_SECRET: ${{ secrets.X_ACCESS_SECRET }}
+          THREADS_TOKEN: ${{ secrets.THREADS_TOKEN }}
+          IG_TOKEN: ${{ secrets.IG_TOKEN }}
+          YT_API_KEY: ${{ secrets.YT_API_KEY }}
+          LINE_TOKEN: ${{ secrets.LINE_TOKEN }}
+        run: node scripts/daily-snapshot.mjs
+      - name: Save to "analytics" branch
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: analytics
+          publish_dir: ./snapshots-out
+          keep_files: true
+          enable_jekyll: true
+          commit_message: "daily snapshot"
+      - name: Alert on anomalies
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ -s snapshots-out/alerts.txt ]; then
+            gh label create alert --color D93F0B 2>/dev/null || true
+            gh issue create --label alert --title "異常のお知らせ $(TZ=Asia/Tokyo date +%F)" --body-file snapshots-out/alerts.txt
+          fi
