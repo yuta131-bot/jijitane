@@ -1,0 +1,995 @@
+{
+ "site": "https://jijitane.com",
+ "generated_at": "2026-11-08T23:24:18.586Z",
+ "period": {
+  "this_week": [
+   "2026-11-02",
+   "2026-11-08"
+  ],
+  "last_week": [
+   "2026-10-26",
+   "2026-11-01"
+  ]
+ },
+ "this_week": {
+  "pageviews": 181,
+  "visits": 86,
+  "daily": [
+   {
+    "date": "2026-11-02",
+    "pageviews": 27,
+    "visits": 14
+   },
+   {
+    "date": "2026-11-03",
+    "pageviews": 31,
+    "visits": 13
+   },
+   {
+    "date": "2026-11-04",
+    "pageviews": 37,
+    "visits": 13
+   },
+   {
+    "date": "2026-11-05",
+    "pageviews": 11,
+    "visits": 6
+   },
+   {
+    "date": "2026-11-06",
+    "pageviews": 51,
+    "visits": 21
+   },
+   {
+    "date": "2026-11-07",
+    "pageviews": 14,
+    "visits": 9
+   },
+   {
+    "date": "2026-11-08",
+    "pageviews": 10,
+    "visits": 10
+   }
+  ],
+  "pages": [
+   {
+    "key": "/",
+    "pageviews": 54
+   },
+   {
+    "key": "/matome/",
+    "pageviews": 9
+   },
+   {
+    "key": "/sheets/tani-wariai",
+    "pageviews": 9
+   },
+   {
+    "key": "/sheets/zukei",
+    "pageviews": 8
+   },
+   {
+    "key": "/sheets/kenpo-sanken",
+    "pageviews": 8
+   },
+   {
+    "key": "/sheets/nenpyo",
+    "pageviews": 7
+   },
+   {
+    "key": "/sheets/kankyo-kagaku",
+    "pageviews": 7
+   },
+   {
+    "key": "/news/2026-11-02",
+    "pageviews": 6
+   },
+   {
+    "key": "/news/2026-11-04",
+    "pageviews": 6
+   },
+   {
+    "key": "/news/2026-11-05",
+    "pageviews": 6
+   },
+   {
+    "key": "/news/2026-11-06",
+    "pageviews": 6
+   },
+   {
+    "key": "/news/2026-11-08",
+    "pageviews": 6
+   },
+   {
+    "key": "/matome/2027-ranking",
+    "pageviews": 5
+   },
+   {
+    "key": "/news/2026-11-03",
+    "pageviews": 5
+   },
+   {
+    "key": "/sheets/",
+    "pageviews": 5
+   },
+   {
+    "key": "/sheets/kokusai",
+    "pageviews": 5
+   },
+   {
+    "key": "/sheets/todofuken",
+    "pageviews": 4
+   },
+   {
+    "key": "/news/2026-10-20-2",
+    "pageviews": 4
+   },
+   {
+    "key": "/news/2026-11-07",
+    "pageviews": 4
+   },
+   {
+    "key": "/matome/2026-10",
+    "pageviews": 3
+   }
+  ],
+  "referrers": [
+   {
+    "key": "（サイト内）",
+    "pageviews": 95
+   },
+   {
+    "key": "（直接・不明）",
+    "pageviews": 46
+   },
+   {
+    "key": "m.facebook.com",
+    "pageviews": 15
+   },
+   {
+    "key": "www.google.com",
+    "pageviews": 7
+   },
+   {
+    "key": "www.facebook.com",
+    "pageviews": 7
+   },
+   {
+    "key": "search.yahoo.co.jp",
+    "pageviews": 6
+   },
+   {
+    "key": "l.instagram.com",
+    "pageviews": 3
+   },
+   {
+    "key": "dataindex.pro",
+    "pageviews": 1
+   },
+   {
+    "key": "l.meta.ai",
+    "pageviews": 1
+   }
+  ],
+  "devices": [
+   {
+    "key": "desktop",
+    "pageviews": 143
+   },
+   {
+    "key": "mobile",
+    "pageviews": 38
+   }
+  ]
+ },
+ "last_week": {
+  "pageviews": 148,
+  "visits": 68,
+  "daily": [
+   {
+    "date": "2026-10-26",
+    "pageviews": 20,
+    "visits": 20
+   },
+   {
+    "date": "2026-10-27",
+    "pageviews": 20,
+    "visits": 10
+   },
+   {
+    "date": "2026-10-28",
+    "pageviews": 50,
+    "visits": 20
+   },
+   {
+    "date": "2026-10-29",
+    "pageviews": 10,
+    "visits": 0
+   },
+   {
+    "date": "2026-10-30",
+    "pageviews": 20,
+    "visits": 0
+   },
+   {
+    "date": "2026-10-31",
+    "pageviews": 20,
+    "visits": 10
+   },
+   {
+    "date": "2026-11-01",
+    "pageviews": 8,
+    "visits": 8
+   }
+  ],
+  "pages": [
+   {
+    "key": "/",
+    "pageviews": 58
+   },
+   {
+    "key": "/matome/2026-10",
+    "pageviews": 20
+   },
+   {
+    "key": "/news/2026-10-26",
+    "pageviews": 10
+   },
+   {
+    "key": "/news/2026-10-28",
+    "pageviews": 10
+   },
+   {
+    "key": "/news/2026-10-29",
+    "pageviews": 10
+   },
+   {
+    "key": "/news/2026-10-24",
+    "pageviews": 10
+   },
+   {
+    "key": "/weekly/2026-10-26",
+    "pageviews": 10
+   },
+   {
+    "key": "/news/2026-10-30",
+    "pageviews": 10
+   },
+   {
+    "key": "/news/2026-10-27-1",
+    "pageviews": 10
+   }
+  ],
+  "referrers": [
+   {
+    "key": "（サイト内）",
+    "pageviews": 80
+   },
+   {
+    "key": "（直接・不明）",
+    "pageviews": 28
+   },
+   {
+    "key": "t.co",
+    "pageviews": 20
+   },
+   {
+    "key": "yuta131-bot.github.io",
+    "pageviews": 10
+   },
+   {
+    "key": "m.facebook.com",
+    "pageviews": 10
+   }
+  ],
+  "devices": [
+   {
+    "key": "desktop",
+    "pageviews": 87
+   },
+   {
+    "key": "mobile",
+    "pageviews": 61
+   }
+  ]
+ },
+ "change_pct": {
+  "pageviews": 22.3,
+  "visits": 26.5
+ },
+ "x_posts": {
+  "this_week": 7,
+  "est_cost_usd": 1.51,
+  "total_posts": 13,
+  "bought_usd": 10,
+  "est_remaining_usd": 7.21,
+  "est_days_left": 33,
+  "low": false
+ },
+ "articles_published": [
+  "2026-11-02.json",
+  "2026-11-03.json",
+  "2026-11-04.json",
+  "2026-11-05.json",
+  "2026-11-06.json",
+  "2026-11-07.json",
+  "2026-11-08.json"
+ ],
+ "sns": {
+  "period": {
+   "this_week": [
+    "2026-11-02",
+    "2026-11-08"
+   ],
+   "last_week": [
+    "2026-10-26",
+    "2026-11-01"
+   ]
+  },
+  "errors": {},
+  "x": {
+   "followers": 0,
+   "posts": [
+    {
+     "date": "2026-10-26",
+     "impressions": 6,
+     "likes": 0,
+     "reposts": 0,
+     "replies": 1,
+     "bookmarks": 0
+    },
+    {
+     "date": "2026-10-27",
+     "impressions": 4,
+     "likes": 0,
+     "reposts": 0,
+     "replies": 1,
+     "bookmarks": 0
+    },
+    {
+     "date": "2026-10-28",
+     "impressions": 5,
+     "likes": 0,
+     "reposts": 0,
+     "replies": 1,
+     "bookmarks": 0
+    },
+    {
+     "date": "2026-10-29",
+     "impressions": 2,
+     "likes": 0,
+     "reposts": 0,
+     "replies": 1,
+     "bookmarks": 0
+    },
+    {
+     "date": "2026-10-30",
+     "impressions": 5,
+     "likes": 0,
+     "reposts": 0,
+     "replies": 1,
+     "bookmarks": 0
+    },
+    {
+     "date": "2026-10-31",
+     "impressions": 3,
+     "likes": 0,
+     "reposts": 0,
+     "replies": 1,
+     "bookmarks": 0
+    },
+    {
+     "date": "2026-11-02",
+     "impressions": 1,
+     "likes": 0,
+     "reposts": 0,
+     "replies": 1,
+     "bookmarks": 0
+    },
+    {
+     "date": "2026-11-03",
+     "impressions": 4,
+     "likes": 0,
+     "reposts": 0,
+     "replies": 1,
+     "bookmarks": 0
+    },
+    {
+     "date": "2026-11-04",
+     "impressions": 1,
+     "likes": 0,
+     "reposts": 0,
+     "replies": 1,
+     "bookmarks": 0
+    },
+    {
+     "date": "2026-11-05",
+     "impressions": 1,
+     "likes": 0,
+     "reposts": 0,
+     "replies": 1,
+     "bookmarks": 0
+    },
+    {
+     "date": "2026-11-06",
+     "impressions": 0,
+     "likes": 0,
+     "reposts": 0,
+     "replies": 1,
+     "bookmarks": 0
+    },
+    {
+     "date": "2026-11-07",
+     "impressions": 0,
+     "likes": 0,
+     "reposts": 0,
+     "replies": 1,
+     "bookmarks": 0
+    },
+    {
+     "date": "2026-11-08",
+     "impressions": 0,
+     "likes": 0,
+     "reposts": 0,
+     "replies": 1,
+     "bookmarks": 0
+    }
+   ],
+   "this_week": {
+    "posts": 7,
+    "impressions": 7,
+    "likes": 0,
+    "reposts": 0,
+    "bookmarks": 0
+   },
+   "last_week": {
+    "posts": 6,
+    "impressions": 25,
+    "likes": 0,
+    "reposts": 0,
+    "bookmarks": 0
+   }
+  },
+  "threads": {
+   "followers": 1,
+   "posts": [
+    {
+     "date": "2026-10-28",
+     "views": 48,
+     "likes": 0,
+     "replies": 0,
+     "reposts": 0,
+     "quotes": 0,
+     "shares": 0
+    },
+    {
+     "date": "2026-10-29",
+     "views": 7,
+     "likes": 0,
+     "replies": 0,
+     "reposts": 0,
+     "quotes": 0,
+     "shares": 0
+    },
+    {
+     "date": "2026-10-30",
+     "views": 20,
+     "likes": 0,
+     "replies": 0,
+     "reposts": 0,
+     "quotes": 0,
+     "shares": 0
+    },
+    {
+     "date": "2026-10-31",
+     "views": 31,
+     "likes": 0,
+     "replies": 0,
+     "reposts": 0,
+     "quotes": 0,
+     "shares": 0
+    },
+    {
+     "date": "2026-11-02",
+     "views": 35,
+     "likes": 0,
+     "replies": 0,
+     "reposts": 0,
+     "quotes": 0,
+     "shares": 0
+    },
+    {
+     "date": "2026-11-03",
+     "views": 6,
+     "likes": 0,
+     "replies": 0,
+     "reposts": 0,
+     "quotes": 0,
+     "shares": 0
+    },
+    {
+     "date": "2026-11-04",
+     "views": 3,
+     "likes": 0,
+     "replies": 0,
+     "reposts": 0,
+     "quotes": 0,
+     "shares": 0
+    },
+    {
+     "date": "2026-11-05",
+     "views": 7,
+     "likes": 0,
+     "replies": 0,
+     "reposts": 0,
+     "quotes": 0,
+     "shares": 0
+    },
+    {
+     "date": "2026-11-06",
+     "views": 7,
+     "likes": 0,
+     "replies": 0,
+     "reposts": 0,
+     "quotes": 0,
+     "shares": 0
+    },
+    {
+     "date": "2026-11-07",
+     "views": 5,
+     "likes": 0,
+     "replies": 0,
+     "reposts": 0,
+     "quotes": 0,
+     "shares": 0
+    },
+    {
+     "date": "2026-11-08",
+     "views": 1,
+     "likes": 0,
+     "replies": 0,
+     "reposts": 0,
+     "quotes": 0,
+     "shares": 0
+    }
+   ],
+   "this_week": {
+    "posts": 7,
+    "views": 64,
+    "likes": 0,
+    "replies": 0,
+    "reposts": 0,
+    "shares": 0
+   },
+   "last_week": {
+    "posts": 4,
+    "views": 106,
+    "likes": 0,
+    "replies": 0,
+    "reposts": 0,
+    "shares": 0
+   }
+  },
+  "instagram": {
+   "followers": 13,
+   "media_count": 22,
+   "posts": [
+    {
+     "date": "2026-10-28",
+     "kind": "朝のまとめ",
+     "views": 104,
+     "reach": 99,
+     "likes": 0,
+     "comments": 0,
+     "saved": 0,
+     "shares": 0,
+     "total_interactions": 0
+    },
+    {
+     "date": "2026-10-29",
+     "kind": "朝のまとめ",
+     "views": 141,
+     "reach": 132,
+     "likes": 0,
+     "comments": 0,
+     "saved": 0,
+     "shares": 0,
+     "total_interactions": 0
+    },
+    {
+     "date": "2026-10-30",
+     "kind": "朝のまとめ",
+     "views": 102,
+     "reach": 94,
+     "likes": 2,
+     "comments": 0,
+     "saved": 0,
+     "shares": 0,
+     "total_interactions": 2
+    },
+    {
+     "date": "2026-10-30",
+     "kind": "夕方のクイズ",
+     "views": 159,
+     "reach": 149,
+     "likes": 0,
+     "comments": 0,
+     "saved": 0,
+     "shares": 0,
+     "total_interactions": 0
+    },
+    {
+     "date": "2026-10-31",
+     "kind": "朝のまとめ",
+     "views": 128,
+     "reach": 128,
+     "likes": 0,
+     "comments": 0,
+     "saved": 1,
+     "shares": 0,
+     "total_interactions": 1
+    },
+    {
+     "date": "2026-10-31",
+     "kind": "夕方のクイズ",
+     "views": 137,
+     "reach": 128,
+     "likes": 0,
+     "comments": 0,
+     "saved": 0,
+     "shares": 0,
+     "total_interactions": 0
+    },
+    {
+     "date": "2026-11-02",
+     "kind": "朝のまとめ",
+     "views": 112,
+     "reach": 101,
+     "likes": 0,
+     "comments": 0,
+     "saved": 0,
+     "shares": 0,
+     "total_interactions": 0
+    },
+    {
+     "date": "2026-11-02",
+     "kind": "夕方のクイズ",
+     "views": 151,
+     "reach": 138,
+     "likes": 0,
+     "comments": 0,
+     "saved": 0,
+     "shares": 0,
+     "total_interactions": 0
+    },
+    {
+     "date": "2026-11-03",
+     "kind": "朝のまとめ",
+     "views": 168,
+     "reach": 155,
+     "likes": 1,
+     "comments": 1,
+     "saved": 0,
+     "shares": 0,
+     "total_interactions": 2
+    },
+    {
+     "date": "2026-11-03",
+     "kind": "夕方のクイズ",
+     "views": 164,
+     "reach": 148,
+     "likes": 0,
+     "comments": 0,
+     "saved": 0,
+     "shares": 0,
+     "total_interactions": 0
+    },
+    {
+     "date": "2026-11-04",
+     "kind": "朝のまとめ",
+     "views": 70,
+     "reach": 64,
+     "likes": 1,
+     "comments": 0,
+     "saved": 1,
+     "shares": 0,
+     "total_interactions": 2
+    },
+    {
+     "date": "2026-11-05",
+     "kind": "朝のまとめ",
+     "views": 94,
+     "reach": 83,
+     "likes": 0,
+     "comments": 0,
+     "saved": 0,
+     "shares": 0,
+     "total_interactions": 0
+    },
+    {
+     "date": "2026-11-05",
+     "kind": "夕方のクイズ",
+     "views": 99,
+     "reach": 90,
+     "likes": 0,
+     "comments": 0,
+     "saved": 0,
+     "shares": 0,
+     "total_interactions": 0
+    },
+    {
+     "date": "2026-11-06",
+     "kind": "朝のまとめ",
+     "views": 63,
+     "reach": 61,
+     "likes": 1,
+     "comments": 0,
+     "saved": 0,
+     "shares": 0,
+     "total_interactions": 1
+    },
+    {
+     "date": "2026-11-07",
+     "kind": "朝のまとめ",
+     "views": 119,
+     "reach": 111,
+     "likes": 0,
+     "comments": 0,
+     "saved": 0,
+     "shares": 0,
+     "total_interactions": 0
+    },
+    {
+     "date": "2026-11-08",
+     "kind": "朝のまとめ",
+     "views": 280,
+     "reach": 257,
+     "likes": 3,
+     "comments": 0,
+     "saved": 1,
+     "shares": 0,
+     "total_interactions": 4
+    }
+   ],
+   "this_week": {
+    "posts": 10,
+    "views": 1320,
+    "reach": 1208,
+    "likes": 6,
+    "comments": 1,
+    "saved": 2,
+    "shares": 0
+   },
+   "last_week": {
+    "posts": 6,
+    "views": 771,
+    "reach": 730,
+    "likes": 2,
+    "comments": 0,
+    "saved": 1,
+    "shares": 0
+   },
+   "by_kind": {
+    "朝のまとめ": {
+     "this_week": {
+      "posts": 7,
+      "views": 906,
+      "reach": 832,
+      "likes": 6,
+      "comments": 1,
+      "saved": 2,
+      "shares": 0
+     },
+     "last_week": {
+      "posts": 4,
+      "views": 475,
+      "reach": 453,
+      "likes": 2,
+      "comments": 0,
+      "saved": 1,
+      "shares": 0
+     }
+    },
+    "夕方のクイズ": {
+     "this_week": {
+      "posts": 3,
+      "views": 414,
+      "reach": 376,
+      "likes": 0,
+      "comments": 0,
+      "saved": 0,
+      "shares": 0
+     },
+     "last_week": {
+      "posts": 2,
+      "views": 296,
+      "reach": 277,
+      "likes": 0,
+      "comments": 0,
+      "saved": 0,
+      "shares": 0
+     }
+    }
+   }
+  },
+  "youtube": {
+   "subscribers": 1,
+   "total_views": 28,
+   "video_count": 21,
+   "posts": [
+    {
+     "date": "2026-10-28",
+     "title": "【中学受験の時事】10月28日のニュース3本｜北日本は初冬の嵐に注意 ほか #shorts",
+     "views": 14,
+     "likes": 1,
+     "comments": 0
+    },
+    {
+     "date": "2026-10-29",
+     "title": "【中学受験・保護者の方へ】10月29日の時事3本｜千葉県で震度5弱の地震 ほか #shorts",
+     "views": 6,
+     "likes": 0,
+     "comments": 0
+    },
+    {
+     "date": "2026-10-30",
+     "title": "【中学受験・時事クイズ】10月30日の3問｜全部わかるかな？ #shorts",
+     "views": 2,
+     "likes": 0,
+     "comments": 0
+    },
+    {
+     "date": "2026-10-30",
+     "title": "【中学受験・保護者の方へ】10月30日の時事3本｜台風31号が小笠原近海へ ほか #shorts #中学受験 #時事問題 #中学受験生の親",
+     "views": 1,
+     "likes": 0,
+     "comments": 0
+    },
+    {
+     "date": "2026-10-31",
+     "title": "【中学受験・時事クイズ】10月31日の3問｜全部わかるかな？ #shorts",
+     "views": 1,
+     "likes": 0,
+     "comments": 0
+    },
+    {
+     "date": "2026-10-31",
+     "title": "【中学受験・保護者の方へ】10月31日の時事3本｜台風31号が小笠原近海へ ほか #shorts",
+     "views": 1,
+     "likes": 0,
+     "comments": 0
+    },
+    {
+     "date": "2026-11-02",
+     "title": "【中学受験・時事クイズ】11月2日の3問｜全部わかるかな？ #shorts",
+     "views": 0,
+     "likes": 0,
+     "comments": 0
+    },
+    {
+     "date": "2026-11-02",
+     "title": "【中学受験・保護者の方へ】11月2日の時事3本｜防災庁が発足 ほか #shorts",
+     "views": 2,
+     "likes": 0,
+     "comments": 0
+    },
+    {
+     "date": "2026-11-03",
+     "title": "【中学受験・時事クイズ】11月3日の3問｜全部わかるかな？ #shorts",
+     "views": 0,
+     "likes": 0,
+     "comments": 0
+    },
+    {
+     "date": "2026-11-03",
+     "title": "【中学受験・保護者の方へ】11月3日の時事3本｜憲法公布から80年 ほか #shorts",
+     "views": 0,
+     "likes": 0,
+     "comments": 0
+    },
+    {
+     "date": "2026-11-04",
+     "title": "【中学受験・時事クイズ】11月4日の3問｜全部わかるかな？ #shorts",
+     "views": 0,
+     "likes": 0,
+     "comments": 0
+    },
+    {
+     "date": "2026-11-04",
+     "title": "【覚えるシート】憲法・三権・選挙 #中学受験 #shorts",
+     "views": 0,
+     "likes": 0,
+     "comments": 0
+    },
+    {
+     "date": "2026-11-04",
+     "title": "【中学受験・保護者の方へ】11月4日の時事3本｜ICC所長が米制裁を批判 ほか #shorts",
+     "views": 1,
+     "likes": 0,
+     "comments": 0
+    },
+    {
+     "date": "2026-11-05",
+     "title": "【中学受験・時事クイズ】11月5日の3問｜全部わかるかな？ #shorts",
+     "views": 0,
+     "likes": 0,
+     "comments": 0
+    },
+    {
+     "date": "2026-11-05",
+     "title": "【覚えるシート】国連と国際ニュース #中学受験 #shorts",
+     "views": 0,
+     "likes": 0,
+     "comments": 0
+    },
+    {
+     "date": "2026-11-05",
+     "title": "【中学受験・保護者の方へ】11月5日の時事3本｜米中間選挙で民主党が勝利 ほか #shorts",
+     "views": 0,
+     "likes": 0,
+     "comments": 0
+    },
+    {
+     "date": "2026-11-06",
+     "title": "【覚えるシート】環境・エネルギー・科学 #中学受験 #shorts",
+     "views": 0,
+     "likes": 0,
+     "comments": 0
+    },
+    {
+     "date": "2026-11-06",
+     "title": "【中学受験・保護者の方へ】11月6日の時事3本｜消費税の減税法案が山場に ほか #shorts",
+     "views": 0,
+     "likes": 0,
+     "comments": 0
+    },
+    {
+     "date": "2026-11-07",
+     "title": "【覚えるシート】単位・分数・割合 #中学受験 #shorts",
+     "views": 0,
+     "likes": 0,
+     "comments": 0
+    },
+    {
+     "date": "2026-11-07",
+     "title": "【中学受験・保護者の方へ】11月7日の時事3本｜消費減税法案が衆議院を通過 ほか #shorts",
+     "views": 0,
+     "likes": 0,
+     "comments": 0
+    },
+    {
+     "date": "2026-11-08",
+     "title": "【中学受験・保護者の方へ】11月8日の時事3本｜愛知で震度5強の地震 ほか #shorts",
+     "views": 0,
+     "likes": 0,
+     "comments": 0
+    }
+   ],
+   "this_week": {
+    "posts": 15,
+    "views": 3,
+    "likes": 0
+   },
+   "last_week": {
+    "posts": 6,
+    "views": 25,
+    "likes": 1
+   }
+  },
+  "line": {
+   "now": {
+    "date": "2026-11-07",
+    "followers": 1,
+    "blocks": 0,
+    "status": "ready"
+   },
+   "week_ago": {
+    "date": "2026-10-31",
+    "followers": 0,
+    "blocks": 0,
+    "status": "ready"
+   },
+   "messages_this_month": 1
+  }
+ }
+}
