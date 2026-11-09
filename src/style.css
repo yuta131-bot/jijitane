@@ -307,3 +307,12 @@ svg text{font-family:"Zen Maru Gothic","Hiragino Maru Gothic ProN","Hiragino San
 .mt-rows .d{flex:none;width:58px;font-size:13px;font-weight:700;color:var(--muted)}
 .mt-rows .t{flex:1;font-weight:700;line-height:1.5}
 .mt-rows .exam{flex:none;font-size:12px}
+
+/* 記事の最後：この話題の覚えるシート */
+.relsheet{margin:18px 0 4px;padding:12px 14px;border:2px dashed #b9d3ea;border-radius:16px;background:#f3f9fe;display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center}
+.relsheet .rs-l{flex:1 1 100%;font-weight:900;font-size:.82rem;color:#56677f}
+.relsheet a{flex:1 1 220px;display:grid;grid-template-columns:44px 1fr;grid-template-rows:auto auto;column-gap:10px;align-items:center;padding:8px 12px;border-radius:14px;background:#fff;border:2px solid var(--ink,#1d2b44);text-decoration:none;color:inherit}
+.relsheet a:hover{background:#fff8e1}
+.relsheet .rs-ic{grid-row:1 / span 2;width:44px;height:44px}
+.relsheet b{font-size:.98rem}
+.relsheet small{font-size:.74rem;color:#56677f}

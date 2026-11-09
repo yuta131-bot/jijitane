@@ -1,5 +1,7 @@
 import fs from 'node:fs';
 import { esc, inline, plain, safeSvg, jpDate } from './markup.mjs';
+import { relatedSheets, SHEET_META } from './related.mjs';
+import { art } from './art.mjs';
 
 const TOOLS = `<div class="hero-tools"><button type="button" class="ruby-toggle" aria-pressed="true">ふりがな：あり</button><span class="streak" hidden></span></div>`;
 
@@ -115,6 +117,10 @@ ${sidebar(cfg, recent)}
 </html>`;
 }
 
+function relBox(base, ids) {
+  if (!ids.length) return '';
+  return `<aside class="relsheet"><span class="rs-l">この話題の「覚えるシート」</span>${ids.map((id) => `<a href="${base}/sheets/${id}.html">${art(SHEET_META[id][1], 'rs-ic')}<b>${esc(SHEET_META[id][0])}</b><small>ページで見られる・A4で印刷もできる</small></a>`).join('')}</aside>`;
+}
 function newsBlock(n, i, a, base, single = false) {
   const svg = safeSvg(n.svg, `n${i}`);
   const s = subj(n.subject_key);
@@ -132,6 +138,7 @@ function newsBlock(n, i, a, base, single = false) {
   ${mathBlock(a, i)}
   ${(n.corrections || []).map((c) => `<div class="fix"><b>訂正（${esc(c.date)}）</b>${inline(c.text)}</div>`).join('')}
   ${(n.talk_hints || []).length ? `<details class="talkbox tdet"><summary><span class="tmark" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M5 7h15a3 3 0 0 1 3 3v7a3 3 0 0 1-3 3h-8l-5 4v-4H5a3 3 0 0 1-3-3v-7a3 3 0 0 1 3-3z" fill="#fff"/><path d="M25 12h2a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3h-1v3l-4-3h-5" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"/><circle cx="8" cy="13.5" r="1.4" fill="#E86A92"/><circle cx="12.5" cy="13.5" r="1.4" fill="#E86A92"/><circle cx="17" cy="13.5" r="1.4" fill="#E86A92"/></svg></span><span class="tbody"><span class="tlabel">おうちの人と話そう</span><span class="ttext">${inline(n.talk)}</span></span><span class="open">ヒントを見る</span></summary><div class="tans"><b>こんな考え方があるよ</b><ul>${n.talk_hints.map((h) => `<li>${inline(h)}</li>`).join('')}</ul><span class="thint">正解はないよ。自分はどう思うか、話してみよう</span></div></details>` : `<div class="talkbox"><span class="tmark" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M5 7h15a3 3 0 0 1 3 3v7a3 3 0 0 1-3 3h-8l-5 4v-4H5a3 3 0 0 1-3-3v-7a3 3 0 0 1 3-3z" fill="#fff"/><path d="M25 12h2a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3h-1v3l-4-3h-5" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"/><circle cx="8" cy="13.5" r="1.4" fill="#E86A92"/><circle cx="12.5" cy="13.5" r="1.4" fill="#E86A92"/><circle cx="17" cy="13.5" r="1.4" fill="#E86A92"/></svg></span><div class="tbody"><span class="tlabel">おうちの人と話そう</span><span class="ttext">${inline(n.talk)}</span><span class="thint">正解はないよ。思ったことを話してみよう</span></div></div>`}
+  ${relBox(base, relatedSheets(n, a, i))}
 </article>`;
 }
 
