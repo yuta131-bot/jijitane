@@ -40,11 +40,11 @@ console.log(`今日のシート：${sheet.id}（${title}／${files.length}ペー
 // ---------- 文面 ----------
 const weight = (s) => [...s].reduce((w, ch) => w + (/[\u0000-ჿ -‍‐-‟′-‷]/.test(ch) ? 1 : 2), 0);
 const xText = (() => {
-  const mk = (tags) => `【覚えるシート】${title}\n${sub}\n\n印刷OKのPDFを、LINEでプレゼント中。\n「シート」と送ると届きます\n${cfg.lineUrl}${tags ? '\n\n#中学受験 #家庭学習' : ''}`;
+  const mk = (tags) => `【覚えるシート】${title}\n${sub}\n\n印刷して、トイレや部屋に貼って覚えよう。\nPDFは、LINEで「シート」と送ると届きます\n${cfg.lineUrl}${tags ? '\n\n#中学受験 #家庭学習' : ''}`;
   const w = (t) => weight(t.replace(cfg.lineUrl, 'x'.repeat(23)));   // URL は長さに関係なく23と数える
   return w(mk(true)) > 280 ? mk(false) : mk(true);
 })();
-const igCaption = `【覚えるシート】${title}\n${sub}\n\n保存して、見返してね。印刷できるPDF（A4）は、LINEで「シート」と送ると届きます。\nLINEの友だち追加は、プロフィールのリンクからできます。\n\n全${sheets.length}種類の覚えるシートを、1日1つずつ紹介しています。\n\n#中学受験 #中受 #家庭学習 #小学生の勉強 #受験勉強 #覚えるシート`;
+const igCaption = `【覚えるシート】${title}\n${sub}\n\nスワイプすると、項目ごとに大きく見られます。保存して、見返してね。\n\n印刷してポスターにして、トイレ・部屋・食卓に貼って、毎日ながめて覚えるのもおすすめです。\nA4で印刷できるPDFは、LINEで「シート」と送ると届きます（友だち追加は、プロフィールのリンクから）。\n\n全${sheets.length}種類の覚えるシートを、1日1つずつ紹介しています。\n\n#中学受験 #中受 #家庭学習 #小学生の勉強 #受験勉強 #覚えるシート`;
 console.log('--- X ---\n' + xText + '\n--- Instagram ---\n' + igCaption);
 if (dry) { console.log('DRY_RUN のため投稿しません'); process.exit(0); }
 
@@ -57,7 +57,7 @@ if (xKeys.every((k) => process.env[k]) && (state[sheet.id].xDay !== today || for
     const { TwitterApi } = await import('twitter-api-v2');
     const client = new TwitterApi({ appKey: process.env.X_API_KEY, appSecret: process.env.X_API_SECRET, accessToken: process.env.X_ACCESS_TOKEN, accessSecret: process.env.X_ACCESS_SECRET });
     const ids = [];
-    for (const f of files.slice(0, 4)) {
+    for (const f of (files.length > 4 ? [files[0], files[1], files[2], files[files.length - 1]] : files)) {
       const buf = fs.readFileSync(path.join(PROMO, f));
       try { ids.push(await client.v2.uploadMedia(buf, { media_type: 'image/jpeg', media_category: 'tweet_image' })); }
       catch (e) { console.log('v2 の画像アップロードに失敗したので v1.1 で試します:', e?.data?.detail || e.message); ids.push(await client.v1.uploadMedia(buf, { mimeType: 'image/jpeg' })); }

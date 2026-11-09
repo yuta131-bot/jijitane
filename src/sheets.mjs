@@ -274,7 +274,7 @@ const sheetCard = (base, s) => `<a class="mt-card" href="${base}/sheets/${s.id}.
 export function sheetsIndexPage({ cfg, css, sheets, recent }) {
   const base = baseOf(cfg);
   const main = `<section class="hero hero-list"><div class="hero-tx"><h1>覚えるシート</h1><p class="lead">中学受験で、くり返し見る「基本の1枚」を集めました。時事のしくみから、算数の公式、年表、都道府県、漢字の部首まで。ページで見られて、A4に印刷もできます。</p></div></section>
-${cfg.lineUrl ? `<div class="sx-line"><b>印刷用のPDF（A4・おもてとうら）をプレゼント</b><p>LINEの友だちになって、トークで「シート」と送ってください。すべてのシートのPDFをお送りします。</p><a class="btn btn-line" href="${esc(cfg.lineUrl)}" target="_blank" rel="noopener">LINEで受け取る</a></div>` : ''}
+${cfg.lineUrl ? `<div class="sx-line"><b>印刷してポスターに。トイレや部屋に貼って、毎日ながめて覚えよう</b><p>A4で印刷できるPDF（おもてとうら）を、LINEでプレゼント。友だちになって、トークで「シート」と送ってください。すべてのシートのPDFをお送りします。</p><a class="btn btn-line" href="${esc(cfg.lineUrl)}" target="_blank" rel="noopener">LINEで受け取る</a></div>` : ''}
 ${GROUPS.map(([k, name, lead]) => {
     const xs = sheets.filter((s) => s.group === k);
     return xs.length ? `<h3 class="month">${esc(name)}</h3><p class="sx-gl">${esc(lead)}</p><div class="mt-cards">${xs.map((s) => sheetCard(base, s)).join('')}</div>` : '';
