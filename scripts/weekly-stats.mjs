@@ -15,7 +15,7 @@ const day = (base, off) => new Date(Date.parse(base + 'T00:00:00Z') + off * 8640
 const days = Array.from({ length: 14 }, (_, i) => day(jstToday, i - 14)); // 古い順に14日
 const Q = `query($a: string!, $s: Time!, $e: Time!, $h: string!) { viewer { accounts(filter: {accountTag: $a}) {
   total: rumPageloadEventsAdaptiveGroups(limit: 1, filter: {datetime_geq: $s, datetime_lt: $e, requestHost: $h}) { count sum { visits } }
-  paths: rumPageloadEventsAdaptiveGroups(limit: 100, orderBy: [count_DESC], filter: {datetime_geq: $s, datetime_lt: $e, requestHost: $h}) { count sum { visits } dimensions { requestPath } }
+  paths: rumPageloadEventsAdaptiveGroups(limit: 400, orderBy: [count_DESC], filter: {datetime_geq: $s, datetime_lt: $e, requestHost: $h}) { count sum { visits } dimensions { requestPath } }
   refs: rumPageloadEventsAdaptiveGroups(limit: 50, orderBy: [count_DESC], filter: {datetime_geq: $s, datetime_lt: $e, requestHost: $h}) { count dimensions { refererHost } }
   devices: rumPageloadEventsAdaptiveGroups(limit: 10, orderBy: [count_DESC], filter: {datetime_geq: $s, datetime_lt: $e, requestHost: $h}) { count dimensions { deviceType } }
 } } }`;
@@ -35,16 +35,20 @@ async function q(d) {
 
 const add = (m, k, v) => { if (k == null || k === '') k = '（直接・不明）'; m[k] = (m[k] || 0) + v; };
 function summarize(list) {
-  const out = { pageviews: 0, visits: 0, daily: [], pages: {}, referrers: {}, devices: {} };
+  const out = { pageviews: 0, visits: 0, daily: [], pages: {}, referrers: {}, devices: {}, line: {} };
   for (const { date, d } of list) {
     const pv = d.total?.[0]?.count || 0, vi = d.total?.[0]?.sum?.visits || 0;
     out.pageviews += pv; out.visits += vi; out.daily.push({ date, pageviews: pv, visits: vi });
-    (d.paths || []).forEach((x) => add(out.pages, x.dimensions.requestPath.replace(/\.html$/, '').replace(/\/index$/, '/'), x.count));
+    (d.paths || []).forEach((x) => {
+      const path = x.dimensions.requestPath.replace(/\.html$/, '').replace(/\/index$/, '/');
+      const m = path.match(/^\/go\/line-(.+)$/);       // 「LINEで受け取る」を押した数（go/line-○○ のページ表示）
+      if (m) add(out.line, m[1], x.count); else add(out.pages, path, x.count);
+    });
     (d.refs || []).forEach((x) => add(out.referrers, x.dimensions.refererHost === host ? '（サイト内）' : x.dimensions.refererHost, x.count));
     (d.devices || []).forEach((x) => add(out.devices, x.dimensions.deviceType, x.count));
   }
   const top = (m, n) => Object.entries(m).sort((a, b) => b[1] - a[1]).slice(0, n).map(([k, v]) => ({ key: k, pageviews: v }));
-  return { ...out, pages: top(out.pages, 20), referrers: top(out.referrers, 15), devices: top(out.devices, 5) };
+  return { ...out, line: top(out.line, 20), pages: top(out.pages, 20), referrers: top(out.referrers, 15), devices: top(out.devices, 5) };
 }
 
 const raw = [];

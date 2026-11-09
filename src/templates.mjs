@@ -1,3 +1,4 @@
+import { lineGoHref } from './go.mjs';
 import fs from 'node:fs';
 import { esc, inline, plain, safeSvg, jpDate } from './markup.mjs';
 import { relatedSheets, SHEET_META } from './related.mjs';
@@ -54,7 +55,7 @@ function sidebar(cfg, recent) {
   return `<aside class="side">
   <section class="box follow-box"><b>毎朝7時半に X で配信中</b><p>その日の3本とクイズが届きます。</p>
     <a class="btn" href="${esc(xUrl)}" target="_blank" rel="noopener">Xでフォロー</a>
-    ${cfg.lineUrl ? `<a class="btn btn-line" href="${esc(cfg.lineUrl)}" target="_blank" rel="noopener">LINEで受け取る</a>` : ''}</section>
+    ${cfg.lineUrl ? `<a class="btn btn-line" href="${lineGoHref(base, 'side')}" target="_blank" rel="noopener">LINEで受け取る</a>` : ''}</section>
   ${cfg.matomeLinks ? `<section class="box mt-side"><h4>入試の時事対策</h4>${cfg.matomeLinks.map(([u, t]) => `<a href="${base}${u}">${esc(t)}</a>`).join('')}</section>` : ''}
   ${ad(cfg, 'side', 'rect')}
   <section class="box"><h4>教科でさがす</h4><div class="subj-links"><a href="${base}/subject/rika.html" style="--c:var(--sci)">理科</a><a href="${base}/subject/shakai.html" style="--c:var(--soc)">社会</a><a href="${base}/archive.html" style="--c:var(--ink)">すべて</a></div></section>

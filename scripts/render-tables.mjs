@@ -31,6 +31,7 @@ out.push('```mermaid', 'xychart-beta', '  title "1日ごとのページビュー
 
 out.push('## よく読まれたページ トップ10', '');
 out.push(table(['順位', 'ページ', 'PV'], tw.pages.slice(0, 10).map((p, i) => [i + 1, `\`${p.key}\``, n(p.pageviews)]), [1]), '');
+if (tw.line?.length) out.push('LINEボタン（「LINEで受け取る」）を押された数', '', table(['押されたページ', '回数'], tw.line.slice(0, 10).map((p) => [`\`${p.key}\``, n(p.pageviews)]), [1]), '');
 const rtot = tw.referrers.reduce((t, r) => t + r.pageviews, 0) || 1;
 out.push('## どこから来たか', '');
 out.push(table(['流入元', 'PV', '割合'], tw.referrers.slice(0, 8).map((r) => [r.key, n(r.pageviews), `${Math.round((r.pageviews / rtot) * 100)}%`])), '');

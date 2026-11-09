@@ -7,6 +7,7 @@ import { layout } from './templates.mjs';
 import { fig, FIG_NAMES } from './figs.mjs';
 import { art, pickArt, CARD_ART } from './art.mjs';
 import { SHEET_META } from './related.mjs';
+import { lineGoHref } from './go.mjs';
 
 const baseOf = (cfg) => cfg.siteUrl.replace(/\/$/, '');
 export const GROUPS = [
@@ -289,7 +290,7 @@ const sheetCard = (base, s) => {
 export function sheetsIndexPage({ cfg, css, sheets, recent }) {
   const base = baseOf(cfg);
   const main = `<section class="hero hero-list"><div class="hero-tx"><h1>覚えるシート</h1><p class="lead">中学受験で、くり返し見る「基本の1枚」を集めました。時事のしくみから、算数の公式、年表、都道府県、漢字の部首まで。ページで見られて、A4に印刷もできます。</p></div></section>
-${cfg.lineUrl ? `<div class="sx-line"><b>印刷してポスターに。トイレや部屋に貼って、毎日ながめて覚えよう</b><p>A4で印刷できるPDF（おもてとうら）を、LINEでプレゼント。友だちになって、トークで「シート」と送ってください。すべてのシートのPDFをお送りします。</p><a class="btn btn-line" href="${esc(cfg.lineUrl)}" target="_blank" rel="noopener">LINEで受け取る</a></div>` : ''}
+${cfg.lineUrl ? `<div class="sx-line"><b>印刷してポスターに。トイレや部屋に貼って、毎日ながめて覚えよう</b><p>A4で印刷できるPDF（おもてとうら）を、LINEでプレゼント。友だちになって、トークで「シート」と送ってください。すべてのシートのPDFをお送りします。</p><a class="btn btn-line" href="${lineGoHref(base, 'sheets')}" target="_blank" rel="noopener">LINEで受け取る</a></div>` : ''}
 <div class="sx-chips" role="group" aria-label="科目でしぼる"><button type="button" class="on" data-f="">すべて（${sheets.length}）</button>${CATS.map((c) => `<button type="button" data-f="${c}">${c}（${sheets.filter((x) => catsOf(x).includes(c)).length}）</button>`).join('')}</div>
 <div class="mt-cards sx-grid">${sheets.map((s) => sheetCard(base, s)).join('')}</div>
 <script>(function(){var b=document.querySelectorAll('.sx-chips button'),c=document.querySelectorAll('.sx-grid .sx-card');b.forEach(function(x){x.addEventListener('click',function(){b.forEach(function(y){y.classList.toggle('on',y===x)});var f=x.getAttribute('data-f');c.forEach(function(k){k.hidden=!!f&&(' '+k.getAttribute('data-cat')+' ').indexOf(' '+f+' ')<0})})})})();</script>
@@ -302,7 +303,7 @@ export function sheetPage({ cfg, css, s, sheets, recent }) {
   const others = sheets.filter((x) => x.id !== s.id);
   const main = `<nav class="crumb"><a href="${base}/">トップ</a><span>›</span><a href="${base}/sheets/">覚えるシート</a><span>›</span><span>${esc(s.title)}</span></nav>
 <section class="hero hero-list"><div class="hero-tx"><h1>${esc(s.title)}</h1><p class="lead">${esc(s.intro)}</p><p class="mt-upd">${esc(s.subject)}　最終更新：${esc(jpDate(s.updated).label)}${s.asof ? `（${esc(s.asof)}の内容）` : ''}</p></div></section>
-${cfg.lineUrl ? `<div class="sx-line"><b>印刷用のPDF（A4・おもてとうら）</b><p>LINEの友だちになって、トークで「シート」と送ると、PDFをお送りします。</p><a class="btn btn-line" href="${esc(cfg.lineUrl)}" target="_blank" rel="noopener">LINEで受け取る</a></div>` : ''}
+${cfg.lineUrl ? `<div class="sx-line"><b>印刷用のPDF（A4・おもてとうら）</b><p>LINEの友だちになって、トークで「シート」と送ると、PDFをお送りします。</p><a class="btn btn-line" href="${lineGoHref(base, `sheet-${s.id}`)}" target="_blank" rel="noopener">LINEで受け取る</a></div>` : ''}
 <div class="sx sx-site">${s.pages.map((p, i) => pageHtml(cfg, s, p, i, false)).join('')}</div>
 <p class="mt-note">家庭・塾・学校での印刷・配布は自由です（内容の改変・販売はご遠慮ください）。まちがいを見つけたら、お問い合わせから教えてください。</p>
 <h3 class="month">ほかのシート</h3><div class="mt-cards">${others.map((x) => sheetCard(base, x)).join('')}</div>`;

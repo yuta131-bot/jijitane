@@ -6,6 +6,7 @@ import { renderCard, renderSiteCard } from '../src/card.mjs';
 import { esc, plain, jpDate, setSayKeys } from '../src/markup.mjs';
 import { sayKeys } from '../src/readings.mjs';
 import { validate, validateMatome } from '../src/schema.mjs';
+import { goPage } from '../src/go.mjs';
 import { loadSheets, sheetsIndexPage, sheetPage, sheetPrintHtml } from '../src/sheets.mjs';
 import { flatNews, examYearOf, mondayOf, addDays, hubPage, monthPage, yearPage, rankingPage, weekData, weeklyPage, printHtml, rankPrintHtml } from '../src/matome.mjs';
 
@@ -148,6 +149,10 @@ fs.writeFileSync(path.join(OUT, 'feed.xml'), rss);
 const urls = ['/', '/matome/', ...(sheets.length ? ['/sheets/', ...sheets.map((s) => `/sheets/${s.id}.html`)] : []), ...(year ? [`/matome/${year.exam_year}.html`, `/matome/${year.exam_year}-ranking.html`] : []), ...months.map((m) => `/matome/${m}.html`), ...weeks.map((w) => `/weekly/${w}.html`), '/archive.html', '/glossary.html', '/units.html', '/subject/rika.html', '/subject/shakai.html', ...all.flatMap((a) => [`/news/${a.date}.html`, ...a.news.map((_, j) => `/news/${a.date}-${j + 1}.html`)])];
 fs.writeFileSync(path.join(OUT, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((u) => `<url><loc>${base}${u}</loc></url>`).join('\n')}\n</urlset>`);
 if (cfg.ads?.client) fs.writeFileSync(path.join(OUT, 'ads.txt'), `google.com, ${cfg.ads.client.replace('ca-pub-', 'pub-')}, DIRECT, f08c47fec0942fa0\n`);
-fs.writeFileSync(path.join(OUT, 'robots.txt'), `User-agent: *\nAllow: /\nDisallow: /gift/\nSitemap: ${base}/sitemap.xml\n`);
+if (cfg.lineUrl) {      // 「LINEで受け取る」の計測用ページ（押された場所ごと）
+  fs.mkdirSync(path.join(OUT, 'go'), { recursive: true });
+  for (const src of ['side', 'sheets', ...sheets.map((x) => `sheet-${x.id}`)]) fs.writeFileSync(path.join(OUT, 'go', `line-${src}.html`), goPage(cfg, cfg.lineUrl));
+}
+fs.writeFileSync(path.join(OUT, 'robots.txt'), `User-agent: *\nAllow: /\nDisallow: /gift/\nDisallow: /go/\nSitemap: ${base}/sitemap.xml\n`);
 fs.writeFileSync(path.join(OUT, '.nojekyll'), '');
 console.log(`${all.length} 号分を dist/ に書き出しました`);
