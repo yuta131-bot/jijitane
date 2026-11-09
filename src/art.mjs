@@ -111,7 +111,7 @@ const A = {
   typhoon: `<circle cx="32" cy="32" r="26" fill="#DDE8F5" ${S}/><path d="M32 8 C48 8 54 24 42 30 C34 34 26 28 32 22 M32 56 C16 56 10 40 22 34 C30 30 38 36 32 42" fill="none" ${S} stroke-width="3.5"/><circle cx="32" cy="32" r="3" fill="#E5484D" ${S} stroke-width="1.4"/>`,
   rain: `<path d="M16 38 C6 38 4 26 14 24 C14 14 28 12 32 20 C40 16 50 22 48 30 C54 32 52 38 46 38 Z" fill="#B8C4D4" ${S}/><path d="M18 44 L14 54 M30 44 L26 56 M42 44 L38 54" stroke="#4A90D9" stroke-width="3.5" stroke-linecap="round"/>`,
   siren: `<path d="M16 50 V32 A16 16 0 0 1 48 32 V50 Z" fill="#E5484D" ${S}/><rect x="10" y="50" width="44" height="8" rx="2" fill="#C9D3DF" ${S}/><path d="M24 34 A8 8 0 0 1 30 26" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/><path d="M32 6 V10 M10 14 L14 18 M54 14 L50 18" ${S}/>`,
-  quake: `<path d="M4 50 H60 L56 58 H8 Z" fill="#B88A5C" ${S}/><path d="M26 50 L30 40 L26 34 L34 28 L30 20 L36 12" fill="none" stroke="#E5484D" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 36 L4 32 L8 28 M56 36 L60 32 L56 28" fill="none" ${S} stroke-width="2.4"/>`,
+  quake: `<path d="M2 56 H62" ${S}/><path d="M8 56 L14 50 L22 58 L30 50 L40 58 L48 50 L56 56" fill="none" stroke="#E5484D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><g transform="rotate(-9 32 36)"><path d="M14 30 L32 12 L50 30 Z" fill="#E5846B" ${S}/><rect x="18" y="30" width="28" height="20" fill="#FFF3D6" ${S}/><rect x="28" y="38" width="8" height="12" fill="${K}"/></g><path d="M6 24 Q2 32 6 40 M58 24 Q62 32 58 40 M11 28 Q8 32 11 36 M53 28 Q56 32 53 36" fill="none" ${S} stroke-width="2.2"/>`,
   volcano: `<path d="M4 58 L24 22 H40 L60 58 Z" fill="#B88A5C" ${S}/><path d="M24 22 L28 28 L32 22 L36 28 L40 22 Z" fill="#E5484D" ${S} stroke-width="1.6"/><circle cx="30" cy="12" r="6" fill="#C9D3DF" ${S} stroke-width="1.6"/><circle cx="40" cy="8" r="5" fill="#DDE3EC" ${S} stroke-width="1.6"/><path d="M28 40 L24 52 M36 40 L40 52" ${S} stroke-width="1.6" stroke="#F6C945"/>`,
   shield: `<path d="M32 6 L54 14 V32 C54 46 44 54 32 58 C20 54 10 46 10 32 V14 Z" fill="#8FB4E3" ${S}/><path d="M22 32 L29 39 L43 24" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>`,
   coin: `<circle cx="32" cy="32" r="24" fill="#FFD36B" ${S}/><circle cx="32" cy="32" r="17" fill="none" ${S} stroke-width="1.6"/><text x="32" y="41" text-anchor="middle" font-size="26" font-weight="900" fill="${K}" font-family="Zen Maru Gothic, Noto Sans JP, sans-serif">¥</text>`,
@@ -126,7 +126,7 @@ export const art = (name, cls = 'sx-ic') => A[name] ? `<svg class="${cls}" viewB
 const RULES = [
   [/台風のきほん/, 'typhoon'], [/大雨でおきる|雨の強さ/, 'rain'], [/警戒レベル|注意報/, 'siren'], [/日本で起きた/, 'scroll'], [/津波/, 'wave'], [/地震/, 'quake'],
   [/火山/, 'volcano'], [/防災の基本|消費者を守る/, 'shield'], [/円高|円安/, 'yen'], [/貿易/, 'ship'],
-  [/消費税|税金|直接税|予算|お金と経済/, 'coin'], [/社会保障/, 'heart'], [/旅人算/, 'walk'], [/通過算/, 'train'], [/流水算/, 'wave'],
+  [/消費税のあゆみ/, 'coin'], [/税金のしゅるい/, 'kantei'], [/直接税/, 'hands'], [/予算/, 'pie'], [/お金と経済/, 'book'], [/社会保障/, 'heart'], [/旅人算/, 'walk'], [/通過算/, 'train'], [/流水算/, 'wave'],
   [/み・は・じ|平均の速さ/, 'car'], [/比のきほん|速さと比/, 'pie'], [/つるかめ/, 'bulb'],
   [/数直線/, 'ruler'], [/100マス/, 'area'], [/く・も・わ/, 'pencil'], [/割引き/, 'pie'],
   [/同じ大きさ/, 'pie'], [/へんしん/, 'rocket'], [/歩合の読み方/, 'book'], [/間違い|まちがい/, 'bulb'],
