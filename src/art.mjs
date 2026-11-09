@@ -118,12 +118,20 @@ const A = {
   yen: `<rect x="6" y="14" width="52" height="36" rx="4" fill="#CDEBC8" ${S}/><circle cx="32" cy="32" r="10" fill="#fff" ${S}/><text x="32" y="38" text-anchor="middle" font-size="15" font-weight="900" fill="${K}" font-family="Zen Maru Gothic, Noto Sans JP, sans-serif">¥</text><circle cx="13" cy="32" r="2" fill="${K}"/><circle cx="51" cy="32" r="2" fill="${K}"/>`,
   ship: `<path d="M6 38 H58 L50 54 H14 Z" fill="#E5484D" ${S}/><rect x="14" y="26" width="12" height="12" fill="#6B8BD6" ${S}/><rect x="28" y="26" width="12" height="12" fill="#F6C945" ${S}/><rect x="42" y="26" width="10" height="12" fill="#8FD19E" ${S}/><path d="M4 58 Q12 54 20 58 T36 58 T52 58 T64 56" fill="none" stroke="#4A90D9" stroke-width="2.4" stroke-linecap="round"/>`,
   walk: `<circle cx="34" cy="10" r="6" fill="#FFD9B8" ${S}/><path d="M34 16 L30 34 L22 54 M30 34 L42 42 L46 56 M32 20 L20 30 M32 20 L46 26" fill="none" ${S} stroke-width="3.5"/>`,
+  moon: `<circle cx="32" cy="32" r="24" fill="#FFE9A0" ${S}/><path d="M42 10 C26 12 18 32 28 46 C34 54 46 54 52 46 C38 46 32 28 42 10 Z" fill="#F6C945" ${S} stroke-width="1.6"/><circle cx="22" cy="26" r="3" fill="#F2D675" ${S} stroke-width="1.4"/><circle cx="30" cy="40" r="2.2" fill="#F2D675" ${S} stroke-width="1.4"/>`,
+  star: `<path d="M32 4 L39 24 L60 24 L43 36 L50 58 L32 44 L14 58 L21 36 L4 24 L25 24 Z" fill="#FFD36B" ${S}/>${face(32, 32, 0.8)}`,
+  planet: `<circle cx="32" cy="32" r="14" fill="#F4B684" ${S}/><path d="M4 40 C4 28 60 14 60 24 C60 36 4 52 4 40 Z" fill="none" ${S} stroke-width="3"/><path d="M20 28 Q32 24 44 28" fill="none" ${S} stroke-width="1.6"/>`,
+  dice: `<rect x="8" y="8" width="32" height="32" rx="6" fill="#fff" ${S}/><g fill="${K}"><circle cx="16" cy="16" r="2.6"/><circle cx="32" cy="16" r="2.6"/><circle cx="24" cy="24" r="2.6"/><circle cx="16" cy="32" r="2.6"/><circle cx="32" cy="32" r="2.6"/></g><rect x="26" y="26" width="30" height="30" rx="6" fill="#FFE27A" ${S}/><g fill="${K}"><circle cx="35" cy="35" r="2.6"/><circle cx="47" cy="47" r="2.6"/><circle cx="41" cy="41" r="2.6"/></g>`,
+  speech: `<path d="M8 12 H56 Q60 12 60 16 V38 Q60 42 56 42 H30 L18 54 V42 H8 Q4 42 4 38 V16 Q4 12 8 12 Z" fill="#CFE6FA" ${S}/><path d="M14 22 H50 M14 30 H42" ${S} stroke-width="2"/>`,
 };
 export const ART_NAMES = Object.keys(A);
 export const art = (name, cls = 'sx-ic') => A[name] ? `<svg class="${cls}" viewBox="0 0 64 64" aria-hidden="true">${A[name]}</svg>` : '';
 
 // 見出し・カードの文字から、ふさわしい絵をえらぶ（上から順に先に当たったもの）
 const RULES = [
+  [/月の満ち欠け|月の出|日食|月食/, 'moon'], [/太陽の南中|季節ができる/, 'sun'], [/星の動き|星座|星の明るさ/, 'star'], [/惑星/, 'planet'],
+  [/並べ方|組み合わせ（|数え上げ|整数をつくる|道順/, 'dice'], [/約数と倍数|素因数分解|約数・倍数のきまり|倍数の見分け|素数|文章題での使い方/, 'sq2'],
+  [/ことわざ|慣用句|四字熟語|似た意味|反対の意味|意味をまちがえ/, 'speech'],
   [/台風のきほん/, 'typhoon'], [/大雨でおきる|雨の強さ/, 'rain'], [/警戒レベル|注意報/, 'siren'], [/日本で起きた/, 'scroll'], [/津波/, 'wave'], [/地震/, 'quake'],
   [/火山/, 'volcano'], [/防災の基本|消費者を守る/, 'shield'], [/円高|円安/, 'yen'], [/貿易/, 'ship'],
   [/消費税のあゆみ/, 'coin'], [/税金のしゅるい/, 'kantei'], [/直接税/, 'hands'], [/予算/, 'pie'], [/お金と経済/, 'book'], [/社会保障/, 'heart'], [/旅人算/, 'walk'], [/通過算/, 'train'], [/流水算/, 'wave'],

@@ -251,7 +251,7 @@ def main():
             d = ImageDraw.Draw(bg)
             d.rounded_rectangle([60, 1500, W - 60, 1820], radius=40, fill=GREEN)
             d.text((W // 2, 1590), 'LINEで「シート」と送ってね', font=font(64), fill=(255, 255, 255), anchor='mm')
-            d.text((W // 2, 1690), f'覚えるシート 全12種類・印刷OK', font=font(44), fill=(255, 255, 255), anchor='mm')
+            d.text((W // 2, 1690), f'覚えるシート 全15種類・印刷OK', font=font(44), fill=(255, 255, 255), anchor='mm')
             d.text((W // 2, 1760), 'プロフィールのリンクから友だち追加', font=font(38), fill=(220, 250, 232), anchor='mm')
             bg.paste(canvas, (60, 240))
             emit(Scene(bg, bg, (0, 0, W, H), sc['dur'], 0).frames((W, H)))
@@ -269,7 +269,7 @@ def main():
     (out / f'sheet-{args.sheet}-title.txt').write_text(f'【覚えるシート】{title} #中学受験 #shorts', encoding='utf-8')
     desc = (f'{title}\n{sub}\n\n印刷できるPDF（A4）は、LINEで「シート」と送ると届きます。\n{cfg.get("lineUrl", "")}\n'
             f'ページで見る：{cfg["siteUrl"].rstrip("/")}/sheets/{args.sheet}.html\n\n'
-            '覚えるシートは全12種類。ほかのシートも、毎日1つずつ紹介しています。\n'
+            '覚えるシートは全15種類。ほかのシートも、毎日1つずつ紹介しています。\n'
             f'音声：{vv.CREDIT}／音楽：自作\n\n#中学受験 #中受 #家庭学習 #小学生の勉強')
     (out / f'sheet-{args.sheet}.txt').write_text(desc, encoding='utf-8')
     print(f'作成：{mp4}（{len(plan)}場面）')

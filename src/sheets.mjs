@@ -17,7 +17,7 @@ const PREF = JSON.parse(fs.readFileSync(new URL('./japan-pref.json', import.meta
 
 export function loadSheets(dir = 'content/sheets') {
   if (!fs.existsSync(dir)) return [];
-  const order = Object.fromEntries(['kenpo-sanken', 'kokusai', 'kankyo-kagaku', 'tani-wariai', 'wariai', 'hayasa-hi', 'zukei', 'nenpyo', 'todofuken', 'bosai-tenki', 'keizai', 'bushu'].map((k, i) => [k, i]));
+  const order = Object.fromEntries(['kenpo-sanken', 'kokusai', 'kankyo-kagaku', 'tani-wariai', 'wariai', 'hayasa-hi', 'kazu-yakusu', 'zukei', 'nenpyo', 'kotowaza', 'todofuken', 'bosai-tenki', 'tentai', 'keizai', 'bushu'].map((k, i) => [k, i]));
   return fs.readdirSync(dir).filter((f) => f.endsWith('.json')).map((f) => {
     const s = JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8'));
     const errs = validateSheet(s);
@@ -296,9 +296,9 @@ ${cfg.lineUrl ? `<div class="sx-line"><b>印刷用のPDF（A4・おもてとう�
 }
 
 const SITE_CSS = `
-.sx-line{border:2px dashed #1E9A72;border-radius:14px;padding:10px 14px;margin:0 0 16px;background:#F3FBF7}
+.sx-line{border:2px dashed #1E9A72;border-radius:14px;padding:10px 14px;margin:0 0 16px;background:#F3FBF7;color:#1D2B44}
 .sx-line b{font-size:16px;font-weight:900}.sx-line p{margin:4px 0 8px;font-size:14px}.sx-line .btn{display:inline-block;padding:8px 22px}
-.sx-gl{margin:-4px 0 10px;color:#56677F;font-size:14px}
+.sx-gl{margin:-4px 0 10px;color:var(--muted,#56677F);font-size:14px}
 .sx-site{background:#fff;border:2px solid #1D2B44;border-radius:12px;padding:6px 14px 14px;margin:0 0 18px}
 .sx-site .sx-pg+.sx-pg{margin-top:10px}
 `;
