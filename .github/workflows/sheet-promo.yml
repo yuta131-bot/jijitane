@@ -85,6 +85,30 @@ jobs:
           sudo apt-get install -y -qq ffmpeg >/dev/null
           for i in $(seq 1 60); do curl -sf http://localhost:50021/version >/dev/null && break; sleep 3; done
           python3 scripts/make_sheet_video.py --sheet "${{ steps.post.outputs.sheet_id }}" --dist dist --out dist-video --voicevox http://localhost:50021
+      - name: 紹介動画を Releases にのせる（Instagram リール用）
+        id: vup
+        if: ${{ always() && !inputs.dry_run && steps.video.outcome == 'success' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload sheet-promo "dist-video/sheet-${{ steps.post.outputs.sheet_id }}.mp4" --clobber
+      - name: Instagram リールに投稿
+        id: reel
+        if: ${{ always() && !inputs.dry_run && steps.vup.outcome == 'success' }}
+        env:
+          SHEET_ID: ${{ steps.post.outputs.sheet_id }}
+          FORCE_POST: ${{ inputs.force_post }}
+          IG_TOKEN: ${{ secrets.IG_TOKEN }}
+        run: node scripts/post-sheet-reel.mjs
+      - name: リールを投稿できなかったら Issue で知らせる
+        if: failure() && steps.reel.outcome == 'failure'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          D="$(TZ=Asia/Tokyo date +%F)"
+          { echo "覚えるシートの紹介動画を、Instagram のリールに投稿できませんでした。"; echo; echo '```'; cat sheet-reel-errors.txt 2>/dev/null; echo '```'; echo; \
+            echo "直したあと、Actions →「覚えるシートを紹介」→「Run workflow」で、やり直せます（カルーセルは投稿済みなら、くり返しません）。"; \
+            echo; echo "くわしいエラー：${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"; } > body.txt
+          gh issue create --title "⚠️ 覚えるシートのリールを投稿できませんでした（$D）" --body-file body.txt
       - name: 試運転の動画を保存する（確かめ用）
         if: always() && inputs.dry_run && steps.video.outcome == 'success'
         uses: actions/upload-artifact@v4
