@@ -113,7 +113,7 @@ def pack(items, width):
     return slides
 
 
-WIDTHS = (940, 860, 780, 700, 640, 580)
+WIDTHS = (960, 880, 800, 720, 650, 580)
 # 枚数が10枚をこえるときに、先に外す項目（上から順）
 DROP = ('白地図', '確認テスト', 'ここがポイント', '地理をおぼえるコ', '今のニュースとつ', 'まちがえやすい')
 
@@ -159,6 +159,12 @@ def cover(title, desc, thumb, total):
 
 def content(title, blocks, n, total):
     im, d = base(title, f'{n}/{total}')
+    # 余白があれば、枚の中でいっぱいまで大きくする（最大1.5倍）
+    avail = BODY_BOTTOM - BODY_TOP - 50
+    cur_h = sum(b.height * s for _, b, s in blocks) + GAP * (len(blocks) - 1)
+    cur_w = max(b.width * s for _, b, s in blocks)
+    k = max(1.0, min(1.5, (W - 90) / cur_w, avail / cur_h))
+    blocks = [(t, b, s * k) for t, b, s in blocks]
     hs = [round(b.height * s) for _, b, s in blocks]
     tot = sum(hs) + GAP * (len(hs) - 1)
     y = BODY_TOP + (BODY_BOTTOM - BODY_TOP - tot) // 2
@@ -205,7 +211,7 @@ def main():
     thumbs = {i: pdf_page1(p) for i, p in pdfs.items()}
     with sync_playwright() as p:
         b = p.chromium.launch()
-        page = b.new_page(viewport={'width': 440, 'height': 900}, device_scale_factor=2.45, color_scheme='light')
+        page = b.new_page(viewport={'width': 380, 'height': 900}, device_scale_factor=3.2, color_scheme='light')
         for sid in ids:
             if args.only and sid != args.only:
                 continue
