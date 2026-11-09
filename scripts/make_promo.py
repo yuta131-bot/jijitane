@@ -80,6 +80,7 @@ def grab(page, url, sid):
     """シートのページから、項目ごとの画像・題名・説明文をとる"""
     page.goto(url, wait_until='load')
     page.evaluate("document.documentElement.dataset.theme='light'")
+    page.add_style_tag(content='.sx .sx-b{margin-bottom:24px!important}')
     page.add_style_tag(content='*::-webkit-scrollbar{display:none!important}*{scrollbar-width:none!important}')
     page.evaluate('document.fonts.ready')
     page.wait_for_timeout(600)
@@ -90,7 +91,9 @@ def grab(page, url, sid):
     over = """el => [...el.querySelectorAll('*')].some(x => x.scrollWidth > x.clientWidth + 1 && getComputedStyle(x).display !== 'inline')"""
     for i in range(n):
         im = None
-        for vw in (380, 440, 520, 620, 760):          # 表がはみ出すときは、ページの幅を広げて撮る（あとで縮めて使う）
+        for vw in (380, 440, 520, 620, 760):
+            if vw < 560 and page.query_selector_all('section.sx-b')[i].query_selector('.sx-kmw'):
+                continue      # み・は・じの図は、広めに撮る          # 表がはみ出すときは、ページの幅を広げて撮る（あとで縮めて使う）
             page.set_viewport_size({'width': vw, 'height': 900})
             page.wait_for_timeout(120)
             el = page.query_selector_all('section.sx-b')[i]
@@ -100,7 +103,10 @@ def grab(page, url, sid):
         t = (head.inner_text() if head else '').strip()
         if t.startswith('まちがえた問題をメモ'):
             continue
-        im = Image.open(BytesIO(el.screenshot())).convert('RGB')
+        r = el.evaluate("e => { const r = e.getBoundingClientRect(); return {x: r.left + scrollX, y: r.top + scrollY, w: r.width, h: r.height}; }")
+        # 見出しのラベルが枠の上にはみ出すので、上を少し広めに撮る
+        clip = {'x': max(0, r['x'] - 6), 'y': max(0, r['y'] - 14), 'width': r['w'] + 12, 'height': r['h'] + 14 + 2}
+        im = Image.open(BytesIO(page.screenshot(clip=clip, full_page=True))).convert('RGB')
         items.append((t, im))
     page.set_viewport_size({'width': 380, 'height': 900})
     return title, desc, items
