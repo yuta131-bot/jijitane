@@ -166,7 +166,7 @@ def main():
     im, d = base('覚えるシートをプレゼント')
     d.text((W // 2, 280), '時事も、算数も、社会も', font=font(58), fill=INK, anchor='mm')
     d.text((W // 2, 400), '覚えるシート', font=font(130), fill=(220, 38, 38), anchor='mm')
-    d.text((W // 2, 520), '全9種類・印刷OK（PDF）', font=font(56), fill=INK, anchor='mm')
+    d.text((W // 2, 520), '全12種類・印刷OK（PDF）', font=font(56), fill=INK, anchor='mm')
     d.text((W // 2, 650), '憲法・三権／国連／環境／単位・割合', font=font(38), fill=(70, 90, 130), anchor='mm')
     d.text((W // 2, 710), '図形／年表／都道府県／部首', font=font(38), fill=(70, 90, 130), anchor='mm')
     d.rounded_rectangle([60, 830, W - 60, 1150], radius=44, fill=GREEN)

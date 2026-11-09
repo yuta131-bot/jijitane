@@ -17,7 +17,7 @@ const PREF = JSON.parse(fs.readFileSync(new URL('./japan-pref.json', import.meta
 
 export function loadSheets(dir = 'content/sheets') {
   if (!fs.existsSync(dir)) return [];
-  const order = Object.fromEntries(['kenpo-sanken', 'kokusai', 'kankyo-kagaku', 'tani-wariai', 'wariai', 'zukei', 'nenpyo', 'todofuken', 'bushu'].map((k, i) => [k, i]));
+  const order = Object.fromEntries(['kenpo-sanken', 'kokusai', 'kankyo-kagaku', 'tani-wariai', 'wariai', 'hayasa-hi', 'zukei', 'nenpyo', 'todofuken', 'bosai-tenki', 'keizai', 'bushu'].map((k, i) => [k, i]));
   return fs.readdirSync(dir).filter((f) => f.endsWith('.json')).map((f) => {
     const s = JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8'));
     const errs = validateSheet(s);
@@ -100,8 +100,9 @@ function grid100(b) {
 }
 // kmw：「く・も・わ」の図（くらべる量／もとにする量×割合）
 function kmw(b) {
+  const L = b.labels || [['く', 'くらべる量'], ['も', 'もとにする量'], ['わ', '割合']];
   const t = (x, y, s, sz = 15, c = '#1D2B44') => `<text x="${x}" y="${y}" text-anchor="middle" font-size="${sz}" font-weight="900" fill="${c}">${esc(s)}</text>`;
-  return `<section class="sx-b"><h4>${cell(b.title)}${b.note ? `<small>${cell(b.note)}</small>` : ''}</h4><div class="sx-kmw"><svg viewBox="0 0 200 130"><rect x="4" y="4" width="192" height="58" rx="10" fill="#FFE9CF" stroke="#1D2B44" stroke-width="2"/><rect x="4" y="62" width="96" height="64" rx="10" fill="#DDF3E8" stroke="#1D2B44" stroke-width="2"/><rect x="100" y="62" width="96" height="64" rx="10" fill="#E3EEFB" stroke="#1D2B44" stroke-width="2"/>${t(100, 28, 'く', 24, '#DB7420')}${t(100, 48, 'くらべる量', 12)}${t(52, 92, 'も', 24, '#1E9A72')}${t(52, 112, 'もとにする量', 11)}${t(148, 92, 'わ', 24, '#1E7DBF')}${t(148, 112, '割合', 12)}</svg><ul>${b.lines.map((l) => `<li>${cell(l)}</li>`).join('')}</ul></div></section>`;
+  return `<section class="sx-b"><h4>${cell(b.title)}${b.note ? `<small>${cell(b.note)}</small>` : ''}</h4><div class="sx-kmw"><svg viewBox="0 0 200 130"><rect x="4" y="4" width="192" height="58" rx="10" fill="#FFE9CF" stroke="#1D2B44" stroke-width="2"/><rect x="4" y="62" width="96" height="64" rx="10" fill="#DDF3E8" stroke="#1D2B44" stroke-width="2"/><rect x="100" y="62" width="96" height="64" rx="10" fill="#E3EEFB" stroke="#1D2B44" stroke-width="2"/>${t(100, 28, L[0][0], 24, '#DB7420')}${t(100, 48, L[0][1], 12)}${t(52, 92, L[1][0], 24, '#1E9A72')}${t(52, 112, L[1][1], 11)}${t(148, 92, L[2][0], 24, '#1E7DBF')}${t(148, 112, L[2][1], 12)}</svg><ul>${b.lines.map((l) => `<li>${cell(l)}</li>`).join('')}</ul></div></section>`;
 }
 // segbar：全体を10こに分けた棒を、色分けして見せる（割引き・ふえる など）
 function segbar(b) {
