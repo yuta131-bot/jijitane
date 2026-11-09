@@ -6,6 +6,7 @@ import { esc, inline, plain, jpDate } from './markup.mjs';
 import { layout } from './templates.mjs';
 import { fig, FIG_NAMES } from './figs.mjs';
 import { art, pickArt, CARD_ART } from './art.mjs';
+import { SHEET_META } from './related.mjs';
 
 const baseOf = (cfg) => cfg.siteUrl.replace(/\/$/, '');
 export const GROUPS = [
@@ -276,16 +277,22 @@ export function sheetPrintHtml(cfg, s) {
 }
 
 // ---------- サイトのページ ----------
-const sheetCard = (base, s) => `<a class="mt-card" href="${base}/sheets/${s.id}.html"><b>${esc(s.title)}</b><span>${esc(s.sub)}</span></a>`;
+const CATS = ['社会', '算数', '理科', '国語'];
+const catsOf = (s) => CATS.filter((c) => String(s.subject || '').includes(c));
+const isNew = (s) => s.added && (Date.now() - Date.parse(s.added)) < 14 * 86400e3;
+const sheetCard = (base, s) => {
+  const cats = catsOf(s);
+  const ic = (SHEET_META[s.id] || [])[1];
+  return `<a class="mt-card sx-card" data-cat="${cats.join(' ')}" href="${base}/sheets/${s.id}.html">${ic ? art(ic, 'sx-ci2') : ''}<span class="sx-cb"><b>${esc(s.title)}${isNew(s) ? '<em class="sx-new">新着</em>' : ''}</b><span>${esc(s.sub)}</span><i>${cats.map((c) => `<u class="cat-${CATS.indexOf(c)}">${c}</u>`).join('')}<small>${s.pages.length}ページ・A4印刷OK</small></i></span></a>`;
+};
 
 export function sheetsIndexPage({ cfg, css, sheets, recent }) {
   const base = baseOf(cfg);
   const main = `<section class="hero hero-list"><div class="hero-tx"><h1>覚えるシート</h1><p class="lead">中学受験で、くり返し見る「基本の1枚」を集めました。時事のしくみから、算数の公式、年表、都道府県、漢字の部首まで。ページで見られて、A4に印刷もできます。</p></div></section>
 ${cfg.lineUrl ? `<div class="sx-line"><b>印刷してポスターに。トイレや部屋に貼って、毎日ながめて覚えよう</b><p>A4で印刷できるPDF（おもてとうら）を、LINEでプレゼント。友だちになって、トークで「シート」と送ってください。すべてのシートのPDFをお送りします。</p><a class="btn btn-line" href="${esc(cfg.lineUrl)}" target="_blank" rel="noopener">LINEで受け取る</a></div>` : ''}
-${GROUPS.map(([k, name, lead]) => {
-    const xs = sheets.filter((s) => s.group === k);
-    return xs.length ? `<h3 class="month">${esc(name)}</h3><p class="sx-gl">${esc(lead)}</p><div class="mt-cards">${xs.map((s) => sheetCard(base, s)).join('')}</div>` : '';
-  }).join('')}
+<div class="sx-chips" role="group" aria-label="科目でしぼる"><button type="button" class="on" data-f="">すべて（${sheets.length}）</button>${CATS.map((c) => `<button type="button" data-f="${c}">${c}（${sheets.filter((x) => catsOf(x).includes(c)).length}）</button>`).join('')}</div>
+<div class="mt-cards sx-grid">${sheets.map((s) => sheetCard(base, s)).join('')}</div>
+<script>(function(){var b=document.querySelectorAll('.sx-chips button'),c=document.querySelectorAll('.sx-grid .sx-card');b.forEach(function(x){x.addEventListener('click',function(){b.forEach(function(y){y.classList.toggle('on',y===x)});var f=x.getAttribute('data-f');c.forEach(function(k){k.hidden=!!f&&(' '+k.getAttribute('data-cat')+' ').indexOf(' '+f+' ')<0})})})})();</script>
 <p class="mt-note">※内容は、公的な資料や教科書の一般的な内容にもとづいて作っています。まちがいを見つけたら、お問い合わせから教えてください。</p>`;
   return layout({ cfg, css: css + SX_CSS + SITE_CSS, main, recent, title: `覚えるシート（時事・算数・社会・国語）｜印刷できるA4のまとめ｜${cfg.siteName}`, desc: '中学受験の基本を1枚にまとめた「覚えるシート」。憲法・三権・選挙、国連、環境、算数の単位と公式、日本の歴史年表、都道府県、漢字の部首。ページで見られて、A4に印刷もできます。', path: '/sheets/', ogImage: '/og/site.png' });
 }
@@ -305,6 +312,11 @@ ${cfg.lineUrl ? `<div class="sx-line"><b>印刷用のPDF（A4・おもてとう�
 const SITE_CSS = `
 .sx-line{border:2px dashed #1E9A72;border-radius:14px;padding:10px 14px;margin:0 0 16px;background:#F3FBF7;color:#1D2B44}
 .sx-line b{font-size:16px;font-weight:900}.sx-line p{margin:4px 0 8px;font-size:14px}.sx-line .btn{display:inline-block;padding:8px 22px}
+.sx-chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}.sx-chips button{font:inherit;font-weight:800;font-size:14px;padding:6px 14px;border:2px solid #1D2B44;border-radius:999px;background:#fff;color:#1D2B44;cursor:pointer}.sx-chips button.on{background:#1D2B44;color:#fff}
+.sx-card{display:flex!important;gap:12px;align-items:center}.sx-card[hidden]{display:none!important}.sx-ci2{width:52px;height:52px;flex:none;background:#fff;border-radius:50%;padding:5px;border:2px solid #1D2B44;box-sizing:border-box}
+.sx-cb{display:block;min-width:0}.sx-cb i{display:flex;flex-wrap:wrap;gap:4px 6px;align-items:center;margin-top:6px;font-style:normal}.sx-cb u{text-decoration:none;font-size:12px;font-weight:900;padding:1px 8px;border-radius:999px;color:#fff}
+.sx-cb u.cat-0{background:#3B8FD9}.sx-cb u.cat-1{background:#E8618C}.sx-cb u.cat-2{background:#3FAF6A}.sx-cb u.cat-3{background:#8A6FD1}.sx-cb small{font-size:12px;font-weight:700;color:#56677F}
+.sx-new{font-style:normal;font-size:11px;font-weight:900;background:#E5484D;color:#fff;border-radius:999px;padding:1px 8px;margin-left:8px;vertical-align:middle}
 .sx-gl{margin:-4px 0 10px;color:var(--muted,#56677F);font-size:14px}
 .sx-site{background:#fff;border:2px solid #1D2B44;border-radius:12px;padding:6px 14px 14px;margin:0 0 18px}
 .sx-site .sx-pg+.sx-pg{margin-top:10px}
