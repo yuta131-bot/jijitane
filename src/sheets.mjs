@@ -160,7 +160,9 @@ const SX_CSS = `
 .sx .sx-card b.hc{display:flex;align-items:center;gap:6px}.sx .sx-ci{width:6mm;height:6mm;margin:-.4mm 0;flex:none;background:#fff;border-radius:50%;padding:.6mm;box-sizing:content-box}
 .sx h4 small{font-size:7.8pt;color:var(--m);font-weight:700}
 .sx .sx-pg-label{display:inline-block;margin-left:6px;font-size:9pt;background:var(--k);color:#fff;border-radius:999px;padding:0 9px;vertical-align:middle}
-.sx .sx-b{break-inside:avoid;margin:0}.sx .sx-b>h4:first-child{margin-top:6px}
+.sx .sx-b{--tint:#FFF3D1;--tint2:#F8E3A0;break-inside:avoid;margin:0 0 5px;padding:1px 8px 6px;border-radius:10px;background:var(--tint)}.sx .sx-b>h4:first-child{margin-top:5px}
+.sx .sx-b:nth-of-type(6n+2){--tint:#E3F1FC;--tint2:#B9DAF3}.sx .sx-b:nth-of-type(6n+3){--tint:#E6F5E9;--tint2:#B8E0C0}.sx .sx-b:nth-of-type(6n+4){--tint:#FDE7EE;--tint2:#F6BFD0}.sx .sx-b:nth-of-type(6n+5){--tint:#EEE8FA;--tint2:#D3C6F0}.sx .sx-b:nth-of-type(6n){--tint:#FFEBDA;--tint2:#F8CBA5}
+.sx .sx-b .sx-t th{background:var(--tint2)}.sx .sx-b .sx-t td{background:rgba(255,255,255,.78)}.sx .sx-b .sx-t.first td:first-child{background:rgba(255,255,255,.55)}
 .sx .sx-row{display:grid;gap:0 10px;align-items:start}.sx .sx-row.n2{grid-template-columns:1fr 1fr}.sx .sx-row.n3{grid-template-columns:1fr 1fr 1fr}
 .sx .sx-sc{overflow-x:auto}
 .sx table.sx-t{width:100%;border-collapse:collapse;font-size:8.2pt}
