@@ -86,13 +86,23 @@ def grab(page, url, sid):
     title = page.title().split('｜')[0]
     desc = page.evaluate("document.querySelector('meta[name=description]')?.content || ''")
     items = []
-    for el in page.query_selector_all('section.sx-b'):
+    n = len(page.query_selector_all('section.sx-b'))
+    over = """el => [...el.querySelectorAll('*')].some(x => x.scrollWidth > x.clientWidth + 1 && getComputedStyle(x).display !== 'inline')"""
+    for i in range(n):
+        im = None
+        for vw in (380, 440, 520, 620, 760):          # 表がはみ出すときは、ページの幅を広げて撮る（あとで縮めて使う）
+            page.set_viewport_size({'width': vw, 'height': 900})
+            page.wait_for_timeout(120)
+            el = page.query_selector_all('section.sx-b')[i]
+            if not el.evaluate(over):
+                break
         head = el.query_selector('h4')
         t = (head.inner_text() if head else '').strip()
         if t.startswith('まちがえた問題をメモ'):
             continue
         im = Image.open(BytesIO(el.screenshot())).convert('RGB')
         items.append((t, im))
+    page.set_viewport_size({'width': 380, 'height': 900})
     return title, desc, items
 
 
