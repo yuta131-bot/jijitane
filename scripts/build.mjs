@@ -147,7 +147,10 @@ ${desc.slice(0, 30).map((a) => `<item><title>${esc(jpDate(a.date).short + ' ' + 
 </channel></rss>`;
 fs.writeFileSync(path.join(OUT, 'feed.xml'), rss);
 const urls = ['/', '/matome/', ...(sheets.length ? ['/sheets/', ...sheets.map((s) => `/sheets/${s.id}.html`)] : []), ...(year ? [`/matome/${year.exam_year}.html`, `/matome/${year.exam_year}-ranking.html`] : []), ...months.map((m) => `/matome/${m}.html`), ...weeks.map((w) => `/weekly/${w}.html`), '/archive.html', '/glossary.html', '/units.html', '/subject/rika.html', '/subject/shakai.html', ...all.flatMap((a) => [`/news/${a.date}.html`, ...a.news.map((_, j) => `/news/${a.date}-${j + 1}.html`)])];
-fs.writeFileSync(path.join(OUT, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((u) => `<url><loc>${base}${u}</loc></url>`).join('\n')}\n</urlset>`);
+// 更新日（lastmod）：記事ページはその号の日付、一覧・まとめ・固定ページは最新号の日付
+const newest = desc[0]?.date;
+const lastmodOf = (u) => { const m = u.match(/^\/news\/(\d{4}-\d{2}-\d{2})/); return m ? m[1] : newest; };
+fs.writeFileSync(path.join(OUT, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((u) => `<url><loc>${base}${u}</loc>${lastmodOf(u) ? `<lastmod>${lastmodOf(u)}</lastmod>` : ''}</url>`).join('\n')}\n</urlset>`);
 if (cfg.ads?.client) fs.writeFileSync(path.join(OUT, 'ads.txt'), `google.com, ${cfg.ads.client.replace('ca-pub-', 'pub-')}, DIRECT, f08c47fec0942fa0\n`);
 if (cfg.lineUrl) {      // 「LINEで受け取る」の計測用ページ（押された場所ごと）
   fs.mkdirSync(path.join(OUT, 'go'), { recursive: true });

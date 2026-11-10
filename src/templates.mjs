@@ -20,6 +20,15 @@ const mathBlock = (a, i) => {
 };
 const figClass = (svg) => { const m = /viewBox="\s*[-\d.]+\s+[-\d.]+\s+([\d.]+)\s+([\d.]+)/.exec(svg); return m && +m[1] <= 400 ? 'fig-tall' : 'fig-wide'; };
 const baseOf = (cfg) => cfg.siteUrl.replace(/\/$/, '');
+// 検索結果向けの構造化データ（記事＝NewsArticle、トップ＝WebSite）
+const newsLd = (cfg, { url, headline, desc, date, image }) => ({
+  '@context': 'https://schema.org', '@type': 'NewsArticle', mainEntityOfPage: url,
+  headline: headline.slice(0, 110), description: desc.slice(0, 200), inLanguage: 'ja',
+  datePublished: `${date}T07:00:00+09:00`, image: [image],
+  author: { '@type': 'Organization', name: cfg.operator || cfg.siteName },
+  publisher: { '@type': 'Organization', name: cfg.siteName, url: baseOf(cfg) + '/' },
+});
+const siteLd = (cfg) => ({ '@context': 'https://schema.org', '@type': 'WebSite', name: cfg.siteName, url: baseOf(cfg) + '/', inLanguage: 'ja', description: cfg.tagline || '' });
 
 const CLIENT_JS = fs.readFileSync(new URL('./client.js', import.meta.url), 'utf8').replace(/<\/script/gi, '<\\/script');
 
@@ -63,7 +72,7 @@ function sidebar(cfg, recent) {
 </aside>`;
 }
 
-export function layout({ cfg, title, desc, path, ogImage, main, css, recent = [] }) {
+export function layout({ cfg, title, desc, path, ogImage, main, css, recent = [], ld = [] }) {
   const base = baseOf(cfg);
   const url = base + path;
   const img = ogImage ? base + ogImage : '';
@@ -85,6 +94,7 @@ export function layout({ cfg, title, desc, path, ogImage, main, css, recent = []
 ${img ? `<meta property="og:image" content="${esc(img)}">\n<meta name="twitter:image" content="${esc(img)}">` : ''}
 <meta name="twitter:card" content="summary_large_image">
 <link rel="alternate" type="application/rss+xml" title="${esc(cfg.siteName)}" href="${base}/feed.xml">
+${ld.map((o) => `<script type="application/ld+json">${JSON.stringify(o).replace(/</g, '\\u003c')}</script>`).join('\n')}
 <link rel="icon" href="data:image/svg+xml,${encodeURIComponent(LOGO.replace('class="logo" ', 'xmlns="http://www.w3.org/2000/svg" '))}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -169,10 +179,12 @@ ${a.extra ? `<div class="tonight">${inline(a.extra)}</div>` : ''}
 <nav class="pager">${prev ? `<a class="prev" href="${base}/news/${prev}.html"><small>前の号</small>${jpDate(prev).short}</a>` : '<span></span>'}${next ? `<a class="next" href="${base}/news/${next}.html"><small>次の号</small>${jpDate(next).short}</a>` : '<span></span>'}</nav>
 ${top ? `<section class="about"><h3>保護者の方へ</h3><p>入試の時事問題は、前年の秋ごろまでのニュースからよく出題されます。このサイトでは毎日3本を、小学5年生が一人で読める言葉・ふりがな・図解・入試を意識したクイズで紹介しています。出典と照らし合わせて確認してから公開しています。つくり方は「このサイトについて」をご覧ください。</p></section>` : ''}
 ${sources.length ? `<div class="sources"><b>参考にした報道</b><ul>${sources.map((s) => `<li><a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.title)}</a></li>`).join('')}</ul></div>` : ''}`;
+  const desc = `${dt.label}の時事ニュース3本を小学生向けにやさしく図解。` + a.news.map((n) => plain(n.title)).join('、');
   return layout({
     cfg, css, main, recent,
     title: `${dt.short} ${a.news.map((n) => plain(n.short_title || n.title)).join('／')}｜${cfg.siteName}`,
-    desc: `${dt.label}の時事ニュース3本を小学生向けにやさしく図解。` + a.news.map((n) => plain(n.title)).join('、'),
+    desc,
+    ld: top ? [siteLd(cfg)] : [newsLd(cfg, { url: pageUrl, headline: `${dt.short} ` + a.news.map((n) => plain(n.short_title || n.title)).join('／'), desc, date: a.date, image: `${base}/og/${a.date}.png` })],
     path: top ? '/' : `/news/${a.date}.html`,
     ogImage: top ? '/og/site.png' : `/og/${a.date}.png`,   // トップは日付なしのサイト紹介カード（Xなどのリンクカードに日付が残らないように）
   });
@@ -210,6 +222,7 @@ ${sources.length ? `<div class="sources"><b>参考にした報道</b><ul>${sourc
     cfg, css, main, recent,
     title: `${plain(n.title)}｜小学生にもわかる図解｜${cfg.siteName}`,
     desc: n.points.map(plain).join(' '),
+    ld: [newsLd(cfg, { url: `${base}/news/${a.date}-${i + 1}.html`, headline: plain(n.title), desc: n.points.map(plain).join(' '), date: a.date, image: `${base}/og/${a.date}.png` })],
     path: `/news/${a.date}-${i + 1}.html`,
     ogImage: `/og/${a.date}.png`,
   });
