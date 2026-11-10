@@ -22,6 +22,8 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
 import voicevox as vv  # noqa: E402
+import make_promo as mp  # noqa: E402  （サイトのスマホ表示から、項目ごとの大きな画像を撮る）
+from playwright.sync_api import sync_playwright  # noqa: E402
 from PIL import Image, ImageDraw, ImageFont  # noqa: E402
 
 RATE = vv.RATE
@@ -203,6 +205,13 @@ def main():
             plan.append(dict(text=seg['t'], page=pi, key=seg.get('f', ''), label=None))
     plan.append(dict(text='プリントできるPDFは、LINEで、シート、と送ってね。', outro=True))
 
+    # 各項目を、サイトのスマホ表示から大きく撮る（A4のPDFを切るだけだと、横長で文字が小さくなるため）
+    with sync_playwright() as pw:
+        br = pw.chromium.launch()
+        pg_ = br.new_page(viewport={'width': 380, 'height': 900}, device_scale_factor=3.2, color_scheme='light')
+        _, _, shots = mp.grab(pg_, (Path(args.dist).resolve() / 'sheets' / f'{args.sheet}.html').as_uri(), args.sheet)
+        br.close()
+
     voice = bytearray()
     for sc in plan:
         if args.voicevox:
@@ -256,10 +265,15 @@ def main():
             bg.paste(canvas, (60, 240))
             emit(Scene(bg, bg, (0, 0, W, H), sc['dur'], 0).frames((W, H)))
             continue
-        box, lab = block_box(sc['page'], sc['key'])
+        hit = next(((t, im) for t, im in shots if sc['key'] and sc['key'] in t), None) if not sc.get('intro') else None
+        if hit:
+            src = hit[1]
+            box, lab = (0, 0, src.width, src.height), short_label(hit[0])
+        else:
+            box, lab = block_box(sc['page'], sc['key'])
+            src = pages[sc['page']]
         label = sc['label'] or lab or title
-        disp = fit(box[2] - box[0], box[3] - box[1])
-        src = pages[sc['page']]
+        disp = fit(box[2] - box[0], box[3] - box[1], maxw=1030)
         bg = scene_bg(brand if not sc.get('intro') else 'じじたねの 覚えるシート', label, sc['text'], card=((W - disp[0]) // 2, IMG_TOP + (IMG_BOT - IMG_TOP - disp[1]) // 2, disp[0], disp[1]))
         emit(Scene(bg, src, box, sc['dur']).frames(disp))
     ff.stdin.close()
