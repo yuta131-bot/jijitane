@@ -203,6 +203,17 @@ export function staticPage({ cfg, css, title, html, path, recent = [] }) {
   return layout({ cfg, css, recent, title: `${title}｜${cfg.siteName}`, desc: title, path, main: `<section class="hero hero-list"><div class="hero-tx"><h1>${esc(title)}</h1></div></section><div class="prose">${html}</div>` });
 }
 
+// 「」でかこまれた言葉（ニュースの主役）にひらがなの読みを添える。ひらがな検索（例：ぼうさいちょう）に一致させるため。
+const yomiOf = (t) => {
+  const m = String(t || '').match(/「(.+?)」/);
+  if (!m) return null;
+  const term = plain(m[1]);
+  const yomi = m[1].replace(/\{([^|}]+)\|([^}]+)\}/g, '$2').replace(/[^\u3041-\u3096\u30fc]/g, '');
+  if (!/[\u4e00-\u9fff]/.test(term) || yomi.length < 3 || yomi === term) return null;
+  return { term, yomi };
+};
+const withYomi = (t) => { const y = yomiOf(t); const p = plain(t); return y ? p.replace(`「${y.term}」`, `「${y.term}（${y.yomi}）」`) : p; };
+
 export function newsPage({ cfg, css, a, i, recent = [] }) {
   const n = a.news[i];
   const dt = jpDate(a.date);
@@ -220,8 +231,8 @@ ${ad(cfg, 'in-article-1')}
 ${sources.length ? `<div class="sources"><b>参考にした報道</b><ul>${sources.map((s) => `<li><a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.title)}</a></li>`).join('')}</ul></div>` : ''}`;
   return layout({
     cfg, css, main, recent,
-    title: `${plain(n.title)}｜小学生にもわかる図解｜${cfg.siteName}`,
-    desc: n.points.map(plain).join(' '),
+    title: `${withYomi(n.title)}｜小学生にもわかる図解｜${cfg.siteName}`,
+    desc: (yomiOf(n.title) ? `${yomiOf(n.title).term}（${yomiOf(n.title).yomi}）とは？ ` : '') + n.points.map(plain).join(' '),
     ld: [newsLd(cfg, { url: `${base}/news/${a.date}-${i + 1}.html`, headline: plain(n.title), desc: n.points.map(plain).join(' '), date: a.date, image: `${base}/og/${a.date}.png` })],
     path: `/news/${a.date}-${i + 1}.html`,
     ogImage: `/og/${a.date}.png`,
