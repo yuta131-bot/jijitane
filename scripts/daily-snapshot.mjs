@@ -14,11 +14,16 @@ const out = { date: today, recorded_at: new Date().toISOString(), errors: {}, al
 try {
   const { CF_API_TOKEN: t, CF_ACCOUNT_ID: a } = process.env; if (!t || !a) throw new Error('CF_API_TOKEN / CF_ACCOUNT_ID がありません');
   const s = new Date(Date.parse(yday + 'T00:00:00+09:00')).toISOString(), e = new Date(Date.parse(yday + 'T00:00:00+09:00') + 86400e3).toISOString();
-  const q = `query($a:string!,$s:Time!,$e:Time!,$h:string!){viewer{accounts(filter:{accountTag:$a}){total:rumPageloadEventsAdaptiveGroups(limit:1,filter:{datetime_geq:$s,datetime_lt:$e,requestHost:$h}){count sum{visits}}}}}`;
+  const q = `query($a:string!,$s:Time!,$e:Time!,$h:string!){viewer{accounts(filter:{accountTag:$a}){total:rumPageloadEventsAdaptiveGroups(limit:1,filter:{datetime_geq:$s,datetime_lt:$e,requestHost:$h}){count sum{visits}} countries:rumPageloadEventsAdaptiveGroups(limit:30,orderBy:[count_DESC],filter:{datetime_geq:$s,datetime_lt:$e,requestHost:$h}){count sum{visits} dimensions{countryName}}}}}`;
   const j = await getJson('https://api.cloudflare.com/client/v4/graphql', { method: 'POST', headers: { Authorization: `Bearer ${t}`, 'Content-Type': 'application/json' }, body: JSON.stringify({ query: q, variables: { a, s, e, h: host } }) });
   if (j.errors?.length) throw new Error(JSON.stringify(j.errors).slice(0, 200));
   const r = j.data.viewer.accounts[0]?.total?.[0];
   out.pv = { date: yday, pageviews: r?.count || 0, visits: r?.sum?.visits || 0 };
+  // 日本語サイトでは、日本からのアクセスが「人の数」にいちばん近い（海外のデータセンターからのボットが混ざるため）
+  const cs = j.data.viewer.accounts[0]?.countries || [];
+  const jp = cs.find((x) => /^(JP|Japan)$/i.test(x.dimensions.countryName || ''));
+  out.pv.jp = { pageviews: jp?.count || 0, visits: jp?.sum?.visits || 0 };
+  out.countries = cs.slice(0, 10).map((x) => ({ country: x.dimensions.countryName, pageviews: x.count }));
   if (out.pv.pageviews === 0) out.alerts.push(`きのう（${yday}）のPVが0です。サイトが表示されていないか、計測が止まっている可能性があります。`);
 } catch (e) { out.errors.pv = e.message; out.alerts.push(`PVの記録に失敗しました：${e.message}`); }
 

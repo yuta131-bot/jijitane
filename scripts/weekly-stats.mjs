@@ -18,6 +18,7 @@ const Q = `query($a: string!, $s: Time!, $e: Time!, $h: string!) { viewer { acco
   paths: rumPageloadEventsAdaptiveGroups(limit: 400, orderBy: [count_DESC], filter: {datetime_geq: $s, datetime_lt: $e, requestHost: $h}) { count sum { visits } dimensions { requestPath } }
   refs: rumPageloadEventsAdaptiveGroups(limit: 50, orderBy: [count_DESC], filter: {datetime_geq: $s, datetime_lt: $e, requestHost: $h}) { count dimensions { refererHost } }
   devices: rumPageloadEventsAdaptiveGroups(limit: 10, orderBy: [count_DESC], filter: {datetime_geq: $s, datetime_lt: $e, requestHost: $h}) { count dimensions { deviceType } }
+  countries: rumPageloadEventsAdaptiveGroups(limit: 30, orderBy: [count_DESC], filter: {datetime_geq: $s, datetime_lt: $e, requestHost: $h}) { count dimensions { countryName } }
 } } }`;
 
 async function q(d) {
@@ -35,7 +36,7 @@ async function q(d) {
 
 const add = (m, k, v) => { if (k == null || k === '') k = '（直接・不明）'; m[k] = (m[k] || 0) + v; };
 function summarize(list) {
-  const out = { pageviews: 0, visits: 0, daily: [], pages: {}, referrers: {}, devices: {}, line: {} };
+  const out = { pageviews: 0, visits: 0, daily: [], pages: {}, referrers: {}, devices: {}, countries: {}, line: {} };
   for (const { date, d } of list) {
     const pv = d.total?.[0]?.count || 0, vi = d.total?.[0]?.sum?.visits || 0;
     out.pageviews += pv; out.visits += vi; out.daily.push({ date, pageviews: pv, visits: vi });
@@ -46,9 +47,10 @@ function summarize(list) {
     });
     (d.refs || []).forEach((x) => add(out.referrers, x.dimensions.refererHost === host ? '（サイト内）' : x.dimensions.refererHost, x.count));
     (d.devices || []).forEach((x) => add(out.devices, x.dimensions.deviceType, x.count));
+    (d.countries || []).forEach((x) => add(out.countries, x.dimensions.countryName, x.count));
   }
   const top = (m, n) => Object.entries(m).sort((a, b) => b[1] - a[1]).slice(0, n).map(([k, v]) => ({ key: k, pageviews: v }));
-  return { ...out, line: top(out.line, 20), pages: top(out.pages, 20), referrers: top(out.referrers, 15), devices: top(out.devices, 5) };
+  return { ...out, line: top(out.line, 20), pages: top(out.pages, 20), referrers: top(out.referrers, 15), devices: top(out.devices, 5), countries: top(out.countries, 8) };
 }
 
 const raw = [];

@@ -11,12 +11,15 @@ const bar = (v, max) => '█'.repeat(max ? Math.round((v / max) * 12) : 0) || '�
 const table = (head, rows, left = [0]) => [`| ${head.join(' | ')} |`, `|${head.map((_, i) => (left.includes(i) ? ':---' : '---:')).join('|')}|`, ...rows.map((r) => `| ${r.join(' | ')} |`)].join('\n');
 const out = [];
 const tw = d.this_week, lw = d.last_week;
+// 日本からのPV（海外のデータセンターからのボットを除いた、人に近い数字）
+const jpOf = (w) => { const c = (w?.countries || []).find((x) => /^(JP|Japan)$/i.test(x.key || x.country || '')); return w?.countries ? (c ? c.pageviews : 0) : null; };
 
 out.push(`# 週次レポート ${d.period.this_week[0]} 〜 ${d.period.this_week[1]}`, '');
 out.push('## 数字のまとめ', '');
 out.push(table(['', '今週', '先週', '増減'], [
   ['ページビュー', n(tw.pageviews), n(lw.pageviews), `${arrow(tw.pageviews, lw.pageviews)} ${diff(tw.pageviews, lw.pageviews)}`],
   ['訪問数', n(tw.visits), n(lw.visits), `${arrow(tw.visits, lw.visits)} ${diff(tw.visits, lw.visits)}`],
+  ...(jpOf(tw) != null ? [['日本からのPV（人に近い数字）', n(jpOf(tw)), n(jpOf(lw)), jpOf(lw) != null ? `${arrow(jpOf(tw), jpOf(lw))} ${diff(jpOf(tw), jpOf(lw))}` : '-']] : []),
   ['公開した記事', n(d.articles_published?.length ?? 0), '-', '-'],
 ]), '');
 
@@ -32,6 +35,7 @@ out.push('```mermaid', 'xychart-beta', '  title "1日ごとのページビュー
 out.push('## よく読まれたページ トップ10', '');
 out.push(table(['順位', 'ページ', 'PV'], tw.pages.slice(0, 10).map((p, i) => [i + 1, `\`${p.key}\``, n(p.pageviews)]), [1]), '');
 if (tw.line?.length) out.push('LINEボタン（「LINEで受け取る」）を押された数', '', table(['押されたページ', '回数'], tw.line.slice(0, 10).map((p) => [`\`${p.key}\``, n(p.pageviews)]), [1]), '');
+if (tw.countries?.length) { const ctot = tw.countries.reduce((t, r) => t + r.pageviews, 0) || 1; out.push('国別のPV（日本以外が多いときは、ボットが混ざっている可能性があります）', '', table(['国', 'PV', '割合'], tw.countries.slice(0, 6).map((r) => [r.key, n(r.pageviews), `${Math.round((r.pageviews / ctot) * 100)}%`])), ''); }
 const rtot = tw.referrers.reduce((t, r) => t + r.pageviews, 0) || 1;
 out.push('## どこから来たか', '');
 out.push(table(['流入元', 'PV', '割合'], tw.referrers.slice(0, 8).map((r) => [r.key, n(r.pageviews), `${Math.round((r.pageviews / rtot) * 100)}%`])), '');
