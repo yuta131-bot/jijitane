@@ -4,6 +4,8 @@ name: 夕方のクイズ動画を投稿
 on:
   schedule:
     - cron: "0 9 * * *"   # UTC 9:00 = 日本時間 18:00
+    - cron: "40 9 * * *"  # 予備：GitHub の定時実行は遅れたり抜けたりするので、18:40・19:30 にも動かす
+    - cron: "30 10 * * *" #   （上げ済みなら記録を見て二重投稿しない）
   workflow_dispatch:
     inputs:
       force_post:
@@ -44,9 +46,26 @@ jobs:
           YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
         run: |
           D="$(TZ=Asia/Tokyo date +%F)"
-          if [ ! -f "content/$D.json" ]; then echo "$D の号はまだありません"; exit 0; fi
+          if [ ! -f "content/$D.json" ]; then
+            echo "$D の号はまだありません"
+            echo "no_issue=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
           gh release download "short-$D" -p "short-$D-quiz.mp4" -p "short-$D-quiz.txt" -p "short-$D-quiz-title.txt" -D dist-video
           python3 scripts/upload_youtube.py --date "$D" --dir dist-video --privacy public --quiz --state state/youtube-posted.json
+      - name: 今日の号がなくて上げられなかったら Issue で知らせる
+        if: always() && github.event_name == 'schedule' && steps.yt.outputs.no_issue == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          D="$(TZ=Asia/Tokyo date +%F)"
+          H="$(TZ=Asia/Tokyo date +%H)"
+          # 予備の実行で何度も作らないよう、19時以降の最後の実行でだけ作る。同じタイトルが既にあれば作らない
+          [ "$H" -ge 19 ] || exit 0
+          T="⚠️ 夕方のクイズ動画を上げられませんでした：$D の号がありません"
+          if [ -z "$(gh issue list --state open --search "$T in:title" --json number --jq '.[0].number')" ]; then
+            gh issue create --title "$T" --body "夕方になっても今日の記事（content/$D.json）がありません。記事のマージ後に、Actions →「ショート動画を作る」と「夕方のクイズ動画を投稿」を Run workflow で動かしてください。"
+          fi
       - name: YouTube に上げられなかったら Issue で知らせる
         if: failure() && steps.yt.outcome == 'failure'
         env:
