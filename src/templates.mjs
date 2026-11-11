@@ -160,6 +160,7 @@ export function articlePage({ cfg, a, prev, next, css, top = false, recent = [] 
   const shareText = `${dt.short}の${cfg.siteName}\n` + a.news.map((n, i) => `${'①②③'[i]}${plain(n.short_title || n.title)}`).join('\n');
   const xShare = `https://x.com/intent/post?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(pageUrl)}&hashtags=${encodeURIComponent(cfg.hashtags.join(','))}`;
   const lineShare = `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(pageUrl)}`;
+  const fbShare = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(pageUrl)}`;
   const sources = (a.sources || []).filter((s) => /^https?:\/\//.test(s.url));
   const toc = `<ol class="toc">${a.news.map((n, i) => {
     const s = subj(n.subject_key);
@@ -175,7 +176,7 @@ ${toc}
 ${articles}
 ${(a.briefs || []).length ? `<section class="briefs"><h3>ひとことニュース</h3><ul>${a.briefs.map((b) => `<li>${inline(b)}</li>`).join('')}</ul></section>` : ''}
 ${a.extra ? `<div class="tonight">${inline(a.extra)}</div>` : ''}
-<div class="share"><span>この号をシェア</span><a href="${esc(xShare)}" target="_blank" rel="noopener">X</a><a href="${esc(lineShare)}" target="_blank" rel="noopener">LINE</a></div>
+<div class="share"><span>この号をシェア</span><a href="${esc(xShare)}" target="_blank" rel="noopener">X</a><a href="${esc(lineShare)}" target="_blank" rel="noopener">LINE</a><a href="${esc(fbShare)}" target="_blank" rel="noopener">Facebook</a></div>
 <nav class="pager">${prev ? `<a class="prev" href="${base}/news/${prev}.html"><small>前の号</small>${jpDate(prev).short}</a>` : '<span></span>'}${next ? `<a class="next" href="${base}/news/${next}.html"><small>次の号</small>${jpDate(next).short}</a>` : '<span></span>'}</nav>
 ${top ? `<section class="about"><h3>保護者の方へ</h3><p>入試の時事問題は、前年の秋ごろまでのニュースからよく出題されます。このサイトでは毎日3本を、小学5年生が一人で読める言葉・ふりがな・図解・入試を意識したクイズで紹介しています。出典と照らし合わせて確認してから公開しています。つくり方は「このサイトについて」をご覧ください。</p></section>` : ''}
 ${sources.length ? `<div class="sources"><b>参考にした報道</b><ul>${sources.map((s) => `<li><a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.title)}</a></li>`).join('')}</ul></div>` : ''}`;
@@ -219,6 +220,7 @@ export function newsPage({ cfg, css, a, i, recent = [] }) {
   const dt = jpDate(a.date);
   const base = baseOf(cfg);
   const pageUrl = `${base}/news/${a.date}-${i + 1}.html`;
+  const fbShare = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(pageUrl)}`;
   const xShare = `https://x.com/intent/post?text=${encodeURIComponent(plain(n.title) + '｜' + cfg.siteName)}&url=${encodeURIComponent(pageUrl)}&hashtags=${encodeURIComponent(cfg.hashtags.join(','))}`;
   const others = a.news.map((m, j) => ({ m, j })).filter((x) => x.j !== i);
   const sources = (a.sources || []).filter((s) => /^https?:\/\//.test(s.url));
@@ -226,7 +228,7 @@ export function newsPage({ cfg, css, a, i, recent = [] }) {
 <section class="hero hero-list"><div class="hero-tx"><p class="issue">${dt.label}<span class="badge">1分で読める</span></p>${TOOLS}</div></section>
 ${newsBlock(n, i, a, base, true).replace('<article ', '<article data-single="1" ')}
 ${ad(cfg, 'in-article-1')}
-<div class="share"><span>この記事をシェア</span><a href="${esc(xShare)}" target="_blank" rel="noopener">X</a></div>
+<div class="share"><span>この記事をシェア</span><a href="${esc(xShare)}" target="_blank" rel="noopener">X</a><a href="${esc(fbShare)}" target="_blank" rel="noopener">Facebook</a></div>
 <section class="siblings"><h3>この日のほかのニュース</h3><ul class="list">${others.map(({ m, j }) => { const s = subj(m.subject_key); return `<li><a href="${base}/news/${a.date}-${j + 1}.html"><span class="d">${dt.label}・${j + 1}本目</span><span class="mini"><span class="row"><span class="chip" style="--c:${s[1]}">${s[0]}</span>${esc(plain(m.short_title || m.title))}</span></span></a></li>`; }).join('')}</ul></section>
 ${sources.length ? `<div class="sources"><b>参考にした報道</b><ul>${sources.map((s) => `<li><a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.title)}</a></li>`).join('')}</ul></div>` : ''}`;
   return layout({
