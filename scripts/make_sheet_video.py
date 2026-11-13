@@ -81,7 +81,10 @@ FPS = 30
 BG = (240, 246, 251)
 INK = (31, 41, 64)
 GREEN = (6, 199, 85)
-IMG_TOP, IMG_BOT = 250, 1600       # 画像を出す範囲（上は見出し、下は字幕）
+# Instagram のリールは、下のおよそ3割（投稿者名・説明文）と右のボタンが画面の上にかぶさる。
+# そのため、字幕は見出しのすぐ下、画像は左寄せの幅900・下端1480まで（下のかぶさりは薄いので、大きさとの兼ね合いで）
+IMG_TOP, IMG_BOT = 470, 1480
+CX, CW = 30, 900                   # 画像を出す左端と幅（右端の ♡💬 ボタンにかからない）
 PAD = 0.012                        # ブロックのまわりの余白（ページの幅に対する割合）
 
 
@@ -119,13 +122,13 @@ def scene_bg(brand, label, caption, card=None):
         x, y, w, h = card
         d.rounded_rectangle([x - 14, y - 14, x + w + 14, y + h + 14], radius=26, fill=(255, 255, 255), outline=(205, 218, 235), width=3)
     if caption:
-        f = font(48)
+        f = font(46)
         lines = wrap(d, caption, f, W - 150)[:3]
-        bh = 40 + 66 * len(lines)
-        top = IMG_BOT + 40
-        d.rounded_rectangle([40, top, W - 40, top + bh], radius=30, fill=(255, 255, 255), outline=INK, width=4)
+        bh = 30 + 62 * len(lines)
+        top = 232
+        d.rounded_rectangle([30, top, W - 30, top + bh], radius=30, fill=(255, 255, 255), outline=INK, width=4)
         for i, ln in enumerate(lines):
-            d.text((75, top + 22 + 66 * i), ln, font=f, fill=INK)
+            d.text((65, top + 16 + 62 * i), ln, font=f, fill=INK)
     return im
 
 
@@ -140,7 +143,9 @@ class Scene:
         n = max(1, round(self.dur * FPS))
         tw, th = disp
         x0, y0, x1, y1 = self.box
-        ox, oy = (W - tw) // 2, IMG_TOP + (IMG_BOT - IMG_TOP - th) // 2
+        ox, oy = CX + (CW - tw) // 2, IMG_TOP + (IMG_BOT - IMG_TOP - th) // 2
+        if (tw, th) == (W, H):
+            ox, oy = 0, 0      # 全画面の場面（案内）はそのまま
         full = self.src.resize((tw, th), Image.LANCZOS, box=(x0, y0, x1, y1))   # 切り取った範囲を、はみ出さずにそのまま見せる
         for i in range(n):
             # 場面の頭の0.3秒だけ、少し小さい所から ふわっと大きくなる（見切れないよう、拡大はしない）
@@ -152,7 +157,7 @@ class Scene:
             yield fr
 
 
-def fit(cw, ch, maxw=1040, maxh=IMG_BOT - IMG_TOP - 40):
+def fit(cw, ch, maxw=CW, maxh=IMG_BOT - IMG_TOP - 20):
     s = min(maxw / cw, maxh / ch)
     return max(1, round(cw * s)), max(1, round(ch * s))
 
@@ -256,13 +261,13 @@ def main():
                 im = pages[pi].resize((pw_, round(pw_ * PH / PW)), Image.LANCZOS)
                 cd.rectangle([x - 4, y - 4, x + im.width + 4, y + im.height + 4], fill=(200, 212, 230))
                 canvas.paste(im, (x, y))
+            canvas = canvas.resize((720, 938), Image.LANCZOS)
             bg = scene_bg(brand, 'このPDFを、プレゼント！', '')
             d = ImageDraw.Draw(bg)
-            d.rounded_rectangle([60, 1500, W - 60, 1820], radius=40, fill=GREEN)
-            d.text((W // 2, 1590), 'LINEで「シート」と送ってね', font=font(64), fill=(255, 255, 255), anchor='mm')
-            d.text((W // 2, 1690), f'覚えるシート 全15種類・印刷OK', font=font(44), fill=(255, 255, 255), anchor='mm')
-            d.text((W // 2, 1760), 'プロフィールのリンクから友だち追加', font=font(38), fill=(220, 250, 232), anchor='mm')
-            bg.paste(canvas, (60, 240))
+            d.rounded_rectangle([CX, 1195, CX + CW, 1350], radius=36, fill=GREEN)
+            d.text((CX + CW // 2, 1240), 'LINEで「シート」と送ってね', font=font(52), fill=(255, 255, 255), anchor='mm')
+            d.text((CX + CW // 2, 1302), '全15種類・印刷OK／プロフィールのリンクから友だち追加', font=font(29), fill=(230, 252, 238), anchor='mm')
+            bg.paste(canvas, (CX + (CW - 720) // 2, 240))
             emit(Scene(bg, bg, (0, 0, W, H), sc['dur'], 0).frames((W, H)))
             continue
         hit = next(((t, im) for t, im in shots if sc['key'] and sc['key'] in t), None) if not sc.get('intro') else None
@@ -273,8 +278,8 @@ def main():
             box, lab = block_box(sc['page'], sc['key'])
             src = pages[sc['page']]
         label = sc['label'] or lab or title
-        disp = fit(box[2] - box[0], box[3] - box[1], maxw=1030)
-        bg = scene_bg(brand if not sc.get('intro') else 'じじたねの 覚えるシート', label, sc['text'], card=((W - disp[0]) // 2, IMG_TOP + (IMG_BOT - IMG_TOP - disp[1]) // 2, disp[0], disp[1]))
+        disp = fit(box[2] - box[0], box[3] - box[1])
+        bg = scene_bg(brand if not sc.get('intro') else 'じじたねの 覚えるシート', label, sc['text'], card=(CX + (CW - disp[0]) // 2, IMG_TOP + (IMG_BOT - IMG_TOP - disp[1]) // 2, disp[0], disp[1]))
         emit(Scene(bg, src, box, sc['dur']).frames(disp))
     ff.stdin.close()
     if ff.wait() != 0:
