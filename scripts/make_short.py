@@ -67,11 +67,11 @@ body{{font-family:"Zen Maru Gothic","Noto Sans CJK JP","Hiragino Maru Gothic Pro
 .bp{{display:inline-block;background:#1D2B44;color:#fff;font-size:30px;font-weight:900;border-radius:10px;padding:2px 12px;margin-right:12px;vertical-align:8px}}
 .brand{{font-size:52px;font-weight:900;line-height:1.1}}
 .date{{font-size:34px;font-weight:700;margin-top:6px}}
-.main{{position:absolute;left:56px;right:56px;top:240px;bottom:470px;display:flex;flex-direction:column;gap:28px}}
-.sub{{position:absolute;left:44px;right:44px;bottom:110px;min-height:300px;background:rgba(20,28,44,.88);color:#fff;border-radius:36px;
-  padding:34px 40px;font-size:54px;font-weight:700;line-height:1.45;display:flex;align-items:center}}
+.main{{position:absolute;left:56px;right:120px;top:468px;bottom:310px;display:flex;flex-direction:column;gap:28px}}
+.sub{{position:absolute;left:36px;right:36px;top:216px;height:230px;background:rgba(20,28,44,.9);color:#fff;border-radius:30px;
+  padding:16px 36px;font-size:50px;font-weight:700;line-height:1.4;display:flex;align-items:center;overflow:hidden}}
 .mk{{background:linear-gradient(transparent 56%,rgba(255,214,64,.62) 56%);border-radius:4px;-webkit-box-decoration-break:clone;box-decoration-break:clone}}
-.credit{{position:absolute;right:52px;bottom:44px;font-size:28px;color:#56677F;font-weight:700}}
+.credit{{position:absolute;right:40px;top:150px;font-size:28px;color:#56677F;font-weight:700}}
 .card{{background:#fff;border:4px solid #1D2B44;border-radius:30px;padding:26px 30px;display:flex;align-items:center;gap:24px}}
 .num{{flex:none;width:84px;height:84px;border-radius:50%;color:#fff;font-size:50px;font-weight:900;display:flex;align-items:center;justify-content:center}}
 .tag{{display:inline-block;color:#fff;font-size:34px;font-weight:700;border-radius:999px;padding:4px 22px}}
