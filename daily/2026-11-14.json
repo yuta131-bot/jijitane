@@ -1,0 +1,33 @@
+{
+ "date": "2026-11-14",
+ "recorded_at": "2026-11-14T06:26:24.555Z",
+ "errors": {
+  "youtube": "キーまたはハンドルなし"
+ },
+ "alerts": [],
+ "pv": {
+  "date": "2026-11-13",
+  "pageviews": 42,
+  "visits": 16,
+  "jp": {
+   "pageviews": 38,
+   "visits": 12
+  }
+ },
+ "countries": [
+  {
+   "country": "JP",
+   "pageviews": 38
+  },
+  {
+   "country": "US",
+   "pageviews": 4
+  }
+ ],
+ "followers": {
+  "x": 1,
+  "threads": 1,
+  "instagram": 42,
+  "line": 3
+ }
+}
