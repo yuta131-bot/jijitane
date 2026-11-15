@@ -209,3 +209,13 @@
 @ChibaMeitokuHS  2026-11-14  千葉明徳中学校・高等学校
 @shota_bansou  2026-11-14  ショウタ（中学受験の伴走・保護者相談）
 @BunkyoGakuinGH  2026-11-14  文京学院大学女子中学校 高等学校（広報部）
+@volontakids  2026-11-15  戸塚国語塾（中学受験国語専門のオンライン塾）
+@OsakaRapid  2026-11-15  パワー読解・大阪国語（国語読解の教室）
+@YEAHeducation  2026-11-15  YEAH education（中学受験算数）
+@mitsuha_nagoya  2026-11-15  おかだなおひさ（みつは受験教室・名古屋）
+@naruebihara  2026-11-15  海老原成彦（『中学受験国語 分野別集中レッスン』著者）
+@juken_hitotoki  2026-11-15  中学受験相談 ひととき 公式
+@_Media_HJS  2026-11-15  星野学園中学校 公式（埼玉）
+@bunsugi  2026-11-15  文化学園大学杉並中学・高等学校
+@kyoiku_shimbun  2026-11-15  教育新聞（教育ニュース）
+@orikumi_kids  2026-11-15  ORIKUMI-kids（子ども向け理科実験教室）
