@@ -174,6 +174,7 @@ export function articlePage({ cfg, a, prev, next, css, top = false, recent = [] 
 </section>
 ${toc}
 ${articles}
+${a.parent_note ? `<section class="pnote"><h3>運営者のひとこと</h3><p>${esc(a.parent_note)}</p><small>小6の子の親（運営者）が書いています</small></section>` : ''}
 ${(a.briefs || []).length ? `<section class="briefs"><h3>ひとことニュース</h3><ul>${a.briefs.map((b) => `<li>${inline(b)}</li>`).join('')}</ul></section>` : ''}
 ${a.extra ? `<div class="tonight">${inline(a.extra)}</div>` : ''}
 <div class="share"><span>この号をシェア</span><a href="${esc(xShare)}" target="_blank" rel="noopener">X</a><a href="${esc(lineShare)}" target="_blank" rel="noopener">LINE</a><a href="${esc(fbShare)}" target="_blank" rel="noopener">Facebook</a></div>

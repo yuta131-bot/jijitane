@@ -316,3 +316,5 @@ svg text{font-family:"Zen Maru Gothic","Hiragino Maru Gothic ProN","Hiragino San
 .relsheet .rs-ic{grid-row:1 / span 2;width:44px;height:44px}
 .relsheet b{font-size:.98rem}
 .relsheet small{font-size:.74rem;color:#56677f}
+
+.pnote{margin:20px 0;padding:16px 20px;border:3px solid var(--ink);border-radius:20px;background:var(--card);box-shadow:4px 4px 0 var(--ink)}.pnote h3{font-size:1rem;margin:0 0 6px}.pnote p{margin:0 0 6px;line-height:1.8;font-weight:700}.pnote small{color:var(--muted)}

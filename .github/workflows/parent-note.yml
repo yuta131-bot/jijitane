@@ -1,0 +1,46 @@
+# Issue「今日の親のひとこと（日付）」に、運営者がコメントすると、その日の記事に「運営者のひとこと」として載せる
+name: 親のひとこと（記事に載せる）
+on:
+  issue_comment:
+    types: [created, edited]
+
+permissions:
+  contents: write
+  issues: write
+  actions: write
+
+concurrency:
+  group: parent-note
+  cancel-in-progress: false
+
+jobs:
+  apply:
+    # 運営者（リポジトリの持ち主・共同作業者）のコメントだけ。ほかの人のコメントは載せない
+    if: >-
+      startsWith(github.event.issue.title, '今日の親のひとこと') &&
+      (github.event.comment.author_association == 'OWNER' || github.event.comment.author_association == 'COLLABORATOR') &&
+      github.event.comment.user.type != 'Bot'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: 記事に書き込む
+        env:
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          COMMENT_BODY: ${{ github.event.comment.body }}
+        run: node scripts/parent-note-apply.mjs
+      - name: 保存して、サイトを更新する
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git config user.name "news-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add content/
+          git commit -m "運営者のひとこと（${{ github.event.issue.title }}）" || { echo "変更なし"; exit 0; }
+          git pull -q --rebase && git push
+          gh api -X POST "repos/${{ github.repository }}/actions/workflows/publish.yml/dispatches" -f ref=main
+          gh issue comment "${{ github.event.issue.number }}" --body "記事に載せました。数分後にサイトで見られます。"

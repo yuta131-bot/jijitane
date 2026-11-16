@@ -1,0 +1,30 @@
+# 毎朝、「優太さんが自分で書いたほうが効く話題」がある日だけ、Issue でお知らせする
+name: 親のひとこと（お知らせ）
+on:
+  schedule:
+    - cron: "0 23 * * *"   # UTC 23:00 = 日本時間 8:00（朝の号が公開されたあと）
+  workflow_dispatch:
+    inputs:
+      date:
+        description: "日付（空なら今日）"
+        required: false
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  nudge:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: お知らせを出す
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TARGET_DATE: ${{ inputs.date }}
+        run: node scripts/parent-note-nudge.mjs
