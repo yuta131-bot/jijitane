@@ -131,8 +131,15 @@ jobs:
           if ! git diff --quiet state/; then
             git config user.name "news-bot"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add state/
-            git commit -m "投稿記録 [skip ci]"
-            git pull -q --rebase
-            git push
+            cp state/meta-posted.json /tmp/mine.json
+            for i in 1 2 3; do
+              git fetch -q origin main
+              git reset -q --hard origin/main
+              # 自分の記録を、最新の記録にまぜる（ほかの実行と同時でも、ぶつからない）
+              node -e "const fs=require('fs');const m=JSON.parse(fs.readFileSync('/tmp/mine.json'));const f='state/meta-posted.json';const t=fs.existsSync(f)?JSON.parse(fs.readFileSync(f)):{};for(const k of Object.keys(m))t[k]={...(t[k]||{}),...m[k]};fs.writeFileSync(f,JSON.stringify(t,null,1)+'\\n')"
+              git add state/
+              git diff --cached --quiet && break
+              git commit -q -m "投稿記録 [skip ci]"
+              git push -q && break
+            done
           fi
