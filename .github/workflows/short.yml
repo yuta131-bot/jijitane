@@ -21,6 +21,7 @@ on:
 
 permissions:
   contents: write
+  issues: write
 
 jobs:
   short:
@@ -86,3 +87,52 @@ jobs:
           YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
           PRIVACY: ${{ (github.event_name == 'schedule' || inputs.youtube == '公開で上げる') && 'public' || 'unlisted' }}
         run: python scripts/upload_youtube.py --date "${{ steps.d.outputs.date }}" --dir dist-video --privacy "$PRIVACY"
+
+  # 動画ができたあとに、Threads・Instagram（リール）へ投稿する。
+  # GitHub の定時実行は数時間おくれることがあり、7:30 の投稿のときに動画がまだ無い日があったため
+  meta:
+    needs: short
+    if: needs.short.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    concurrency:
+      group: publish          # 「公開とX投稿」と同時に動かさない（二重投稿を防ぐ）
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: 日付を決める
+        id: d
+        run: |
+          D="${{ inputs.date }}"; [ -z "$D" ] && D="$(TZ=Asia/Tokyo date +%F)"
+          echo "date=$D" >> "$GITHUB_OUTPUT"
+      - name: Threads と Instagram に投稿
+        id: metapost
+        timeout-minutes: 20
+        env:
+          TARGET_DATE: ${{ steps.d.outputs.date }}
+          SITE_URL: ${{ vars.SITE_URL }}
+          THREADS_TOKEN: ${{ secrets.THREADS_TOKEN }}
+          IG_TOKEN: ${{ secrets.IG_TOKEN }}
+        run: node scripts/post-meta.mjs
+      - name: 失敗したら Issue で知らせる
+        if: always() && steps.metapost.outcome == 'failure'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          { echo "動画ができたあとの Threads・Instagram への投稿で、うまくいかなかったものがあります。"; echo; echo '```'; cat meta-errors.txt 2>/dev/null; echo '```'; echo; \
+            echo "くわしいエラー：${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"; } > body.txt
+          gh issue create --title "⚠️ Threads / Instagram への投稿に失敗しました（${{ steps.d.outputs.date }}・動画のあと）" --body-file body.txt
+      - name: 投稿の記録を残す
+        if: always()
+        run: |
+          if ! git diff --quiet state/; then
+            git config user.name "news-bot"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add state/
+            git commit -m "投稿記録 [skip ci]"
+            git pull -q --rebase
+            git push
+          fi

@@ -124,6 +124,7 @@ jobs:
           FORCE_POST: ${{ inputs.force_post }}
           THREADS_TOKEN: ${{ secrets.THREADS_TOKEN }}
           IG_TOKEN: ${{ secrets.IG_TOKEN }}
+          WAIT_VIDEO_OK: "1"   # 動画がまだなら、失敗にせず、動画ができたあとの流れ（short.yml）で投稿する
         run: node scripts/post-meta.mjs
       - name: Threads・Instagram の投稿に失敗したら Issue で知らせる
         if: always() && steps.metapost.outcome == 'failure'

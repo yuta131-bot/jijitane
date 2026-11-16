@@ -61,6 +61,11 @@ if (process.env.IG_TOKEN && (!state[date][igKey] || force)) {
     const token = process.env.IG_TOKEN;
     const video = `https://github.com/${repo}/releases/download/short-${date}/short-${date}${quiz ? '-quiz' : ''}.mp4`;
     const head = await fetch(video, { method: 'HEAD', redirect: 'follow' });
+    if (!head.ok && !quiz && !force && process.env.WAIT_VIDEO_OK === '1') {
+      // 朝の動画づくり（GitHub の定時実行は数時間おくれることがある）が終わったら、そちらの流れで投稿する
+      console.log(`今日のショート動画がまだないので、Instagram は動画ができてから投稿します（${head.status}）`);
+      throw Object.assign(new Error('skip'), { soft: true });
+    }
     if (!head.ok) throw new Error(`今日の${quiz ? 'クイズ' : 'ショート'}動画がまだありません（${head.status}）。Actions の「ショート動画を作る」を確認してください`);
     const caption = quiz
       ? `${dt.short}のニュースクイズ🌱 全3問、何問わかるかな？\n答えを見る前に、コメントで予想してみてね！\n\nきょうのニュース\n${lines}\n\nLINEで「時事」と送ると、出題予想ランキングのプリント（無料）が届きます\n友だち追加と図解つきの解説は、プロフィールのリンクから\n音声：VOICEVOX:冥鳴ひまり\n\n#中学受験 #時事問題 #中受 #クイズ #小学生の勉強 #家庭学習`
@@ -86,7 +91,7 @@ if (process.env.IG_TOKEN && (!state[date][igKey] || force)) {
     const p = await call(`${G}/${id}/media_publish`, { creation_id: c.id, access_token: token });
     state[date][igKey] = { id: p.id, at: new Date().toISOString() };
     console.log('Instagram にリールを投稿しました:', p.id);
-  } catch (e) { errors.push(`Instagram：${e.message}`); }
+  } catch (e) { if (!e.soft) errors.push(`Instagram：${e.message}`); }
 } else console.log(process.env.IG_TOKEN ? `Instagram（${igKey}）は投稿済みです` : 'IG_TOKEN がないので Instagram は投稿しません');
 
 fs.mkdirSync('state', { recursive: true });
