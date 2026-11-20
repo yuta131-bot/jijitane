@@ -8,6 +8,7 @@ import { sayKeys } from '../src/readings.mjs';
 import { validate, validateMatome } from '../src/schema.mjs';
 import { goPage } from '../src/go.mjs';
 import { loadSheets, sheetsIndexPage, sheetPage, sheetPrintHtml } from '../src/sheets.mjs';
+import { loadStudy, studyPage, studyIndexPage } from '../src/study.mjs';
 import { flatNews, examYearOf, mondayOf, addDays, hubPage, monthPage, yearPage, rankingPage, weekData, weeklyPage, printHtml, rankPrintHtml } from '../src/matome.mjs';
 
 const cfg = JSON.parse(fs.readFileSync('site.config.json', 'utf8'));
@@ -38,6 +39,7 @@ if (examYear && fs.existsSync(yf)) {
 }
 const months = [...new Set(all.map((a) => a.date.slice(0, 7)))].sort();
 const weeks = [...new Set(all.map((a) => mondayOf(a.date)))].sort();
+const study = loadStudy();     // 中受の読み物（content/study/*.json）
 const sheets = loadSheets();   // 覚えるシート（content/sheets/*.json）
 cfg.matomeLinks = [
   ...(year ? [[`/matome/${year.exam_year}.html`, `${year.exam_year}年入試 時事問題まとめ`], [`/matome/${year.exam_year}-ranking.html`, '出題予想ランキング TOP20']] : []),
@@ -122,6 +124,13 @@ for (const [key, name] of [['rika', '理科'], ['shakai', '社会']]) {
   }));
 }
 
+// 中受の読み物（/study/）
+if (study.length) {
+  fs.mkdirSync(path.join(OUT, 'study'), { recursive: true });
+  fs.writeFileSync(path.join(OUT, 'study', 'index.html'), studyIndexPage({ cfg, css, items: study, recent: desc }));
+  for (const s of study) fs.writeFileSync(path.join(OUT, 'study', `${s.id}.html`), studyPage({ cfg, css, s, sheets, recent: desc }));
+}
+
 // 固定ページ（広告審査にも必要）
 const MAIL = cfg.contactEmail || '';
 const mailLink = MAIL ? `<a href="mailto:${esc(MAIL)}">${esc(MAIL)}</a>` : '（お問い合わせ先を記入）';
@@ -146,7 +155,7 @@ const rss = `<?xml version="1.0" encoding="UTF-8"?>
 ${desc.slice(0, 30).map((a) => `<item><title>${esc(jpDate(a.date).short + ' ' + a.news.map((n) => plain(n.short_title || n.title)).join('／'))}</title><link>${base}/news/${a.date}.html</link><guid>${base}/news/${a.date}.html</guid><pubDate>${new Date(a.date + 'T07:00:00+09:00').toUTCString()}</pubDate></item>`).join('\n')}
 </channel></rss>`;
 fs.writeFileSync(path.join(OUT, 'feed.xml'), rss);
-const urls = ['/', '/matome/', ...(sheets.length ? ['/sheets/', ...sheets.map((s) => `/sheets/${s.id}.html`)] : []), ...(year ? [`/matome/${year.exam_year}.html`, `/matome/${year.exam_year}-ranking.html`] : []), ...months.map((m) => `/matome/${m}.html`), ...weeks.map((w) => `/weekly/${w}.html`), '/archive.html', '/glossary.html', '/units.html', '/subject/rika.html', '/subject/shakai.html', ...all.flatMap((a) => [`/news/${a.date}.html`, ...a.news.map((_, j) => `/news/${a.date}-${j + 1}.html`)])];
+const urls = ['/', '/matome/', ...(study.length ? ['/study/', ...study.map((x) => `/study/${x.id}.html`)] : []), ...(sheets.length ? ['/sheets/', ...sheets.map((s) => `/sheets/${s.id}.html`)] : []), ...(year ? [`/matome/${year.exam_year}.html`, `/matome/${year.exam_year}-ranking.html`] : []), ...months.map((m) => `/matome/${m}.html`), ...weeks.map((w) => `/weekly/${w}.html`), '/archive.html', '/glossary.html', '/units.html', '/subject/rika.html', '/subject/shakai.html', ...all.flatMap((a) => [`/news/${a.date}.html`, ...a.news.map((_, j) => `/news/${a.date}-${j + 1}.html`)])];
 // 更新日（lastmod）：記事ページはその号の日付、一覧・まとめ・固定ページは最新号の日付
 const newest = desc[0]?.date;
 const lastmodOf = (u) => { const m = u.match(/^\/news\/(\d{4}-\d{2}-\d{2})/); return m ? m[1] : newest; };

@@ -305,6 +305,7 @@ export function sheetPage({ cfg, css, s, sheets, recent }) {
 <section class="hero hero-list"><div class="hero-tx"><h1>${esc(s.title)}</h1><p class="lead">${esc(s.intro)}</p><p class="mt-upd">${esc(s.subject)}　最終更新：${esc(jpDate(s.updated).label)}${s.asof ? `（${esc(s.asof)}の内容）` : ''}</p></div></section>
 ${cfg.lineUrl ? `<div class="sx-line"><b>印刷用のPDF（A4・おもてとうら）</b><p>LINEの友だちになって、トークで「シート」と送ると、PDFをお送りします。</p><a class="btn btn-line" href="${lineGoHref(base, `sheet-${s.id}`)}" target="_blank" rel="noopener">LINEで受け取る</a></div>` : ''}
 <div class="sx sx-site">${s.pages.map((p, i) => pageHtml(cfg, s, p, i, false)).join('')}</div>
+${s.study ? `<p class="mt-note">おぼえ方の解説は、<a href="${base}/study/${s.study}.html">中受の読み物</a>にまとめています。</p>` : ''}
 <p class="mt-note">家庭・塾・学校での印刷・配布は自由です（内容の改変・販売はご遠慮ください）。まちがいを見つけたら、お問い合わせから教えてください。</p>
 <h3 class="month">ほかのシート</h3><div class="mt-cards">${others.map((x) => sheetCard(base, x)).join('')}</div>`;
   return layout({ cfg, css: css + SX_CSS + SITE_CSS, main, recent, title: `${plain(s.seo_title || s.title)}｜覚えるシート｜${cfg.siteName}`, desc: s.intro, path: `/sheets/${s.id}.html`, ogImage: '/og/site.png' });
