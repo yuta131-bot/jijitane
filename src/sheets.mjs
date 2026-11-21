@@ -136,11 +136,11 @@ const memo = (b) => `<section class="sx-b"><h4>${cell(b.title)}</h4><div class="
 const text = (b) => `<p class="sx-text">${cell(b.text)}</p>`;
 const RENDER = { table, cards, kanji, tips, quiz, list, text, figs, test, map, memo, ratio, flow, numline, grid100, kmw, segbar };
 // 見出し（h4）の左に、内容に合った絵を入れる。カードは見出し文字から絵をえらぶ
-const ICON_SKIP = new Set(['text', 'memo', 'map']);
+const ICON_SKIP = new Set(['text']);
 function one(b) {
   let h = RENDER[b.t](b);
   if (ICON_SKIP.has(b.t) || b.ic === false) return h;
-  const n = b.ic || pickArt(b.title);
+  const n = b.ic || (b.t === 'memo' ? 'book' : pickArt(b.title));
   if (n) h = h.replace('<h4>', `<h4 class="hi">${art(n)}`);
   if (b.t === 'cards') h = h.replace(/<div class="sx-card c-(\w+)"><b>([^<]*)/g, (m, c, t) => { const a = pickArt(t); return CARD_ART.has(a) ? `<div class="sx-card c-${c}"><b class="hc">${art(a, 'sx-ci')}${t}` : m; });
   return h;

@@ -94,10 +94,10 @@ const G = {
   cutCubeHex: () => wrap(poly([[60, 10], [90, 27], [60, 44], [30, 27]], FILL3) + poly([[30, 27], [60, 44], [60, 78], [30, 61]]) + poly([[60, 44], [90, 27], [90, 61], [60, 78]], FILL2) + cutPoly([[75, 18.5], [90, 44], [75, 69.5], [45, 69.5], [30, 44], [45, 18.5]]), 120, 96),
   cutCylCircle: () => wrap(cylBase() + `<ellipse cx="60" cy="46" rx="36" ry="10" fill="${ACC}" fill-opacity=".5" stroke="${ACC}" stroke-width="1.6"/>`, 120, 96),
   cutCylRect: () => wrap(cylBase() + `<polygon points="24,22 96,22 96,70 24,70" fill="${ACC}" fill-opacity=".45" stroke="${ACC}" stroke-width="1.6"/>`, 120, 96),
-  cutCylEllipse: () => wrap(cylBase() + `<path d="M24 58 L96 34 A36 10 0 0 1 96 34 Z" fill="none"/><ellipse cx="60" cy="46" rx="40" ry="14" transform="rotate(-18 60 46)" fill="${ACC}" fill-opacity=".5" stroke="${ACC}" stroke-width="1.6"/>`, 120, 96),
-  cutConeCircle: () => wrap(coneBase() + `<ellipse cx="60" cy="48" rx="15" ry="4.2" fill="${ACC}" fill-opacity=".55" stroke="${ACC}" stroke-width="1.6"/>`, 120, 96),
+  cutCylEllipse: () => wrap(cylBase() + `<path d="M24 58 L96 34 A36 10 0 0 1 96 34 Z" fill="none"/><ellipse cx="60" cy="46" rx="38.6" ry="10" transform="rotate(-21.3 60 46)" fill="${ACC}" fill-opacity=".5" stroke="${ACC}" stroke-width="1.6"/>`, 120, 96),
+  cutConeCircle: () => wrap(coneBase() + `<ellipse cx="60" cy="48" rx="21.8" ry="6.2" fill="${ACC}" fill-opacity=".55" stroke="${ACC}" stroke-width="1.6"/>`, 120, 96),
   cutConeTri: () => wrap(coneBase() + `<polygon points="60,8 24,74 96,74" fill="${ACC}" fill-opacity=".45" stroke="${ACC}" stroke-width="1.6" stroke-linejoin="round"/>`, 120, 96),
-  cutSphere: () => wrap(`<circle cx="60" cy="48" r="38" fill="${FILL}" stroke="${INK}" stroke-width="1.6"/><ellipse cx="60" cy="38" rx="30" ry="8" fill="${ACC}" fill-opacity=".5" stroke="${ACC}" stroke-width="1.6"/>`, 120, 96),
+  cutSphere: () => wrap(`<circle cx="60" cy="48" r="38" fill="${FILL}" stroke="${INK}" stroke-width="1.6"/><ellipse cx="60" cy="38" rx="36.6" ry="9.6" fill="${ACC}" fill-opacity=".5" stroke="${ACC}" stroke-width="1.6"/>`, 120, 96),
   // ---- 植物のつくり（部分の名前つき） ----
   flower: () => wrap(
     `<rect x="57" y="92" width="6" height="22" fill="#8FD19E" stroke="${INK}" stroke-width="1.4"/>`
