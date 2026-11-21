@@ -89,6 +89,8 @@ const A = {
   stomach: `<path d="M24 6 V18 C24 26 14 30 12 42 C10 54 24 60 36 56 C50 52 56 42 52 34 C48 26 40 30 36 22 C34 18 34 12 34 6" fill="#F4A9A0" ${S}/><path d="M22 6 H36" ${S}/>`,
   // 血液（しずく）
   drop: `<path d="M32 6 C44 22 52 32 52 42 C52 54 43 60 32 60 C21 60 12 54 12 42 C12 32 20 22 32 6 Z" fill="#E5484D" ${S}/><path d="M22 44 C22 50 26 54 31 54" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/>`,
+  // 円柱・円すい・球
+  rounds: `<path d="M6 24 V46 A11 4.5 0 0 0 28 46 V24" fill="#CFE6FA" ${S} stroke-width="1.8"/><ellipse cx="17" cy="24" rx="11" ry="4.5" fill="#EAF3FB" ${S} stroke-width="1.8"/><path d="M46 10 L33 50 A13 4.5 0 0 0 59 50 Z" fill="#F6C945" ${S} stroke-width="1.8"/>`,
   // くもと太陽（天気）
   cloud: `<circle cx="42" cy="20" r="11" fill="#FFD36B" ${S}/><path d="M16 52 C6 52 4 40 14 38 C14 28 28 26 32 34 C40 30 50 36 48 44 C54 46 52 52 46 52 Z" fill="#fff" ${S}/>`,
   // 時計
