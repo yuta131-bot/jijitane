@@ -19,6 +19,9 @@ const cutPoly = (pts) => `<polygon points="${pts.map((q) => q.join(',')).join(' 
 const cylBase = () => `<path d="M24 22 V70 A36 10 0 0 0 96 70 V22" fill="${FILL}" stroke="${INK}" stroke-width="1.6"/><ellipse cx="60" cy="22" rx="36" ry="10" fill="${FILL3}" stroke="${INK}" stroke-width="1.6"/>`;
 const coneBase = () => `<path d="M60 8 L24 74 A36 10 0 0 0 96 74 Z" fill="${FILL}" stroke="${INK}" stroke-width="1.6" stroke-linejoin="round"/><path d="M24 74 A36 10 0 0 1 96 74" fill="none" stroke="${INK}" stroke-width="1.2" stroke-dasharray="3 2.5"/>`;
 
+const LBL = (x, y, s, a = 'start') => T(x, y, s, { s: 9.5, a });
+const lead = (x1, y1, x2, y2) => `<path d="M${x1} ${y1} L${x2} ${y2}" stroke="${INK}" stroke-width="1" fill="none"/><circle cx="${x1}" cy="${y1}" r="1.5" fill="${INK}"/>`;
+
 const G = {
   // 三角形：底辺・高さ
   tri: (b, h) => wrap(
@@ -95,6 +98,30 @@ const G = {
   cutConeCircle: () => wrap(coneBase() + `<ellipse cx="60" cy="48" rx="15" ry="4.2" fill="${ACC}" fill-opacity=".55" stroke="${ACC}" stroke-width="1.6"/>`, 120, 96),
   cutConeTri: () => wrap(coneBase() + `<polygon points="60,8 24,74 96,74" fill="${ACC}" fill-opacity=".45" stroke="${ACC}" stroke-width="1.6" stroke-linejoin="round"/>`, 120, 96),
   cutSphere: () => wrap(`<circle cx="60" cy="48" r="38" fill="${FILL}" stroke="${INK}" stroke-width="1.6"/><ellipse cx="60" cy="38" rx="30" ry="8" fill="${ACC}" fill-opacity=".5" stroke="${ACC}" stroke-width="1.6"/>`, 120, 96),
+  // ---- 植物のつくり（部分の名前つき） ----
+  flower: () => wrap(
+    `<rect x="57" y="92" width="6" height="22" fill="#8FD19E" stroke="${INK}" stroke-width="1.4"/>`
+    + `<path d="M60 82 C30 82 22 54 30 36 C42 44 56 60 60 82 Z" fill="#F7A8C4" stroke="${INK}" stroke-width="1.4"/><path d="M60 82 C90 82 98 54 90 36 C78 44 64 60 60 82 Z" fill="#F7A8C4" stroke="${INK}" stroke-width="1.4"/>`
+    + `<path d="M52 76 L44 50 M68 76 L76 50" stroke="${INK}" stroke-width="1.6" fill="none"/><ellipse cx="43" cy="46" rx="4.5" ry="6.5" fill="#F6C945" stroke="${INK}" stroke-width="1.3"/><ellipse cx="77" cy="46" rx="4.5" ry="6.5" fill="#F6C945" stroke="${INK}" stroke-width="1.3"/>`
+    + `<rect x="58.5" y="42" width="3" height="20" fill="#CFEFC8" stroke="${INK}" stroke-width="1.2"/><ellipse cx="60" cy="70" rx="10" ry="11" fill="#CFEFC8" stroke="${INK}" stroke-width="1.4"/><circle cx="60" cy="38" r="5" fill="#E5484D" stroke="${INK}" stroke-width="1.3"/>`
+    + `<circle cx="56.5" cy="68" r="2.4" fill="#F6C945" stroke="${INK}" stroke-width="1"/><circle cx="63.5" cy="68" r="2.4" fill="#F6C945" stroke="${INK}" stroke-width="1"/><circle cx="60" cy="74" r="2.4" fill="#F6C945" stroke="${INK}" stroke-width="1"/>`
+    + `<path d="M44 90 Q60 100 76 90 L72 82 L48 82 Z" fill="#8FD19E" stroke="${INK}" stroke-width="1.4"/>`
+    + lead(65, 36, 102, 26) + LBL(104, 29, '柱頭') + lead(80, 44, 102, 46) + LBL(104, 49, 'やく') + lead(90, 62, 102, 66) + LBL(104, 69, '花びら')
+    + lead(69, 72, 102, 86) + LBL(104, 89, '子房') + lead(74, 90, 102, 106) + LBL(104, 109, 'がく') + lead(56.5, 68, 22, 88) + LBL(4, 99, '胚珠', 'start'), 150, 118),
+  seed: () => wrap(
+    `<ellipse cx="72" cy="58" rx="46" ry="27" fill="#E9C48B" stroke="#8A5A2B" stroke-width="2"/><ellipse cx="72" cy="58" rx="41" ry="22" fill="#F3D9A4" stroke="#C9A06A" stroke-width="1.2" stroke-dasharray="3 2"/>`
+    + `<path d="M40 64 L22 78 L42 72 Z" fill="#D9B27C" stroke="${INK}" stroke-width="1.3"/><path d="M40 62 Q50 58 58 60" stroke="#B8935E" stroke-width="5" stroke-linecap="round" fill="none"/>`
+    + `<ellipse cx="52" cy="51" rx="5" ry="8" fill="#8FD19E" stroke="${INK}" stroke-width="1.2" transform="rotate(-15 52 51)"/><ellipse cx="59" cy="49" rx="4.5" ry="7.5" fill="#6FC184" stroke="${INK}" stroke-width="1.2" transform="rotate(12 59 49)"/>`
+    + lead(55, 44, 55, 18) + LBL(55, 14, '幼芽', 'middle') + lead(48, 62, 40, 100) + LBL(40, 110, '胚軸', 'middle') + lead(26, 76, 12, 96) + LBL(4, 106, '幼根')
+    + lead(112, 44, 124, 26) + LBL(124, 22, '種皮') + lead(96, 64, 120, 88) + LBL(122, 99, '子葉'), 150, 116),
+  photo: () => wrap(
+    `<circle cx="20" cy="20" r="9" fill="#F6C945" stroke="${INK}" stroke-width="1.4"/><path d="M20 6 V1 M20 34 V39 M6 20 H1 M34 20 H39 M10 10 L6 6 M30 10 L34 6 M10 30 L6 34" stroke="${ACC}" stroke-width="1.6" stroke-linecap="round"/>`
+    + `<path d="M34 30 L62 50" stroke="${ACC}" stroke-width="1.8" stroke-dasharray="4 3" fill="none"/>` + `<path d="M58 44 L66 52 L55 52 Z" fill="${ACC}"/>` + LBL(44, 30, '光')
+    + `<path d="M70 76 C66 50 90 34 122 36 C124 66 100 84 70 76 Z" fill="#8FD19E" stroke="${INK}" stroke-width="1.5"/><path d="M70 76 C86 62 100 50 114 42" stroke="${INK}" stroke-width="1.2" fill="none"/>`
+    + `<path d="M8 64 L52 64" stroke="${INK}" stroke-width="1.6" fill="none"/><path d="M50 59 L60 64 L50 69 Z" fill="${INK}"/>` + LBL(4, 58, '二酸化炭素')
+    + `<path d="M118 60 L142 70" stroke="${INK}" stroke-width="1.6" fill="none"/><path d="M138 64 L146 71 L136 73 Z" fill="${INK}"/>` + LBL(126, 56, '酸素')
+    + `<rect x="68" y="80" width="5" height="24" fill="#8FD19E" stroke="${INK}" stroke-width="1.2"/><path d="M96 112 L96 92" stroke="#3B8FD9" stroke-width="2" fill="none"/><path d="M91 96 L96 88 L101 96 Z" fill="#3B8FD9"/>` + LBL(104, 106, '水')
+    + T(96, 62, 'デンプン', { s: 9.5 }), 150, 118),
 };
 
 export function fig(spec) {

@@ -77,6 +77,18 @@ const A = {
   heart: `<path d="M32 56 C8 40 6 22 18 14 C26 9 32 16 32 20 C32 16 38 9 46 14 C58 22 56 40 32 56 Z" fill="#F4727F" ${S}/><path d="M18 24 Q20 18 26 18" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/>`,
   // 葉っぱ（生き物と自然）
   leaf: `<path d="M10 54 C6 28 24 8 54 8 C58 38 40 58 10 54 Z" fill="#8FD19E" ${S}/><path d="M10 54 C22 40 34 28 46 18" fill="none" ${S} stroke-width="1.8"/><path d="M26 38 L22 30 M34 30 L30 22" ${S} stroke-width="1.6"/>`,
+  // 花
+  flower: `<path d="M32 60 V36" ${S}/><path d="M32 52 C22 52 18 46 18 40 C26 40 32 44 32 52 Z" fill="#8FD19E" ${S} stroke-width="1.6"/><g fill="#F7A8C4" ${S} stroke-width="1.6"><circle cx="32" cy="12" r="8"/><circle cx="46" cy="22" r="8"/><circle cx="41" cy="38" r="8"/><circle cx="23" cy="38" r="8"/><circle cx="18" cy="22" r="8"/></g><circle cx="32" cy="27" r="8" fill="#F6C945" ${S}/>`,
+  // 種子（豆）と芽
+  seed: `<path d="M8 40 C6 26 22 18 36 24 C50 30 52 46 40 52 C26 58 10 52 8 40 Z" fill="#E9C48B" ${S}/><path d="M16 40 C18 34 24 32 30 34" fill="none" ${S} stroke-width="1.5"/><path d="M44 28 V10" ${S}/><path d="M44 16 C54 14 58 8 58 4 C50 4 44 8 44 16 Z M44 20 C36 20 32 15 32 11 C38 11 44 14 44 20 Z" fill="#8FD19E" ${S} stroke-width="1.5"/>`,
+  // 昆虫（てんとう虫）
+  bug: `<path d="M24 14 L18 6 M40 14 L46 6" fill="none" ${S} stroke-width="1.6"/><circle cx="32" cy="16" r="8" fill="${K}"/><ellipse cx="32" cy="38" rx="20" ry="22" fill="#E5484D" ${S}/><path d="M32 16 V60" fill="none" ${S} stroke-width="1.6"/><g fill="${K}"><circle cx="22" cy="32" r="3.2"/><circle cx="42" cy="32" r="3.2"/><circle cx="24" cy="46" r="3"/><circle cx="40" cy="46" r="3"/></g><path d="M10 34 L2 30 M10 46 L2 50 M54 34 L62 30 M54 46 L62 50" fill="none" ${S} stroke-width="1.6"/>`,
+  // 魚
+  fish: `<path d="M6 32 C14 16 36 14 46 28 L60 16 V48 L46 36 C36 50 14 48 6 32 Z" fill="#8CCBF2" ${S}/><circle cx="18" cy="28" r="2.4" fill="${K}"/><path d="M30 24 C34 30 34 34 30 40" fill="none" ${S} stroke-width="1.5"/>`,
+  // 胃（消化）
+  stomach: `<path d="M24 6 V18 C24 26 14 30 12 42 C10 54 24 60 36 56 C50 52 56 42 52 34 C48 26 40 30 36 22 C34 18 34 12 34 6" fill="#F4A9A0" ${S}/><path d="M22 6 H36" ${S}/>`,
+  // 血液（しずく）
+  drop: `<path d="M32 6 C44 22 52 32 52 42 C52 54 43 60 32 60 C21 60 12 54 12 42 C12 32 20 22 32 6 Z" fill="#E5484D" ${S}/><path d="M22 44 C22 50 26 54 31 54" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/>`,
   // くもと太陽（天気）
   cloud: `<circle cx="42" cy="20" r="11" fill="#FFD36B" ${S}/><path d="M16 52 C6 52 4 40 14 38 C14 28 28 26 32 34 C40 30 50 36 48 44 C54 46 52 52 46 52 Z" fill="#fff" ${S}/>`,
   // 時計
