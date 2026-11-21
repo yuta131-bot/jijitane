@@ -19,7 +19,7 @@ const PREF = JSON.parse(fs.readFileSync(new URL('./japan-pref.json', import.meta
 
 export function loadSheets(dir = 'content/sheets') {
   if (!fs.existsSync(dir)) return [];
-  const order = Object.fromEntries(['kenpo-sanken', 'kokusai', 'kankyo-kagaku', 'tani-wariai', 'wariai', 'hayasa-hi', 'kazu-yakusu', 'zukei', 'nenpyo', 'kotowaza', 'todofuken', 'bosai-tenki', 'tentai', 'keizai', 'bushu'].map((k, i) => [k, i]));
+  const order = Object.fromEntries(['kenpo-sanken', 'kokusai', 'kankyo-kagaku', 'tani-wariai', 'wariai', 'hayasa-hi', 'kazu-yakusu', 'zukei', 'nenpyo', 'nenpyo-goro', 'kotowaza', 'todofuken', 'bosai-tenki', 'tentai', 'keizai', 'bushu'].map((k, i) => [k, i]));
   return fs.readdirSync(dir).filter((f) => f.endsWith('.json')).map((f) => {
     const s = JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8'));
     const errs = validateSheet(s);

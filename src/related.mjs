@@ -8,6 +8,7 @@ export const SHEET_META = {
   wariai: ['分数・小数・割合 ずかい', 'pie'],
   zukei: ['図形の公式', 'cube'],
   nenpyo: ['日本の歴史 年表', 'scroll'],
+  'nenpyo-goro': ['年号の語呂合わせ', 'scroll'],
   bushu: ['部首ずかん', 'kanji'],
   'bosai-tenki': ['防災・天気（台風・地震・火山）', 'cloud'],
   keizai: ['経済・税金・くらし', 'pie'],
