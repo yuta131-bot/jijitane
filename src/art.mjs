@@ -85,8 +85,10 @@ const A = {
   bug: `<path d="M24 14 L18 6 M40 14 L46 6" fill="none" ${S} stroke-width="1.6"/><circle cx="32" cy="16" r="8" fill="${K}"/><ellipse cx="32" cy="38" rx="20" ry="22" fill="#E5484D" ${S}/><path d="M32 16 V60" fill="none" ${S} stroke-width="1.6"/><g fill="${K}"><circle cx="22" cy="32" r="3.2"/><circle cx="42" cy="32" r="3.2"/><circle cx="24" cy="46" r="3"/><circle cx="40" cy="46" r="3"/></g><path d="M10 34 L2 30 M10 46 L2 50 M54 34 L62 30 M54 46 L62 50" fill="none" ${S} stroke-width="1.6"/>`,
   // 魚
   fish: `<path d="M6 32 C14 16 36 14 46 28 L60 16 V48 L46 36 C36 50 14 48 6 32 Z" fill="#8CCBF2" ${S}/><circle cx="18" cy="28" r="2.4" fill="${K}"/><path d="M30 24 C34 30 34 34 30 40" fill="none" ${S} stroke-width="1.5"/>`,
+  // せきつい動物（鳥と魚）
+  animals: `<path d="M6 24 C8 12 22 8 30 16 C34 20 34 28 28 32 C20 38 8 36 6 24 Z" fill="#FFE27A" ${S}/><path d="M6 20 L0 22 L6 26" fill="#F59B3D" ${S} stroke-width="1.6"/><circle cx="14" cy="20" r="1.8" fill="${K}"/><path d="M20 26 C26 22 32 24 34 30 C28 34 22 32 20 26 Z" fill="#F6C945" ${S} stroke-width="1.6"/><path d="M24 46 C30 36 46 34 52 44 L62 36 V58 L52 50 C46 60 30 58 24 46 Z" fill="#8CCBF2" ${S}/><circle cx="33" cy="44" r="1.8" fill="${K}"/>`,
   // 胃（消化）
-  stomach: `<path d="M24 6 V18 C24 26 14 30 12 42 C10 54 24 60 36 56 C50 52 56 42 52 34 C48 26 40 30 36 22 C34 18 34 12 34 6" fill="#F4A9A0" ${S}/><path d="M22 6 H36" ${S}/>`,
+  stomach: `<path d="M20 4 V16" fill="none" stroke="#E58A8A" stroke-width="7" stroke-linecap="round"/><path d="M20 4 V16" fill="none" ${S} stroke-width="1" opacity="0"/><path d="M26 14 C44 12 56 20 56 36 C56 52 42 60 28 58 C14 56 6 46 8 34 C9 26 14 22 20 22 C24 22 26 26 28 30 C30 34 36 34 38 30 C40 26 36 20 26 14 Z" fill="#F4A9A0" ${S}/><path d="M16 36 C18 44 26 50 36 48" fill="none" stroke="#E58A8A" stroke-width="2" stroke-linecap="round"/><path d="M52 22 C58 20 62 24 62 30" fill="none" stroke="#E58A8A" stroke-width="5" stroke-linecap="round"/>`,
   // 血液（しずく）
   drop: `<path d="M32 6 C44 22 52 32 52 42 C52 54 43 60 32 60 C21 60 12 54 12 42 C12 32 20 22 32 6 Z" fill="#E5484D" ${S}/><path d="M22 44 C22 50 26 54 31 54" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/>`,
   // 円柱・円すい・球

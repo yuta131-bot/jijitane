@@ -99,29 +99,49 @@ const G = {
   cutConeTri: () => wrap(coneBase() + `<polygon points="60,8 24,74 96,74" fill="${ACC}" fill-opacity=".45" stroke="${ACC}" stroke-width="1.6" stroke-linejoin="round"/>`, 120, 96),
   cutSphere: () => wrap(`<circle cx="60" cy="48" r="38" fill="${FILL}" stroke="${INK}" stroke-width="1.6"/><ellipse cx="60" cy="38" rx="36.6" ry="9.6" fill="${ACC}" fill-opacity=".5" stroke="${ACC}" stroke-width="1.6"/>`, 120, 96),
   // ---- 植物のつくり（部分の名前つき） ----
-  flower: () => wrap(
-    `<rect x="57" y="92" width="6" height="22" fill="#8FD19E" stroke="${INK}" stroke-width="1.4"/>`
-    + `<path d="M60 82 C30 82 22 54 30 36 C42 44 56 60 60 82 Z" fill="#F7A8C4" stroke="${INK}" stroke-width="1.4"/><path d="M60 82 C90 82 98 54 90 36 C78 44 64 60 60 82 Z" fill="#F7A8C4" stroke="${INK}" stroke-width="1.4"/>`
-    + `<path d="M52 76 L44 50 M68 76 L76 50" stroke="${INK}" stroke-width="1.6" fill="none"/><ellipse cx="43" cy="46" rx="4.5" ry="6.5" fill="#F6C945" stroke="${INK}" stroke-width="1.3"/><ellipse cx="77" cy="46" rx="4.5" ry="6.5" fill="#F6C945" stroke="${INK}" stroke-width="1.3"/>`
-    + `<rect x="58.5" y="42" width="3" height="20" fill="#CFEFC8" stroke="${INK}" stroke-width="1.2"/><ellipse cx="60" cy="70" rx="10" ry="11" fill="#CFEFC8" stroke="${INK}" stroke-width="1.4"/><circle cx="60" cy="38" r="5" fill="#E5484D" stroke="${INK}" stroke-width="1.3"/>`
-    + `<circle cx="56.5" cy="68" r="2.4" fill="#F6C945" stroke="${INK}" stroke-width="1"/><circle cx="63.5" cy="68" r="2.4" fill="#F6C945" stroke="${INK}" stroke-width="1"/><circle cx="60" cy="74" r="2.4" fill="#F6C945" stroke="${INK}" stroke-width="1"/>`
-    + `<path d="M44 90 Q60 100 76 90 L72 82 L48 82 Z" fill="#8FD19E" stroke="${INK}" stroke-width="1.4"/>`
-    + lead(65, 36, 102, 26) + LBL(104, 29, '柱頭') + lead(80, 44, 102, 46) + LBL(104, 49, 'やく') + lead(90, 62, 102, 66) + LBL(104, 69, '花びら')
-    + lead(69, 72, 102, 86) + LBL(104, 89, '子房') + lead(74, 90, 102, 106) + LBL(104, 109, 'がく') + lead(56.5, 68, 22, 88) + LBL(4, 99, '胚珠', 'start'), 150, 118),
-  seed: () => wrap(
-    `<ellipse cx="72" cy="58" rx="46" ry="27" fill="#E9C48B" stroke="#8A5A2B" stroke-width="2"/><ellipse cx="72" cy="58" rx="41" ry="22" fill="#F3D9A4" stroke="#C9A06A" stroke-width="1.2" stroke-dasharray="3 2"/>`
-    + `<path d="M40 64 L22 78 L42 72 Z" fill="#D9B27C" stroke="${INK}" stroke-width="1.3"/><path d="M40 62 Q50 58 58 60" stroke="#B8935E" stroke-width="5" stroke-linecap="round" fill="none"/>`
-    + `<ellipse cx="52" cy="51" rx="5" ry="8" fill="#8FD19E" stroke="${INK}" stroke-width="1.2" transform="rotate(-15 52 51)"/><ellipse cx="59" cy="49" rx="4.5" ry="7.5" fill="#6FC184" stroke="${INK}" stroke-width="1.2" transform="rotate(12 59 49)"/>`
-    + lead(55, 44, 55, 18) + LBL(55, 14, '幼芽', 'middle') + lead(48, 62, 40, 100) + LBL(40, 110, '胚軸', 'middle') + lead(26, 76, 12, 96) + LBL(4, 106, '幼根')
-    + lead(112, 44, 124, 26) + LBL(124, 22, '種皮') + lead(96, 64, 120, 88) + LBL(122, 99, '子葉'), 150, 116),
-  photo: () => wrap(
-    `<circle cx="20" cy="20" r="9" fill="#F6C945" stroke="${INK}" stroke-width="1.4"/><path d="M20 6 V1 M20 34 V39 M6 20 H1 M34 20 H39 M10 10 L6 6 M30 10 L34 6 M10 30 L6 34" stroke="${ACC}" stroke-width="1.6" stroke-linecap="round"/>`
-    + `<path d="M34 30 L62 50" stroke="${ACC}" stroke-width="1.8" stroke-dasharray="4 3" fill="none"/>` + `<path d="M58 44 L66 52 L55 52 Z" fill="${ACC}"/>` + LBL(44, 30, '光')
-    + `<path d="M70 76 C66 50 90 34 122 36 C124 66 100 84 70 76 Z" fill="#8FD19E" stroke="${INK}" stroke-width="1.5"/><path d="M70 76 C86 62 100 50 114 42" stroke="${INK}" stroke-width="1.2" fill="none"/>`
-    + `<path d="M8 64 L52 64" stroke="${INK}" stroke-width="1.6" fill="none"/><path d="M50 59 L60 64 L50 69 Z" fill="${INK}"/>` + LBL(4, 58, '二酸化炭素')
-    + `<path d="M118 60 L142 70" stroke="${INK}" stroke-width="1.6" fill="none"/><path d="M138 64 L146 71 L136 73 Z" fill="${INK}"/>` + LBL(126, 56, '酸素')
-    + `<rect x="68" y="80" width="5" height="24" fill="#8FD19E" stroke="${INK}" stroke-width="1.2"/><path d="M96 112 L96 92" stroke="#3B8FD9" stroke-width="2" fill="none"/><path d="M91 96 L96 88 L101 96 Z" fill="#3B8FD9"/>` + LBL(104, 106, '水')
-    + T(96, 62, 'デンプン', { s: 9.5 }), 150, 118),
+  flower: () => {
+    const st = `stroke="${INK}" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"`;
+    return wrap(
+      `<rect x="67" y="94" width="6" height="32" rx="2" fill="#8FD19E" ${st}/>`
+      + `<path d="M70 92 C54 96 42 92 36 80 C50 82 62 86 70 88 Z" fill="#7CC48E" ${st}/><path d="M70 92 C86 96 98 92 104 80 C90 82 78 86 70 88 Z" fill="#7CC48E" ${st}/>`
+      + `<path d="M68 88 C38 92 16 70 22 40 C24 28 36 28 40 36 C50 54 62 68 68 88 Z" fill="#F7A8C4" ${st}/><path d="M72 88 C102 92 124 70 118 40 C116 28 104 28 100 36 C90 54 78 68 72 88 Z" fill="#F7A8C4" ${st}/>`
+      + `<path d="M62 80 C48 66 38 52 32 38 M78 80 C92 66 102 52 108 38" stroke="#E27AA0" stroke-width="1" fill="none" stroke-linecap="round"/>`
+      + `<path d="M61 78 C52 68 50 58 52 48 M79 78 C88 68 90 58 88 48" stroke="${INK}" stroke-width="1.6" fill="none" stroke-linecap="round"/>`
+      + `<ellipse cx="52" cy="42" rx="4.8" ry="7.5" fill="#F6C945" ${st}/><ellipse cx="88" cy="42" rx="4.8" ry="7.5" fill="#F6C945" ${st}/>`
+      + `<rect x="68.4" y="44" width="3.2" height="20" fill="#DFF3D6" ${st} stroke-width="1.2"/>`
+      + `<ellipse cx="70" cy="76" rx="11.5" ry="14" fill="#DFF3D6" ${st}/>`
+      + `<circle cx="66" cy="72" r="2.6" fill="#F6C945" stroke="${INK}" stroke-width="1"/><circle cx="74" cy="72" r="2.6" fill="#F6C945" stroke="${INK}" stroke-width="1"/><circle cx="70" cy="79" r="2.6" fill="#F6C945" stroke="${INK}" stroke-width="1"/>`
+      + `<ellipse cx="70" cy="40" rx="6.5" ry="5.5" fill="#F0713A" ${st}/><circle cx="67" cy="38.5" r="1" fill="#fff"/><circle cx="72" cy="39.5" r="1" fill="#fff"/>`
+      + lead(76, 38, 118, 30) + LBL(120, 33, '柱頭') + lead(92, 42, 118, 46) + LBL(120, 49, 'やく') + lead(112, 56, 118, 62) + LBL(120, 65, '花びら')
+      + lead(80, 76, 118, 80) + LBL(120, 83, '子房') + lead(96, 86, 118, 98) + LBL(120, 101, 'がく') + lead(65, 73, 30, 98) + LBL(4, 108, '胚珠'), 160, 128);
+  },
+  seed: () => {
+    const st = `stroke="${INK}" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"`;
+    return wrap(
+      `<path d="M22 62 C18 36 48 24 84 26 C120 28 142 42 138 64 C134 86 104 96 74 94 C56 93 44 88 38 82 C32 86 24 80 22 62 Z" fill="#D9A55F" stroke="#7A4B1E" stroke-width="2.4" stroke-linejoin="round"/>`
+      + `<path d="M30 62 C28 42 52 32 84 34 C114 36 132 46 130 64 C126 82 102 88 76 86 C60 85 48 80 42 74 C36 78 32 72 30 62 Z" fill="#F4DDA8" stroke="#C99A55" stroke-width="1.2" stroke-dasharray="3 2.5"/>`
+      + `<path d="M92 44 C108 44 120 52 120 62" stroke="#E7C98C" stroke-width="3" fill="none" stroke-linecap="round"/>`
+      + `<path d="M42 70 C38 78 30 86 22 92 C32 92 42 88 48 80 Z" fill="#E2B987" ${st}/>`
+      + `<path d="M44 70 C46 62 52 56 60 54" stroke="#C99A55" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M44 70 C46 62 52 56 60 54" stroke="${INK}" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-dasharray="0.1 4"/>`
+      + `<path d="M58 54 C50 46 52 34 62 30 C66 40 64 50 58 54 Z" fill="#8FD19E" ${st}/><path d="M60 54 C66 44 76 42 82 46 C78 54 70 58 60 54 Z" fill="#6FC184" ${st}/>`
+      + lead(62, 32, 62, 12) + LBL(62, 10, '幼芽', 'middle') + lead(50, 62, 46, 104) + LBL(46, 114, '胚軸', 'middle') + lead(26, 88, 12, 106) + LBL(4, 116, '幼根')
+      + lead(130, 52, 140, 30) + LBL(138, 24, '種皮') + lead(108, 70, 128, 94) + LBL(130, 106, '子葉'), 160, 122);
+  },
+  photo: () => {
+    const st = `stroke="${INK}" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round"`;
+    return wrap(
+      `<rect x="0" y="100" width="170" height="30" fill="#D8B48A"/><path d="M0 100 Q20 96 40 100 T80 100 T120 100 T170 100" fill="none" stroke="#8A5A2B" stroke-width="1.6"/>`
+      + `<path d="M90 102 C84 112 78 118 70 122 M90 102 V124 M90 102 C96 112 104 118 112 122" stroke="#8A5A2B" stroke-width="1.8" fill="none" stroke-linecap="round"/>`
+      + `<path d="M90 102 V62" stroke="#4FA36A" stroke-width="5" stroke-linecap="round"/>`
+      + `<path d="M90 70 C60 70 46 46 56 16 C86 20 112 42 90 70 Z" fill="#8FD19E" ${st}/><path d="M90 70 C80 52 70 36 60 22 M80 56 L70 52 M72 44 L64 42 M86 60 L96 52 M80 48 L90 40" stroke="${INK}" stroke-width="1.1" fill="none" stroke-linecap="round"/>`
+      + `<path d="M92 76 C110 76 128 66 134 50 C118 48 100 58 92 76 Z" fill="#7CC48E" ${st} transform="translate(2 4)"/>`
+      + `<circle cx="22" cy="22" r="11" fill="#F6C945" stroke="${INK}" stroke-width="1.4"/><path d="M22 6 V1 M22 38 V43 M6 22 H1 M38 22 H43 M10 10 L6 6 M34 10 L38 6 M10 34 L6 38" stroke="${ACC}" stroke-width="1.8" stroke-linecap="round"/>`
+      + `<path d="M36 34 L54 44" stroke="${ACC}" stroke-width="2" stroke-dasharray="4 3" fill="none"/><path d="M52 38 L60 46 L49 47 Z" fill="${ACC}"/>` + LBL(36, 26, '光')
+      + `<path d="M6 72 L46 62" stroke="${INK}" stroke-width="1.8" fill="none"/><path d="M44 57 L54 60 L45 67 Z" fill="${INK}"/>` + LBL(3, 54, '二酸化炭素')
+      + `<path d="M104 36 L132 26" stroke="${INK}" stroke-width="1.8" fill="none"/><path d="M128 21 L138 25 L129 31 Z" fill="${INK}"/>` + LBL(124, 17, '酸素')
+      + lead(82, 46, 122, 64) + LBL(124, 67, 'デンプン')
+      + `<path d="M130 120 L112 108" stroke="#2F7BC8" stroke-width="2" fill="none"/><path d="M118 104 L108 105 L113 114 Z" fill="#2F7BC8"/>` + T(140, 118, '水', { s: 9.5, c: INK }), 170, 130);
+  },
 };
 
 export function fig(spec) {
