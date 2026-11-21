@@ -12,6 +12,13 @@ const rightAngle = (x, y, dx = 1, dy = -1) => `<path d="M${x + dx * 6} ${y} L${x
 const poly = (pts, fill = FILL) => `<polygon points="${pts.map((p) => p.join(',')).join(' ')}" fill="${fill}" stroke="${INK}" stroke-width="1.6" stroke-linejoin="round"/>`;
 const wrap = (inner, w = 120, h = 96) => `<svg class="sx-fig" viewBox="0 0 ${w} ${h}" role="img" aria-hidden="true">${inner}</svg>`;
 
+// 切り口の図で使う、立方体・円柱・円すいの土台
+const cubeBase = () => poly([[38, 18], [90, 18], [68, 36], [16, 36]], FILL3) + poly([[16, 36], [68, 36], [68, 88], [16, 88]]) + poly([[68, 36], [90, 18], [90, 70], [68, 88]], FILL2)
+  + `<path d="M16 88 L38 70 M38 70 L38 18 M38 70 L90 70" fill="none" stroke="${INK}" stroke-width="1.2" stroke-dasharray="3 2.5"/>`;
+const cutPoly = (pts) => `<polygon points="${pts.map((q) => q.join(',')).join(' ')}" fill="${ACC}" fill-opacity=".55" stroke="${ACC}" stroke-width="1.8" stroke-linejoin="round"/>`;
+const cylBase = () => `<path d="M24 22 V70 A36 10 0 0 0 96 70 V22" fill="${FILL}" stroke="${INK}" stroke-width="1.6"/><ellipse cx="60" cy="22" rx="36" ry="10" fill="${FILL3}" stroke="${INK}" stroke-width="1.6"/>`;
+const coneBase = () => `<path d="M60 8 L24 74 A36 10 0 0 0 96 74 Z" fill="${FILL}" stroke="${INK}" stroke-width="1.6" stroke-linejoin="round"/><path d="M24 74 A36 10 0 0 1 96 74" fill="none" stroke="${INK}" stroke-width="1.2" stroke-dasharray="3 2.5"/>`;
+
 const G = {
   // 三角形：底辺・高さ
   tri: (b, h) => wrap(
@@ -78,6 +85,16 @@ const G = {
   square: (a) => wrap(poly([[36, 10], [102, 10], [102, 76], [36, 76]]) + T(69, 90, L(a, '1辺')) + T(32, 46, L(a, '1辺'), { a: 'end' })),
   // 長方形
   rect: (w, h) => wrap(poly([[30, 18], [112, 18], [112, 70], [30, 70]]) + T(71, 86, L(w, '横')) + T(26, 48, L(h, 'たて'), { a: 'end' })),
+  // ---- 立体を切ったときの切り口（オレンジ色が切り口） ----
+  cutCubeTri: () => wrap(cubeBase() + cutPoly([[16, 36], [68, 88], [90, 18]]), 120, 96),
+  cutCubeRect: () => wrap(cubeBase() + cutPoly([[16, 36], [68, 36], [90, 70], [38, 70]]), 120, 96),
+  cutCubeHex: () => wrap(poly([[60, 10], [90, 27], [60, 44], [30, 27]], FILL3) + poly([[30, 27], [60, 44], [60, 78], [30, 61]]) + poly([[60, 44], [90, 27], [90, 61], [60, 78]], FILL2) + cutPoly([[75, 18.5], [90, 44], [75, 69.5], [45, 69.5], [30, 44], [45, 18.5]]), 120, 96),
+  cutCylCircle: () => wrap(cylBase() + `<ellipse cx="60" cy="46" rx="36" ry="10" fill="${ACC}" fill-opacity=".5" stroke="${ACC}" stroke-width="1.6"/>`, 120, 96),
+  cutCylRect: () => wrap(cylBase() + `<polygon points="24,22 96,22 96,70 24,70" fill="${ACC}" fill-opacity=".45" stroke="${ACC}" stroke-width="1.6"/>`, 120, 96),
+  cutCylEllipse: () => wrap(cylBase() + `<path d="M24 58 L96 34 A36 10 0 0 1 96 34 Z" fill="none"/><ellipse cx="60" cy="46" rx="40" ry="14" transform="rotate(-18 60 46)" fill="${ACC}" fill-opacity=".5" stroke="${ACC}" stroke-width="1.6"/>`, 120, 96),
+  cutConeCircle: () => wrap(coneBase() + `<ellipse cx="60" cy="48" rx="15" ry="4.2" fill="${ACC}" fill-opacity=".55" stroke="${ACC}" stroke-width="1.6"/>`, 120, 96),
+  cutConeTri: () => wrap(coneBase() + `<polygon points="60,8 24,74 96,74" fill="${ACC}" fill-opacity=".45" stroke="${ACC}" stroke-width="1.6" stroke-linejoin="round"/>`, 120, 96),
+  cutSphere: () => wrap(`<circle cx="60" cy="48" r="38" fill="${FILL}" stroke="${INK}" stroke-width="1.6"/><ellipse cx="60" cy="38" rx="30" ry="8" fill="${ACC}" fill-opacity=".5" stroke="${ACC}" stroke-width="1.6"/>`, 120, 96),
 };
 
 export function fig(spec) {
