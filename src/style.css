@@ -40,7 +40,7 @@ mark{background:linear-gradient(transparent 52%,var(--mark-bg) 52%);color:var(--
 .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--hdr-ink);min-width:0}
 .brand .logo{width:56px;height:56px;flex:none}
 .brand .bp{font-style:normal;display:inline-block;font-size:.55em;vertical-align:.35em;background:#fff;color:#1D2B44;border:2px solid #1D2B44;border-radius:8px;padding:0 6px;margin-right:6px;line-height:1.5}
-.gh .mascot{width:76px;height:76px;flex:none;margin-left:auto;margin-bottom:-26px;position:relative;z-index:2}
+.gh .mascot{width:76px;height:76px;flex:none;margin-left:auto;margin-bottom:-8px;position:relative;z-index:2}
 .gh-in{position:relative}
 .brand b{display:block;font-size:26px;font-weight:900;line-height:1.2;letter-spacing:.02em}
 .brand small{display:block;font-size:13px;font-weight:700;opacity:.85;line-height:1.4}
