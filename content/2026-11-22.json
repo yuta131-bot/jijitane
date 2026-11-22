@@ -1,0 +1,218 @@
+{
+  "date": "2026-11-22",
+  "intro": "{日曜日|にちようび}のきょうは「{今週|こんしゅう}のふり{返|かえ}り」{号|ごう}です。{首里城|しゅりじょう}{正殿|せいでん}の{完成式|かんせいしき}、H3（{H3|エイチスリー}）ロケットの{民間|みんかん}への{移|うつ}り{変|か}わり、COP31（{COP31|コップさんじゅういち}）の{話|はな}し{合|あ}いの3本です。",
+  "news": [
+    {
+      "subject": "社会（歴史・地域）",
+      "subject_key": "shakai",
+      "title": "{首里城|しゅりじょう}{正殿|せいでん}、きょう{復元|ふくげん}の{完成式|かんせいしき}",
+      "short_title": "首里城正殿が完成",
+      "points": [
+        "{焼|や}けた{首里城|しゅりじょう}の{正殿|せいでん}を{元|もと}の{姿|すがた}にもどす{工事|こうじ}が{終|お}わり、22{日|にち}に{完成式|かんせいしき}が{開|ひら}かれます。",
+        "{正殿|せいでん}の{中|なか}は、23{日|にち}から{一般|いっぱん}に{公開|こうかい}されます。",
+        "{中|なか}を{見|み}るには、あらかじめの{予約|よやく}が{必要|ひつよう}です。"
+      ],
+      "svg": "<svg viewBox='0 0 360 560'><text x='180' y='28' font-size='17' text-anchor='middle' font-weight='bold' style='fill:var(--ink)'>首里城の正殿（せいでん）</text><rect x='60' y='240' width='240' height='14' style='fill:#9aa0a6'/><rect x='72' y='226' width='216' height='16' style='fill:#b5bac0'/>\n<rect x='95' y='170' width='170' height='56' style='fill:#D9442B'/><rect x='95' y='170' width='170' height='6' style='fill:#B8321C'/>\n<rect x='108' y='184' width='16' height='42' style='fill:#F2C14E'/><rect x='172' y='184' width='16' height='42' style='fill:#F2C14E'/><rect x='236' y='184' width='16' height='42' style='fill:#F2C14E'/>\n<rect x='128' y='186' width='40' height='34' style='fill:#7A2214'/><rect x='192' y='186' width='40' height='34' style='fill:#7A2214'/>\n<polygon points='80,172 280,172 258,146 102,146' style='fill:#B5452A'/><polygon points='80,172 280,172 280,177 80,177' style='fill:#7A2214'/>\n<rect x='122' y='112' width='116' height='34' style='fill:#D9442B'/><rect x='140' y='122' width='16' height='24' style='fill:#7A2214'/><rect x='204' y='122' width='16' height='24' style='fill:#7A2214'/><rect x='170' y='116' width='20' height='14' style='fill:#F2C14E'/>\n<polygon points='108,114 252,114 232,88 128,88' style='fill:#B5452A'/><polygon points='108,114 252,114 252,119 108,119' style='fill:#7A2214'/>\n<polygon points='168,88 192,88 180,70' style='fill:#F2C14E'/><circle cx='122' cy='84' r='4' style='fill:#F2C14E'/><circle cx='238' cy='84' r='4' style='fill:#F2C14E'/>\n<path d='M60 254 Q180 266 300 254 L300 262 L60 262 Z' style='fill:var(--land)'/>\n<text x='180' y='290' font-size='13' text-anchor='middle' style='fill:var(--ink)'>（3階建て・イメージ図）</text>\n<rect x='15' y='308' width='330' height='70' rx='10' style='fill:var(--card);stroke:var(--landline);stroke-width:1.5'/><text x='32' y='336' font-size='14'  style='fill:var(--ink)'>2019年10月31日</text><text x='32' y='362' font-size='14'  style='fill:var(--ink)'>火災で正殿が焼けた</text>\n<path d='M180 380 L180 394' style='stroke:var(--muted);stroke-width:2.5;fill:none'/><path d='M172 391 L180 403 L188 391 Z' style='fill:var(--muted)'/>\n<rect x='15' y='406' width='330' height='70' rx='10' style='fill:var(--card);stroke:var(--landline);stroke-width:1.5'/><text x='32' y='434' font-size='14'  style='fill:var(--ink)'>2026年11月22日</text><text x='32' y='460' font-size='14'  style='fill:var(--ink)'>復元の完成式（首里城公園）</text>\n<path d='M180 478 L180 492' style='stroke:var(--muted);stroke-width:2.5;fill:none'/><path d='M172 489 L180 501 L188 489 Z' style='fill:var(--muted)'/>\n<rect x='15' y='504' width='330' height='46' rx='10' style='fill:var(--soft);stroke:var(--landline);stroke-width:1.5'/><text x='32' y='533' font-size='14'  style='fill:var(--ink)'>23日から正殿の中を一般公開</text></svg>",
+      "caption": "首里城正殿のイメージ図と、焼失から完成式までの流れ。",
+      "body": [
+        "{沖縄県|おきなわけん}の{首里城|しゅりじょう}の{正殿|せいでん}は、2019{年|ねん}10{月|がつ}31{日|にち}の{火事|かじ}で{焼|や}けました。その{後|あと}、{元|もと}の{姿|すがた}にもどす{工事|こうじ}が{進|すす}み、==22{日|にち}に{首里城公園|しゅりじょうこうえん}で{完成式|かんせいしき}==が{開|ひら}かれます。{熊本日日新聞|くまもとにちにちしんぶん}が{伝|つた}えました。",
+        "{正殿|せいでん}の{内部|ないぶ}は、==23{日|にち}から{一般|いっぱん}に{公開|こうかい}==されます。{内部|ないぶ}は3{階建|かいだ}てで、{公開|こうかい}の{初日|しょにち}のチケットは{売|う}り{切|き}れたと、nippon.com（{nippon.com|ニッポンドットコム}）が{伝|つた}えています。",
+        "{復元|ふくげん}には、{国産|こくさん}のヒノキや{沖縄産|おきなわさん}の{木材|もくざい}が{使|つか}われ、{焼|や}けた{赤瓦|あかがわら}をくだいて{再利用|さいりよう}した{瓦|かわら}もあると、タイムアウト{東京|とうきょう}が{伝|つた}えました。{文化|ぶんか}を{守|まも}り、{次|つぎ}の{世代|せだい}に{伝|つた}える{取|と}り{組|く}みです。"
+      ],
+      "keywords": [
+        {
+          "term": "首里城",
+          "desc": "沖縄県那覇市にある城。昔の琉球王国の中心だった。"
+        },
+        {
+          "term": "復元",
+          "desc": "なくなった建物を、昔の姿にもどして建て直すこと。"
+        },
+        {
+          "term": "琉球王国",
+          "desc": "今の沖縄県にあった国。中国や日本、東南アジアと貿易をして栄えた。"
+        }
+      ],
+      "quiz": {
+        "q": "首里城があるのは、どの県？",
+        "choices": [
+          "鹿児島県",
+          "沖縄県",
+          "長崎県"
+        ],
+        "answer": 1,
+        "a": "沖縄県の那覇市にあります。昔の琉球王国の王が住んだ城です。",
+        "hint": "日本でいちばん南西の県だよ。"
+      },
+      "units": [
+        "社会：日本の歴史（琉球王国）",
+        "社会：日本の地理（九州・沖縄）"
+      ],
+      "talk": "火事で焼けた大切な建物を、お金と時間をかけて元にもどすのは、なぜだと思う？",
+      "talk_hints": [
+        "歴史を学べる：実物があると、昔の人の暮らしを想像しやすい。",
+        "地域の誇り：地元の人にとって、心のよりどころになる。",
+        "お金のかけ方：ほかに使い道はないか、という考え方もある。"
+      ],
+      "exam_level": 2
+    },
+    {
+      "subject": "理科（宇宙・科学技術）",
+      "subject_key": "rika",
+      "title": "H3（{H3|エイチスリー}）ロケット、{次|つぎ}の{号機|ごうき}から{民間|みんかん}へ",
+      "short_title": "H3ロケットを民間へ",
+      "points": [
+        "{日本|にほん}の{主力|しゅりょく}ロケットH3（{H3|エイチスリー}）の{打|う}ち{上|あ}げの{仕事|しごと}が、{三菱重工業|みつびしじゅうこうぎょう}に{移|うつ}ります。",
+        "{移|うつ}るのは、{次|つぎ}の11{号機|ごうき}からだと、NHKが{伝|つた}えました。",
+        "{会社|かいしゃ}として、ほかの{衛星|えいせい}の{打|う}ち{上|あ}げの{注文|ちゅうもん}を{集|あつ}める{見通|みとお}しです。"
+      ],
+      "svg": "<svg viewBox='0 0 360 640'><text x='180' y='28' font-size='17' text-anchor='middle' font-weight='bold' style='fill:var(--ink)'>H3ロケットの打ち上げ</text><path d='M180 44 Q200 70 200 100 L160 100 Q160 70 180 44 Z' style='fill:#E8ECEF;stroke:var(--landline);stroke-width:1.5'/>\n<rect x='160' y='100' width='40' height='110' style='fill:#F7F9FA;stroke:var(--landline);stroke-width:1.5'/>\n<rect x='160' y='128' width='40' height='10' style='fill:#2E6FD8'/><rect x='186' y='100' width='14' height='110' style='fill:#DDE3E8'/>\n<circle cx='172' cy='160' r='6' style='fill:var(--sky);stroke:var(--landline)'/>\n<path d='M160 180 L138 224 L160 210 Z' style='fill:#D9442B'/><path d='M200 180 L222 224 L200 210 Z' style='fill:#D9442B'/>\n<rect x='166' y='210' width='28' height='10' style='fill:#6b7280'/>\n<path d='M168 220 Q180 275 192 220 Z' style='fill:#F2A33A'/><path d='M173 220 Q180 252 187 220 Z' style='fill:#FFE08A'/>\n<rect x='15' y='290' width='330' height='92' rx='10' style='fill:var(--card);stroke:var(--landline);stroke-width:1.5'/><text x='32' y='318' font-size='14'  style='fill:var(--ink)'>いまの打ち上げ担当：JAXA</text><text x='32' y='342' font-size='14'  style='fill:var(--ink)'>（宇宙航空研究開発機構）</text><text x='32' y='366' font-size='13'  style='fill:var(--ink)'>2026年8月11日、9号機は成功</text>\n<path d='M180 384 L180 398' style='stroke:var(--muted);stroke-width:2.5;fill:none'/><path d='M172 395 L180 407 L188 395 Z' style='fill:var(--muted)'/>\n<rect x='15' y='410' width='330' height='92' rx='10' style='fill:var(--card);stroke:var(--landline);stroke-width:1.5'/><text x='32' y='438' font-size='14'  style='fill:var(--ink)'>次の11号機から</text><text x='32' y='462' font-size='14'  style='fill:var(--ink)'>三菱重工業に移す</text><text x='32' y='484' font-size='14'  style='fill:var(--ink)'>（みつびしじゅうこうぎょう）</text>\n<path d='M180 504 L180 518' style='stroke:var(--muted);stroke-width:2.5;fill:none'/><path d='M172 515 L180 527 L188 515 Z' style='fill:var(--muted)'/>\n<rect x='15' y='530' width='330' height='92' rx='10' style='fill:var(--soft);stroke:var(--landline);stroke-width:1.5'/><text x='32' y='558' font-size='14'  style='fill:var(--ink)'>民間の会社として、</text><text x='32' y='582' font-size='14'  style='fill:var(--ink)'>外国や会社の衛星の</text><text x='32' y='606' font-size='14'  style='fill:var(--ink)'>打ち上げ注文を集める</text></svg>",
+      "caption": "H3ロケットのイメージ図と、打ち上げ担当が移る流れ。",
+      "body": [
+        "{日本|にほん}の{主力|しゅりょく}ロケット「H3（{H3|エイチスリー}）」の、{次|つぎ}の11{号機|ごうき}の{打|う}ち{上|あ}げの{仕事|しごと}を、{三菱重工業|みつびしじゅうこうぎょう}に{移|うつ}して{民営化|みんえいか}することが{分|わ}かりました。20{日|か}にNHKが{伝|つた}えました。{時事通信|じじつうしん}も、{来年|らいねん}の11{号機|ごうき}からだと{伝|つた}えています。",
+        "==これまでは{国|くに}の{機関|きかん}JAXA（{JAXA|ジャクサ}）が{打|う}ち{上|あ}げを{担当|たんとう}==してきました。これからは{会社|かいしゃ}として、H3（{H3|エイチスリー}）を{使|つか}った{衛星|えいせい}の{打|う}ち{上|あ}げの{注文|ちゅうもん}を、{本格的|ほんかくてき}に{集|あつ}めていく{見通|みとお}しです。",
+        "H3（{H3|エイチスリー}）は、2025{年|ねん}12{月|がつ}の8{号機|ごうき}が{失敗|しっぱい}し、{衛星|えいせい}の「みちびき5{号機|ごうき}」を{失|うしな}いました。2026{年|ねん}8{月|がつ}11{日|にち}の9{号機|ごうき}は{成功|せいこう}しています。==コストを{下|さ}げながら{品質|ひんしつ}を{保|たも}てるか==が、これからの{課題|かだい}だと、{科学|かがく}ポータルが{伝|つた}えました。"
+      ],
+      "keywords": [
+        {
+          "term": "H3ロケット",
+          "desc": "日本の主力の大型ロケット。種子島宇宙センターから打ち上げる。"
+        },
+        {
+          "term": "民営化",
+          "desc": "国がしていた仕事を、民間の会社が引きつぐこと。"
+        }
+      ],
+      "quiz": {
+        "q": "H3ロケットを打ち上げる、鹿児島県の宇宙センターはどこ？",
+        "choices": [
+          "内之浦宇宙空間観測所",
+          "筑波宇宙センター",
+          "種子島宇宙センター"
+        ],
+        "answer": 2,
+        "a": "種子島宇宙センターです。大型のロケットはここから打ち上げられます。",
+        "hint": "島の名前がついているよ。"
+      },
+      "units": [
+        "理科：宇宙（人工衛星）",
+        "社会：日本の産業（科学技術）"
+      ],
+      "talk": "国がやっていた宇宙の仕事を、会社に任せると、どんないいことと心配なことがあると思う？",
+      "talk_hints": [
+        "いいこと：会社が工夫して、費用が下がるかもしれない。",
+        "心配なこと：もうからないと、続けにくくなるかもしれない。",
+        "身近な例：郵便や鉄道も、国から会社に変わった。"
+      ],
+      "exam_level": 2
+    },
+    {
+      "subject": "社会（環境・国際）",
+      "subject_key": "shakai",
+      "title": "COP31（{COP31|コップさんじゅういち}）、{会期|かいき}をのばして{話|はな}し{合|あ}い",
+      "short_title": "COP31で会期延長",
+      "points": [
+        "{地球温暖化|ちきゅうおんだんか}を{話|はな}し{合|あ}うCOP31（{COP31|コップさんじゅういち}）で、{会期|かいき}が{延|の}びました。",
+        "{石油|せきゆ}・{石炭|せきたん}・{天然|てんねん}ガスから{離|はな}れる{道|みち}すじで、{意見|いけん}がまとまっていません。",
+        "{会議|かいぎ}は、トルコのアンタルヤで{開|ひら}かれています。"
+      ],
+      "svg": "<svg viewBox='0 0 360 600'><text x='180' y='28' font-size='17' text-anchor='middle' font-weight='bold' style='fill:var(--ink)'>COP31（コップさんじゅういち）</text><circle cx='180' cy='100' r='58' style='fill:#2E7FD8'/><path d='M140 80 Q158 62 176 76 Q184 96 168 106 Q150 112 142 98 Z' style='fill:#4CAF6A'/><path d='M190 98 Q214 86 226 104 Q222 128 202 134 Q190 120 190 98 Z' style='fill:#4CAF6A'/><path d='M160 128 Q172 124 176 138 Q168 148 158 142 Z' style='fill:#4CAF6A'/><path d='M138 70 A58 58 0 0 1 200 46' style='fill:none;stroke:#FFFFFF;stroke-width:4;opacity:.55'/>\n<circle cx='180' cy='100' r='58' style='fill:none;stroke:var(--landline);stroke-width:1.5'/>\n<rect x='15' y='184' width='330' height='92' rx='10' style='fill:var(--card);stroke:var(--landline);stroke-width:1.5'/><text x='32' y='212' font-size='14'  style='fill:var(--ink)'>場所：トルコのアンタルヤ</text><text x='32' y='236' font-size='14'  style='fill:var(--ink)'>11月9日ごろに始まった</text><text x='32' y='260' font-size='13'  style='fill:var(--ink)'>議長国はトルコ</text>\n<path d='M180 278 L180 292' style='stroke:var(--muted);stroke-width:2.5;fill:none'/><path d='M172 289 L180 301 L188 289 Z' style='fill:var(--muted)'/>\n<rect x='15' y='304' width='330' height='70' rx='10' style='fill:var(--card);stroke:var(--landline);stroke-width:1.5'/><text x='32' y='332' font-size='14'  style='fill:var(--ink)'>予定の日にちでは</text><text x='32' y='358' font-size='14'  style='fill:var(--ink)'>決まらず、会期を延長</text>\n<path d='M180 376 L180 390' style='stroke:var(--muted);stroke-width:2.5;fill:none'/><path d='M172 387 L180 399 L188 387 Z' style='fill:var(--muted)'/>\n<rect x='15' y='402' width='330' height='112' rx='10' style='fill:var(--soft);stroke:var(--landline);stroke-width:1.5'/><text x='32' y='430' font-size='16' font-weight='bold' style='fill:var(--ink)'>ぶつかっている点</text><text x='32' y='456' font-size='14'  style='fill:var(--ink)'>石油・石炭・天然ガスから</text><text x='32' y='480' font-size='14'  style='fill:var(--ink)'>どう離れていくか、</text><text x='32' y='504' font-size='14'  style='fill:var(--ink)'>国ごとの考えが分かれる</text>\n<text x='180' y='550' font-size='13' text-anchor='middle' style='fill:var(--ink)'>結果はまだ出ていません</text></svg>",
+      "caption": "COP31の場所と、話し合いが長引いている理由。",
+      "body": [
+        "{地球温暖化|ちきゅうおんだんか}への{対策|たいさく}を{話|はな}し{合|あ}う{国連|こくれん}の{会議|かいぎ}「COP31（{COP31|コップさんじゅういち}）」が、{予定|よてい}の{日|ひ}をすぎても{続|つづ}いています。{時事通信|じじつうしん}は21{日|にち}、=={会期|かいき}が{延長|えんちょう}され、{石油|せきゆ}などからの{脱却|だっきゃく}の{調整|ちょうせい}が{難|むずか}しい==と{伝|つた}えました。",
+        "{会議|かいぎ}は、トルコのアンタルヤで11{月|がつ}9{日|か}ごろに{始|はじ}まりました。ロイター{通信|つうしん}によると、{議長国|ぎちょうこく}はトルコで、{話|はな}し{合|あ}いの{進|すす}め{役|やく}はオーストラリアがつとめています。{大|おお}きな{産油国|さんゆこく}や、{石油|せきゆ}を{多|おお}く{使|つか}う{国|くに}が、はっきりした{目標|もくひょう}に{反対|はんたい}しているとされます。",
+        "{石油|せきゆ}や{石炭|せきたん}を{燃|も}やすと、{二酸化炭素|にさんかたんそ}が{出|で}て、{地球|ちきゅう}の{温度|おんど}を{上|あ}げます。==どの{国|くに}が、どのくらい{早|はや}く{減|へ}らすか==は、{国|くに}の{産業|さんぎょう}や{暮|く}らしに{関|かか}わるので、{意見|いけん}が{分|わ}かれやすい{問題|もんだい}です。{結果|けっか}は、まだ{出|で}ていません。"
+      ],
+      "keywords": [
+        {
+          "term": "COP",
+          "desc": "気候変動枠組条約の締約国会議。毎年、世界の国々が集まって温暖化対策を話し合う。"
+        },
+        {
+          "term": "地球温暖化",
+          "desc": "二酸化炭素などが増えて、地球の平均気温が上がること。"
+        },
+        {
+          "term": "化石燃料",
+          "desc": "石油・石炭・天然ガスのこと。燃やすと二酸化炭素が出る。"
+        }
+      ],
+      "quiz": {
+        "q": "地球温暖化の大きな原因とされる、化石燃料を燃やすと出る気体はどれ？",
+        "choices": [
+          "二酸化炭素",
+          "酸素",
+          "ちっ素"
+        ],
+        "answer": 0,
+        "a": "二酸化炭素です。熱をためこむ性質があり、地球の気温を上げると考えられています。",
+        "hint": "「温室効果ガス」の代表だよ。"
+      },
+      "units": [
+        "社会：環境問題（地球温暖化）",
+        "社会：資源とエネルギー"
+      ],
+      "talk": "石油や石炭を使わない暮らしに変えるとき、先に変わるべきなのは、国・会社・自分たちのだれだと思う？",
+      "talk_hints": [
+        "国：ルールや補助金を決められるのは国だ、という考え。",
+        "会社：工場や発電で出す量が大きいので、会社の責任が重い。",
+        "自分たち：電気をこまめに消すなど、小さなことも積み重なる。"
+      ],
+      "exam_level": 3
+    }
+  ],
+  "math": {
+    "news": 1,
+    "unit": "算数：日数・年月の計算",
+    "q": "{首里城|しゅりじょう}の{正殿|せいでん}は、2019{年|ねん}10{月|がつ}31{日|にち}に{焼|や}け、2026{年|ねん}11{月|がつ}22{日|にち}に{完成式|かんせいしき}が{開|ひら}かれます。{焼|や}けた{日|ひ}から{完成式|かんせいしき}の{日|ひ}までは、何年と何日ですか。",
+    "hint": "まず、2026年10月31日までを数えて、そこから11月22日までの日数をたそう。",
+    "answer": "7年22日",
+    "steps": [
+      "2019年10月31日から2026年10月31日までは、2026−2019＝7（年）",
+      "10月31日から11月22日までは、11月1日が1日目なので、11月22日までで22日",
+      "合わせて、7年22日"
+    ]
+  },
+  "briefs": [
+    "{日本版|にほんばん}DBS（{DBS|ディービーエス}）は12{月|がつ}に{始|はじ}まりますが、{専用|せんよう}システムの{稼働|かどう}は{延期|えんき}されると、{時事通信|じじつうしん}が{伝|つた}えました。",
+    "{藤井聡太|ふじいそうた}{六冠|ろっかん}が{竜王戦|りゅうおうせん}で{勝|か}ち、6{連覇|れんぱ}を{決|き}めたと、{時事通信|じじつうしん}が{伝|つた}えました。"
+  ],
+  "extra": "23日は勤労感謝の日で、首里城の正殿の内部が一般公開されます。",
+  "sources": [
+    {
+      "title": "熊本日日新聞：首里城正殿、11月22日完成式 19年に焼失し再建中",
+      "url": "https://kumanichi.com/articles/1997876"
+    },
+    {
+      "title": "nippon.com：首里城正殿の公開・内部の紹介",
+      "url": "https://www.nippon.com/ja/articles/-/57492"
+    },
+    {
+      "title": "Time Out Tokyo：首里城正殿の内部を一般公開",
+      "url": "https://www.timeout.jp/tokyo/ja/news/shuri-castle-reopen-102126"
+    },
+    {
+      "title": "NHK：H3の11号機の打ち上げ業務を三菱重工業へ移管（11月20日）",
+      "url": "https://news.web.nhk/newsweb/na/nd-20261120de78738"
+    },
+    {
+      "title": "科学ポータル：H3・みちびき7号機の打ち上げ成功と民間移管の計画",
+      "url": "https://scienceportal.jst.go.jp/newsflash/20260812_n01/"
+    },
+    {
+      "title": "時事ドットコム：記事一覧（H3民間移管、COP31会期延長、日本版DBS、竜王戦の見出し）",
+      "url": "https://www.jiji.com/jc/archives?g=soc_archive_0"
+    },
+    {
+      "title": "Al-Monitor（ロイター）：COP31、化石燃料をめぐる対立",
+      "url": "https://www.al-monitor.com/originals/2026/11/un-climate-chief-urges-speed-cop31-confronts-fossil-fuel-divide"
+    }
+  ],
+  "review_notes": [
+    "首里城：完成式の日付22日は熊本日日・Time Out Tokyo、23日公開と3階建て・予約制はnippon.comとTime Outで確認。nippon.comの本文に完成式の日付はないので、当日の式の様子は書いていない。",
+    "H3：11号機の移管はNHKで確認。時事通信の「来年1月」「情報収集衛星」は確認できなかったので書いていない。",
+    "COP31：「会期延長」「脱化石燃料で調整難航」は時事通信の見出しで確認。会期の終了予定日と延長後の日程は確認できていないので書いていない。11月9日開始はENBの記事による。アンタルヤの読みと「議長国トルコ」を確認してほしい。",
+    "今週のふり返り号だが、今日までの1週間のうち、米中ロ首脳会談・国連事務総長選びなどは直近号で扱い済みのため、今日は新しい動きがあった3本を選んだ。intro の「ふり返り」表現は調整してもよい。",
+    "算数：焼失日は熊本日日（2019年10月31日）、完成式の日は複数報道で確認。日数は自分で2回計算（7年22日）。"
+  ]
+}
