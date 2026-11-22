@@ -1,0 +1,41 @@
+{
+ "date": "2026-11-22",
+ "recorded_at": "2026-11-22T06:51:18.261Z",
+ "errors": {
+  "youtube": "キーまたはハンドルなし"
+ },
+ "alerts": [],
+ "pv": {
+  "date": "2026-11-21",
+  "pageviews": 67,
+  "visits": 12,
+  "jp": {
+   "pageviews": 60,
+   "visits": 5
+  }
+ },
+ "countries": [
+  {
+   "country": "JP",
+   "pageviews": 60
+  },
+  {
+   "country": "US",
+   "pageviews": 4
+  },
+  {
+   "country": "IE",
+   "pageviews": 2
+  },
+  {
+   "country": "CN",
+   "pageviews": 1
+  }
+ ],
+ "followers": {
+  "x": 4,
+  "threads": 3,
+  "instagram": 57,
+  "line": 6
+ }
+}
