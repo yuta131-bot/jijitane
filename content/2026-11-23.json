@@ -1,0 +1,154 @@
+{
+  "date": "2026-11-23",
+  "intro": "{勤労感謝|きんろうかんしゃ}の{日|ひ}のきょうは、{COP31|コップさんじゅういち}が{成果文書|せいかぶんしょ}なしで{閉幕|へいまく}したこと、{AI|エーアイ}が{数学|すうがく}の{難問|なんもん}を{解|と}いたという{主張|しゅちょう}、{文部科学大臣|もんぶかがくだいじん}への{辞任要求|じにんようきゅう}の3本です。",
+  "news": [
+    {
+      "subject": "社会（環境・国際）",
+      "subject_key": "shakai",
+      "title": "{COP31|コップさんじゅういち}、{成果文書|せいかぶんしょ}を{採択|さいたく}できず{閉幕|へいまく}",
+      "short_title": "COP31が文書なしで閉幕",
+      "points": [
+        "{地球温暖化|ちきゅうおんだんか}を{話|はな}し{合|あ}う{国連|こくれん}の{会議|かいぎ}「{COP31|コップさんじゅういち}」が、22{日|にち}に{閉幕|へいまく}しました。",
+        "{会議|かいぎ}の{成果|せいか}をまとめた{文書|ぶんしょ}は、{採択|さいたく}されませんでした。",
+        "{文書|ぶんしょ}なしの{閉幕|へいまく}は、2009{年|ねん}の{COP15|コップじゅうご}{以来|いらい}です。"
+      ],
+      "svg": "<svg viewBox='0 0 360 560'><defs><linearGradient id='c31s' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#0B1230'/><stop offset='1' stop-color='#1B2A5C'/></linearGradient><radialGradient id='c31o' cx='.38' cy='.32' r='.85'><stop offset='0' stop-color='#5FB4F2'/><stop offset='.6' stop-color='#2373C9'/><stop offset='1' stop-color='#0F3C82'/></radialGradient><radialGradient id='c31a' cx='.5' cy='.5' r='.5'><stop offset='.8' stop-color='#7FD1FF' stop-opacity='0'/><stop offset='.9' stop-color='#7FD1FF' stop-opacity='.55'/><stop offset='1' stop-color='#7FD1FF' stop-opacity='0'/></radialGradient><clipPath id='c31c'><circle cx='180' cy='108' r='48'/></clipPath></defs><text x='180' y='28' font-size='17' text-anchor='middle' font-weight='bold' style='fill:var(--ink)'>COP31（コップさんじゅういち）</text><rect x='10' y='40' width='340' height='130' rx='14' fill='url(#c31s)'/><circle cx='44' cy='62' r='1.3' fill='#fff' opacity='.8'/><circle cx='70' cy='140' r='1' fill='#fff' opacity='.6'/><circle cx='318' cy='70' r='1.3' fill='#fff' opacity='.8'/><circle cx='300' cy='150' r='1' fill='#fff' opacity='.6'/><circle cx='110' cy='56' r='1' fill='#fff' opacity='.7'/><circle cx='180' cy='108' r='58' fill='url(#c31a)'/><circle cx='180' cy='108' r='48' fill='url(#c31o)'/><g clip-path='url(#c31c)'><path d='M160 72 C172 62 190 64 198 72 C208 70 218 78 214 90 C206 94 198 92 192 98 C186 92 176 90 168 84 Z' fill='#6FBF73'/><path d='M168 102 C182 98 198 104 202 116 C202 130 194 144 184 152 C176 142 168 126 168 102 Z' fill='#D9BE68'/><path d='M128 80 C140 74 152 84 150 98 C144 106 134 102 130 92 Z' fill='#5DB36F'/><path d='M120 72 Q146 62 176 72' stroke='#fff' stroke-width='6' stroke-linecap='round' fill='none' opacity='.5'/><path d='M136 128 Q164 120 196 132' stroke='#fff' stroke-width='6' stroke-linecap='round' fill='none' opacity='.5'/><ellipse cx='210' cy='134' rx='44' ry='54' fill='#0B1840' opacity='.4' transform='rotate(25 210 134)'/></g><circle cx='180' cy='108' r='48' fill='none' stroke='#9FD8FF' stroke-width='1.5' opacity='.8'/><path d='M146 80 A44 44 0 0 1 176 64' stroke='#fff' stroke-width='3' fill='none' opacity='.55' stroke-linecap='round'/><circle cx='190' cy='80' r='4' fill='#E5484D' stroke='#fff' stroke-width='1.5'/><path d='M194 78 L234 66' stroke='#fff' stroke-width='1' opacity='.8'/><text x='236' y='68' font-size='13' style='fill:#fff'>トルコ</text><rect x='15' y='184' width='330' height='70' rx='10' style='fill:var(--card);stroke:var(--landline);stroke-width:1.5'/><text x='32' y='212' font-size='14' style='fill:var(--ink)'>場所：トルコのアンタルヤ</text><text x='32' y='238' font-size='14' style='fill:var(--ink)'>22日に閉幕</text><path d='M180 256 L180 270' style='stroke:var(--muted);stroke-width:2.5;fill:none'/><path d='M172 267 L180 279 L188 267 Z' style='fill:var(--muted)'/><rect x='15' y='282' width='330' height='100' rx='10' style='fill:var(--card);stroke:var(--landline);stroke-width:1.5'/><text x='32' y='310' font-size='16' font-weight='bold' style='fill:var(--ink)'>議長国トルコの草案</text><text x='32' y='336' font-size='14' style='fill:var(--ink)'>電化率35%（2035年）</text><text x='32' y='360' font-size='14' style='fill:var(--ink)'>CCUS（シーシーユーエス）をうながす</text><path d='M180 384 L180 398' style='stroke:var(--muted);stroke-width:2.5;fill:none'/><path d='M172 395 L180 407 L188 395 Z' style='fill:var(--muted)'/><rect x='15' y='410' width='330' height='70' rx='10' style='fill:var(--soft);stroke:#E5484D;stroke-width:2'/><text x='32' y='438' font-size='14' style='fill:#E5484D'>化石燃料からの脱却は書かれず、</text><text x='32' y='464' font-size='14' style='fill:var(--ink)'>EUなどが反対した</text><path d='M180 482 L180 496' style='stroke:var(--muted);stroke-width:2.5;fill:none'/><path d='M172 493 L180 505 L188 493 Z' style='fill:var(--muted)'/><rect x='15' y='508' width='330' height='44' rx='10' style='fill:var(--card);stroke:var(--landline);stroke-width:1.5'/><text x='32' y='536' font-size='14' style='fill:var(--ink)'>文書なしは17年ぶり</text></svg>",
+      "caption": "COP31の場所と、文書が採択されなかった流れ。",
+      "body": [
+        "{地球温暖化|ちきゅうおんだんか}への{対策|たいさく}を{話|はな}し{合|あ}う{国連|こくれん}の{会議|かいぎ}「{COP31|コップさんじゅういち}」は、トルコの{南部|なんぶ}アンタルヤで{開|ひら}かれました。{産経|さんけい}ニュースによると、{議長国|ぎちょうこく}のトルコは22{日|にち}、=={成果文書|せいかぶんしょ}を{採択|さいたく}しないと{決|き}め、{会議|かいぎ}は{文書|ぶんしょ}なしで{閉幕|へいまく}==しました。NHKも、{成果文書|せいかぶんしょ}を{採択|さいたく}できずに{閉幕|へいまく}したと{伝|つた}えています。",
+        "この{会議|かいぎ}は、{反対|はんたい}する{国|くに}が{一|ひと}つでもいれば{決|き}められない「コンセンサス（{全会一致|ぜんかいいっち}）」が{原則|げんそく}です。{議長国|ぎちょうこく}の{草案|そうあん}には、{石油|せきゆ}・{石炭|せきたん}・{天然|てんねん}ガスから{離|はな}れる「{脱化石燃料|だつかせきねんりょう}」の{言葉|ことば}がなく、{EU|イーユー}などが{反対|はんたい}しました。ロイター{通信|つうしん}は、{産油国|さんゆこく}のサウジアラビアなどが{化石燃料|かせきねんりょう}に{触|ふ}れないよう{強|つよ}く{求|もと}めていたと、{関係者|かんけいしゃ}の{話|はなし}として{伝|つた}えています。",
+        "{草案|そうあん}には、2035{年|ねん}までに{電気|でんき}の{使|つか}われる{割合|わりあい}を35%にする{目標|もくひょう}や、{二酸化炭素|にさんかたんそ}を{地下|ちか}にためる{技術|ぎじゅつ}「CCUS（{CCUS|シーシーユーエス}）」を{広|ひろ}げることが{入|はい}っていました。=={成果文書|せいかぶんしょ}が{採択|さいたく}されずに{閉幕|へいまく}するのは、2009{年|ねん}の{COP15|コップじゅうご}{以来|いらい}==だと{報|ほう}じられています。"
+      ],
+      "keywords": [
+        {"term": "COP", "desc": "気候変動枠組条約の締約国会議。毎年、世界の国々が集まって温暖化対策を話し合う。"},
+        {"term": "コンセンサス（全会一致）", "desc": "反対する国がいないことを確かめて決める方法。一国でも強く反対すると決まりにくい。"},
+        {"term": "化石燃料", "desc": "石油・石炭・天然ガスのこと。燃やすと二酸化炭素が出る。"}
+      ],
+      "quiz": {
+        "q": "COPでは、会議の決定を原則どのように決める？",
+        "choices": ["多数決で決める", "反対する国がいないことを確かめて決める", "議長国が一人で決める"],
+        "answer": 1,
+        "a": "反対する国がいないことを確かめる「コンセンサス（全会一致）」が原則です。だから、強く反対する国がいると文書がまとまりにくくなります。",
+        "hint": "「一国でも反対すれば…」がポイントだよ。"
+      },
+      "units": ["社会：環境問題（地球温暖化）", "社会：国際連合と世界の国々"],
+      "talk": "全員が納得しないと決められない会議には、どんないいところと困ったところがあると思う？",
+      "talk_hints": [
+        "いいところ：すべての国が納得するので、決めたことを守りやすい。",
+        "困ったところ：一国が反対すると、何も決まらないことがある。",
+        "身近な例：クラスの話し合いで、全員一致を目指すと時間がかかる。"
+      ],
+      "exam_level": 3
+    },
+    {
+      "subject": "理科・算数（科学技術）",
+      "subject_key": "rika",
+      "title": "{AI|エーアイ}で「リーマン{予想|よそう}」を{証明|しょうめい}？{主張|しゅちょう}が{話題|わだい}に",
+      "short_title": "AIがリーマン予想を証明？",
+      "points": [
+        "{米国|べいこく}のAI（{AI|エーアイ}）{企業|きぎょう}の{数学者|すうがくしゃ}が、20{日|か}に「リーマン{予想|よそう}」を{証明|しょうめい}したと{主張|しゅちょう}しました。",
+        "{素数|そすう}のならび{方|かた}に{関|かか}わる、1859{年|ねん}からの{難問|なんもん}です。",
+        "{正|ただ}しいかどうかは、まだ{決|き}まっていません。"
+      ],
+      "svg": "<svg viewBox='0 0 360 560'><text x='180' y='28' font-size='17' text-anchor='middle' font-weight='bold' style='fill:var(--ink)'>リーマン予想（よそう）とAI</text><rect x='20' y='42' width='320' height='172' rx='8' fill='#8B5E3C'/><rect x='28' y='50' width='304' height='156' rx='4' fill='#2F5D50'/><circle cx='56' cy='76' r='13' fill='none' stroke='#F2C14E' stroke-width='2'/><circle cx='106' cy='76' r='13' fill='none' stroke='#F2C14E' stroke-width='2'/><circle cx='206' cy='76' r='13' fill='none' stroke='#F2C14E' stroke-width='2'/><circle cx='306' cy='76' r='13' fill='none' stroke='#F2C14E' stroke-width='2'/><circle cx='206' cy='116' r='13' fill='none' stroke='#F2C14E' stroke-width='2'/><circle cx='306' cy='116' r='13' fill='none' stroke='#F2C14E' stroke-width='2'/><circle cx='206' cy='156' r='13' fill='none' stroke='#F2C14E' stroke-width='2'/><circle cx='306' cy='156' r='13' fill='none' stroke='#F2C14E' stroke-width='2'/><g font-size='18' text-anchor='middle' style='fill:#fff'><text x='56' y='82'>2</text><text x='106' y='82'>3</text><text x='156' y='82'>4</text><text x='206' y='82'>5</text><text x='256' y='82'>6</text><text x='306' y='82'>7</text><text x='56' y='122'>8</text><text x='106' y='122'>9</text><text x='156' y='122'>10</text><text x='206' y='122'>11</text><text x='256' y='122'>12</text><text x='306' y='122'>13</text><text x='56' y='162'>14</text><text x='106' y='162'>15</text><text x='156' y='162'>16</text><text x='206' y='162'>17</text><text x='256' y='162'>18</text><text x='306' y='162'>19</text></g><text x='180' y='194' font-size='13' text-anchor='middle' style='fill:#F2C14E'>○は素数（そすう）</text><rect x='60' y='206' width='26' height='6' rx='2' fill='#F5F5F0'/><rect x='150' y='228' width='60' height='56' rx='8' fill='#4B6BFB'/><rect x='140' y='240' width='10' height='5' fill='#9AA5B8'/><rect x='140' y='254' width='10' height='5' fill='#9AA5B8'/><rect x='140' y='268' width='10' height='5' fill='#9AA5B8'/><rect x='210' y='240' width='10' height='5' fill='#9AA5B8'/><rect x='210' y='254' width='10' height='5' fill='#9AA5B8'/><rect x='210' y='268' width='10' height='5' fill='#9AA5B8'/><rect x='158' y='236' width='44' height='40' rx='5' fill='none' stroke='#fff' stroke-width='1.5' opacity='.7'/><text x='180' y='263' font-size='16' font-weight='bold' text-anchor='middle' style='fill:#fff'>AI</text><rect x='15' y='298' width='330' height='64' rx='10' style='fill:var(--card);stroke:var(--landline);stroke-width:1.5'/><text x='32' y='324' font-size='14' style='fill:var(--ink)'>1859年</text><text x='32' y='348' font-size='14' style='fill:var(--ink)'>リーマンが予想を出した</text><path d='M180 364 L180 378' style='stroke:var(--muted);stroke-width:2.5;fill:none'/><path d='M172 375 L180 387 L188 375 Z' style='fill:var(--muted)'/><rect x='15' y='390' width='330' height='90' rx='10' style='fill:var(--card);stroke:var(--landline);stroke-width:1.5'/><text x='32' y='416' font-size='14' style='fill:var(--ink)'>2026年11月20日</text><text x='32' y='440' font-size='14' style='fill:var(--ink)'>数学者がAIと証明を</text><text x='32' y='464' font-size='14' style='fill:var(--ink)'>見つけたと主張した</text><path d='M180 482 L180 496' style='stroke:var(--muted);stroke-width:2.5;fill:none'/><path d='M172 493 L180 505 L188 493 Z' style='fill:var(--muted)'/><rect x='15' y='508' width='330' height='44' rx='10' style='fill:var(--soft);stroke:var(--landline);stroke-width:1.5'/><text x='32' y='536' font-size='14' style='fill:var(--ink)'>いま：正しいか確認が続く</text></svg>",
+      "caption": "黒板の素数のイメージと、予想から主張までの流れ。",
+      "body": [
+        "アメリカのAI（{AI|エーアイ}）{企業|きぎょう}アンソロピックの{数学者|すうがくしゃ}、レベント・アルポゲ{氏|し}が20{日|か}、{同|どう}{社|しゃ}のAIのクロードと{一緒|いっしょ}に、{数学|すうがく}の{難問|なんもん}「リーマン{予想|よそう}」の=={証明|しょうめい}を{見|み}つけたと{主張|しゅちょう}==しました。{時事通信|じじつうしん}が{伝|つた}えました。",
+        "リーマン{予想|よそう}は、1859{年|ねん}にドイツの{数学者|すうがくしゃ}リーマンが{出|だ}した{予想|よそう}で、{素数|そすう}のならび{方|かた}に{関|かか}わります。{素数|そすう}とは、1と{自分|じぶん}{自身|じしん}でしか{割|わ}り{切|き}れない、1より{大|おお}きい{整数|せいすう}です。アメリカのクレイ{数学研究所|すうがくけんきゅうじょ}は2000{年|ねん}、この{問題|もんだい}をふくむ7つの{難問|なんもん}に100{万|まん}ドルの{賞金|しょうきん}をかけました。",
+        "{証明|しょうめい}は、コンピューターで{確|たし}かめられる{形|かたち}で{公開|こうかい}されました。{日経|にっけい}サイエンスによると、ある{数学者|すうがくしゃ}は{自分|じぶん}で{確|たし}かめて「{歴史的|れきしてき}な{瞬間|しゅんかん}」と{話|はな}しました。でも、{確|たし}かめる{方法|ほうほう}にもまちがいが{入|はい}る{可能性|かのうせい}があり、==まだ{正|ただ}しいと{決|き}まったわけではありません==。{専門家|せんもんか}による{確認|かくにん}が、これからも{続|つづ}きます。"
+      ],
+      "keywords": [
+        {"term": "素数", "desc": "1と自分自身でしか割り切れない、1より大きい整数。2、3、5、7、11…など。"},
+        {"term": "予想と証明", "desc": "数学で「たぶん正しい」と考えられていることが予想。それがいつも正しいと、筋道を立てて示すのが証明。"},
+        {"term": "ミレニアム問題", "desc": "アメリカのクレイ数学研究所が賞金をかけた、7つの数学の難問。"}
+      ],
+      "quiz": {
+        "q": "次のうち、素数はどれ？",
+        "choices": ["15", "21", "23"],
+        "answer": 2,
+        "a": "23です。15は3×5、21は3×7で割り切れるので、素数ではありません。",
+        "hint": "3や5で割れるかどうか、順番に試してみよう。"
+      },
+      "units": ["算数：整数の性質（素数）", "理科：科学技術とくらし"],
+      "talk": "AIが「証明を見つけた」と言ったとき、それが正しいと、どうやって確かめればよいと思う？",
+      "talk_hints": [
+        "人が確かめる：専門家が一つずつ読んで、まちがいがないか調べる。",
+        "別の方法で確かめる：別のコンピューターや、別の人が同じ結果になるか試す。",
+        "身近な例：テストの答え合わせも、自分以外の人に見てもらうと安心。"
+      ],
+      "exam_level": 1
+    },
+    {
+      "subject": "社会（政治）",
+      "subject_key": "shakai",
+      "title": "{文部科学大臣|もんぶかがくだいじん}に{辞任|じにん}を{求|もと}める{声|こえ}、{野党|やとう}で{強|つよ}まる",
+      "short_title": "文科相に辞任を求める声",
+      "points": [
+        "{関|せき}{文部科学大臣|もんぶかがくだいじん}の{政治資金|せいじしきん}パーティーをめぐり、{野党|やとう}が{辞任|じにん}を{求|もと}める{声|こえ}を{強|つよ}めています。",
+        "{野党|やとう}は、{大臣|だいじん}が{国会|こっかい}で{事実|じじつ}と{違|ちが}う{説明|せつめい}をしたと{主張|しゅちょう}しています。",
+        "{木原官房長官|きはらかんぼうちょうかん}は「{大臣|だいじん}{自身|じしん}の{説明|せつめい}が{重要|じゅうよう}」と{述|の}べました。"
+      ],
+      "svg": "<svg viewBox='0 0 360 580'><text x='180' y='28' font-size='17' text-anchor='middle' font-weight='bold' style='fill:var(--ink)'>大臣への辞任要求（じにんようきゅう）</text><rect x='10' y='40' width='340' height='150' rx='14' style='fill:var(--sky)'/><rect x='10' y='176' width='340' height='14' fill='#6BB57A'/><rect x='60' y='146' width='240' height='30' fill='#D8D2C4'/><rect x='60' y='118' width='72' height='28' fill='#E6E0D2'/><rect x='228' y='118' width='72' height='28' fill='#E6E0D2'/><rect x='148' y='100' width='64' height='46' fill='#E6E0D2'/><rect x='156' y='88' width='48' height='12' fill='#D8D2C4'/><rect x='164' y='76' width='32' height='12' fill='#E6E0D2'/><rect x='171' y='64' width='18' height='12' fill='#D8D2C4'/><path d='M180 46 L175 64 L185 64 Z' fill='#B8B2A4'/><g fill='#5B6572'><rect x='68' y='126' width='8' height='14'/><rect x='84' y='126' width='8' height='14'/><rect x='100' y='126' width='8' height='14'/><rect x='116' y='126' width='8' height='14'/><rect x='236' y='126' width='8' height='14'/><rect x='252' y='126' width='8' height='14'/><rect x='268' y='126' width='8' height='14'/><rect x='284' y='126' width='8' height='14'/><rect x='156' y='108' width='8' height='14'/><rect x='172' y='108' width='8' height='14'/><rect x='188' y='108' width='8' height='14'/><rect x='72' y='154' width='10' height='18'/><rect x='96' y='154' width='10' height='18'/><rect x='120' y='154' width='10' height='18'/><rect x='150' y='154' width='10' height='18'/><rect x='170' y='154' width='20' height='22'/><rect x='200' y='154' width='10' height='18'/><rect x='230' y='154' width='10' height='18'/><rect x='254' y='154' width='10' height='18'/><rect x='278' y='154' width='10' height='18'/></g><text x='180' y='210' font-size='13' text-anchor='middle' style='fill:var(--muted)'>国会議事堂（こっかいぎじどう）のイメージ図</text><rect x='15' y='222' width='330' height='66' rx='10' style='fill:var(--card);stroke:var(--landline);stroke-width:1.5'/><text x='32' y='250' font-size='14' style='fill:var(--ink)'>16日 参議院の委員会で</text><text x='32' y='274' font-size='14' style='fill:var(--ink)'>パーティーの事実を認めた</text><path d='M180 290 L180 304' style='stroke:var(--muted);stroke-width:2.5;fill:none'/><path d='M172 301 L180 313 L188 301 Z' style='fill:var(--muted)'/><rect x='15' y='316' width='330' height='66' rx='10' style='fill:var(--card);stroke:var(--landline);stroke-width:1.5'/><text x='32' y='344' font-size='14' style='fill:var(--ink)'>野党が辞任を求める</text><text x='32' y='368' font-size='14' style='fill:var(--ink)'>「事実と違う説明」と主張</text><path d='M180 384 L180 398' style='stroke:var(--muted);stroke-width:2.5;fill:none'/><path d='M172 395 L180 407 L188 395 Z' style='fill:var(--muted)'/><rect x='15' y='410' width='330' height='66' rx='10' style='fill:var(--card);stroke:var(--landline);stroke-width:1.5'/><text x='32' y='438' font-size='14' style='fill:var(--ink)'>木原官房長官（かんぼうちょうかん）</text><text x='32' y='462' font-size='14' style='fill:var(--ink)'>「大臣自身の説明が重要」</text><path d='M180 478 L180 492' style='stroke:var(--muted);stroke-width:2.5;fill:none'/><path d='M172 489 L180 501 L188 489 Z' style='fill:var(--muted)'/><rect x='15' y='504' width='330' height='70' rx='10' style='fill:var(--soft);stroke:var(--landline);stroke-width:1.5'/><text x='32' y='530' font-size='14' style='fill:var(--ink)'>大臣を任命し、やめさせる</text><text x='32' y='552' font-size='14' style='fill:var(--ink)'>のは内閣総理大臣</text><text x='32' y='568' font-size='13' style='fill:var(--muted)'>（憲法第68条）</text></svg>",
+      "caption": "国会議事堂のイメージ図と、辞任要求までの流れ。",
+      "body": [
+        "{関|せき}{文部科学大臣|もんぶかがくだいじん}は、{政治資金|せいじしきん}パーティーをめぐって{指摘|してき}を{受|う}けています。{赤旗|あかはた}によると、16{日|にち}の{参議院|さんぎいん}の{委員会|いいんかい}で、{大臣|だいじん}は{厚生労働省|こうせいろうどうしょう}の{課長|かちょう}を{招|まね}いたパーティーを{開|ひら}いたことを{認|みと}めました。{政治資金|せいじしきん}パーティーとは、{政治家|せいじか}が{活動|かつどう}のお{金|かね}を{集|あつ}めるために、{会費|かいひ}をとって{開|ひら}く{会|かい}です。",
+        "NHKによると、{野党|やとう}は、{大臣|だいじん}が{国会|こっかい}で{事実|じじつ}と{違|ちが}う{説明|せつめい}をしたとして、{辞任|じにん}を{求|もと}める{声|こえ}を{強|つよ}めています。{木原官房長官|きはらかんぼうちょうかん}は、=={大臣|だいじん}{自身|じしん}の{説明|せつめい}が{重要|じゅうよう}==だという{考|かんが}えを{示|しめ}しました。{大臣|だいじん}の{言|い}い{分|ぶん}は、{今回|こんかい}の{記事|きじ}では{確|たし}かめられていません。",
+        "{憲法|けんぽう}では、{国務大臣|こくむだいじん}を{任命|にんめい}し、やめさせることができるのは{内閣総理大臣|ないかくそうりだいじん}です。=={国会|こっかい}は、{大臣|だいじん}をやめさせる{力|ちから}をもたない==ので、{野党|やとう}は{質問|しつもん}や{説明|せつめい}の{要求|ようきゅう}を{通|とお}して{責任|せきにん}を{問|と}います。これからの{首相|しゅしょう}の{判断|はんだん}が{注目|ちゅうもく}されます。"
+      ],
+      "keywords": [
+        {"term": "政治資金パーティー", "desc": "政治家が活動のお金を集めるために、会費をとって開く会。"},
+        {"term": "官房長官", "desc": "内閣の仕事をまとめ、政府の考えを記者会見で説明する大臣。"},
+        {"term": "国務大臣", "desc": "内閣をつくる大臣。内閣総理大臣が任命し、やめさせることもできる。"}
+      ],
+      "quiz": {
+        "q": "国務大臣を任命するのは、だれ？",
+        "choices": ["内閣総理大臣", "衆議院議長", "最高裁判所長官"],
+        "answer": 0,
+        "a": "内閣総理大臣です。憲法第68条で、任命もやめさせることも首相ができると決められています。",
+        "hint": "内閣のリーダーだよ。"
+      },
+      "units": ["社会：国会と内閣（三権分立）", "社会：日本国憲法"],
+      "talk": "大臣が問題を指摘されたとき、どんな説明や対応があれば、国民は納得できると思う？",
+      "talk_hints": [
+        "自分から説明する：何があったか、事実を順番に話す。",
+        "第三者が調べる：本人以外の人が確かめると、信じやすい。",
+        "身近な例：学校で問題が起きたときも、ごまかさず説明すると信頼される。"
+      ],
+      "exam_level": 3
+    }
+  ],
+  "math": {
+    "news": 2,
+    "unit": "算数：日数・年月の計算",
+    "q": "リーマン{予想|よそう}が{出|だ}されたのは1859{年|ねん}です。2026{年|ねん}まで、{何年|なんねん}たちましたか。また、その{年数|ねんすう}を、1{年|ねん}を365{日|にち}として{日数|にっすう}になおすと、{何日|なんにち}ですか。（うるう{年|どし}は{考|かんが}えません）",
+    "hint": "まず年数を引き算で出して、そのあと365をかけよう。",
+    "answer": "167年、60955日",
+    "steps": [
+      "2026−1859＝167（年）",
+      "167年を日数になおすので、167×365 を計算する",
+      "167×365＝167×300＋167×65＝50100＋10855＝60955（日）"
+    ]
+  },
+  "briefs": [
+    "{首里城|しゅりじょう}の{正殿|せいでん}が{復元|ふくげん}され、23{日|にち}から{一般|いっぱん}に{公開|こうかい}されると、NHKが{伝|つた}えました。"
+  ],
+  "extra": "23日は勤労感謝の日（祝日）です。",
+  "sources": [
+    {"title": "NHK：COP31 成果文書採択断念 化石燃料からの脱却言及なしに反発の声（11月22日・23日更新）", "url": "https://news.web.nhk/newsweb/na/nd-20261122de79933"},
+    {"title": "産経ニュース（HeadTopics経由）：COP31で成果文書採択せず 2009年以来の閉幕（11月22日）", "url": "https://jp.headtopics.com/news/677980514912391338113-90080979"},
+    {"title": "時事通信（Yahoo!ニュース）：AIで「リーマン予想」証明か 米アンソロピックの数学者（11月21日）", "url": "https://news.yahoo.co.jp/articles/6ce2b1b319469a78623f32e2c23a47fe67281044"},
+    {"title": "日経サイエンス：リーマン予想をAIで証明？ アンソロピックの研究者が証明を発見したと主張", "url": "https://nk-science.nikkei.com/atcl/nsc/00058/112100037/"},
+    {"title": "NHK：AIで未解決難問“リーマン予想”証明主張 専門家の受けとめは？（11月22日）", "url": "https://news.web.nhk/newsweb/na/nd-20261122de79817"},
+    {"title": "NHK：野党 関文科相辞任求める声強まる 木原官房長官“説明が重要”（11月23日）", "url": "https://news.web.nhk/newsweb/na/nd-20261123de80109"},
+    {"title": "しんぶん赤旗：関文科相の政治資金パーティー問題（11月18日）", "url": "https://www.jcp.or.jp/akahata/aik26/2026-11-18/2026111802_03_0.php"},
+    {"title": "NHKニュース：トップページの見出し（首里城正殿の一般公開、AI自律兵器の国際会議など、11月22日・23日）", "url": "https://news.web.nhk/newsweb"}
+  ],
+  "review_notes": [
+    "COP31：「22日に成果文書を採択せず閉幕」「2009年のCOP15以来」「EUなどが反対」「電化率35%・CCUS」は産経ニュース（HeadTopics経由）で確認。NHKは本文が途中までしか読めず、見出しと「採択できず閉幕」のみ確認。サウジアラビアの働きかけはロイターが関係者の話として報じた内容で、「とされる」の扱いにしてある。「17年ぶり」は2026−2009の計算。",
+    "AIとリーマン予想：時事通信（21日）と日経サイエンスで、アルポゲ氏の主張・1859年・2000年の100万ドルの懸賞を確認。NHKは冒頭の要約のみ確認。「正しいと確定していない」という書き方にしてある。アンソロピックは、この文章を書いているAI（クロード）を作っている会社なので、記事の中立性を人の目で確認してほしい。「歴史的な瞬間」と話した数学者は日経サイエンスでサザーランド氏と読めるが、名前は書いていない。",
+    "文科相：NHK（23日）は本文が途中までしか読めず、「虚偽答弁と野党が主張」「官房長官が説明が重要と発言」を確認。16日に委員会でパーティーを認めた点と、課長を招いたことはしんぶん赤旗（野党の機関紙）のみの確認。関大臣本人の言い分は確認できていないので、公開前に他社報道での裏づけと、中立な書き方になっているかの確認が必要。関大臣の下の名前は書いていない。",
+    "算数：1859→2026で167年、167×365=60955を2回計算して確認。",
+    "ひとことニュース：首里城の一般公開と、AI兵器の国際会議はNHKのトップページの見出しのみで確認（本文は未確認）。23日が勤労感謝の日（祝日）であることは暦の事実。",
+    "ふりがな：「関（せき）」「木原官房長官（きはらかんぼうちょうかん）」「アンタルヤ」の読み、「脱化石燃料」「産経」の読みを確認してほしい。"
+  ]
+}
