@@ -1,6 +1,6 @@
 {
  "site": "https://jijitane.com",
- "generated_at": "2026-11-23T02:56:55.339Z",
+ "generated_at": "2026-11-23T03:23:40.204Z",
  "period": {
   "this_week": [
    "2026-11-16",
@@ -484,7 +484,7 @@
     },
     {
      "date": "2026-11-23",
-     "impressions": 64,
+     "impressions": 67,
      "likes": 0,
      "reposts": 0,
      "replies": 1,
@@ -637,7 +637,7 @@
     },
     {
      "date": "2026-11-23",
-     "views": 56,
+     "views": 60,
      "likes": 0,
      "replies": 0,
      "reposts": 0,
@@ -823,8 +823,8 @@
     {
      "date": "2026-11-23",
      "kind": "朝のまとめ",
-     "views": 72,
-     "reach": 20,
+     "views": 83,
+     "reach": 70,
      "likes": 0,
      "comments": 0,
      "saved": 0,
