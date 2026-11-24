@@ -128,6 +128,12 @@ ${sidebar(cfg, recent)}
 </html>`;
 }
 
+function sheetBand(base) {
+  const ids = Object.keys(SHEET_META);
+  const pick = ids.slice(0, 6);
+  return `<aside class="relsheet"><span class="rs-l">入試に出る「覚えるシート」（全${ids.length}種類・A4印刷OK）</span>${pick.map((id) => `<a href="${base}/sheets/${id}.html">${art(SHEET_META[id][1], 'rs-ic')}<b>${esc(SHEET_META[id][0])}</b><small>ページで見られる・A4で印刷もできる</small></a>`).join('')}<a href="${base}/sheets/"><b>ぜんぶのシートを見る</b><small>${ids.length}種類の一覧へ</small></a></aside>`;
+}
+
 function relBox(base, ids) {
   if (!ids.length) return '';
   return `<aside class="relsheet"><span class="rs-l">この話題の「覚えるシート」</span>${ids.map((id) => `<a href="${base}/sheets/${id}.html">${art(SHEET_META[id][1], 'rs-ic')}<b>${esc(SHEET_META[id][0])}</b><small>ページで見られる・A4で印刷もできる</small></a>`).join('')}</aside>`;
@@ -173,6 +179,7 @@ export function articlePage({ cfg, a, prev, next, css, top = false, recent = [] 
   <div class="hero-tx"><p class="issue">${top ? 'きょうの号' : `${dt.y}年の号`}<span class="badge">3分で読める</span></p><p class="lead">${inline(a.intro || '')}</p>${TOOLS}</div>
 </section>
 ${toc}
+${top ? sheetBand(base) : ''}
 ${articles}
 ${a.parent_note ? `<section class="pnote"><h3>運営者のひとこと</h3><p>${esc(a.parent_note)}</p><small>小6の子の親（運営者）が書いています</small></section>` : ''}
 ${(a.briefs || []).length ? `<section class="briefs"><h3>ひとことニュース</h3><ul>${a.briefs.map((b) => `<li>${inline(b)}</li>`).join('')}</ul></section>` : ''}
