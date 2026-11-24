@@ -28,7 +28,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: github-pages
-      url: ${{ steps.pages.outputs.page_url }}
+      url: ${{ steps.pages1.outputs.page_url || steps.pages.outputs.page_url }}
     services:
       voicevox:   # サイトの読み上げ音声（VOICEVOX:冥鳴ひまり）を作る
         image: voicevox/voicevox_engine:cpu-latest
@@ -76,7 +76,16 @@ jobs:
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
+      - name: 反映待ち（成果物がAPIに出るまで少し待つ）
+        run: sleep 30
+      - id: pages1
+        continue-on-error: true
+        uses: actions/deploy-pages@v4
+      - name: 失敗したら待ってもう一度
+        if: steps.pages1.outcome == 'failure'
+        run: sleep 60
       - id: pages
+        if: steps.pages1.outcome == 'failure'
         uses: actions/deploy-pages@v4
 
   post:
