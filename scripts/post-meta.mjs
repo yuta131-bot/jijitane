@@ -45,8 +45,17 @@ else if (process.env.THREADS_TOKEN && (!state[date].threads || force)) {
     const T = 'https://graph.threads.net/v1.0';
     const token = process.env.THREADS_TOKEN;
     const text = `${dt.short}の${cfg.siteName}🌱\n\n${lines}\n\nQ. ${plain(a.news[0].quiz.q)}\n答えは図解つきでサイトに👇\n${base}/news/${date}.html\n\n#中学受験`;
-    const c = await call(`${T}/me/threads`, { media_type: 'IMAGE', image_url: `${base}/og/${date}.png`, text: [...text].slice(0, 500).join(''), access_token: token });
-    await sleep(30000); // 画像の取り込みを待つ（Meta の推奨）
+    // Meta が画像を取りに来て失敗する（取得失敗・タイムアウト）ことがあるので、2回まで試し、だめなら画像なし（文章とリンクだけ）で投稿する
+    const imgUrl = `${base}/og/${date}.png`;
+    try { const h = await fetch(imgUrl, { method: 'HEAD' }); console.log('画像の確認:', h.status, h.headers.get('content-type'), h.headers.get('content-length')); } catch (e) { console.log('画像の確認に失敗:', e.message); }
+    const body = [...text].slice(0, 500).join('');
+    let c;
+    for (let attempt = 1; attempt <= 2 && !c; attempt++) {
+      try { c = await call(`${T}/me/threads`, { media_type: 'IMAGE', image_url: imgUrl, text: body, access_token: token }); }
+      catch (e) { console.log(`Threads 画像つき（${attempt}回目）失敗: ${e.message.slice(0, 200)}`); if (attempt < 2) await sleep(20000); }
+    }
+    if (!c) { c = await call(`${T}/me/threads`, { media_type: 'TEXT', text: body, access_token: token }); console.log('Threads は画像なしで投稿します'); }
+    await sleep(30000); // 取り込みを待つ（Meta の推奨）
     const p = await call(`${T}/me/threads_publish`, { creation_id: c.id, access_token: token });
     state[date].threads = { id: p.id, at: new Date().toISOString() };
     console.log('Threads に投稿しました:', p.id);

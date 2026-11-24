@@ -98,7 +98,11 @@ if (process.env.IG_TOKEN && (state[sheet.id].igDay !== today || force)) {
       const url = `https://github.com/${repo}/releases/download/sheet-promo/${f}`;
       const head = await fetch(url, { method: 'HEAD', redirect: 'follow' });
       if (!head.ok) throw new Error(`画像がまだ置かれていません（${head.status}）${url}`);
-      const c = await call(`${G}/${id}/media`, { image_url: url, is_carousel_item: 'true', access_token: token });
+      let c; // Meta の画像取り込みがタイムアウトすることがあるので、3回まで試す
+      for (let attempt = 1; attempt <= 3 && !c; attempt++) {
+        try { c = await call(`${G}/${id}/media`, { image_url: url, is_carousel_item: 'true', access_token: token }); }
+        catch (e) { console.log(`画像の取り込み失敗（${attempt}回目）: ${e.message.slice(0, 200)}`); if (attempt === 3) throw e; await sleep(20000); }
+      }
       kids.push(c.id);
     }
     for (const k of kids) await wait(G, k, token);
