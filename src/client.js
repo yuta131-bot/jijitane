@@ -303,6 +303,12 @@
   }
   /* スタンプ帳：連続でなくてよい。クイズに答えた日の合計（累計）で、称号がふえる */
   var RANKS = [[5, 'ニュース見習い'], [10, 'ニュース博士'], [20, 'ニュースマスター'], [30, 'ニュースヒーロー'], [50, 'ニュース名人'], [100, 'ニュース王']];
+  (function seed() { // 以前の「れんぞく記録」で遊んだ分を、スタンプにひきつぐ
+    if (ls.get('jt-days') !== null) return;
+    var n = Number(ls.get('jt-streak') || 0), last = ls.get('jt-last'), a = [];
+    if (n && last) { var b = new Date(last + 'T00:00:00Z').getTime(); for (var i = n - 1; i >= 0; i--) a.push(new Date(b - i * 86400e3).toISOString().slice(0, 10)); }
+    ls.set('jt-days', JSON.stringify(a));
+  })();
   function stampDays() { try { var a = JSON.parse(ls.get('jt-days') || '[]'); return Array.isArray(a) ? a : []; } catch (e) { return []; } }
   function rankOf(n) { var r = 'はじめの一歩'; RANKS.forEach(function (x) { if (n >= x[0]) r = x[1]; }); return r; }
   function nextGoal(n) { for (var i = 0; i < RANKS.length; i++) if (n < RANKS[i][0]) return RANKS[i]; return null; }
