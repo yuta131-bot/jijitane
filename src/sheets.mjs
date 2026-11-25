@@ -290,7 +290,7 @@ const sheetCard = (base, s) => {
 export function sheetsIndexPage({ cfg, css, sheets, recent }) {
   const base = baseOf(cfg);
   const main = `<section class="hero hero-list"><div class="hero-tx"><h1>覚えるシート</h1><p class="lead">中学受験で、くり返し見る「基本の1枚」を集めました。時事のしくみから、算数の公式、年表、都道府県、漢字の部首まで。ページで見られて、A4に印刷もできます。</p></div></section>
-${cfg.lineUrl ? `<div class="sx-line"><b>印刷してポスターに。トイレや部屋に貼って、毎日ながめて覚えよう</b><p>A4で印刷できるPDF（おもてとうら）を、LINEでプレゼント。友だちになって、トークで「シート」と送ってください。すべてのシートのPDFをお送りします。</p><a class="btn btn-line" href="${lineGoHref(base, 'sheets')}" target="_blank" rel="noopener">LINEで受け取る</a></div>` : ''}
+<div class="sx-line"><b>印刷してポスターに。トイレや部屋に貼って、毎日ながめて覚えよう</b><p>どのシートも、ページを開くと「PDFをダウンロード」ボタンから、A4の印刷用PDF（おもてとうら）を無料でもらえます。登録は要りません。${cfg.lineUrl ? `新しいシートや今週の出題予想のお知らせは、<a href="${lineGoHref(base, 'sheets')}" target="_blank" rel="noopener">LINE</a>でも届けています。` : ''}</p></div>
 <div class="sx-chips" role="group" aria-label="科目でしぼる"><button type="button" class="on" data-f="">すべて（${sheets.length}）</button>${CATS.map((c) => `<button type="button" data-f="${c}">${c}（${sheets.filter((x) => catsOf(x).includes(c)).length}）</button>`).join('')}</div>
 <div class="mt-cards sx-grid">${sheets.map((s) => sheetCard(base, s)).join('')}</div>
 <script>(function(){var b=document.querySelectorAll('.sx-chips button'),c=document.querySelectorAll('.sx-grid .sx-card');b.forEach(function(x){x.addEventListener('click',function(){b.forEach(function(y){y.classList.toggle('on',y===x)});var f=x.getAttribute('data-f');c.forEach(function(k){k.hidden=!!f&&(' '+k.getAttribute('data-cat')+' ').indexOf(' '+f+' ')<0})})})})();</script>
@@ -303,7 +303,7 @@ export function sheetPage({ cfg, css, s, sheets, recent }) {
   const others = sheets.filter((x) => x.id !== s.id);
   const main = `<nav class="crumb"><a href="${base}/">トップ</a><span>›</span><a href="${base}/sheets/">覚えるシート</a><span>›</span><span>${esc(s.title)}</span></nav>
 <section class="hero hero-list"><div class="hero-tx"><h1>${esc(s.title)}</h1><p class="lead">${esc(s.intro)}</p><p class="mt-upd">${esc(s.subject)}　最終更新：${esc(jpDate(s.updated).label)}${s.asof ? `（${esc(s.asof)}の内容）` : ''}</p></div></section>
-${cfg.lineUrl ? `<div class="sx-line"><b>印刷用のPDF（A4・おもてとうら）</b><p>LINEの友だちになって、トークで「シート」と送ると、PDFをお送りします。</p><a class="btn btn-line" href="${lineGoHref(base, `sheet-${s.id}`)}" target="_blank" rel="noopener">LINEで受け取る</a></div>` : ''}
+<div class="sx-line"><b>印刷用のPDF（A4・おもてとうら）</b><p>無料でダウンロードできます。登録は要りません。印刷して、部屋やトイレに貼って使ってください。</p><a class="btn btn-dl" href="${base}/gift/sheet-${s.id}.pdf" download>PDFをダウンロード</a>${cfg.lineUrl ? `<p class="sx-line-sub">新しいシートのお知らせは<a href="${lineGoHref(base, `sheet-${s.id}`)}" target="_blank" rel="noopener">LINE</a>で届きます。</p>` : ''}</div>
 <div class="sx sx-site">${s.pages.map((p, i) => pageHtml(cfg, s, p, i, false)).join('')}</div>
 ${s.study ? `<p class="mt-note">おぼえ方の解説は、<a href="${base}/study/${s.study}.html">中受の読み物</a>にまとめています。</p>` : ''}
 <p class="mt-note">家庭・塾・学校での印刷・配布は自由です（内容の改変・販売はご遠慮ください）。まちがいを見つけたら、お問い合わせから教えてください。</p>
@@ -313,7 +313,7 @@ ${s.study ? `<p class="mt-note">おぼえ方の解説は、<a href="${base}/stud
 
 const SITE_CSS = `
 .sx-line{border:2px dashed #1E9A72;border-radius:14px;padding:10px 14px;margin:0 0 16px;background:#F3FBF7;color:#1D2B44}
-.sx-line b{font-size:16px;font-weight:900}.sx-line p{margin:4px 0 8px;font-size:14px}.sx-line .btn{display:inline-block;padding:8px 22px}
+.sx-line b{font-size:16px;font-weight:900}.sx-line p{margin:4px 0 8px;font-size:14px}.sx-line .btn{display:inline-block;padding:8px 22px}.btn-dl{background:#1E9A72;color:#fff}.sx-line .sx-line-sub{margin:8px 0 0;font-size:13px;color:#56677f}
 .sx-chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}.sx-chips button{font:inherit;font-weight:800;font-size:14px;padding:6px 14px;border:2px solid #1D2B44;border-radius:999px;background:#fff;color:#1D2B44;cursor:pointer}.sx-chips button.on{background:#1D2B44;color:#fff}
 .sx-card{display:flex!important;gap:12px;align-items:center}.sx-card[hidden]{display:none!important}.sx-ci2{width:52px;height:52px;flex:none;background:#fff;border-radius:50%;padding:5px;border:2px solid #1D2B44;box-sizing:border-box}
 .sx-cb{display:block;min-width:0}.sx-cb i{display:flex;flex-wrap:wrap;gap:4px 6px;align-items:center;margin-top:6px;font-style:normal}.sx-cb u{text-decoration:none;font-size:12px;font-weight:900;padding:1px 8px;border-radius:999px;color:#fff}
