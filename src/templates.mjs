@@ -131,7 +131,7 @@ ${sidebar(cfg, recent)}
 function sheetBand(base) {
   const ids = Object.keys(SHEET_META);
   const pick = ids.slice(0, 6);
-  return `<aside class="relsheet"><span class="rs-l">入試に出る「覚えるシート」（全${ids.length}種類・A4印刷OK）</span>${pick.map((id) => `<a href="${base}/sheets/${id}.html">${art(SHEET_META[id][1], 'rs-ic')}<b>${esc(SHEET_META[id][0])}</b><small>ページで見られる・A4で印刷もできる</small></a>`).join('')}<a href="${base}/sheets/"><b>ぜんぶのシートを見る</b><small>${ids.length}種類の一覧へ</small></a></aside>`;
+  return `<aside class="relsheet band"><span class="rs-l">入試に出る「覚えるシート」（全${ids.length}種類・A4印刷OK）</span>${pick.map((id) => `<a href="${base}/sheets/${id}.html">${art(SHEET_META[id][1], 'rs-ic')}<b>${esc(SHEET_META[id][0])}</b><small>見る・A4印刷OK</small></a>`).join('')}<a class="all" href="${base}/sheets/"><b>ぜんぶのシートを見る（${ids.length}種類の一覧へ）</b></a></aside>`;
 }
 
 function relBox(base, ids) {

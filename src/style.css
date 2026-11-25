@@ -319,3 +319,10 @@ svg text{font-family:"Zen Maru Gothic","Hiragino Maru Gothic ProN","Hiragino San
 
 .pnote{margin:20px 0;padding:16px 20px;border:3px solid var(--ink);border-radius:20px;background:var(--card);box-shadow:4px 4px 0 var(--ink)}.pnote h3{font-size:1rem;margin:0 0 6px}.pnote p{margin:0 0 6px;line-height:1.8;font-weight:700}.pnote small{color:var(--muted)}
 .relsheet a,.relsheet b{color:#1d2b44}
+.relsheet.band{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.relsheet.band .rs-l{grid-column:1/-1}
+.relsheet.band a{min-height:86px;min-width:0;align-content:center}
+.relsheet.band b{line-height:1.3}
+.relsheet.band a.all{grid-column:1/-1;grid-template-columns:1fr;min-height:0;text-align:center;padding:12px}
+@media(max-width:640px){.relsheet.band{grid-template-columns:repeat(2,1fr)}.relsheet.band a{grid-template-columns:36px 1fr;column-gap:8px;padding:8px}.relsheet.band .rs-ic{width:36px;height:36px}.relsheet.band b{font-size:.88rem}}
+
