@@ -58,6 +58,73 @@ export const ARTS = {
     '<path d="M110 70h80M116 84h68" stroke="#8A8468" stroke-width="1" opacity=".6"/>',
     '<rect x="20" y="96" width="260" height="5" fill="#B3AB93"/>',
   ].join('') },
+
+  // ロケット（打ち上げ中）。炎つき
+  rocket: { W: 120, H: 270, f: () => [
+    '<defs><linearGradient id="rkB" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#C5CED8"/><stop offset=".38" stop-color="#fff"/><stop offset="1" stop-color="#AEB9C6"/></linearGradient>',
+    '<linearGradient id="rkF" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF4C2"/><stop offset=".5" stop-color="#FFB52E"/><stop offset="1" stop-color="#E8451E" stop-opacity="0"/></linearGradient></defs>',
+    '<path d="M34 196v-56q8-26 16-20v76zM86 196v-56q-8-26-16-20v76z" fill="url(#rkB)" stroke="#8A94A3" stroke-width="1.4"/>',
+    '<path d="M60 4C74 24 80 50 80 84v118H40V84C40 50 46 24 60 4z" fill="url(#rkB)" stroke="#8A94A3" stroke-width="1.6"/>',
+    '<path d="M52 18C47 38 46 60 46 84" stroke="#fff" stroke-width="3" opacity=".8" fill="none" stroke-linecap="round"/>',
+    '<rect x="40" y="84" width="40" height="6" fill="#3A4352"/><rect x="40" y="150" width="40" height="7" fill="#E8742A"/><path d="M40 118h40M40 176h40" stroke="#B4BEC9" stroke-width="1"/>',
+    '<circle cx="60" cy="104" r="6.5" fill="#6FA9D3" stroke="#3A4352" stroke-width="1.6"/>',
+    '<path d="M34 196l-8 14h16zM86 196l8 14H78z" fill="#4B5563"/><path d="M48 202l-4 14h32l-4-14z" fill="#4B5563"/>',
+    '<path d="M44 216Q60 276 76 216z" fill="url(#rkF)"/><path d="M52 216Q60 252 68 216z" fill="#FFF4C2" opacity=".95"/>',
+    '<path d="M28 210q6 36 12 4zM92 210q-6 36-12 4z" fill="url(#rkF)"/>',
+  ].join('') },
+  // 人工衛星・探査機（太陽電池パネルとパラボラアンテナ）
+  satellite: { W: 240, H: 140, f: () => [
+    '<defs><linearGradient id="stP" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3C79D6"/><stop offset="1" stop-color="#1D3F8C"/></linearGradient>',
+    '<linearGradient id="stB" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F6D77A"/><stop offset="1" stop-color="#C79A2B"/></linearGradient></defs>',
+    '<path d="M120 70h-18M120 70h18" stroke="#8892A6" stroke-width="3"/>',
+    '<rect x="6" y="38" width="94" height="64" rx="3" fill="url(#stP)" stroke="#A9C6FF" stroke-width="1.6"/>', grid(6, 38, 94, 64, 15.6, 16, '#A9C6FF', '.8'),
+    '<rect x="140" y="38" width="94" height="64" rx="3" fill="url(#stP)" stroke="#A9C6FF" stroke-width="1.6"/>', grid(140, 38, 94, 64, 15.6, 16, '#A9C6FF', '.8'),
+    '<rect x="98" y="46" width="44" height="48" rx="5" fill="url(#stB)" stroke="#8A6A1A" stroke-width="1.6"/>',
+    '<path d="M104 58h32M104 70h32M104 82h32" stroke="#8A6A1A" stroke-width="1" opacity=".55"/>',
+    '<path d="M120 46v-14" stroke="#8892A6" stroke-width="2.4"/><path d="M104 22q16-16 32 0q-16 8-32 0z" fill="#E8ECF4" stroke="#8892A6" stroke-width="1.4"/><circle cx="120" cy="32" r="2.6" fill="#E5484D"/>',
+    '<path d="M120 94v10" stroke="#8892A6" stroke-width="2.4"/><rect x="112" y="104" width="16" height="8" rx="2" fill="#4B5563"/>',
+  ].join('') },
+  // 地震：地下の層、震源、ゆれの波、ゆれる家
+  quake: { W: 300, H: 180, f: () => [
+    '<defs><linearGradient id="qkS" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#C9A06A"/><stop offset=".5" stop-color="#A9794A"/><stop offset="1" stop-color="#7A5233"/></linearGradient></defs>',
+    '<rect x="0" y="72" width="300" height="108" rx="8" fill="url(#qkS)"/>',
+    '<path d="M0 100q60-8 130 2t170-4M0 132q80 8 150-2t150 6" stroke="#5C3B22" stroke-width="2" opacity=".5" fill="none"/>',
+    '<rect x="0" y="62" width="300" height="12" rx="4" fill="#6FBF73"/>',
+    '<path d="M162 74l-18 30l14 4l-14 22" stroke="#2B1A10" stroke-width="3" fill="none" stroke-linejoin="round"/>',
+    '<g fill="none" stroke="#E5484D" stroke-width="2.4" opacity=".85"><circle cx="144" cy="130" r="12"/><circle cx="144" cy="130" r="26" opacity=".7"/><circle cx="144" cy="130" r="38" opacity=".5"/><circle cx="144" cy="130" r="48" opacity=".3"/></g>',
+    '<path d="M144 120l3.5 8l8.5 .6l-6.5 5.6l2 8.4l-7.5-4.5l-7.5 4.5l2-8.4l-6.5-5.6l8.5-.6z" fill="#F2C14E" stroke="#B8860B" stroke-width="1.2"/>',
+    // 家（ゆれる）
+    '<g stroke="#5A4636" stroke-width="1.4"><rect x="40" y="36" width="34" height="26" fill="#F3E3C6"/><path d="M36 36l21-18l21 18z" fill="#C9573A"/><rect x="52" y="44" width="10" height="18" fill="#8A6A4A"/></g>',
+    '<g stroke="#5A4636" stroke-width="1.4" transform="rotate(5 232 62)"><rect x="214" y="30" width="38" height="32" fill="#E4EEF6"/><path d="M210 30l23-20l23 20z" fill="#5B7DB1"/><rect x="226" y="42" width="11" height="20" fill="#8A6A4A"/></g>',
+    '<path d="M28 30q-6 8 0 16M20 26q-8 12 0 24M270 34q6 8 0 16M280 28q8 12 0 24" stroke="#E5484D" stroke-width="2" fill="none" stroke-linecap="round"/>',
+  ].join('') },
+  // 台風：うずまく雲と目（うずは計算で描く）
+  typhoon: { W: 200, H: 200, f: () => {
+    const arm = (k, w, o) => {
+      let d = '';
+      for (let s = 0; s <= 40; s++) { const u = s / 40, r = 20 + 74 * u, th = k * 2.0944 + u * 4.4; d += `${s ? 'L' : 'M'}${(100 + r * Math.cos(th)).toFixed(1)} ${(100 + r * Math.sin(th)).toFixed(1)}`; }
+      return `<path d="${d}" stroke="#fff" stroke-width="${w}" opacity="${o}" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`;
+    };
+    return '<defs><radialGradient id="tyO" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#3A7CC2"/><stop offset="1" stop-color="#1E4F8C"/></radialGradient>'
+      + '<radialGradient id="tyE" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#1B4A82"/><stop offset="1" stop-color="#6AA3DA"/></radialGradient></defs>'
+      + '<circle cx="100" cy="100" r="96" fill="url(#tyO)"/>'
+      + '<circle cx="100" cy="100" r="40" fill="#fff" opacity=".7"/>'
+      + [0, 1, 2].map((k) => arm(k, 20, 0.88)).join('') + [0, 1, 2].map((k) => arm(k + 0.5, 9, 0.55)).join('')
+      + '<circle cx="100" cy="100" r="13" fill="url(#tyE)" stroke="#fff" stroke-width="2.4"/>';
+  } },
+  // 原子力発電所：ドーム型の原子炉建屋、タービン建屋、煙突、海
+  nuclear: { W: 300, H: 180, f: () => [
+    '<defs><linearGradient id="nuW" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5BA8E6"/><stop offset="1" stop-color="#2E78C7"/></linearGradient>',
+    '<linearGradient id="nuD" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#F2F4F7"/><stop offset="1" stop-color="#C5CDD8"/></linearGradient></defs>',
+    '<rect x="0" y="146" width="300" height="34" rx="4" fill="url(#nuW)"/><path d="M12 160q10-5 20 0t20 0t20 0t20 0t20 0t20 0t20 0t20 0t20 0t20 0t20 0t20 0M40 172q10-5 20 0t20 0t20 0t20 0t20 0t20 0" stroke="#fff" stroke-width="1.3" fill="none" opacity=".5"/>',
+    '<rect x="0" y="130" width="300" height="18" fill="#D9DEE5"/>',
+    '<rect x="150" y="62" width="100" height="70" fill="url(#nuD)" stroke="#7B8794" stroke-width="1.6"/>', grid(150, 62, 100, 70, 25, 14, '#7B8794', '.35'),
+    '<path d="M70 132v-48a40 40 0 0 1 80 0v48z" fill="url(#nuD)" stroke="#7B8794" stroke-width="1.6"/>',
+    '<path d="M70 96h80M70 112h80" stroke="#7B8794" stroke-width="1" opacity=".5"/><path d="M84 132v-36M110 132v-60M136 132v-36" stroke="#7B8794" stroke-width="1" opacity=".35"/>',
+    '<rect x="262" y="26" width="10" height="106" fill="#E5484D"/><rect x="262" y="26" width="10" height="14" fill="#fff"/><rect x="262" y="54" width="10" height="14" fill="#fff"/><rect x="262" y="82" width="10" height="14" fill="#fff"/><rect x="260" y="22" width="14" height="6" fill="#7B8794"/>',
+    '<path d="M268 20q-4-10 8-16q-2 10-8 16" fill="#E9E6EC" opacity=".9"/>',
+    '<rect x="176" y="50" width="48" height="14" fill="#EAF0F6" stroke="#7B8794" stroke-width="1.4"/>',
+  ].join('') },
 };
 const num = (v, d) => (Number.isFinite(parseFloat(v)) ? parseFloat(v) : d);
 export function expandArts(svg = '') {
