@@ -125,6 +125,34 @@ export const ARTS = {
     '<path d="M268 20q-4-10 8-16q-2 10-8 16" fill="#E9E6EC" opacity=".9"/>',
     '<rect x="176" y="50" width="48" height="14" fill="#EAF0F6" stroke="#7B8794" stroke-width="1.4"/>',
   ].join('') },
+
+  // 防護服を着た人（医療・検査の訓練など）
+  ppe: { W: 100, H: 170, f: () => {
+    const S = '#F7F8FA', L = '#9AA5B8';
+    return [
+      `<rect x="30" y="108" width="18" height="48" rx="7" fill="${S}" stroke="${L}" stroke-width="1.8"/><rect x="52" y="108" width="18" height="48" rx="7" fill="${S}" stroke="${L}" stroke-width="1.8"/>`,
+      '<rect x="30" y="146" width="18" height="4" fill="#F2994A"/><rect x="52" y="146" width="18" height="4" fill="#F2994A"/>',
+      `<path d="M28 154h22v10q0 5-5 5H31q-5 0-5-5v-6q0-4 2-4zM50 154h22q2 0 2 4v6q0 5-5 5H55q-5 0-5-5z" fill="#9FD0B0" stroke="#5F8F70" stroke-width="1.5" stroke-linejoin="round"/>`,
+      `<path d="M26 62Q50 52 74 62L80 114H20z" fill="${S}" stroke="${L}" stroke-width="1.8" stroke-linejoin="round"/>`,
+      `<path d="M50 62V114" stroke="${L}" stroke-width="1.6" stroke-dasharray="3 2.5"/><path d="M34 68q-4 20-3 44M66 68q4 20 3 44" stroke="#DDE2E9" stroke-width="1.2" fill="none"/>`,
+      `<path d="M26 64Q8 74 5 108l15 2Q23 86 34 72z" fill="${S}" stroke="${L}" stroke-width="1.8" stroke-linejoin="round"/><path d="M74 64Q92 74 95 108l-15 2Q77 86 66 72z" fill="${S}" stroke="${L}" stroke-width="1.8" stroke-linejoin="round"/>`,
+      '<rect x="4" y="103" width="17" height="5" fill="#F2994A"/><rect x="79" y="103" width="17" height="5" fill="#F2994A"/>',
+      '<ellipse cx="12" cy="118" rx="9.5" ry="11" fill="#3B6FE0" stroke="#27479B" stroke-width="1.4"/><ellipse cx="88" cy="118" rx="9.5" ry="11" fill="#3B6FE0" stroke="#27479B" stroke-width="1.4"/>',
+      `<path d="M22 58Q22 50 30 48Q50 56 70 48Q78 50 78 58Q50 66 22 58z" fill="${S}" stroke="${L}" stroke-width="1.6"/>`,
+      `<ellipse cx="50" cy="30" rx="28" ry="30" fill="${S}" stroke="${L}" stroke-width="1.8"/>`,
+      '<ellipse cx="50" cy="33" rx="17" ry="20" fill="#F6D3B0" stroke="#C9A58A" stroke-width="1.4"/>',
+      '<rect x="33" y="24" width="34" height="12" rx="6" fill="#D6EDF9" stroke="#3B6FE0" stroke-width="2"/><path d="M38 28q4-3 10-3" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" opacity=".9"/><circle cx="43" cy="31" r="1.6" fill="#3A2F2A"/><circle cx="57" cy="31" r="1.6" fill="#3A2F2A"/>',
+      '<path d="M35 38h30q2 0 2 3v6q0 6-17 7q-17-1-17-7v-6q0-3 2-3z" fill="#E3F1FA" stroke="#8FB5CC" stroke-width="1.4"/><path d="M38 42h24M38 47h24" stroke="#B9D6E8" stroke-width="1"/>',
+      `<path d="M26 26Q28 6 50 4" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" opacity=".7"/>`,
+    ].join('');
+  } },
+  // エボラウイルス（ひも状）
+  filovirus: { W: 120, H: 100, f: () => [
+    '<defs><linearGradient id="fvG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#C79BF2"/><stop offset="1" stop-color="#7A4FB8"/></linearGradient></defs>',
+    '<path d="M14 80C20 30 54 16 68 36C82 56 54 76 54 56C54 40 74 36 86 46C100 58 102 72 110 64" fill="none" stroke="#5B3590" stroke-width="13" stroke-linecap="round"/>',
+    '<path d="M14 80C20 30 54 16 68 36C82 56 54 76 54 56C54 40 74 36 86 46C100 58 102 72 110 64" fill="none" stroke="url(#fvG)" stroke-width="9" stroke-linecap="round"/>',
+    '<path d="M18 70C24 38 50 24 62 36" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" opacity=".55"/>',
+  ].join('') },
 };
 const num = (v, d) => (Number.isFinite(parseFloat(v)) ? parseFloat(v) : d);
 export function expandArts(svg = '') {
