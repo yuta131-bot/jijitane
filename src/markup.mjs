@@ -28,6 +28,7 @@ export function plain(s = '') {
 // 正確な海岸線のベースマップ（tools/make-basemaps.py で Natural Earth から作成）
 //   図の中に <basemap name="typhoon" x="0" y="40" width="360"/> と書くと、ここで地図に置きかわる
 export const BASEMAPS = JSON.parse(fs.readFileSync(new URL('./basemaps.json', import.meta.url), 'utf8'));
+import { expandArts } from './arts.mjs';
 const num = (v, d) => (Number.isFinite(parseFloat(v)) ? parseFloat(v) : d);
 export function expandBasemaps(svg = '') {
   return String(svg).replace(/<basemap\b([^>]*?)\/?>(\s*<\/basemap>)?/gi, (_, attrs) => {
@@ -43,7 +44,7 @@ export function expandBasemaps(svg = '') {
 
 // AI が作った SVG を安全にして、ページ内で id がぶつからないようにする
 export function safeSvg(svg = '', prefix = 'f') {
-  let s = expandBasemaps(String(svg).trim());
+  let s = expandArts(expandBasemaps(String(svg).trim()));
   if (!/^<svg[\s>]/i.test(s) || !/<\/svg>\s*$/i.test(s)) return '';
   s = s
     .replace(/<script[\s\S]*?<\/script>/gi, '')
