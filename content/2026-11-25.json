@@ -1,0 +1,225 @@
+{
+  "date": "2026-11-25",
+  "intro": "中国の宇宙船が外国人を初めて乗せて出発し、日本政府は核兵器禁止条約の会議に出ないと決め、日経平均株価が大きく下がった、3本です。",
+  "news": [
+    {
+      "subject": "理科（宇宙）",
+      "subject_key": "rika",
+      "title": "{中国|ちゅうごく}の{宇宙船|うちゅうせん}「{神舟|しんしゅう}24{号|ごう}」、{外国人|がいこくじん}{初|はじ}めて{乗|の}せ{出発|しゅっぱつ}",
+      "short_title": "中国の宇宙船に外国人飛行士",
+      "points": [
+        "11月25日、{中国|ちゅうごく}が{有人宇宙船|ゆうじんうちゅうせん}「{神舟|しんしゅう}24{号|ごう}」を{打|う}ち{上|あ}げた。",
+        "{乗|の}っているのは、{中国|ちゅうごく}の{宇宙飛行士|うちゅうひこうし}2人とパキスタンの{宇宙飛行士|うちゅうひこうし}1人。",
+        "{中国|ちゅうごく}の{宇宙|うちゅう}ステーションに{外国人|がいこくじん}が{乗|の}るのは{初|はじ}めて。"
+      ],
+      "svg": "<svg viewBox='0 0 360 440'><defs><linearGradient id='sp' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#050B22'/><stop offset='1' stop-color='#1B2F63'/></linearGradient><marker id='ar' markerWidth='8' markerHeight='8' refX='6' refY='4' orient='auto'><path d='M0 0 L8 4 L0 8 Z' fill='#FFD166'/></marker></defs>\n<rect x='0' y='0' width='360' height='440' style='fill:var(--soft)'/>\n<rect x='0' y='0' width='360' height='330' fill='url(#sp)'/>\n<circle cx='300' cy='40' r='1.5' fill='#fff'/><circle cx='220' cy='60' r='1.2' fill='#fff'/><circle cx='20' cy='60' r='1.5' fill='#fff'/><circle cx='330' cy='250' r='1.5' fill='#fff'/><circle cx='150' cy='270' r='1.2' fill='#fff'/><circle cx='120' cy='30' r='1.2' fill='#fff'/>\n<text x='180' y='30' font-size='17' text-anchor='middle' font-weight='bold' style='fill:#fff'>神舟24号が打ち上げられた</text>\n<path d='M52 110 L70 70 L88 110 Z' fill='#E8ECF4'/><rect x='52' y='110' width='36' height='100' fill='#F5F7FB'/><rect x='52' y='140' width='36' height='8' fill='#E5484D'/><circle cx='70' cy='172' r='8' fill='#4FA3E0' stroke='#8892A6' stroke-width='2'/>\n<path d='M52 180 L36 225 L52 210 Z' fill='#C9D0DE'/><path d='M88 180 L104 225 L88 210 Z' fill='#C9D0DE'/><rect x='80' y='110' width='8' height='100' fill='#D3D9E6'/>\n<path d='M57 210 L70 268 L83 210 Z' fill='#FFB020'/><path d='M63 210 L70 245 L77 210 Z' fill='#FF6B35'/>\n<path d='M108 150 Q135 140 163 140' fill='none' stroke='#FFD166' stroke-width='2.5' stroke-dasharray='5 4' marker-end='url(#ar)'/>\n<rect x='170' y='86' width='52' height='18' rx='2' fill='#2F6FD6' stroke='#9CC1FF'/><line x1='187' y1='86' x2='187' y2='104' stroke='#9CC1FF'/><line x1='204' y1='86' x2='204' y2='104' stroke='#9CC1FF'/>\n<rect x='170' y='122' width='52' height='18' rx='2' fill='#2F6FD6' stroke='#9CC1FF'/><line x1='187' y1='122' x2='187' y2='140' stroke='#9CC1FF'/><line x1='204' y1='122' x2='204' y2='140' stroke='#9CC1FF'/>\n<rect x='282' y='86' width='52' height='18' rx='2' fill='#2F6FD6' stroke='#9CC1FF'/><line x1='299' y1='86' x2='299' y2='104' stroke='#9CC1FF'/><line x1='316' y1='86' x2='316' y2='104' stroke='#9CC1FF'/>\n<rect x='282' y='122' width='52' height='18' rx='2' fill='#2F6FD6' stroke='#9CC1FF'/><line x1='299' y1='122' x2='299' y2='140' stroke='#9CC1FF'/><line x1='316' y1='122' x2='316' y2='140' stroke='#9CC1FF'/>\n<rect x='222' y='100' width='60' height='28' rx='6' fill='#CFD6E4'/><rect x='244' y='80' width='16' height='20' rx='3' fill='#AEB8CC'/><rect x='244' y='128' width='16' height='20' rx='3' fill='#AEB8CC'/><circle cx='252' cy='114' r='6' fill='#6B7690'/>\n<text x='130' y='185' font-size='15' font-weight='bold' style='fill:#fff'>宇宙ステーション</text>\n<text x='130' y='206' font-size='15' style='fill:#fff'>「天宮（てんきゅう）」</text>\n<circle cx='180' cy='590' r='265' style='fill:var(--sea)'/><ellipse cx='150' cy='345' rx='80' ry='14' style='fill:var(--land)'/><ellipse cx='260' cy='352' rx='50' ry='10' style='fill:var(--land)'/>\n<path d='M70 322 L70 336' stroke='#E5484D' stroke-width='3'/><circle cx='70' cy='320' r='6' fill='#E5484D'/>\n<text x='85' y='326' font-size='14' style='fill:var(--ink);stroke:var(--card);stroke-width:3.5;stroke-linejoin:round;paint-order:stroke'>酒泉（しゅせん）の発射場</text>\n<rect x='14' y='368' width='332' height='60' rx='12' style='fill:var(--card);stroke:var(--sci);stroke-width:2'/>\n<text x='180' y='393' font-size='15' text-anchor='middle' font-weight='bold' style='fill:var(--ink)'>パキスタンの宇宙飛行士が</text>\n<text x='180' y='415' font-size='15' text-anchor='middle' style='fill:var(--ink)'>外国人で初めて天宮へ向かう</text>\n</svg>",
+      "caption": "神舟24号は酒泉の発射場から、宇宙ステーション「天宮」へ向かった。",
+      "body": [
+        "{北京時間|ぺきんじかん}の25{日|にち}{午前|ごぜん}8{時|じ}18{分|ふん}、{中国|ちゅうごく}の{酒泉|しゅせん}{衛星発射|えいせいはっしゃ}センターから、{有人宇宙船|ゆうじんうちゅうせん}「{神舟|しんしゅう}24{号|ごう}」が{打|う}ち{上|あ}げられました。{乗|の}っているのは、{中国|ちゅうごく}の{宇宙飛行士|うちゅうひこうし}2人と、パキスタンの{宇宙飛行士|うちゅうひこうし}1人です。",
+        "{向|む}かう{先|さき}は、{中国|ちゅうごく}が{地球|ちきゅう}の{上空|じょうくう}にもつ{宇宙|うちゅう}ステーション「{天宮|てんきゅう}」です。ステーションに=={外国人|がいこくじん}が{乗|の}りこむのは、これが{初|はじ}めて==です。パキスタンの{飛行士|ひこうし}は{実験|じっけん}などを{担当|たんとう}し、{滞在|たいざい}は{数日|すうじつ}から1{週間|しゅうかん}ほどと{伝|つた}えられています。",
+        "{宇宙|うちゅう}ステーションには、アメリカや{日本|にほん}などが{協力|きょうりょく}して{運営|うんえい}する{国際宇宙|こくさいうちゅう}ステーションもあります。{中国|ちゅうごく}は、=={自分|じぶん}の{国|くに}のステーションに{他|ほか}の{国|くに}の{人|ひと}を{招|まね}くこと==で、{宇宙|うちゅう}での{協力|きょうりょく}を{示|しめ}すねらいがあるとみられます。"
+      ],
+      "keywords": [
+        {
+          "term": "{天宮|てんきゅう}",
+          "desc": "中国が地球の上空につくった宇宙ステーション。"
+        },
+        {
+          "term": "{有人宇宙船|ゆうじんうちゅうせん}",
+          "desc": "人が乗って宇宙へ行く宇宙船。"
+        },
+        {
+          "term": "{国際宇宙|こくさいうちゅう}ステーション",
+          "desc": "{ISS|アイエスエス}ともいう。アメリカ・日本などが協力して運営する。"
+        }
+      ],
+      "quiz": {
+        "q": "アメリカ・ロシア・日本などが協力して運営している、地球の上空の宇宙ステーションは？",
+        "choices": [
+          "天宮",
+          "国際宇宙ステーション（ISS）",
+          "はやぶさ2"
+        ],
+        "answer": 1,
+        "a": "正しいのは2番目の国際宇宙ステーションです。天宮は中国のステーション、はやぶさ2は小惑星を調べた探査機です。",
+        "hint": "いくつもの国が協力しているよ。"
+      },
+      "units": [
+        "理科：月と星（宇宙）",
+        "社会：国際協力"
+      ],
+      "talk": "ほかの国の人を自分の国の宇宙ステーションにまねくと、どんなよいことや、むずかしいことがあるだろう？",
+      "talk_hints": [
+        "よいこと：宇宙の実験を、いろいろな国の人といっしょにできる。",
+        "むずかしいこと：ステーションの技術や情報を、どこまで見せてよいのか。",
+        "身近な例：学校に転校生や留学生が来たとき、どんな準備がいるかな。"
+      ],
+      "exam_level": 2
+    },
+    {
+      "subject": "社会（国際・政治）",
+      "subject_key": "shakai",
+      "title": "{日本政府|にほんせいふ}、{核兵器禁止条約|かくへいききんしじょうやく}の{会議|かいぎ}に{参加|さんか}せず",
+      "short_title": "核禁条約の会議 参加見送り",
+      "points": [
+        "{茂木外務大臣|もてぎがいむだいじん}が11月24日、{核兵器禁止条約|かくへいききんしじょうやく}の{再検討会議|さいけんとうかいぎ}に{参加|さんか}しないと{表明|ひょうめい}した。",
+        "{会議|かいぎ}は11月30日から、{国連本部|こくれんほんぶ}（アメリカ・ニューヨーク）で{開|ひら}かれる。",
+        "{広島市|ひろしまし}の{松井市長|まついしちょう}は「{被爆者|ひばくしゃ}の{思|おも}いに{反|はん}する」と{批判|ひはん}した。"
+      ],
+      "svg": "<svg viewBox='0 0 360 440'><rect x='0' y='0' width='360' height='440' style='fill:var(--soft)'/>\n<text x='180' y='28' font-size='17' text-anchor='middle' font-weight='bold' style='fill:var(--ink)'>核兵器禁止条約の再検討会議</text>\n<polygon points='120,80 180,48 240,80' style='fill:var(--card);stroke:var(--ink);stroke-width:2'/>\n<rect x='132' y='84' width='12' height='44' style='fill:var(--card);stroke:var(--ink);stroke-width:1.5'/><rect x='152' y='84' width='12' height='44' style='fill:var(--card);stroke:var(--ink);stroke-width:1.5'/><rect x='172' y='84' width='12' height='44' style='fill:var(--card);stroke:var(--ink);stroke-width:1.5'/><rect x='192' y='84' width='12' height='44' style='fill:var(--card);stroke:var(--ink);stroke-width:1.5'/><rect x='212' y='84' width='12' height='44' style='fill:var(--card);stroke:var(--ink);stroke-width:1.5'/>\n<rect x='118' y='128' width='124' height='10' style='fill:var(--sky);stroke:var(--ink);stroke-width:1.5'/><rect x='108' y='138' width='144' height='8' style='fill:var(--sky);stroke:var(--ink);stroke-width:1.5'/>\n<text x='180' y='172' font-size='15' text-anchor='middle' style='fill:var(--ink)'>国連本部（アメリカ・ニューヨーク）</text>\n<text x='180' y='194' font-size='15' text-anchor='middle' font-weight='bold' style='fill:var(--soc)'>11月30日に始まる</text>\n<path d='M180 204 L180 226' stroke='var(--muted)' stroke-width='3'/><path d='M172 222 L180 232 L188 222 Z' style='fill:var(--muted)'/>\n<rect x='14' y='240' width='161' height='104' rx='12' style='fill:var(--card);stroke:var(--soc);stroke-width:2'/><rect x='185' y='240' width='161' height='104' rx='12' style='fill:var(--card);stroke:#E5484D;stroke-width:2'/>\n<circle cx='94' cy='266' r='10' fill='#5B7DB1'/><path d='M76 300 Q76 278 94 278 Q112 278 112 300 Z' fill='#5B7DB1'/><circle cx='265' cy='266' r='10' fill='#E5484D'/><path d='M247 300 Q247 278 265 278 Q283 278 283 300 Z' fill='#E5484D'/>\n<text x='94' y='322' font-size='15' text-anchor='middle' font-weight='bold' style='fill:var(--ink)'>日本政府</text><text x='94' y='340' font-size='13' text-anchor='middle' style='fill:var(--muted)'>参加を見送る</text>\n<text x='265' y='322' font-size='15' text-anchor='middle' font-weight='bold' style='fill:var(--ink)'>広島市の市長</text><text x='265' y='340' font-size='13' text-anchor='middle' style='fill:var(--muted)'>参加を求めている</text>\n<rect x='14' y='360' width='332' height='64' rx='12' style='fill:var(--card);stroke:var(--landline);stroke-width:2'/>\n<text x='180' y='386' font-size='15' text-anchor='middle' style='fill:var(--ink)'>外相の理由：核抑止（よくし）の政策と</text>\n<text x='180' y='408' font-size='15' text-anchor='middle' style='fill:var(--ink)'>合わず「誤ったメッセージ」になる</text>\n</svg>",
+      "caption": "日本政府は見送り、広島市は参加を求めている。",
+      "body": [
+        "11月24日、{茂木外務大臣|もてぎがいむだいじん}は{記者会見|きしゃかいけん}で、30日から{国連本部|こくれんほんぶ}で{始|はじ}まる{核兵器禁止条約|かくへいききんしじょうやく}の{再検討会議|さいけんとうかいぎ}に、日本は==オブザーバーとしても{参加|さんか}しない==と{伝|つた}えました。オブザーバーとは、{条約|じょうやく}に{入|はい}っていない{国|くに}が、{会議|かいぎ}を{見守|みまも}るために{出|で}る{立場|たちば}のことです。",
+        "{核兵器禁止条約|かくへいききんしじょうやく}は、{核兵器|かくへいき}をつくることや{使|つか}うことをすべて{禁|きん}じる{条約|じょうやく}で、2021{年|ねん}に{発効|はっこう}しました。アメリカや{中国|ちゅうごく}など{核兵器|かくへいき}をもつ{国|くに}は{入|はい}っていません。{日本|にほん}も{入|はい}っていません。",
+        "{茂木外務大臣|もてぎがいむだいじん}は{理由|りゆう}を、=={日本|にほん}の{核抑止|かくよくし}の{政策|せいさく}と「{相|あい}いれない」==からだと{説明|せつめい}し、{会議|かいぎ}に{出|で}ると「{誤|あやま}ったメッセージ」になるとも{話|はな}しました。{核抑止|かくよくし}とは、{核兵器|かくへいき}の{力|ちから}で{相手|あいて}に{攻撃|こうげき}をあきらめさせる{考|かんが}え{方|かた}です。",
+        "{一方|いっぽう}、{広島市|ひろしまし}の{松井市長|まついしちょう}は、=={被爆者|ひばくしゃ}の{思|おも}いに{反|はん}する==と{批判|ひはん}し、これからもオブザーバーとして{参加|さんか}するよう{求|もと}める{考|かんが}えを{示|しめ}しました。"
+      ],
+      "keywords": [
+        {
+          "term": "{核兵器禁止条約|かくへいききんしじょうやく}",
+          "desc": "核兵器をつくることや使うことをすべて禁じる条約。2021年に発効した。"
+        },
+        {
+          "term": "オブザーバー",
+          "desc": "条約に入っていない国が、会議を見守るために出る立場。"
+        },
+        {
+          "term": "{核抑止|かくよくし}",
+          "desc": "核兵器の力で、相手に攻撃をあきらめさせる考え方。"
+        }
+      ],
+      "quiz": {
+        "q": "日本が「核兵器をもたず、つくらず、もちこませず」と決めている方針を何という？",
+        "choices": [
+          "非核三原則",
+          "専守防衛",
+          "三権分立"
+        ],
+        "answer": 0,
+        "a": "正しいのは1番目の非核三原則です。専守防衛は、相手から攻撃を受けたときにだけ守る考え方、三権分立は国の力を3つに分ける仕組みです。",
+        "hint": "「核」が「非」＝ないという意味の言葉だよ。"
+      },
+      "units": [
+        "社会：日本国憲法（平和主義）",
+        "社会：国際連合のはたらき"
+      ],
+      "talk": "核兵器をなくすために、会議に出て話すことと、出ないで別のやり方をとること。どちらが近道だろう？",
+      "talk_hints": [
+        "出る立場：被爆した国として、会議の場で直接思いを伝えられる。",
+        "出ない立場：核をもつ国との関係を大事にして、別の場で話し合いを進める。",
+        "身近な例：けんかの仲直りで、話し合いの場に出るか、先に別の人と話すか。"
+      ],
+      "exam_level": 3
+    },
+    {
+      "subject": "社会（経済）",
+      "subject_key": "shakai",
+      "title": "{日経平均株価|にっけいへいきんかぶか}、{一時|いちじ}2100{円|えん}{以上|いじょう}{下|さ}がる",
+      "short_title": "日経平均が大きく下落",
+      "points": [
+        "11月25日、{日経平均株価|にっけいへいきんかぶか}が{一時|いちじ}、{前|まえ}の{日|ひ}より2100{円|えん}{以上|いじょう}{下|さ}がった。",
+        "{前|まえ}の{日|ひ}のアメリカで、{半導体|はんどうたい}{株|かぶ}の{指数|しすう}が7.88%{下|さ}がった{流|なが}れを{受|う}けた。",
+        "{AI|エーアイ}{投資|とうし}がもうかるのかという{不安|ふあん}が{背景|はいけい}にあるとみられる。"
+      ],
+      "svg": "<svg viewBox='0 0 360 450'><rect x='0' y='0' width='360' height='450' style='fill:var(--soft)'/>\n<text x='180' y='28' font-size='17' text-anchor='middle' font-weight='bold' style='fill:var(--ink)'>日経平均株価（かぶか）の動き</text>\n<rect x='14' y='44' width='332' height='244' rx='12' style='fill:var(--card)'/>\n<line x1='40' y1='250' x2='330' y2='250' style='stroke:var(--landline)' stroke-width='2'/><line x1='40' y1='60' x2='40' y2='250' style='stroke:var(--landline)' stroke-width='2'/>\n<line x1='90' y1='110' x2='282' y2='196' stroke='#E5484D' stroke-width='4'/>\n<circle cx='90' cy='110' r='7' style='fill:var(--sci)'/><circle cx='290' cy='200' r='7' fill='#E5484D'/>\n<text x='90' y='92' font-size='15' text-anchor='middle' font-weight='bold' style='fill:var(--ink)'>58,644円</text><text x='270' y='230' font-size='15' text-anchor='middle' font-weight='bold' style='fill:var(--ink)'>56,710円</text>\n<text x='140' y='205' font-size='15' text-anchor='middle' font-weight='bold' style='fill:#E5484D'>一時2100円以上</text><text x='140' y='224' font-size='15' text-anchor='middle' style='fill:#E5484D'>下がった</text>\n<text x='90' y='272' font-size='13' text-anchor='middle' style='fill:var(--muted)'>24日（終値）</text><text x='280' y='272' font-size='13' text-anchor='middle' style='fill:var(--muted)'>25日（午前の終値）</text>\n<text x='180' y='306' font-size='13' text-anchor='middle' style='fill:var(--muted)'>※たて軸は一部をはぶいています</text>\n<rect x='14' y='318' width='332' height='60' rx='12' style='fill:var(--card);stroke:var(--soc);stroke-width:2'/>\n<text x='180' y='343' font-size='15' text-anchor='middle' style='fill:var(--ink)'>前日のアメリカで半導体株の</text><text x='180' y='363' font-size='15' text-anchor='middle' style='fill:var(--ink)'>指数（しすう）が7.88%下がった</text>\n<path d='M180 380 L180 392' stroke='var(--muted)' stroke-width='3'/><path d='M172 388 L180 398 L188 388 Z' style='fill:var(--muted)'/>\n<rect x='14' y='402' width='332' height='40' rx='12' style='fill:var(--card);stroke:#E5484D;stroke-width:2'/>\n<text x='180' y='427' font-size='15' text-anchor='middle' style='fill:var(--ink)'>東京でもAI（エーアイ）・半導体株に売り</text>\n</svg>",
+      "caption": "24日の終値から、25日の午前の終値までに約1900円下がった。",
+      "body": [
+        "11月25日の{東京株式市場|とうきょうかぶしきしじょう}で、{日経平均株価|にっけいへいきんかぶか}が{大|おお}きく{下|さ}がりました。{取引|とりひき}の{途中|とちゅう}では、=={前|まえ}の{日|ひ}のおわり{値|ね}より2100{円|えん}{以上|いじょう}{安|やす}くなる=={場面|ばめん}もありました。{午前|ごぜん}のおわり{値|ね}は56,710{円|えん}で、{前|まえ}の{日|ひ}より1934{円|えん}20{銭|せん}{安|やす}い{値|ね}でした。{日経平均株価|にっけいへいきんかぶか}は、{日本|にほん}を{代表|だいひょう}する{会社|かいしゃ}の{株|かぶ}の{値段|ねだん}をもとにした{数字|すうじ}です。",
+        "{原因|げんいん}は{前|まえ}の{日|ひ}のアメリカです。{半導体|はんどうたい}（{電子機器|でんしきき}に{使|つか}う{小|ちい}さな{部品|ぶひん}）の{会社|かいしゃ}の{株|かぶ}をまとめた{指数|しすう}が7.88%も{下|さ}がり、=={AI|エーアイ}に{関係|かんけい}する{会社|かいしゃ}の{株|かぶ}が{売|う}られました==。{東京|とうきょう}でも{同|おな}じように、AIや{半導体|はんどうたい}の{株|かぶ}に{売|う}りが{広|ひろ}がりました。",
+        "{前|まえ}の{日|ひ}の24{日|にち}は、{日経平均株価|にっけいへいきんかぶか}は2200{円|えん}あまり{上|あ}がって58,644{円|えん}で{終|お}わっていました。AIの{投資|とうし}がちゃんともうかるのか{見|み}えにくい、という{不安|ふあん}が、{株価|かぶか}を=={大|おお}きく{揺|ゆ}らしている==とみられます。"
+      ],
+      "keywords": [
+        {
+          "term": "{日経平均株価|にっけいへいきんかぶか}",
+          "desc": "日本を代表する会社の株の値段をもとにした数字。景気の目安になる。"
+        },
+        {
+          "term": "{株価|かぶか}",
+          "desc": "会社の株の値段。人気が高まると上がり、売る人が増えると下がる。"
+        },
+        {
+          "term": "{半導体|はんどうたい}",
+          "desc": "スマートフォンやパソコンなどの電子機器に使う、小さな部品。"
+        }
+      ],
+      "quiz": {
+        "q": "会社の株が売り買いされる場所を何という？",
+        "choices": [
+          "日本銀行",
+          "国税庁",
+          "証券取引所"
+        ],
+        "answer": 2,
+        "a": "正しいのは3番目の証券取引所です。東京には東京証券取引所があります。日本銀行は国のお金の中心となる銀行、国税庁は税金を集める役所です。",
+        "hint": "「株」と「取引」を合わせた言葉だよ。"
+      },
+      "units": [
+        "社会：くらしと経済"
+      ],
+      "talk": "株の値段が大きく上がったり下がったりすると、ふつうの家の暮らしにはどんな影響があるだろう？",
+      "talk_hints": [
+        "年金や会社のお金が株で運用されていると、値下がりで増え方が変わる。",
+        "会社の業績が変わり、給料や働く人の数に影響が出ることもある。",
+        "身近な例：人気のカードの値段が、買う人の数でどんどん変わること。"
+      ],
+      "exam_level": 2
+    }
+  ],
+  "math": {
+    "news": 3,
+    "unit": "算数：割合",
+    "q": "{日経平均株価|にっけいへいきんかぶか}の{前|まえ}の{日|ひ}のおわり{値|ね}は{約|やく}58,600{円|えん}で、25{日|にち}は{一時|いちじ}2100{円|えん}{下|さ}がりました。2100{円|えん}は、{前|まえ}の{日|ひ}のおわり{値|ね}の{何%|なんパーセント}ですか。{四捨五入|ししゃごにゅう}して{小数第|しょうすうだい}1{位|い}まで{答|こた}えなさい。（58,600{円|えん}は「{約|やく}」の{数|かず}として{使|つか}います。）",
+    "hint": "割合＝くらべる量÷もとにする量。もとにする量は「前の日のおわり値」だよ。",
+    "answer": "約3.6%",
+    "steps": [
+      "くらべる量は2100円、もとにする量は前の日のおわり値の58,600円",
+      "割合＝2100÷58600＝0.03583…",
+      "百分率にすると、0.03583…×100＝3.583…（%）",
+      "小数第2位を四捨五入して、約3.6%"
+    ]
+  },
+  "briefs": [],
+  "extra": "11月30日に、{核兵器禁止条約|かくへいききんしじょうやく}の{再検討会議|さいけんとうかいぎ}が{国連本部|こくれんほんぶ}で{始|はじ}まります。",
+  "sources": [
+    {
+      "title": "NHK：中国で初めて外国人宇宙飛行士を乗せた有人宇宙船を打ち上げ（11月25日）",
+      "url": "https://news.web.nhk/newsweb/na/nd-20261125de80985"
+    },
+    {
+      "title": "Dawn：Chinese spacecraft Shenzhou-24 lifts off with Pakistani astronaut Zeeshan Ali on board",
+      "url": "https://www.dawn.com/news/2046753/chinese-spacecraft-shenzhou-24-lifts-off-with-pakistani-astronaut-zeeshan-ali-on-board"
+    },
+    {
+      "title": "時事通信：核兵器禁止条約、再検討会議の不参加表明 茂木外相「日本の立場と相いれず」（11月24日）",
+      "url": "https://www.jiji.com/jc/article?k=2026112400986&g=pol&m=rss"
+    },
+    {
+      "title": "テレビ新広島（Yahoo!ニュース）：核兵器禁止条約再検討会議オブザーバー参加見送り 茂木外相表明 広島・松井市長「被爆者の思いに反する」",
+      "url": "https://news.yahoo.co.jp/articles/f92e1a66b80a1f94023049310997ecf7b598eaa4"
+    },
+    {
+      "title": "NHK：核兵器禁止条約 再検討会議のオブザーバー参加見送り 茂木外相（11月24日）",
+      "url": "https://news.web.nhk/newsweb/na/nd-20261124de80811"
+    },
+    {
+      "title": "日本テレビ系（Infoseek）：日経平均 一時2100円超下落 AI半導体関連株中心に売り",
+      "url": "https://news.infoseek.co.jp/article/ntv_2026112503126463/"
+    },
+    {
+      "title": "財経新聞：日経平均は大幅反落、米半導体株安でAI関連株に売り／ランチタイムコメント",
+      "url": "https://www.zaikei.co.jp/article/20261125/879060.html"
+    },
+    {
+      "title": "NHK：日経平均株価 一時2100円超の値下がり 半導体関連中心に売り（11月25日）",
+      "url": "https://news.web.nhk/newsweb/na/nd-20261125de80958"
+    }
+  ],
+  "review_notes": [
+    "【選んだ理由】神舟24号：外国人初の搭乗で理科（宇宙）。教科書の宇宙分野と国際協力につながる。",
+    "【選んだ理由】核禁条約の会議不参加：11/24に決まったこと。平和主義・国際連合の単元につながる。",
+    "【選んだ理由】日経平均の急落：経済のトップ級ニュースで、算数（割合）にもつなげやすい。",
+    "図の天宮（てんきゅう）、酒泉（しゅせん）の読みを確認。図3のグラフは縦軸を省略している。",
+    "滞在期間は報道によって幅があるため「数日から1週間ほど」とした。パキスタン飛行士の名前・年齢は2社目で確認できず外した。",
+    "日経平均の前日終値58,644円は午前終値と前日比からの計算値。24日の上げ幅・上昇理由は確認できず「2200円あまり」とだけ書いた。"
+  ]
+}
