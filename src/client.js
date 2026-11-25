@@ -298,19 +298,37 @@
     q.classList.add(ok ? 'is-ok' : 'is-ng');
     if (silent) return;
     ls.set('jt-q-' + q.dataset.qid, ok ? '1' : '0');
-    var t = jstDay(0), last = ls.get('jt-last'), n = Number(ls.get('jt-streak') || 0);
-    if (last !== t) { n = last === jstDay(-1) ? n + 1 : 1; ls.set('jt-last', t); ls.set('jt-streak', String(n)); }
-    showStreak();
+    var t = jstDay(0), d = stampDays();
+    if (d.indexOf(t) < 0) { d.push(t); ls.set('jt-days', JSON.stringify(d.slice(-400))); ls.set('jt-last', t); showStamps(d.length); }
   }
-  function showStreak() {
-    var n = Number(ls.get('jt-streak') || 0), last = ls.get('jt-last');
-    if (!n || (last !== jstDay(0) && last !== jstDay(-1))) return;
-    document.querySelectorAll('.streak').forEach(function (s) { s.hidden = false; s.textContent = 'クイズ ' + n + '日れんぞく'; });
+  /* スタンプ帳：連続でなくてよい。クイズに答えた日の合計（累計）で、称号がふえる */
+  var RANKS = [[5, 'ニュース見習い'], [10, 'ニュース博士'], [20, 'ニュースマスター'], [30, 'ニュースヒーロー'], [50, 'ニュース名人'], [100, 'ニュース王']];
+  function stampDays() { try { var a = JSON.parse(ls.get('jt-days') || '[]'); return Array.isArray(a) ? a : []; } catch (e) { return []; } }
+  function rankOf(n) { var r = 'はじめの一歩'; RANKS.forEach(function (x) { if (n >= x[0]) r = x[1]; }); return r; }
+  function nextGoal(n) { for (var i = 0; i < RANKS.length; i++) if (n < RANKS[i][0]) return RANKS[i]; return null; }
+  function toast(msg) {
+    var el = document.createElement('div'); el.className = 'stamp-toast'; el.textContent = msg; document.body.appendChild(el);
+    setTimeout(function () { el.classList.add('out'); }, 2600); setTimeout(function () { el.remove(); }, 3200);
+  }
+  function showStamps(just) {
+    var n = stampDays().length;
+    document.querySelectorAll('.streak').forEach(function (s) { if (!n) return; s.hidden = false; s.textContent = 'スタンプ ' + n + '個'; });
+    var box = document.getElementById('stampbook');
+    if (box) {
+      box.querySelectorAll('.sb-badge').forEach(function (b) { b.classList.toggle('on', n >= Number(b.getAttribute('data-n'))); });
+      var g = nextGoal(n), slots = box.querySelector('.sb-slots'), msg = box.querySelector('.sb-msg');
+      box.querySelector('.sb-rank').textContent = '今の称号：' + rankOf(n) + '（スタンプ ' + n + '個）';
+      if (g && g[0] <= 20) {
+        var h = ''; for (var i = 0; i < g[0]; i++) h += '<span class="sb-s' + (i < n ? ' on' : '') + '"></span>'; slots.innerHTML = h;
+      } else { slots.innerHTML = '<span class="sb-bar"><i style="width:' + Math.min(100, Math.round(n * 100 / (g ? g[0] : n || 1))) + '%"></i></span>'; }
+      msg.textContent = g ? 'あと ' + (g[0] - n) + ' 回で「' + g[1] + '」。毎日でなくても、クイズに答えた日がたまっていきます。' : 'すべての称号を集めました！ すごい！';
+    }
+    if (just) { var rk = null; RANKS.forEach(function (x) { if (x[0] === just) rk = x[1]; }); toast(rk ? 'スタンプ ' + just + '個！「' + rk + '」になりました' : 'スタンプ +1（' + just + '個め）'); }
   }
   document.querySelectorAll('.quiz.mc').forEach(function (q) {
     var r = ls.get('jt-q-' + q.dataset.qid); if (r === null) return;
     var pick = r === '1' ? q.dataset.answer : String((Number(q.dataset.answer) + 1) % q.querySelectorAll('.choice').length);
     var b = q.querySelector('.choice[data-i="' + pick + '"]'); if (b) answer(b, true);
   });
-  showStreak();
+  showStamps();
 })();

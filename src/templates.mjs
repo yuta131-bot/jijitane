@@ -128,6 +128,15 @@ ${sidebar(cfg, recent)}
 </html>`;
 }
 
+const BADGES = [[5, 'ニュース見習い', '#8AA4C8'], [10, 'ニュース博士', '#2E78C7'], [20, 'ニュースマスター', '#3FA66B'], [30, 'ニュースヒーロー', '#E5484D'], [50, 'ニュース名人', '#9B59D0'], [100, 'ニュース王', '#F2A91E']];
+function badgeSvg(n, c) {
+  const star = (x, y, r) => { let d = ''; for (let i = 0; i < 10; i++) { const a = -Math.PI / 2 + i * Math.PI / 5, rr = i % 2 ? r * 0.45 : r; d += `${i ? 'L' : 'M'}${(x + rr * Math.cos(a)).toFixed(1)} ${(y + rr * Math.sin(a)).toFixed(1)}`; } return d + 'Z'; };
+  const k = n >= 100 ? 5 : n >= 50 ? 4 : n >= 30 ? 3 : n >= 20 ? 2 : 1;
+  return `<svg viewBox="0 0 64 80" aria-hidden="true"><path d="M20 44l-8 30l14-7l6 11l6-30z" fill="${c}" opacity=".85"/><path d="M44 44l8 30l-14-7l-6 11l-6-30z" fill="${c}" opacity=".7"/><circle cx="32" cy="30" r="26" fill="${c}" stroke="#fff" stroke-width="3"/><circle cx="32" cy="30" r="20" fill="none" stroke="#fff" stroke-width="1.6" opacity=".7"/><path d="${star(32, 30, k > 3 ? 13 : 15)}" fill="#fff"/>${k > 1 ? `<text x="32" y="${k > 3 ? 62 : 60}" font-size="0" fill="none"></text>` : ''}</svg>`;
+}
+function stampBook() {
+  return `<section id="stampbook" class="stampbook"><h3>スタンプ帳</h3><p class="sb-msg">クイズに答えると、その日のスタンプがたまります。毎日でなくても大丈夫。5回で「ニュース見習い」！</p><div class="sb-slots"></div><div class="sb-badges">${BADGES.map(([n, name, c]) => `<div class="sb-badge" data-n="${n}">${badgeSvg(n, c)}<b>${name}</b><small>${n}回</small></div>`).join('')}</div><p class="sb-rank">今の称号：はじめの一歩（スタンプ 0個）</p></section>`;
+}
 function sheetBand(base) {
   const ids = Object.keys(SHEET_META);
   const pick = ids.slice(0, 6);
@@ -179,6 +188,7 @@ export function articlePage({ cfg, a, prev, next, css, top = false, recent = [] 
   <div class="hero-tx"><p class="issue">${top ? 'きょうの号' : `${dt.y}年の号`}<span class="badge">3分で読める</span></p><p class="lead">${inline(a.intro || '')}</p>${TOOLS}</div>
 </section>
 ${toc}
+${top ? stampBook() : ''}
 ${top ? sheetBand(base) : ''}
 ${articles}
 ${a.parent_note ? `<section class="pnote"><h3>運営者のひとこと</h3><p>${esc(a.parent_note)}</p><small>小6の子の親（運営者）が書いています</small></section>` : ''}
