@@ -12,8 +12,12 @@ VARS = ('--paper:#F5FAFE;--grid:#DDEAF4;--card:#FFFFFF;--ink:#1D2B44;--muted:#56
         '--sky:#2E78C9;--sea:#BFE0F5;--land:#F1E3C6;--landline:#C9AE7C;--soft:#EEF5FB;--marker:#FFE36E;--mark-bg:#FFE36E;--mark-ink:inherit')
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument('--date', required=True); args = ap.parse_args()
-    a = json.loads((ROOT / 'content' / f'{args.date}.json').read_text(encoding='utf-8'))
+    ap = argparse.ArgumentParser(); ap.add_argument('--date'); ap.add_argument('--fk'); args = ap.parse_args()
+    if args.fk:  # 深掘り：sections を news のように扱う
+        f = json.loads(Path(args.fk).read_text(encoding='utf-8')); args.date = 'fk-' + f['id']
+        a = {'news': [{'svg': x.get('svg', '')} for x in f['sections']]}
+    else:
+        a = json.loads((ROOT / 'content' / f'{args.date}.json').read_text(encoding='utf-8'))
     svgs = json.loads(subprocess.run(
         ['node', '-e', "import('./src/markup.mjs').then(m=>{const a=JSON.parse(require('fs').readFileSync(0,'utf8'));"
          "process.stdout.write(JSON.stringify(a.map((s,i)=>m.safeSvg(s,'r'+i))))})"],

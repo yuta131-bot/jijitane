@@ -10,8 +10,15 @@ import path from 'node:path';
 import { BASEMAPS, plain } from '../src/markup.mjs';
 import { ARTS } from '../src/arts.mjs';
 
-const date = process.argv[2];
-const a = JSON.parse(fs.readFileSync(path.join('content', `${date}.json`), 'utf8'));
+// 引数が日付なら毎日の号、.json のファイルなら「深掘り」（sections を news のように扱う）
+const arg = process.argv[2];
+let date = arg, a;
+if (/\.json$/.test(arg)) {
+  const f = JSON.parse(fs.readFileSync(arg, 'utf8'));
+  date = `fk-${f.id}`;
+  a = { news: f.sections.map((s) => ({ svg: s.svg, title: `${f.title} ${f.lead} ${s.h}`, caption: s.caption, body: s.p, points: f.point, quiz: f.quiz, keywords: f.keywords })) };
+  a.news[0].short_title = f.short_title;
+} else a = JSON.parse(fs.readFileSync(path.join('content', `${arg}.json`), 'utf8'));
 const z2h = (s) => String(s).replace(/[０-９．，]/g, (c) => String.fromCharCode(c.charCodeAt(0) - 0xfee0));
 const norm = (s) => z2h(plain(s)).replace(/,/g, '');
 const out = [];
@@ -24,7 +31,7 @@ a.news.forEach((n, i) => {
   for (const t of texts) {
     for (const m of norm(t).matchAll(/\d+(?:\.\d+)?/g)) {
       const v = m[0];
-      if (seen.has(v) || v.length < 2 || v === date.slice(0, 4)) continue; // 1けたの数・確認済みの年はとばす
+      if (seen.has(v) || v.length < 2 || v === String(arg).slice(0, 4) || v === '2026') continue; // 1けたの数・確認済みの年はとばす
       seen.add(v);
       if (!prose.includes(v)) out.push({ news: no, claim: `図の中の数字「${v}」（${t.trim().slice(0, 30)}）`, verdict: 'unclear', detail: '本文・3行まとめ・説明文のどこにも同じ数字がありません。図の書きまちがいか、確かめていない数字の可能性があります。', fix: '出典で確かめ、正しい数字に直すか、図から外す' });
     }

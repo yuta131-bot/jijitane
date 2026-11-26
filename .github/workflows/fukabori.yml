@@ -1,0 +1,235 @@
+# 毎週 水曜・金曜の朝に、土〜火の号から題材を1つ選んで「深掘り」記事を作る
+# 流れは「下書きを作る」と同じ：作る → 形・図の機械チェック → 図と読みの確認 → 事実確認 → 自動で直す → 作れるか確認 → PR → 自動公開
+name: 深掘りを作る
+on:
+  schedule:
+    - cron: "30 20 * * 2,4"   # UTC 火・木 20:30 = 日本時間 水・金 5:30
+  workflow_dispatch:
+    inputs:
+      date:
+        description: "日付（空なら今日）例：2026-12-02"
+        required: false
+
+permissions:
+  contents: write
+  pull-requests: write
+  actions: write
+  id-token: write
+
+concurrency: fukabori
+
+jobs:
+  fukabori:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/cache@v4
+        with:
+          path: fonts
+          key: fonts-zen-maru-v1
+
+      - name: 日付と、題材にする号を決める
+        id: d
+        run: |
+          D="${{ inputs.date }}"; [ -z "$D" ] && D="$(TZ=Asia/Tokyo date +%F)"
+          echo "date=$D" >> "$GITHUB_OUTPUT"
+          if ls content/fukabori/"$D"-*.json >/dev/null 2>&1; then echo "skip=true" >> "$GITHUB_OUTPUT"; else echo "skip=false" >> "$GITHUB_OUTPUT"; fi
+          # 直近の土曜〜火曜（この日より前のもの）の号
+          DOW=$(date -d "$D" +%w); BACK=$(( (DOW + 1) % 7 )); [ "$BACK" -lt 4 ] && BACK=$((BACK + 7))
+          SAT=$(date -d "$D - $BACK days" +%F)
+          L=""; for i in 0 1 2 3; do X=$(date -d "$SAT + $i days" +%F); [ -f "content/$X.json" ] && L="$L content/$X.json"; done
+          echo "issues=$L" >> "$GITHUB_OUTPUT"
+          [ -n "$L" ] || echo "skip=true" >> "$GITHUB_OUTPUT"
+          echo "題材の号:$L"
+
+      - name: 深掘りを作る
+        if: steps.d.outputs.skip == 'false'
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          github_token: ${{ github.token }}
+          prompt: |
+            今日は ${{ steps.d.outputs.date }}（日本時間）です。「深掘り」記事を1本作ってください。
+            1. prompts/fukabori.md を読み、すべてのルールに従ってください（図は prompts/system.md の図のルールも守る）。
+            2. 題材にする号は次のファイルです（土〜火の号）：${{ steps.d.outputs.issues }}
+            3. content/fukabori/ の既存の記事を読んで、話題と教科のかぶりを避け、書きぶりのお手本にしてください。
+            4. 完成した JSON を content/fukabori/${{ steps.d.outputs.date }}-<id>.json に書き出してください（"date" は "${{ steps.d.outputs.date }}"）。題材を選んだ理由は .review/fk-<id>-notes.md に書いてください。
+            5. node scripts/validate-fukabori.mjs content/fukabori/${{ steps.d.outputs.date }}-<id>.json を実行し、「OK」が出るまで直してください。
+            ほかのファイルは変更しないでください。
+          claude_args: |
+            --allowedTools "WebSearch,WebFetch,Read,Write,Edit,Glob,Grep,Bash(node scripts/validate-fukabori.mjs:*)"
+            --max-turns 100
+
+      - name: 作った記事を見つける
+        id: f
+        if: steps.d.outputs.skip == 'false'
+        run: |
+          F=$(ls content/fukabori/${{ steps.d.outputs.date }}-*.json 2>/dev/null | head -1)
+          if [ -z "$F" ]; then echo "記事が作られませんでした"; exit 1; fi
+          ID=$(node -e "console.log(JSON.parse(require('fs').readFileSync('$F','utf8')).id)")
+          echo "file=$F" >> "$GITHUB_OUTPUT"; echo "id=$ID" >> "$GITHUB_OUTPUT"
+          node scripts/validate-fukabori.mjs "$F"
+
+      - name: 図の機械チェックと、見直し用の図の画像
+        if: steps.d.outputs.skip == 'false'
+        continue-on-error: true
+        run: |
+          node scripts/check-figs.mjs "${{ steps.f.outputs.file }}"
+          pip install -q playwright==1.49.1 && python -m playwright install --with-deps chromium >/dev/null
+          sudo apt-get install -y -qq fonts-noto-cjk >/dev/null || true
+          python3 scripts/render_figs.py --fk "${{ steps.f.outputs.file }}"
+
+      - name: 図と読み・誤字の確認
+        if: steps.d.outputs.skip == 'false'
+        continue-on-error: true
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          github_token: ${{ github.token }}
+          prompt: |
+            あなたは子ども向けニュースサイトの「図と言葉の係」の校閲者です。事実の確認は別の係がするので、ここでは次の3つだけを見てください。
+            対象：${{ steps.f.outputs.file }}（深掘り記事。sections の何番目か＝図の番号。図の画像は .review/figs/fk-${{ steps.f.outputs.id }}-番号.png で、sections の順に1から。svg のない section の番号も数えるので、画像は svg がある section だけ見ればよい）
+            1. 図：画像を Read で開き、記事と見比べる。
+               - 地図の地点・矢印などが実際の場所と合っているか／文字の重なり・はみ出し・小さすぎる文字がないか／図の中の数字・名前が本文と同じか
+               - 見た目の質（厳しく）：乗り物・建物・人が地面や水面に接しているか（宙に浮いていないか）／場所を示す図に地図（basemap）があるか／丸と四角だけで何の絵か分からなくなっていないか（src/arts.mjs の部品で描けるなら部品を使う）／余白・大きさのバランス／文字が絵や文字と重なっていないか。ひとつでも気になれば wrong にして、fix に具体的な直し方を書く
+            2. 読み：{漢字|よみ} の読みが正しいか。人名・地名・団体名・専門用語は WebSearch で確かめる。
+            3. 誤字・脱字・文のねじれ、表記ゆれ。
+            .review/fk-${{ steps.f.outputs.id }}-auto.json に機械チェックの結果があれば参考にしてください。
+            結果は .review/fk-${{ steps.f.outputs.id }}-fig.json に、次の形の JSON 配列だけで書き出してください。問題がなくても、確認した主なところを ok として入れてください。
+            [{"news": section番号(1から), "claim": "確認したところ", "verdict": "ok か wrong か unclear", "detail": "根拠や問題点（短く）", "fix": "直し方"}]
+            記事ファイルそのものは変更しないでください。
+          claude_args: |
+            --allowedTools "WebSearch,WebFetch,Read,Write,Glob"
+            --max-turns 30
+
+      - name: 事実確認
+        if: steps.d.outputs.skip == 'false'
+        continue-on-error: true
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          github_token: ${{ github.token }}
+          prompt: |
+            あなたは子ども向けニュースサイトの校閲者です。${{ steps.f.outputs.file }}（深掘り記事）を読み、事実（数字・日付・人名・地名・できごとの順番・仕組みの説明・歴史・「初めて」などの言い切り）を WebSearch と WebFetch で、信頼できる資料と照らして確認してください。意見や書き方の好みには触れません。
+            本文・図（svg の中の文字）・入試に出るポイント・言葉の説明・クイズ（正解の番号が正しいかも）に出てくる、数字・日付・人名・地名・組織名・仕組みの説明・言い切りを**すべて**一覧にし、1つずつ確かめてください。2つ以上の資料（公的機関・研究機関・大手報道）で確かめ、決められないものは unclear にします。
+            from の date と n が、実際の号（content/日付.json）のニュースと合っているかも確かめてください。
+            .review/fk-${{ steps.f.outputs.id }}-auto.json に「図にしかない数字」があれば、それも確かめてください。
+            結果は .review/fk-${{ steps.f.outputs.id }}-fact.json に、次の形の JSON 配列だけで書き出してください。
+            [{"news": section番号(1から。導入・ポイント・クイズは0), "claim": "確認した記述", "verdict": "ok か wrong か unclear", "detail": "根拠や問題点（短く）", "fix": "直し方"}]
+            記事ファイルそのものは変更しないでください。
+          claude_args: |
+            --allowedTools "WebSearch,WebFetch,Read,Write,Glob"
+            --max-turns 60
+
+      - name: 見直し結果を調べる
+        id: fc
+        if: steps.d.outputs.skip == 'false'
+        run: |
+          I="${{ steps.f.outputs.id }}"
+          if [ -f ".review/fk-$I-fact.json" ]; then
+            echo "has=true" >> "$GITHUB_OUTPUT"
+            BAD=$(node -e "let n=0;for(const f of ['.review/fk-$I-fact.json','.review/fk-$I-fig.json','.review/fk-$I-auto.json']){try{n+=JSON.parse(require('fs').readFileSync(f,'utf8')).filter(x=>x.verdict!=='ok').length}catch(e){}}console.log(n)")
+            echo "bad=$BAD" >> "$GITHUB_OUTPUT"
+          else
+            echo "has=false" >> "$GITHUB_OUTPUT"; echo "bad=0" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: 見つかったまちがいを自動で直す
+        if: steps.d.outputs.skip == 'false' && vars.AUTO_PUBLISH == 'true' && steps.fc.outputs.bad != '0'
+        continue-on-error: true
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          github_token: ${{ github.token }}
+          prompt: |
+            ${{ steps.f.outputs.file }}（深掘り記事）の見直し結果が3つあります（ないファイルはとばしてください）。
+            - .review/fk-${{ steps.f.outputs.id }}-fact.json：事実確認
+            - .review/fk-${{ steps.f.outputs.id }}-fig.json：図・読み・誤字の確認（図の画像は .review/figs/fk-${{ steps.f.outputs.id }}-番号.png）
+            - .review/fk-${{ steps.f.outputs.id }}-auto.json：機械チェック
+            verdict が "wrong" の項目は、detail と fix に従って該当箇所を正しく直してください。必要なら WebSearch で確かめてください。"unclear" は、確かめられた場合だけ直し、確かめられなければその記述を外すか断定しない言い方にしてください（数字は消す）。
+            ふりがな記法 {漢字|よみ}・==強調==・子ども向けの文体を保ち、図の中の同じ数字や言葉も合わせて直してください。図の見た目の指摘は svg を描き直します（prompts/system.md の図のルール、src/arts.mjs の部品を使う）。
+            直したら node scripts/validate-fukabori.mjs ${{ steps.f.outputs.file }} を実行し、「OK」が出るまで直してください。
+            最後に、直した内容を .review/fk-${{ steps.f.outputs.id }}-fixed.md に箇条書きで書いてください（直さなかった場合は「修正なし」）。
+          claude_args: |
+            --allowedTools "WebSearch,WebFetch,Read,Write,Edit,Glob,Bash(node scripts/validate-fukabori.mjs:*)"
+            --max-turns 50
+
+      - name: 直した図を撮り直して、最終チェック
+        if: steps.d.outputs.skip == 'false' && vars.AUTO_PUBLISH == 'true' && steps.fc.outputs.bad != '0'
+        continue-on-error: true
+        run: |
+          rm -f .review/figs/fk-${{ steps.f.outputs.id }}-*.png
+          node scripts/check-figs.mjs "${{ steps.f.outputs.file }}" || true
+          python3 scripts/render_figs.py --fk "${{ steps.f.outputs.file }}"
+
+      - name: 撮り直した図の最終チェック（AI）
+        if: steps.d.outputs.skip == 'false' && vars.AUTO_PUBLISH == 'true' && steps.fc.outputs.bad != '0'
+        continue-on-error: true
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          github_token: ${{ github.token }}
+          prompt: |
+            直したあとの図を、もう一度だけ見て仕上げてください。.review/figs/fk-${{ steps.f.outputs.id }}-*.png を Read で画像として開き、次を確かめます。
+            ・乗り物・建物・人などが地面や水面に接していて、宙に浮いて見えないか
+            ・場所を示す図に地図があるか／丸と四角だけで何の絵か分からない図になっていないか（src/arts.mjs の部品で描けるなら部品を使う）
+            ・文字が重なったり、はみ出したりしていないか
+            ・.review/fk-${{ steps.f.outputs.id }}-auto.json に wrong があれば直す
+            問題があれば ${{ steps.f.outputs.file }} の該当 section の svg だけを直してください（本文・数字・事実は変えない）。直したら node scripts/validate-fukabori.mjs ${{ steps.f.outputs.file }} を実行し、「OK」が出るまで直してください。
+            直せなかったものは .review/fk-${{ steps.f.outputs.id }}-fixed.md の末尾に「図の最終チェック：」の見出しで追記してください。直すのは1回だけです。
+          claude_args: |
+            --allowedTools "Read,Write,Edit,Glob,Grep,Bash(node scripts/validate-fukabori.mjs:*),Bash(node scripts/check-figs.mjs:*)"
+            --max-turns 30
+
+      - name: サイトが作れるか確かめる
+        if: steps.d.outputs.skip == 'false'
+        run: |
+          I="${{ steps.f.outputs.id }}"
+          node scripts/validate-fukabori.mjs "${{ steps.f.outputs.file }}"
+          {
+            echo "## 深掘り：$I"; echo; cat ".review/fk-$I-notes.md" 2>/dev/null
+            for k in fact fig auto; do
+              [ -f ".review/fk-$I-$k.json" ] && node -e "const a=JSON.parse(require('fs').readFileSync('.review/fk-$I-$k.json','utf8'));const b=a.filter(x=>x.verdict!=='ok');console.log('\n- $k：'+a.length+'件中 '+b.length+' 件が要確認');b.forEach(x=>console.log('  - '+x.claim+'：'+x.detail))"
+            done
+            if [ -f ".review/fk-$I-fixed.md" ]; then printf '\n### 自動で直したところ\n'; cat ".review/fk-$I-fixed.md"; fi
+          } > ".review/fk-$I.md"
+          node scripts/build.mjs
+
+      - name: Pull Request を出して、公開する
+        if: steps.d.outputs.skip == 'false'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          D: ${{ steps.d.outputs.date }}
+          I: ${{ steps.f.outputs.id }}
+          F: ${{ steps.f.outputs.file }}
+          AUTO_PUBLISH: ${{ vars.AUTO_PUBLISH }}
+        run: |
+          git config user.name "news-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          B="fukabori/$D"
+          git checkout -b "$B"
+          git add "$F"
+          git commit -m "深掘り: $I ($D)"
+          git push -f origin "$B"
+          echo "" >> ".review/fk-$I.md"
+          echo "プレビュー: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" >> ".review/fk-$I.md"
+          gh pr create --base main --head "$B" --title "【確認】深掘り $D" --body-file ".review/fk-$I.md"
+          if [ "$AUTO_PUBLISH" = "true" ]; then
+            if [ -f ".review/fk-$I-fact.json" ]; then
+              gh pr merge "$B" --squash --delete-branch
+              gh workflow run publish.yml --ref main
+            else
+              gh pr comment "$B" --body "事実確認が実行できなかったため、自動公開を止めています。内容を確認して Merge してください。"
+            fi
+          fi
