@@ -1,0 +1,237 @@
+{
+  "date": "2026-11-26",
+  "intro": "アメリカが日本などに追加の関税をかける案を出し、政府が副首都の指定の進め方をまとめ、JAXAが月の水をさがす探査車を公開した、3本です。",
+  "news": [
+    {
+      "subject": "社会（経済・貿易）",
+      "subject_key": "shakai",
+      "title": "{米国|べいこく}が{日本|にほん}など14の{国|くに}に{追加関税案|ついかかんぜいあん}",
+      "short_title": "アメリカが追加関税案",
+      "points": [
+        "{米国|べいこく}の{通商代表部|つうしょうだいひょうぶ}が11{月|がつ}25{日|にち}、{日本|にほん}をふくむ14の{国|くに}と{地域|ちいき}に{追加|ついか}の{関税|かんぜい}をかける{案|あん}を{発表|はっぴょう}した。",
+        "{理由|りゆう}は、{作|つく}りすぎた{製品|せいひん}を{輸出|ゆしゅつ}して{米国|べいこく}の{産業|さんぎょう}に{害|がい}が{出|で}ている、という{考|かんが}え。",
+        "{日本|にほん}は、{今|いま}ある{関税|かんぜい}をふくめて{最大|さいだい}15％の{案|あん}。まだ{決|き}まっていない。"
+      ],
+      "svg": "<svg viewBox='0 0 360 470'><defs><linearGradient id='s1' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#BFE3F8'/><stop offset='1' stop-color='#6FB4E3'/></linearGradient></defs>\n<rect x='0' y='0' width='360' height='470' style='fill:var(--soft)'/>\n<text x='180' y='28' font-size='17' text-anchor='middle' font-weight='bold' style='fill:var(--ink)'>アメリカが関税（かんぜい）を上げる案</text>\n<rect x='14' y='44' width='332' height='130' rx='14' fill='url(#s1)'/>\n<circle cx='300' cy='70' r='16' fill='#FFE08A'/><circle cx='70' cy='68' r='10' fill='#fff' opacity='.85'/><circle cx='88' cy='64' r='14' fill='#fff' opacity='.85'/><circle cx='108' cy='70' r='9' fill='#fff' opacity='.85'/>\n<rect x='60' y='86' width='34' height='22' fill='#E5484D'/><rect x='96' y='86' width='34' height='22' fill='#F2B441'/><rect x='132' y='86' width='34' height='22' fill='#3E9B6E'/><rect x='168' y='86' width='34' height='22' fill='#5B7DB1'/><rect x='96' y='62' width='34' height='22' fill='#5B7DB1'/><rect x='132' y='62' width='34' height='22' fill='#E5484D'/>\n<rect x='214' y='70' width='40' height='38' rx='3' fill='#F4F6FA'/><rect x='222' y='78' width='8' height='8' fill='#6FB4E3'/><rect x='238' y='78' width='8' height='8' fill='#6FB4E3'/><rect x='228' y='56' width='12' height='14' fill='#C94A4A'/>\n<path d='M44 108 L270 108 L246 138 L68 138 Z' fill='#35506B'/><rect x='44' y='106' width='226' height='4' fill='#E5484D'/>\n<path d='M14 146 Q34 138 54 146 T94 146 T134 146 T174 146 T214 146 T254 146 T294 146 T346 146 L346 174 L14 174 Z' fill='#4A9AD4' opacity='.8'/>\n<text x='180' y='198' font-size='15' text-anchor='middle' style='fill:var(--ink)'>理由：作りすぎた物を輸出して</text>\n<text x='180' y='218' font-size='15' text-anchor='middle' style='fill:var(--ink)'>アメリカの産業が困っている、という主張</text>\n<path d='M180 228 L180 244' stroke='var(--muted)' stroke-width='3'/><path d='M172 240 L180 250 L188 240 Z' style='fill:var(--muted)'/>\n<rect x='14' y='258' width='332' height='60' rx='12' style='fill:var(--card);stroke:var(--soc);stroke-width:2'/>\n<text x='180' y='284' font-size='15' text-anchor='middle' style='fill:var(--ink)'>対象は日本をふくむ</text>\n<text x='180' y='306' font-size='16' text-anchor='middle' font-weight='bold' style='fill:var(--soc)'>14の国と地域</text>\n<path d='M180 322 L180 336' stroke='var(--muted)' stroke-width='3'/><path d='M172 332 L180 342 L188 332 Z' style='fill:var(--muted)'/>\n<rect x='14' y='350' width='332' height='76' rx='12' style='fill:var(--card);stroke:#E5484D;stroke-width:2'/>\n<text x='180' y='376' font-size='15' text-anchor='middle' style='fill:var(--ink)'>日本の税率の案（今ある税もふくむ）</text>\n<text x='180' y='406' font-size='22' text-anchor='middle' font-weight='bold' fill='#E5484D'>最大15％</text>\n<text x='180' y='450' font-size='14' text-anchor='middle' style='fill:var(--muted)'>まだ決まっていない「案」の段階</text>\n</svg>",
+      "caption": "アメリカの案：日本の関税は、今ある分をふくめて最大15％。",
+      "body": [
+        "{米国|べいこく}の{通商代表部|つうしょうだいひょうぶ}は、11{月|がつ}25{日|にち}（{米国|べいこく}の{時間|じかん}）に、{日本|にほん}をふくむ14の{国|くに}と{地域|ちいき}に、{追加|ついか}の{関税|かんぜい}をかける{案|あん}を{示|しめ}しました。{関税|かんぜい}とは、{外国|がいこく}から{入|はい}ってくる{品物|しなもの}にかける{税金|ぜいきん}です。{理由|りゆう}は、==それらの{国|くに}が{製品|せいひん}を{作|つく}りすぎて{輸出|ゆしゅつ}し、{米国|べいこく}の{産業|さんぎょう}に{害|がい}を{与|あた}えている==という{主張|しゅちょう}です。{米国|べいこく}の{法律|ほうりつ}（{通商法|つうしょうほう}301{条|じょう}）にもとづく{調査|ちょうさ}の{結果|けっか}として{示|しめ}されました。",
+        "{日本|にほん}については、{今|いま}ある{関税|かんぜい}もふくめて、=={最大|さいだい}15％にする{案|あん}==だと{伝|つた}えられています。{昨年|さくねん}の{日米|にちべい}の{合意|ごうい}で{決|き}まった{税率|ぜいりつ}と{同|おな}じ{水準|すいじゅん}だという{解説|かいせつ}もあります。",
+        "ただし、これは{案|あん}です。=={意見|いけん}を{聞|き}く{手続|てつづ}きを{経|へ}てから、{実際|じっさい}に{始|はじ}めるかどうかが{決|き}まります==。{日本|にほん}は{米国|べいこく}に{自動車|じどうしゃ}などをたくさん{輸出|ゆしゅつ}しているので、{関税|かんぜい}が{上|あ}がると{会社|かいしゃ}の{利益|りえき}や{私|わたし}たちの{暮|く}らしにも{関係|かんけい}します。"
+      ],
+      "keywords": [
+        {
+          "term": "{関税|かんぜい}",
+          "desc": "外国から入ってくる品物にかける税金。国内の産業を守る目的などで使われる。"
+        },
+        {
+          "term": "{過剰生産|かじょうせいさん}",
+          "desc": "必要な量より多く作りすぎること。"
+        },
+        {
+          "term": "{貿易摩擦|ぼうえきまさつ}",
+          "desc": "貿易のしかたをめぐって、国どうしが対立すること。"
+        }
+      ],
+      "quiz": {
+        "q": "外国から入ってくる品物にかける税金を何という？",
+        "choices": [
+          "消費税",
+          "関税",
+          "所得税"
+        ],
+        "answer": 1,
+        "a": "正しいのは2番目の関税です。消費税は買い物のときにはらう税金、所得税は収入にかかる税金です。",
+        "hint": "「関」は国の出入り口（関所）の「関」だよ。"
+      },
+      "units": [
+        "社会：貿易と日本の産業",
+        "社会：国際関係（日米関係）"
+      ],
+      "talk": "関税が上がると、アメリカで売られる日本の製品の値段はどうなるだろう？",
+      "talk_hints": [
+        "値段が上がると、買う人が減って、日本の会社の売り上げが下がるかもしれない。",
+        "アメリカの人にとっても、好きな物が高くなるのは困るかもしれない。",
+        "身近な例：お気に入りのお菓子が10%値上がりしたら、買う数を減らす？"
+      ],
+      "exam_level": 3
+    },
+    {
+      "subject": "社会（政治・地方自治）",
+      "subject_key": "shakai",
+      "title": "{副首都|ふくしゅと}、{来年|らいねん}{秋|あき}に{複数|ふくすう}{指定|してい}へ",
+      "short_title": "副首都 来秋に複数指定",
+      "points": [
+        "{政府|せいふ}が、{副首都|ふくしゅと}の{指定|してい}の{進|すす}め{方|かた}を{示|しめ}す「{基本的|きほんてき}な{考|かんが}え{方|かた}」の{案|あん}をまとめた。",
+        "{来年|らいねん}6{月|がつ}から{申請|しんせい}を{受|う}け{付|つ}け、{秋|あき}に{複数|ふくすう}を{同時|どうじ}に{指定|してい}し、2028{年|ねん}の{春|はる}ごろに{始|はじ}める{方針|ほうしん}。",
+        "{条件|じょうけん}に{当|あ}てはまるのは、{北海道|ほっかいどう}・{愛知|あいち}・{大阪|おおさか}・{福岡|ふくおか}の4{道府県|どうふけん}。"
+      ],
+      "svg": "<svg viewBox='0 0 360 626'><rect x='0' y='0' width='360' height='626' style='fill:var(--soft)'/>\n<text x='180' y='28' font-size='17' text-anchor='middle' font-weight='bold' style='fill:var(--ink)'>副首都（ふくしゅと）をめざす4道府県</text>\n<basemap name='japan' x='0' y='44' width='360'/>\n<circle cx='257.9' cy='91.7' r='7' fill='#E5484D'/><circle cx='198.8' cy='219.6' r='7' fill='#E5484D'/><circle cx='180' cy='227.6' r='7' fill='#E5484D'/><circle cx='112' cy='245.4' r='7' fill='#E5484D'/><circle cx='235.8' cy='211.5' r='5' fill='#7A7F8C'/>\n<g font-size='14' font-weight='bold' text-anchor='middle' style='fill:var(--ink);stroke:var(--card);stroke-width:3.5;stroke-linejoin:round;paint-order:stroke'>\n<text x='214' y='80' text-anchor='end'>北海道</text><text x='112' y='270'>福岡</text><text x='170' y='252'>大阪</text><text x='199' y='203'>愛知</text></g>\n<text x='268' y='207' font-size='13' style='fill:var(--ink);stroke:var(--card);stroke-width:3.5;stroke-linejoin:round;paint-order:stroke'>東京</text>\n<text x='180' y='428' font-size='14' text-anchor='middle' style='fill:var(--muted)'>赤い点＝めざす道府県　位置はだいたい</text>\n<rect x='14' y='444' width='332' height='44' rx='12' style='fill:var(--card);stroke:var(--soc);stroke-width:2'/>\n<text x='180' y='472' font-size='15' text-anchor='middle' style='fill:var(--ink)'>来年6月から　申請（しんせい）スタート</text>\n<path d='M180 490 L180 502' stroke='var(--muted)' stroke-width='3'/><path d='M172 498 L180 508 L188 498 Z' style='fill:var(--muted)'/>\n<rect x='14' y='514' width='332' height='44' rx='12' style='fill:var(--card);stroke:var(--soc);stroke-width:2'/>\n<text x='180' y='542' font-size='15' text-anchor='middle' style='fill:var(--ink)'>来年の秋　複数をいっしょに指定</text>\n<path d='M180 560 L180 572' stroke='var(--muted)' stroke-width='3'/><path d='M172 568 L180 578 L188 568 Z' style='fill:var(--muted)'/>\n<rect x='14' y='584' width='332' height='30' rx='12' style='fill:var(--card);stroke:#E5484D;stroke-width:2'/>\n<text x='180' y='605' font-size='15' text-anchor='middle' font-weight='bold' style='fill:var(--ink)'>2028年の春ごろ　運用（うんよう）開始</text>\n</svg>",
+      "caption": "副首都をめざす北海道・愛知・大阪・福岡と、これからの流れ。",
+      "body": [
+        "{副首都|ふくしゅと}とは、{首都|しゅと}の{東京|とうきょう}が{大|おお}きな{地震|じしん}などで{動|うご}かなくなったとき、=={首都|しゅと}の{仕事|しごと}の{一部|いちぶ}を{代|か}わりに{受|う}け{持|も}つ{都市|とし}==のことです。{政府|せいふ}がまとめた「{基本的|きほんてき}な{考|かんが}え{方|かた}」の{案|あん}の{内容|ないよう}が、{明|あき}らかになりました。",
+        "それによると、{道府県|どうふけん}からの{申請|しんせい}は{来年|らいねん}6{月|がつ}から{受|う}け{付|つ}けます。{条件|じょうけん}を{満|み}たした{地域|ちいき}は、{来年|らいねん}の{秋|あき}に=={複数|ふくすう}が{同時|どうじ}に{指定|してい}される=={見通|みとお}しで、2028{年|ねん}の{春|はる}ごろに{運用|うんよう}が{始|はじ}まる{方針|ほうしん}です。",
+        "{条件|じょうけん}は、{東京|とうきょう}と{同時|どうじ}に{被害|ひがい}を{受|う}けにくい{場所|ばしょ}であることや、{人口|じんこう}・{経済|けいざい}の{大|おお}きさなどです。{政府|せいふ}は、=={北海道|ほっかいどう}・{愛知県|あいちけん}・{大阪府|おおさかふ}・{福岡県|ふくおかけん}の4{道府県|どうふけん}が{当|あ}てはまる==とみており、{各地|かくち}が{指定|してい}をめざして{準備|じゅんび}しています。"
+      ],
+      "keywords": [
+        {
+          "term": "{副首都|ふくしゅと}",
+          "desc": "首都の東京が災害などで動かなくなったとき、首都の仕事を代わりにする都市。"
+        },
+        {
+          "term": "{政令指定都市|せいれいしていとし}",
+          "desc": "人口が多く、都道府県に近い仕事を任された大きな市。札幌市・名古屋市・大阪市・福岡市など。"
+        },
+        {
+          "term": "{首都直下地震|しゅとちょっかじしん}",
+          "desc": "東京を中心とする地域の真下で起きると心配されている大地震。"
+        }
+      ],
+      "quiz": {
+        "q": "副首都がつくられる大きな目的は、次のうちどれ？",
+        "choices": [
+          "東京に人を集めること",
+          "東京が災害で動けなくなったときの備え",
+          "外国からの観光客をふやすこと"
+        ],
+        "answer": 1,
+        "a": "正しいのは2番目です。副首都は、首都直下地震などで東京の機能が止まったとき、代わりに仕事を受け持つための備えです。",
+        "hint": "「副」は「そえる、代わりをつとめる」という意味だよ。"
+      },
+      "units": [
+        "社会：地方自治",
+        "社会：日本の国土と防災"
+      ],
+      "talk": "東京にいろいろな仕事が集まっているのは、便利な点と心配な点の、どちらが大きいかな？",
+      "talk_hints": [
+        "便利な点：会社や役所が近くにあり、仕事がすばやく進む。",
+        "心配な点：大きな災害が起きると、日本全体の仕事が止まるかもしれない。",
+        "身近な例：たまごを1つのかごに入れると、落としたとき全部われる。"
+      ],
+      "exam_level": 2
+    },
+    {
+      "subject": "理科（宇宙）",
+      "subject_key": "rika",
+      "title": "{月|つき}の{水|みず}をさがす{探査車|たんさしゃ}を{公開|こうかい}",
+      "short_title": "月の水さがす探査車を公開",
+      "points": [
+        "JAXA（{JAXA|ジャクサ}）が11{月|がつ}25{日|にち}、{月|つき}の{水|みず}をさがす{探査車|たんさしゃ}の{試験機|しけんき}を{公開|こうかい}した。",
+        "{日本|にほん}とインドの{共同|きょうどう}{計画|けいかく}で、2028{年度|ねんど}にも{打|う}ち{上|あ}げる{予定|よてい}。",
+        "{水|みず}が{見|み}つかれば、{酸素|さんそ}や{燃料|ねんりょう}に{使|つか}えるかもしれない。"
+      ],
+      "svg": "<svg viewBox='0 0 360 500'><defs><linearGradient id='sp' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#080C26'/><stop offset='1' stop-color='#22336E'/></linearGradient><linearGradient id='gr' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#D5D6DE'/><stop offset='1' stop-color='#8E909C'/></linearGradient></defs>\n<rect x='0' y='0' width='360' height='500' style='fill:var(--soft)'/>\n<text x='180' y='28' font-size='17' text-anchor='middle' font-weight='bold' style='fill:var(--ink)'>月の水をさがす探査車（たんさしゃ）</text>\n<rect x='14' y='44' width='332' height='206' rx='14' fill='url(#sp)'/>\n<circle cx='40' cy='66' r='1.6' fill='#fff'/><circle cx='90' cy='90' r='1.3' fill='#fff'/><circle cx='150' cy='60' r='1.8' fill='#fff'/><circle cx='230' cy='78' r='1.4' fill='#fff'/><circle cx='320' cy='62' r='1.6' fill='#fff'/><circle cx='290' cy='110' r='1.3' fill='#fff'/><circle cx='60' cy='130' r='1.4' fill='#fff'/>\n<circle cx='300' cy='84' r='20' fill='#3E7FD0'/><path d='M288 80 Q298 72 306 82 Q300 92 290 90 Z' fill='#4FAE6E'/><circle cx='300' cy='84' r='20' fill='none' stroke='#9FD2F5' stroke-width='2' opacity='.6'/>\n<path d='M14 196 Q80 176 150 190 T346 184 L346 236 Q346 250 332 250 L28 250 Q14 250 14 236 Z' fill='url(#gr)'/>\n<ellipse cx='70' cy='226' rx='30' ry='8' fill='#7B7D89'/><ellipse cx='290' cy='222' rx='36' ry='9' fill='#7B7D89'/><ellipse cx='200' cy='238' rx='22' ry='6' fill='#7B7D89'/>\n<polygon points='148,134 158,114 226,114 236,134' fill='#2D5FA8' stroke='#9FC0F0' stroke-width='1.5'/><line x1='192' y1='114' x2='192' y2='134' stroke='#9FC0F0'/><line x1='170' y1='114' x2='168' y2='134' stroke='#9FC0F0'/><line x1='214' y1='114' x2='218' y2='134' stroke='#9FC0F0'/>\n<rect x='136' y='134' width='112' height='32' rx='7' fill='#ECEEF4' stroke='#9AA0B0' stroke-width='1.5'/><rect x='146' y='142' width='24' height='10' rx='2' fill='#5B7DB1'/>\n<rect x='238' y='96' width='5' height='38' fill='#ECEEF4'/><rect x='232' y='88' width='18' height='10' rx='2' fill='#ECEEF4'/><circle cx='241' cy='93' r='3' fill='#333'/>\n<circle cx='152' cy='184' r='15' fill='#444'/><circle cx='152' cy='184' r='6' fill='#BBB'/><circle cx='192' cy='184' r='15' fill='#444'/><circle cx='192' cy='184' r='6' fill='#BBB'/><circle cx='232' cy='184' r='15' fill='#444'/><circle cx='232' cy='184' r='6' fill='#BBB'/>\n<line x1='140' y1='156' x2='112' y2='164' stroke='#ECEEF4' stroke-width='5'/><rect x='106' y='162' width='9' height='32' fill='#C9CCD6'/><polygon points='106,194 115,194 110.5,206' fill='#F2B441'/>\n<text x='60' y='140' font-size='13' style='fill:#fff'>ドリル</text><line x1='80' y1='146' x2='106' y2='168' stroke='#fff' stroke-width='1.5'/>\n<text x='160' y='84' font-size='13' style='fill:#fff'>太陽電池</text>\n<rect x='14' y='262' width='161' height='64' rx='12' style='fill:var(--card);stroke:var(--sci);stroke-width:2'/><rect x='185' y='262' width='161' height='64' rx='12' style='fill:var(--card);stroke:var(--sci);stroke-width:2'/>\n<text x='94' y='288' font-size='15' text-anchor='middle' style='fill:var(--ink)'>日本とインドが</text><text x='94' y='310' font-size='15' text-anchor='middle' font-weight='bold' style='fill:var(--sci)'>いっしょに計画</text>\n<text x='265' y='288' font-size='15' text-anchor='middle' style='fill:var(--ink)'>打ち上げは</text><text x='265' y='310' font-size='15' text-anchor='middle' font-weight='bold' style='fill:var(--sci)'>2028年度にも</text>\n<path d='M180 332 L180 346' stroke='var(--muted)' stroke-width='3'/><path d='M172 342 L180 352 L188 342 Z' style='fill:var(--muted)'/>\n<rect x='14' y='360' width='332' height='60' rx='12' style='fill:var(--card);stroke:var(--sci);stroke-width:2'/>\n<text x='180' y='386' font-size='15' text-anchor='middle' style='fill:var(--ink)'>地面をほって、砂（すな）をあつめ</text><text x='180' y='408' font-size='15' text-anchor='middle' style='fill:var(--ink)'>水がふくまれるか調べる</text>\n<path d='M180 424 L180 436' stroke='var(--muted)' stroke-width='3'/><path d='M172 432 L180 442 L188 432 Z' style='fill:var(--muted)'/>\n<rect x='14' y='448' width='332' height='44' rx='12' style='fill:var(--card);stroke:#E5484D;stroke-width:2'/>\n<text x='180' y='476' font-size='15' text-anchor='middle' style='fill:var(--ink)'>水→酸素と水素→ロケット燃料に</text>\n</svg>",
+      "caption": "月の地面をほって水を調べる探査車（イメージの絵）。",
+      "body": [
+        "JAXA（{JAXA|ジャクサ}）は11{月|がつ}25{日|にち}、{東京都|とうきょうと}{調布市|ちょうふし}にある{調布航空宇宙|ちょうふこうくううちゅう}センターで、=={月|つき}の{水|みず}をさがす{探査車|たんさしゃ}==の{地上|ちじょう}{試験機|しけんき}を{報道陣|ほうどうじん}に{公開|こうかい}しました。{月|つき}の{極|きょく}に{近|ちか}い{場所|ばしょ}に{水|みず}がありそうだと{考|かんが}えられていて、それを{調|しら}べる「LUPEX（{LUPEX|ルペックス}）」という{計画|けいかく}の{一部|いちぶ}です。",
+        "{試験|しけん}は、{石|いし}をしきつめて{月|つき}の{地面|じめん}に{似|に}せた{場所|ばしょ}で{行|おこな}われました。{月|つき}の{表面|ひょうめん}は、「レゴリス」という{細|こま}かい{砂|すな}でおおわれていて、{車|くるま}がしずみやすいのです。{探査車|たんさしゃ}は、その{上|うえ}をゆっくり{進|すす}みました。{本番|ほんばん}では{地面|じめん}をほって{砂|すな}を{集|あつ}め、{水|みず}がふくまれているかを{調|しら}べます。",
+        "{計画|けいかく}は=={日本|にほん}とインドがいっしょに{進|すす}めています==。インドが{着陸機|ちゃくりくき}を、{日本|にほん}が{探査車|たんさしゃ}を{受|う}け{持|も}ち、2028{年度|ねんど}にもH3（{H3|エイチスリー}）ロケットで{打|う}ち{上|あ}げる{予定|よてい}です。{月|つき}で{水|みず}が{手|て}に{入|はい}れば、{飲|の}み{水|みず}のほか、{酸素|さんそ}や{燃料|ねんりょう}の{材料|ざいりょう}にも{使|つか}え、{将来|しょうらい}の{月面基地|げつめんきち}づくりに{役立|やくだ}つと{期待|きたい}されています。"
+      ],
+      "keywords": [
+        {
+          "term": "LUPEX（{LUPEX|ルペックス}）",
+          "desc": "日本とインドが進める、月の水を調べる探査計画。"
+        },
+        {
+          "term": "レゴリス",
+          "desc": "月の表面をおおう、細かい砂やほこり。"
+        },
+        {
+          "term": "{探査車|たんさしゃ}（ローバー）",
+          "desc": "天体の表面を走って調べる、車のような機械。"
+        }
+      ],
+      "quiz": {
+        "q": "水を電気で分解すると、酸素と何ができる？",
+        "choices": [
+          "水素",
+          "二酸化炭素",
+          "窒素"
+        ],
+        "answer": 0,
+        "a": "正しいのは1番目の水素です。水は水素と酸素でできています。水素と酸素はロケットの燃料にも使われます。",
+        "hint": "水の化学式はH₂O。Hは何の記号かな？"
+      },
+      "units": [
+        "理科：月と太陽",
+        "理科：水溶液・物質の変化"
+      ],
+      "talk": "月に人が住むようになったら、水はどうやって手に入れるのがいいと思う？",
+      "talk_hints": [
+        "地球から運ぶ：確実だが、重くてお金がかかる。",
+        "月で見つける：運ぶ手間が省けるが、見つかるかは調べないと分からない。",
+        "身近な例：キャンプで水を持っていくか、川の水を使うか。"
+      ],
+      "exam_level": 2
+    }
+  ],
+  "math": {
+    "news": 1,
+    "unit": "算数：割合",
+    "q": "{米国|べいこく}が{日本|にほん}に{最大|さいだい}15％の{関税|かんぜい}をかける{案|あん}を{示|しめ}しました。1{台|だい}300{万円|まんえん}の{機械|きかい}に15％の{関税|かんぜい}がかかるとすると、{関税|かんぜい}は1{台|だい}いくらですか。また、40{台|だい}{分|ぶん}の{関税|かんぜい}は{全部|ぜんぶ}でいくらですか。（15％は「{最大|さいだい}」の{数|かず}をそのまま{使|つか}います。）",
+    "hint": "関税の金額＝もとの値段×割合。割合15％は0.15にして考えよう。",
+    "answer": "1台45万円、40台で1800万円",
+    "steps": [
+      "15％＝0.15なので、1台の関税は 300×0.15＝45（万円）",
+      "40台分は 45×40＝1800（万円）",
+      "答え：1台45万円、40台で1800万円"
+    ]
+  },
+  "briefs": [
+    "{高市首相|たかいちしゅしょう}が24{日|か}、{経済財政諮問会議|けいざいざいせいしもんかいぎ}で{今年度|こんねんど}の{第2次補正予算案|だいにじほせいよさんあん}をつくるよう{指示|しじ}したと、NHKが{伝|つた}えました。{災害|さいがい}への{対応|たいおう}など{必要|ひつよう}な{費用|ひよう}に{絞|しぼ}る{方針|ほうしん}だと、{新潟日報|にいがたにっぽう}が{伝|つた}えています。",
+    "JAXA（{JAXA|ジャクサ}）は24{日|か}、{地球|ちきゅう}の{観測|かんそく}データを{公開|こうかい}するシステムが{不正|ふせい}に{入|はい}られ、{利用者|りようしゃ}の{情報|じょうほう}が{漏|も}れたと{発表|はっぴょう}しました。{流出|りゅうしゅつ}は{約|やく}2000{人分|にんぶん}と、{信濃毎日新聞|しなのまいにちしんぶん}が{伝|つた}えました。"
+  ],
+  "extra": "",
+  "sources": [
+    {
+      "title": "NHK：米 過剰生産で日本などに追加関税 既存税率含め日本最大15％に",
+      "url": "https://news.web.nhk/newsweb/na/nd-20261126de81560"
+    },
+    {
+      "title": "Holland & Knight：USTR Proposes Tariffs Following 14 Section 301 Manufacturing Excess Capacity Investigations",
+      "url": "https://www.hklaw.com/en/insights/publications/2026/11/ustr-proposes-tariffs-following-14-section-301"
+    },
+    {
+      "title": "東京新聞：副首都、来秋に複数を同時指定 10〜11月ごろ、政府案",
+      "url": "https://tokyo-np.co.jp/article/530550"
+    },
+    {
+      "title": "時事通信（nippon.com）：副首都、来秋指定＝政府、来年6月から申請受け付け",
+      "url": "https://www.nippon.com/ja/articles/-/57947"
+    },
+    {
+      "title": "時事通信：月探査車の試験走行公開 日印共同、28年度打ち上げ―JAXA",
+      "url": "https://www.jiji.com/jc/article?k=2026112501057&g=soc&m=rss"
+    },
+    {
+      "title": "日本経済新聞：月で水探す探査車、JAXAが試験走行を公開 28年度にも打ち上げ",
+      "url": "https://www.nikkei.com/article/DGXZQOSG20AS20Q6A121C2000000/"
+    },
+    {
+      "title": "NHK：高市首相 今年度の第2次補正予算案の編成を指示",
+      "url": "https://news.web.nhk/newsweb/na/nd-20261124de80761"
+    },
+    {
+      "title": "新潟日報：首相、第2次補正予算編成を指示",
+      "url": "https://www.niigata-nippo.co.jp/articles/-/948783"
+    },
+    {
+      "title": "NHK：JAXAのシステムに不正アクセス 一部アカウント名など漏えい",
+      "url": "https://news.web.nhk/newsweb/na/nd-20261124de80645"
+    },
+    {
+      "title": "信濃毎日新聞：JAXA、利用者情報流出 地球観測データ公開停止",
+      "url": "https://www.shinmai.co.jp/news/article/gfkn2026112401001382"
+    }
+  ],
+  "review_notes": [
+    "【選んだ理由】米国の追加関税案：11/25に発表された、日本の貿易に直結する大きなニュース。貿易・日米関係の単元につながる。",
+    "【選んだ理由】副首都：地方自治・防災の単元につながり、政府案が明らかになった実際の動き。",
+    "【選んだ理由】月探査車の公開：理科（宇宙）枠。11/25に公開された出来事で、水・月の単元につながる。",
+    "関税案：NHKは本文の詳細を確認できず、細部（14の国と地域、最大15％）はNHKとHolland & Knightの2つで一致。意見提出の期限（来年1月5日）・公聴会（来年1月25日）はHolland & Knightのみのため本文に書かず。HKLawには「協議が不調なら最大20％」との記述もあるが単独のため省いた。「昨年の日米合意と同じ水準」は解説記事（NRI）による。",
+    "副首都：案が明らかになった日付は報道で11/24（読売）と11/25（東京新聞・時事）に差があるため、日付を書かず「案がまとまった」とした。「来年」は2027年。指定時期は「来秋」と「10〜11月ごろ」で表現差あり。地図の点は市の位置（愛知は名古屋）。",
+    "算数は、関税15％を使った仮定の問題（実際の関税額ではない）。",
+    "算数は、関税15％を使った仮定の問題（実際の関税額ではない）。steps の3つ目は不要な書き方なので、必要なら削ること。",
+    "JAXAの不正アクセス：NHKは「一部の利用者のアカウント名など」、信濃毎日は「約2千人分のアカウント名と暗号化パスワード」と詳しさが違うため、briefsは人数のみ引用。"
+  ]
+}
