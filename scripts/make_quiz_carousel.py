@@ -6,7 +6,7 @@
 end の日までの7日間の記事（content/日付.json）にある3択クイズから、6問を選ぶ。
   ・1つの記事から1問まで／できるだけ ちがう科目・ちがう日から／記事を読まないと解けない問題は除く
 できるもの：quiz-promo/quiz-{end}-{1..9}.jpg と quiz-promo/quiz-{end}.json（問題・答え・投稿文）
-  1 表紙 / 2〜7 問題 / 8 答え合わせ / 9 LINEの案内
+  1 表紙 / 2〜7 問題 / 8 答え合わせ / 9 サイトの案内
 """
 import argparse
 import datetime as dt
@@ -162,7 +162,7 @@ def main():
     d.text((W // 2, H - 60), 'くわしい解説・図解は、毎日のニュースで', font=font(38), fill=(70, 90, 130), anchor='mm')
     imgs.append(im)
 
-    # 9 LINE の案内
+    # 9 サイトの案内
     im, d = base('覚えるシートをプレゼント')
     d.text((W // 2, 280), '時事も、算数も、社会も', font=font(58), fill=INK, anchor='mm')
     d.text((W // 2, 400), '覚えるシート', font=font(130), fill=(220, 38, 38), anchor='mm')
@@ -170,9 +170,9 @@ def main():
     d.text((W // 2, 650), '憲法・三権／国連／環境／単位・割合', font=font(38), fill=(70, 90, 130), anchor='mm')
     d.text((W // 2, 710), '図形／年表／都道府県／部首', font=font(38), fill=(70, 90, 130), anchor='mm')
     d.rounded_rectangle([60, 830, W - 60, 1150], radius=44, fill=GREEN)
-    d.text((W // 2, 920), 'LINEで「シート」と送ってね', font=font(66), fill=(255, 255, 255), anchor='mm')
-    d.text((W // 2, 1020), 'PDFがすぐに届きます', font=font(48), fill=(255, 255, 255), anchor='mm')
-    d.text((W // 2, 1090), 'プロフィールのリンクから友だち追加', font=font(38), fill=(220, 250, 232), anchor='mm')
+    d.text((W // 2, 920), 'サイトで無料ダウンロード', font=font(66), fill=(255, 255, 255), anchor='mm')
+    d.text((W // 2, 1020), '登録なし・すぐ印刷できます', font=font(48), fill=(255, 255, 255), anchor='mm')
+    d.text((W // 2, 1090), 'jijitane.com（プロフィールのリンクから）', font=font(38), fill=(220, 250, 232), anchor='mm')
     d.text((W // 2, 1250), '毎朝7:30、中学受験の時事ニュース3本', font=font(42), fill=INK, anchor='mm')
     imgs.append(im)
 
@@ -181,7 +181,7 @@ def main():
     letters = ' '.join(f'Q{i}={LET[it["ans"]]}' for i, it in enumerate(qs, 1))
     caption = (f'【今週の時事チャレンジ】{span}のニュースから、3択クイズ6問！\n6問中、何問わかるかな？ 答えは8ページ目にあります。\n\n'
                + '\n'.join(f'Q{i} {it["q"]}' for i, it in enumerate(qs, 1))
-               + f'\n\n親子で考えて、コメントで答えを教えてね。\n覚えるシート（全8種・印刷OKのPDF）は、LINEで「シート」と送ると届きます。LINEの友だち追加は、プロフィールのリンクからできます。\n'
+               + f'\n\n親子で考えて、コメントで答えを教えてね。\n覚えるシート（全21種・印刷OKのPDF）は、プロフィールのリンクから、サイトで無料ダウンロードできます（登録なし）。\n'
                + '\n#中学受験 #中受 #時事問題 #時事クイズ #小学生の勉強 #家庭学習 #親子で学ぶ')
     (out / f'quiz-{args.end}.json').write_text(json.dumps(dict(end=args.end, span=span, caption=caption, answers=letters, count=len(imgs),
                                                                  questions=[dict(day=q['day'], q=q['q'], ch=q['ch'], ans=q['ans']) for q in qs]), ensure_ascii=False, indent=1), encoding='utf-8')

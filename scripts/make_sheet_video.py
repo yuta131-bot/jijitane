@@ -4,7 +4,7 @@
   python3 scripts/make_sheet_video.py --sheet zukei --dist dist --out dist-video [--voicevox http://localhost:50021]
 
 - 画面：シートのPDFから、いま話している所（表やカードのブロック）だけを切り取って、ゆっくりズームインしながら見せる。
-        下に、話している言葉を字幕で出す。最後に、シートの画像を並べて「LINEで『シート』と送ってね」を出す
+        下に、話している言葉を字幕で出す。最後に、シートの画像を並べて「プロフィールのリンクから、サイトでダウンロード」を出す
 - 声：VOICEVOX（毎朝のショートと同じ冥鳴ひまり）。content/sheets/{id}.json の pages[].voice（1文ごとに、どのブロックを見せるか f で指定）
 - 音楽：この場で作る、オリジナルの明るい曲（著作権の心配なし）。声の下で小さく流す
 できるもの：sheet-{id}.mp4 / sheet-{id}-title.txt / sheet-{id}.txt
@@ -27,7 +27,7 @@ from playwright.sync_api import sync_playwright  # noqa: E402
 from PIL import Image, ImageDraw, ImageFont  # noqa: E402
 
 RATE = vv.RATE
-OUTRO = 'プリントできるPDFは、LINEで、シート、と送ってね。'
+OUTRO = 'プリントできるPDFは、プロフィールのリンクから、サイトでダウンロードできます。'
 
 
 def bgm_pcm(seconds):
@@ -208,7 +208,7 @@ def main():
         for seg in p.get('voice', []):
             seg = seg if isinstance(seg, dict) else {'t': seg, 'f': ''}
             plan.append(dict(text=seg['t'], page=pi, key=seg.get('f', ''), label=None))
-    plan.append(dict(text='プリントできるPDFは、LINEで、シート、と送ってね。', outro=True))
+    plan.append(dict(text=OUTRO, outro=True))
 
     # 各項目を、サイトのスマホ表示から大きく撮る（A4のPDFを切るだけだと、横長で文字が小さくなるため）
     with sync_playwright() as pw:
@@ -265,8 +265,8 @@ def main():
             bg = scene_bg(brand, 'このPDFを、プレゼント！', '')
             d = ImageDraw.Draw(bg)
             d.rounded_rectangle([CX, 1195, CX + CW, 1350], radius=36, fill=GREEN)
-            d.text((CX + CW // 2, 1240), 'LINEで「シート」と送ってね', font=font(52), fill=(255, 255, 255), anchor='mm')
-            d.text((CX + CW // 2, 1302), '全21種類・印刷OK／プロフィールのリンクから友だち追加', font=font(29), fill=(230, 252, 238), anchor='mm')
+            d.text((CX + CW // 2, 1240), 'サイトでダウンロード', font=font(56), fill=(255, 255, 255), anchor='mm')
+            d.text((CX + CW // 2, 1302), 'jijitane.com／無料・登録なし／プロフィールのリンクから', font=font(30), fill=(230, 252, 238), anchor='mm')
             bg.paste(canvas, (CX + (CW - 720) // 2, 240))
             emit(Scene(bg, bg, (0, 0, W, H), sc['dur'], 0).frames((W, H)))
             continue
@@ -286,7 +286,7 @@ def main():
         raise SystemExit('ffmpeg が失敗しました')
 
     (out / f'sheet-{args.sheet}-title.txt').write_text(f'【覚えるシート】{title} #中学受験 #shorts', encoding='utf-8')
-    desc = (f'{title}\n{sub}\n\n印刷できるPDF（A4）は、LINEで「シート」と送ると届きます。\n{cfg.get("lineUrl", "")}\n'
+    desc = (f'{title}\n{sub}\n\n印刷できるPDF（A4）は、サイトから無料でダウンロードできます（登録なし）。\n'
             f'ページで見る：{cfg["siteUrl"].rstrip("/")}/sheets/{args.sheet}.html\n\n'
             '覚えるシートは全21種類。ほかのシートも、毎日1つずつ紹介しています。\n'
             f'音声：{vv.CREDIT}／音楽：自作\n\n#中学受験 #中受 #家庭学習 #小学生の勉強')

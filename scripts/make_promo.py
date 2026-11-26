@@ -6,7 +6,7 @@
 サイトの /sheets/{id}.html（スマホ幅）を Chromium で開き、項目（表・カードなど）ごとに大きく撮って、
   1 表紙（A4の1ページ目を小さく載せる）
   2〜 項目ごとのスライド（小さい項目は、1枚にまとめる）
-  最後 PDF のダウンロード案内（3枚の表紙と、LINE で「シート」と送る案内、ポスターとして貼るすすめ）
+  最後 PDF のダウンロード案内（3枚の表紙と、サイトでダウンロードする案内、ポスターとして貼るすすめ）
 を promo/{id}-{n}.jpg に書き出す。Instagram のカルーセルは10枚までなので、おさまるまで大きさを調整する。
 """
 import argparse
@@ -205,8 +205,8 @@ def last(sid, thumbs, count, total):
         card(im, x, 350, tw, th, r=6)
         im.paste(t.resize((tw, th), Image.LANCZOS), (x, 350))
     d.rounded_rectangle([60, 830, W - 60, 1060], radius=44, fill=GREEN)
-    d.text((W // 2, 905), 'LINEで「シート」と送ってね', font=font(62), fill=(255, 255, 255), anchor='mm')
-    d.text((W // 2, 985), 'PDFがすぐに届きます（プロフィールのリンクから友だち追加）', font=font(32), fill=(220, 250, 232), anchor='mm')
+    d.text((W // 2, 905), 'サイトで無料ダウンロード', font=font(62), fill=(255, 255, 255), anchor='mm')
+    d.text((W // 2, 985), 'jijitane.com／登録なし（プロフィールのリンクから）', font=font(32), fill=(220, 250, 232), anchor='mm')
     d.text((W // 2, 1140), '印刷して、ポスターにしよう', font=font(52), fill=INK, anchor='mm')
     d.text((W // 2, 1210), 'トイレ・部屋・食卓に貼って、毎日ながめて覚える', font=font(36), fill=(70, 90, 130), anchor='mm')
     d.text((W // 2, 1275), '毎朝7:30、中学受験の時事ニュース3本', font=font(34), fill=(70, 90, 130), anchor='mm')

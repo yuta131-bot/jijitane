@@ -40,11 +40,11 @@ console.log(`今日のシート：${sheet.id}（${title}／${files.length}ペー
 // ---------- 文面 ----------
 const weight = (s) => [...s].reduce((w, ch) => w + (/[\u0000-ჿ -‍‐-‟′-‷]/.test(ch) ? 1 : 2), 0);
 const xText = (() => {
-  const mk = (tags) => `【覚えるシート】${title}\n${sub}\n\n印刷して、トイレや部屋に貼って覚えよう。\nPDFは、LINEで「シート」と送ると届きます\n${cfg.lineUrl}${tags ? '\n\n#中学受験 #家庭学習' : ''}`;
-  const w = (t) => weight(t.replace(cfg.lineUrl, 'x'.repeat(23)));   // URL は長さに関係なく23と数える
+  const mk = (tags) => `【覚えるシート】${title}\n${sub}\n\n印刷して、トイレや部屋に貼って覚えよう。\nPDFは、サイトから無料でダウンロードできます\n${base}/sheets/${sheet.id}.html${tags ? '\n\n#中学受験 #家庭学習' : ''}`;
+  const w = (t) => weight(t.replace(`${base}/sheets/${sheet.id}.html`, 'x'.repeat(23)));   // URL は長さに関係なく23と数える
   return w(mk(true)) > 280 ? mk(false) : mk(true);
 })();
-const igCaption = `【覚えるシート】${title}\n${sub}\n\nスワイプすると、項目ごとに大きく見られます。保存して、見返してね。\n\n印刷してポスターにして、トイレ・部屋・食卓に貼って、毎日ながめて覚えるのもおすすめです。\nA4で印刷できるPDFは、LINEで「シート」と送ると届きます（友だち追加は、プロフィールのリンクから）。\n\n全${sheets.length}種類の覚えるシートを、1日1つずつ紹介しています。\n\n#中学受験 #中受 #家庭学習 #小学生の勉強 #受験勉強 #覚えるシート`;
+const igCaption = `【覚えるシート】${title}\n${sub}\n\nスワイプすると、項目ごとに大きく見られます。保存して、見返してね。\n\n印刷してポスターにして、トイレ・部屋・食卓に貼って、毎日ながめて覚えるのもおすすめです。\nA4で印刷できるPDFは、プロフィールのリンクから、サイトで無料ダウンロードできます（登録なし）。\n\n全${sheets.length}種類の覚えるシートを、1日1つずつ紹介しています。\n\n#中学受験 #中受 #家庭学習 #小学生の勉強 #受験勉強 #覚えるシート`;
 console.log('--- X ---\n' + xText + '\n--- Instagram ---\n' + igCaption);
 if (dry) { console.log('DRY_RUN のため投稿しません'); process.exit(0); }
 

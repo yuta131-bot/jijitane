@@ -20,7 +20,7 @@ const sheet = sheets.find((s) => s.id === sid);
 if (!sheet) { console.log('今日のシートが分かりません'); process.exit(0); }
 state[sid] = state[sid] || {};
 const title = plain(sheet.title), sub = plain(sheet.sub || '');
-const caption = `【覚えるシート】${title}\n${sub}\n\n動画で、ポイントをさっと見よう。くわしい表は、同じ日の投稿のスライドで。\n\n印刷してポスターにして、トイレ・部屋・食卓に貼って、毎日ながめて覚えるのもおすすめです。\nA4で印刷できるPDFは、LINEで「シート」と送ると届きます（友だち追加は、プロフィールのリンクから）。\n\n全${sheets.length}種類の覚えるシートを、1日1つずつ紹介しています。\n\n#中学受験 #中受 #家庭学習 #小学生の勉強 #受験勉強 #覚えるシート`;
+const caption = `【覚えるシート】${title}\n${sub}\n\n動画で、ポイントをさっと見よう。くわしい表は、同じ日の投稿のスライドで。\n\n印刷してポスターにして、トイレ・部屋・食卓に貼って、毎日ながめて覚えるのもおすすめです。\nA4で印刷できるPDFは、プロフィールのリンクから、サイトで無料ダウンロードできます（登録なし）。\n\n全${sheets.length}種類の覚えるシートを、1日1つずつ紹介しています。\n\n#中学受験 #中受 #家庭学習 #小学生の勉強 #受験勉強 #覚えるシート`;
 console.log(`リール：${sid}\n${caption}`);
 if (dry) { console.log('DRY_RUN のため投稿しません'); process.exit(0); }
 if (!process.env.IG_TOKEN) { console.log('IG_TOKEN がないので、リールは投稿しません'); process.exit(0); }
