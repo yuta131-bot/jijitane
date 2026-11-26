@@ -153,6 +153,36 @@ export const ARTS = {
     '<path d="M14 80C20 30 54 16 68 36C82 56 54 76 54 56C54 40 74 36 86 46C100 58 102 72 110 64" fill="none" stroke="url(#fvG)" stroke-width="9" stroke-linecap="round"/>',
     '<path d="M18 70C24 38 50 24 62 36" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" opacity=".55"/>',
   ].join('') },
+  rover: { W: 240, H: 135, f: () => {
+    let wh = '';
+    [92, 140, 188].forEach((x) => {
+      wh += `<circle cx="${x}" cy="110" r="14" fill="#3B3D45"/><circle cx="${x}" cy="110" r="11.5" fill="none" stroke="#25262C" stroke-width="2" stroke-dasharray="3 2.2"/>`
+        + `<circle cx="${x}" cy="110" r="5.5" fill="#B4B8C4"/><path d="M${x - 5} ${110}H${x + 5}M${x} ${105}V${115}" stroke="#7D8190" stroke-width="1.2"/>`;
+    });
+    let cell = '';
+    [123, 144, 165].forEach((x) => { cell += `<path d="M${x} 38L${x - 3} 62" stroke="#9FC0F0" stroke-width="1"/>`; });
+    return [
+      '<ellipse cx="136" cy="125" rx="86" ry="5" fill="#000" opacity=".28"/>',
+      // ドリルが入った穴
+      '<ellipse cx="31" cy="124.5" rx="11" ry="3.2" fill="#575967"/>',
+      // 足まわり（ロッカー・ボギー）
+      '<path d="M110 88L92 110M110 88L140 110M172 88L188 110M172 88L140 110" stroke="#B9BDC9" stroke-width="3.6" stroke-linecap="round" fill="none"/>', wh,
+      // 本体
+      '<rect x="78" y="62" width="124" height="28" rx="7" fill="#ECEEF4" stroke="#9AA0B0" stroke-width="1.5"/>',
+      '<rect x="88" y="70" width="26" height="10" rx="2" fill="#5B7DB1"/><rect x="152" y="70" width="38" height="10" rx="2" fill="#E7B85A"/><path d="M122 68V84M130 68V84M138 68V84" stroke="#B8BDCB" stroke-width="1.6"/>',
+      // 太陽電池
+      '<path d="M104 62L110 50M170 62L164 50" stroke="#9AA0B0" stroke-width="2"/>',
+      '<polygon points="92,52 102,36 172,36 182,52" fill="#2D5FA8" stroke="#9FC0F0" stroke-width="1.5"/>', cell, '<path d="M97 44H177" stroke="#9FC0F0" stroke-width="1"/>',
+      // マスト＋カメラ
+      '<rect x="188" y="22" width="5" height="40" fill="#ECEEF4"/><rect x="180" y="12" width="21" height="11" rx="2.5" fill="#ECEEF4" stroke="#9AA0B0" stroke-width="1"/><circle cx="190.5" cy="17.5" r="3.4" fill="#333"/>',
+      // ドリルのうで＋ドリル（地面に刺さる）
+      '<path d="M80 74L32 84" stroke="#ECEEF4" stroke-width="5" stroke-linecap="round"/><circle cx="80" cy="74" r="3.2" fill="#9AA0B0"/>',
+      '<rect x="26" y="82" width="10" height="34" rx="1.5" fill="#C9CCD6" stroke="#9AA0B0" stroke-width="1"/><path d="M26 98H36M26 106H36" stroke="#9AA0B0" stroke-width="1"/>',
+      '<polygon points="26,116 36,116 31,127" fill="#F2B441"/>',
+      // ほった砂・舞う砂
+      '<ellipse cx="21" cy="124" rx="8" ry="2.6" fill="#C2C4CE"/><ellipse cx="42" cy="125" rx="7" ry="2.2" fill="#B5B7C2"/><circle cx="16" cy="117" r="1.6" fill="#D7D8E0"/><circle cx="45" cy="118" r="1.3" fill="#D7D8E0"/><circle cx="12" cy="121" r="1.1" fill="#D7D8E0"/>',
+    ].join('');
+  } },
   ship: { W: 300, H: 118, f: () => {
     const wave = (y, a) => { let d = `M0 ${y}`; d += ` Q12 ${y - a} 25 ${y}`; for (let i = 1; i < 12; i++) d += ` T${25 * (i + 1)} ${y}`; return d; };
     const cols = ['#E5484D', '#F2B441', '#3E9B6E', '#5B7DB1', '#E8833A', '#8E6BBF'];
