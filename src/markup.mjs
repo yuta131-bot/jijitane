@@ -32,9 +32,9 @@ import { expandArts } from './arts.mjs';
 const num = (v, d) => (Number.isFinite(parseFloat(v)) ? parseFloat(v) : d);
 export function expandBasemaps(svg = '') {
   return String(svg).replace(/<basemap\b([^>]*?)\/?>(\s*<\/basemap>)?/gi, (_, attrs) => {
-    const a = Object.fromEntries([...attrs.matchAll(/([a-z-]+)\s*=\s*"([^"]*)"/gi)].map((m) => [m[1].toLowerCase(), m[2]]));
+    const a = Object.fromEntries([...attrs.matchAll(/([a-z-]+)\s*=\s*(?:"([^"]*)"|'([^']*)')/gi)].map((m) => [m[1].toLowerCase(), m[2] ?? m[3]]));
     const m = BASEMAPS[a.name];
-    if (!m) return '';
+    if (!m) { console.warn(`::warning::地図 "${a.name}" が見つからないため、図から消えました（basemaps.json にある名前か確認）`); return ''; }
     const x = num(a.x, 0), y = num(a.y, 0), w = num(a.width, m.W), h = +(w * m.H / m.W).toFixed(1);
     return `<svg x="${x}" y="${y}" width="${w}" height="${h}" viewBox="0 0 ${m.W} ${m.H}" overflow="hidden" aria-hidden="true">`
       + `<rect width="${m.W}" height="${m.H}" style="fill:var(--sea)"/>`

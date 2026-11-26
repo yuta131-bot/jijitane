@@ -153,13 +153,50 @@ export const ARTS = {
     '<path d="M14 80C20 30 54 16 68 36C82 56 54 76 54 56C54 40 74 36 86 46C100 58 102 72 110 64" fill="none" stroke="url(#fvG)" stroke-width="9" stroke-linecap="round"/>',
     '<path d="M18 70C24 38 50 24 62 36" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" opacity=".55"/>',
   ].join('') },
+  ship: { W: 300, H: 118, f: () => {
+    const wave = (y, a) => { let d = `M0 ${y}`; d += ` Q12 ${y - a} 25 ${y}`; for (let i = 1; i < 12; i++) d += ` T${25 * (i + 1)} ${y}`; return d; };
+    const cols = ['#E5484D', '#F2B441', '#3E9B6E', '#5B7DB1', '#E8833A', '#8E6BBF'];
+    const heights = [3, 2, 3, 2];
+    let box = '';
+    heights.forEach((n, i) => {
+      for (let r = 0; r < n; r++) {
+        const x = 98 + i * 38, y = 56 - r * 15, c = cols[(i * 2 + r * 3) % cols.length];
+        box += `<rect x="${x}" y="${y}" width="36" height="14" rx="1.5" fill="${c}"/>`
+          + `<path d="M${x + 9} ${y + 1}V${y + 13}M${x + 18} ${y + 1}V${y + 13}M${x + 27} ${y + 1}V${y + 13}" stroke="#000" stroke-opacity=".18" stroke-width="1.2"/>`
+          + `<rect x="${x}" y="${y}" width="36" height="2.4" rx="1" fill="#fff" opacity=".35"/>`;
+      }
+    });
+    let win = '';
+    [42, 52, 62].forEach((y) => { for (let i = 0; i < 5; i++) win += `<rect x="${34 + i * 8}" y="${y}" width="6" height="5" rx="1" fill="#6FB4E3"/>`; });
+    return [
+      // 煙
+      '<circle cx="70" cy="9" r="5" fill="#fff" opacity=".85"/><circle cx="79" cy="3" r="4" fill="#fff" opacity=".7"/>',
+      // 船体（水面より下までのびる）
+      '<path d="M8 70H286Q293 70 291 78L279 102H22Q10 102 8 90Z" fill="#2F4A66"/>',
+      '<path d="M8 90H284L279 102H22Q10 102 8 90Z" fill="#C94A4A"/>',
+      '<rect x="8" y="68" width="279" height="4" rx="1" fill="#E5484D"/><path d="M10 78H289" stroke="#fff" stroke-width="2" opacity=".5"/>',
+      '<circle cx="40" cy="83" r="2.2" fill="#9FC9EC"/><circle cx="54" cy="83" r="2.2" fill="#9FC9EC"/><circle cx="68" cy="83" r="2.2" fill="#9FC9EC"/>',
+      // 荷物のコンテナ
+      box,
+      // 船のうしろの建物（ブリッジ）と煙突
+      '<rect x="56" y="14" width="14" height="18" fill="#C94A4A"/><rect x="56" y="20" width="14" height="4" fill="#fff"/>',
+      '<rect x="26" y="30" width="52" height="8" rx="2" fill="#DDE3EC"/><rect x="30" y="36" width="44" height="34" fill="#F4F6FA"/>', win,
+      '<path d="M38 30V18" stroke="#35506B" stroke-width="2"/>',
+      // 海（船の下のほうに重なる）
+      `<path d="${wave(95, 6)}V105Q300 118 287 118H13Q0 118 0 105Z" fill="#4A9AD4" opacity=".92"/>`,
+      `<path d="${wave(95, 6)}" fill="none" stroke="#fff" stroke-width="1.6" opacity=".6"/>`,
+      `<path d="${wave(106, 5)}V108Q300 118 287 118H13Q0 118 0 108Z" fill="#3B86C4" opacity=".85"/>`,
+      // しぶき
+      '<ellipse cx="288" cy="96" rx="11" ry="3.2" fill="#fff" opacity=".85"/><ellipse cx="14" cy="96" rx="9" ry="2.8" fill="#fff" opacity=".8"/><ellipse cx="270" cy="100" rx="8" ry="2.2" fill="#fff" opacity=".6"/>',
+    ].join('');
+  } },
 };
 const num = (v, d) => (Number.isFinite(parseFloat(v)) ? parseFloat(v) : d);
 export function expandArts(svg = '') {
   return String(svg).replace(/<art\b([^>]*?)\/?>(\s*<\/art>)?/gi, (_, attrs) => {
     const a = Object.fromEntries([...attrs.matchAll(/([a-z-]+)\s*=\s*(?:"([^"]*)"|'([^']*)')/gi)].map((m) => [m[1].toLowerCase(), m[2] ?? m[3]]));
     const art = ARTS[a.name];
-    if (!art) return '';
+    if (!art) { console.warn(`::warning::部品 "${a.name}" が見つからないため、図から消えました（arts.mjs にある名前か確認）`); return ''; }
     const x = num(a.x, 0), y = num(a.y, 0), w = num(a.width, art.W), h = +(w * art.H / art.W).toFixed(1);
     return `<svg x="${x}" y="${y}" width="${w}" height="${h}" viewBox="0 0 ${art.W} ${art.H}" overflow="visible" aria-hidden="true">${art.f(a)}</svg>`;
   });
