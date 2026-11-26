@@ -201,6 +201,37 @@ jobs:
             --allowedTools "WebSearch,WebFetch,Read,Write,Edit,Glob,Bash(node scripts/validate.mjs:*)"
             --max-turns 50
 
+      - name: 直した図を撮り直して、もう一度見る＆直す（サブスク版・自動公開のとき）
+        if: steps.d.outputs.skip == 'false' && env.USE_SUB == 'true' && vars.AUTO_PUBLISH == 'true' && steps.fc.outputs.bad != '0'
+        continue-on-error: true
+        env:
+          D: ${{ steps.d.outputs.date }}
+        run: |
+          rm -f ".review/figs/$D-"*.png
+          node scripts/check-figs.mjs "$D" || true
+          python3 scripts/render_figs.py --date "$D"
+
+      - name: 撮り直した図の最終チェック（サブスク版・自動公開のとき）
+        if: steps.d.outputs.skip == 'false' && env.USE_SUB == 'true' && vars.AUTO_PUBLISH == 'true' && steps.fc.outputs.bad != '0'
+        continue-on-error: true
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          github_token: ${{ github.token }}
+          prompt: |
+            直したあとの図を、もう一度だけ見て仕上げてください。.review/figs/${{ steps.d.outputs.date }}-1.png〜3.png を Read で画像として開き、次を確かめます。
+            ・乗り物・建物・人などが、地面や水面に接していて、宙に浮いて見えないか（影・水しぶき・波があるか）
+            ・場所を示す図に、地図が出ているか（点とラベルだけが浮いていないか）
+            ・丸と四角だけで何の絵か分からない図になっていないか（src/arts.mjs の部品で描けるなら部品を使う。部品の一覧は prompts/system.md の表）
+            ・文字が重なったり、図からはみ出したりしていないか
+            ・.review/${{ steps.d.outputs.date }}-auto.json に wrong があれば、それも直す
+            問題があれば content/${{ steps.d.outputs.date }}.json の該当ニュースの svg だけを直してください（本文・数字・事実は変えない）。直したら node scripts/validate.mjs content/${{ steps.d.outputs.date }}.json を実行し、「OK」が出るまで直してください。
+            直せなかったもの・迷ったものは、.review/${{ steps.d.outputs.date }}-fixed.md の末尾に「図の最終チェック：」の見出しで追記してください（直した内容も短く書く）。
+            直すのは1回だけです。完璧を目指して繰り返さないでください。
+          claude_args: |
+            --allowedTools "Read,Write,Edit,Glob,Grep,Bash(node scripts/validate.mjs:*),Bash(node scripts/check-figs.mjs:*)"
+            --max-turns 30
+
       - name: サイトが作れるか確かめる
         if: steps.d.outputs.skip == 'false'
         env:
