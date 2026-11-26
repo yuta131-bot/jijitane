@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import { esc, inline, plain, safeSvg, jpDate } from './markup.mjs';
 import { relatedSheets, SHEET_META } from './related.mjs';
 import { art } from './art.mjs';
+import { getFukabori, fukaboriFor } from './fkreg.mjs';
 
 const TOOLS = `<div class="hero-tools"><button type="button" class="ruby-toggle" aria-pressed="true">ふりがな：あり</button><span class="streak" hidden></span></div>`;
 
@@ -108,7 +109,7 @@ ${cfg.analytics?.cloudflare ? `<script defer src="https://static.cloudflareinsig
 <header class="gh"><div class="gh-in">
   <a class="brand" href="${base}/">${LOGO}<span><b>${cfg.brandPrefix ? `<i class="bp">${esc(cfg.brandPrefix)}</i>${esc(cfg.brandMain)}` : esc(cfg.siteName)}</b><small>${esc(cfg.taglineShort || cfg.tagline)}</small></span></a>
   ${MASCOT}
-  <nav class="gnav"><a href="${base}/subject/rika.html">理科</a><a href="${base}/subject/shakai.html">社会</a><a href="${base}/matome/">時事まとめ</a><a href="${base}/sheets/">覚えるシート</a><a href="${base}/archive.html">バックナンバー</a></nav>
+  <nav class="gnav"><a href="${base}/subject/rika.html">理科</a><a href="${base}/subject/shakai.html">社会</a><a href="${base}/matome/">時事まとめ</a><a href="${base}/fukabori/">深掘り</a><a href="${base}/sheets/">覚えるシート</a><a href="${base}/archive.html">バックナンバー</a></nav>
 </div></header>
 <div class="page">
 <main>
@@ -119,7 +120,7 @@ ${sidebar(cfg, recent)}
 </div>
 <footer class="gf"><div class="gf-in">
   <div><b>${esc(cfg.siteName)}</b><br>${esc(cfg.tagline)}</div>
-  <nav><a href="${base}/matome/">時事まとめ</a><a href="${base}/sheets/">覚えるシート</a><a href="${base}/glossary.html">用語集</a><a href="${base}/units.html">単元別</a><a href="${base}/about.html">このサイトについて・訂正の方針</a><a href="${base}/privacy.html">プライバシーポリシー</a><a href="${base}/contact.html">お問い合わせ</a></nav>
+  <nav><a href="${base}/matome/">時事まとめ</a><a href="${base}/fukabori/">深掘り</a><a href="${base}/sheets/">覚えるシート</a><a href="${base}/glossary.html">用語集</a><a href="${base}/units.html">単元別</a><a href="${base}/about.html">このサイトについて・訂正の方針</a><a href="${base}/privacy.html">プライバシーポリシー</a><a href="${base}/contact.html">お問い合わせ</a></nav>
   <p>読み上げ音声：VOICEVOX:冥鳴ひまり</p>
   <p>記事のつくり方と、まちがいが見つかったときの訂正の方針は、<a href="${base}/about.html">「このサイトについて・訂正の方針」</a>に書いています。</p>
 </div></footer>
@@ -143,6 +144,11 @@ function sheetBand(base) {
   return `<aside class="relsheet band"><span class="rs-l">入試に出る「覚えるシート」（全${ids.length}種類・A4印刷OK）</span>${pick.map((id) => `<a href="${base}/sheets/${id}.html">${art(SHEET_META[id][1], 'rs-ic')}<b>${esc(SHEET_META[id][0])}</b><small>見る・A4印刷OK</small></a>`).join('')}<a class="all" href="${base}/sheets/"><b>ぜんぶのシートを見る（${ids.length}種類の一覧へ）</b></a></aside>`;
 }
 
+function fukaboriBand(base) {
+  const f = getFukabori()[0];
+  if (!f) return '';
+  return `<a class="fkband" href="${base}/fukabori/${f.id}.html"><span class="fb-l">深掘り</span><b>${inline(f.title)}</b><small>ニュースの「なぜ？」をじっくり読む・入試ポイントとクイズつき</small><span class="fb-all">深掘り一覧を見る →</span></a>`;
+}
 function relBox(base, ids) {
   if (!ids.length) return '';
   return `<aside class="relsheet"><span class="rs-l">この話題の「覚えるシート」</span>${ids.map((id) => `<a href="${base}/sheets/${id}.html">${art(SHEET_META[id][1], 'rs-ic')}<b>${esc(SHEET_META[id][0])}</b><small>ページで見られる・A4で印刷もできる</small></a>`).join('')}</aside>`;
@@ -164,6 +170,7 @@ function newsBlock(n, i, a, base, single = false) {
   ${mathBlock(a, i)}
   ${(n.corrections || []).map((c) => `<div class="fix"><b>訂正（${esc(c.date)}）</b>${inline(c.text)}</div>`).join('')}
   ${(n.talk_hints || []).length ? `<details class="talkbox tdet"><summary><span class="tmark" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M5 7h15a3 3 0 0 1 3 3v7a3 3 0 0 1-3 3h-8l-5 4v-4H5a3 3 0 0 1-3-3v-7a3 3 0 0 1 3-3z" fill="#fff"/><path d="M25 12h2a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3h-1v3l-4-3h-5" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"/><circle cx="8" cy="13.5" r="1.4" fill="#E86A92"/><circle cx="12.5" cy="13.5" r="1.4" fill="#E86A92"/><circle cx="17" cy="13.5" r="1.4" fill="#E86A92"/></svg></span><span class="tbody"><span class="tlabel">おうちの人と話そう</span><span class="ttext">${inline(n.talk)}</span></span><span class="open">ヒントを見る</span></summary><div class="tans"><b>こんな考え方があるよ</b><ul>${n.talk_hints.map((h) => `<li>${inline(h)}</li>`).join('')}</ul><span class="thint">正解はないよ。自分はどう思うか、話してみよう</span></div></details>` : `<div class="talkbox"><span class="tmark" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M5 7h15a3 3 0 0 1 3 3v7a3 3 0 0 1-3 3h-8l-5 4v-4H5a3 3 0 0 1-3-3v-7a3 3 0 0 1 3-3z" fill="#fff"/><path d="M25 12h2a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3h-1v3l-4-3h-5" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"/><circle cx="8" cy="13.5" r="1.4" fill="#E86A92"/><circle cx="12.5" cy="13.5" r="1.4" fill="#E86A92"/><circle cx="17" cy="13.5" r="1.4" fill="#E86A92"/></svg></span><div class="tbody"><span class="tlabel">おうちの人と話そう</span><span class="ttext">${inline(n.talk)}</span><span class="thint">正解はないよ。思ったことを話してみよう</span></div></div>`}
+  ${fukaboriFor(a.date, i + 1).map((f) => `<a class="fkside" href="${base}/fukabori/${f.id}.html"><small>この話題を深掘り</small><b>${inline(f.title)}</b></a>`).join('')}
   ${relBox(base, relatedSheets(n, a, i))}
 </article>`;
 }
@@ -189,6 +196,7 @@ export function articlePage({ cfg, a, prev, next, css, top = false, recent = [] 
 </section>
 ${toc}
 ${top ? stampBook() : ''}
+${top ? fukaboriBand(base) : ''}
 ${top ? sheetBand(base) : ''}
 ${articles}
 ${a.parent_note ? `<section class="pnote"><h3>運営者のひとこと</h3><p>${esc(a.parent_note)}</p><small>小6の子の親（運営者）が書いています</small></section>` : ''}

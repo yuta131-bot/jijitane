@@ -1,0 +1,112 @@
+{
+  "id": "virus-saikin",
+  "date": "2026-11-26",
+  "title": "ウイルスって、{生|い}きものなの？ {細菌|さいきん}とどうちがう？",
+  "short_title": "ウイルスと細菌のちがい",
+  "lead": "エボラ{出血熱|しゅっけつねつ}の{訓練|くんれん}のニュースに{出|で}てきた「ウイルス」。{名前|なまえ}はよく{聞|き}くけれど、{細菌|さいきん}とは{何|なに}がちがうのでしょう。{大|おお}きさ、{生|い}きものかどうか、{薬|くすり}が{効|き}くかどうかで、くらべてみましょう。",
+  "subject": "理科（感染症）",
+  "subject_key": "rika",
+  "from": {
+    "date": "2026-11-24",
+    "n": 3,
+    "title": "{国内初|こくないはつ}のエボラ{出血熱|しゅっけつねつ}{患者|かんじゃ}を{想定|そうてい}、{首相官邸|しゅしょうかんてい}で{訓練|くんれん}"
+  },
+  "sections": [
+    {
+      "h": "{大|おお}きさがぜんぜんちがう",
+      "svg": "<svg viewBox='0 0 360 262'><text x='180' y='28' font-size='17' text-anchor='middle' font-weight='bold' style='fill:var(--ink)'>大きさくらべ（イメージ図）</text><rect x='10' y='40' width='340' height='150' rx='14' style='fill:var(--soft);stroke:var(--landline);stroke-width:1.5'/><path d='M46 112 q-8 -14 -14 0 t-14 0' fill='none' stroke='#3E9B6E' stroke-width='2.5' stroke-linecap='round'/><rect x='46' y='88' width='138' height='48' rx='24' fill='#8ED6B4' stroke='#3E9B6E' stroke-width='2.5'/><circle cx='84' cy='108' r='5' fill='#3E9B6E' opacity='.5'/><circle cx='112' cy='116' r='4' fill='#3E9B6E' opacity='.5'/><circle cx='140' cy='106' r='5' fill='#3E9B6E' opacity='.5'/><circle cx='160' cy='116' r='3.5' fill='#3E9B6E' opacity='.5'/><line x1='293.0' y1='112.0' x2='300.0' y2='112.0' stroke='#E5484D' stroke-width='2'/><circle cx='300.0' cy='112.0' r='2.2' fill='#E5484D'/><line x1='291.5' y1='117.5' x2='297.6' y2='121.0' stroke='#E5484D' stroke-width='2'/><circle cx='297.6' cy='121.0' r='2.2' fill='#E5484D'/><line x1='287.5' y1='121.5' x2='291.0' y2='127.6' stroke='#E5484D' stroke-width='2'/><circle cx='291.0' cy='127.6' r='2.2' fill='#E5484D'/><line x1='282.0' y1='123.0' x2='282.0' y2='130.0' stroke='#E5484D' stroke-width='2'/><circle cx='282.0' cy='130.0' r='2.2' fill='#E5484D'/><line x1='276.5' y1='121.5' x2='273.0' y2='127.6' stroke='#E5484D' stroke-width='2'/><circle cx='273.0' cy='127.6' r='2.2' fill='#E5484D'/><line x1='272.5' y1='117.5' x2='266.4' y2='121.0' stroke='#E5484D' stroke-width='2'/><circle cx='266.4' cy='121.0' r='2.2' fill='#E5484D'/><line x1='271.0' y1='112.0' x2='264.0' y2='112.0' stroke='#E5484D' stroke-width='2'/><circle cx='264.0' cy='112.0' r='2.2' fill='#E5484D'/><line x1='272.5' y1='106.5' x2='266.4' y2='103.0' stroke='#E5484D' stroke-width='2'/><circle cx='266.4' cy='103.0' r='2.2' fill='#E5484D'/><line x1='276.5' y1='102.5' x2='273.0' y2='96.4' stroke='#E5484D' stroke-width='2'/><circle cx='273.0' cy='96.4' r='2.2' fill='#E5484D'/><line x1='282.0' y1='101.0' x2='282.0' y2='94.0' stroke='#E5484D' stroke-width='2'/><circle cx='282.0' cy='94.0' r='2.2' fill='#E5484D'/><line x1='287.5' y1='102.5' x2='291.0' y2='96.4' stroke='#E5484D' stroke-width='2'/><circle cx='291.0' cy='96.4' r='2.2' fill='#E5484D'/><line x1='291.5' y1='106.5' x2='297.6' y2='103.0' stroke='#E5484D' stroke-width='2'/><circle cx='297.6' cy='103.0' r='2.2' fill='#E5484D'/><circle cx='282' cy='112' r='11' fill='#E5484D'/><text x='115' y='158' font-size='15' text-anchor='middle' font-weight='bold' style='fill:var(--ink)'>細菌</text><text x='115' y='178' font-size='13' text-anchor='middle' style='fill:var(--muted)'>1〜10μm</text><text x='282' y='158' font-size='15' text-anchor='middle' font-weight='bold' style='fill:var(--ink)'>ウイルス</text><text x='282' y='178' font-size='13' text-anchor='middle' style='fill:var(--muted)'>約0.1μm</text><rect x='20' y='204' width='320' height='44' rx='22' style='fill:var(--card);stroke:var(--sci);stroke-width:1.5'/><text x='180' y='232' font-size='15' text-anchor='middle' font-weight='bold' style='fill:var(--ink)'>細菌のほうが 10〜100倍 大きい</text></svg>",
+      "caption": "{細菌|さいきん}のほうが、ウイルスより10〜100{倍|ばい}ほど{大|おお}きい（{絵|え}は、くらべやすいようにかいたイメージです）。",
+      "p": [
+        "ウイルスの{大|おお}きさは{種類|しゅるい}によってちがいますが、インフルエンザウイルスは、{直径|ちょっけい}およそ0.1μm（マイクロメートル）です。1μmは1mmの1000{分|ぶん}の1なので、0.0001mmほどしかありません。",
+        "{細菌|さいきん}は1〜10μmほどで、ウイルスの10〜100{倍|ばい}も{大|おお}きいです。{細菌|さいきん}はふつうの{顕微鏡|けんびきょう}で{見|み}えますが、ウイルスは、{電子顕微鏡|でんしけんびきょう}という{特別|とくべつ}な{道具|どうぐ}でないと、ふつうは{見|み}えません。"
+      ]
+    },
+    {
+      "h": "ウイルスは、{生|い}きものと{言|い}えるの？",
+      "svg": "<svg viewBox='0 0 360 392'><text x='180' y='28' font-size='17' text-anchor='middle' font-weight='bold' style='fill:var(--ink)'>ウイルスの増え方</text><rect x='10' y='44' width='340' height='78' rx='12' style='fill:var(--card);stroke:var(--landline);stroke-width:1.5'/><circle cx='34' cy='83' r='13' fill='#7B4FD0'/><text x='34' y='89' font-size='15' text-anchor='middle' font-weight='bold' fill='#fff'>1</text><ellipse cx='120' cy='83' rx='46' ry='30' fill='#FBE3D2' stroke='#D79B7A' stroke-width='2'/><circle cx='130' cy='86' r='10' fill='#F2B58F' opacity='.8'/><line x1='70.0' y1='83.0' x2='74.0' y2='83.0' stroke='#E5484D' stroke-width='2'/><circle cx='74.0' cy='83.0' r='2.2' fill='#E5484D'/><line x1='68.9' y1='86.5' x2='72.1' y2='88.9' stroke='#E5484D' stroke-width='2'/><circle cx='72.1' cy='88.9' r='2.2' fill='#E5484D'/><line x1='65.9' y1='88.7' x2='67.1' y2='92.5' stroke='#E5484D' stroke-width='2'/><circle cx='67.1' cy='92.5' r='2.2' fill='#E5484D'/><line x1='62.1' y1='88.7' x2='60.9' y2='92.5' stroke='#E5484D' stroke-width='2'/><circle cx='60.9' cy='92.5' r='2.2' fill='#E5484D'/><line x1='59.1' y1='86.5' x2='55.9' y2='88.9' stroke='#E5484D' stroke-width='2'/><circle cx='55.9' cy='88.9' r='2.2' fill='#E5484D'/><line x1='58.0' y1='83.0' x2='54.0' y2='83.0' stroke='#E5484D' stroke-width='2'/><circle cx='54.0' cy='83.0' r='2.2' fill='#E5484D'/><line x1='59.1' y1='79.5' x2='55.9' y2='77.1' stroke='#E5484D' stroke-width='2'/><circle cx='55.9' cy='77.1' r='2.2' fill='#E5484D'/><line x1='62.1' y1='77.3' x2='60.9' y2='73.5' stroke='#E5484D' stroke-width='2'/><circle cx='60.9' cy='73.5' r='2.2' fill='#E5484D'/><line x1='65.9' y1='77.3' x2='67.1' y2='73.5' stroke='#E5484D' stroke-width='2'/><circle cx='67.1' cy='73.5' r='2.2' fill='#E5484D'/><line x1='68.9' y1='79.5' x2='72.1' y2='77.1' stroke='#E5484D' stroke-width='2'/><circle cx='72.1' cy='77.1' r='2.2' fill='#E5484D'/><circle cx='64' cy='83' r='6' fill='#E5484D'/><text x='186' y='78' font-size='15' font-weight='bold' style='fill:var(--ink)'>細胞にくっつく</text><text x='186' y='102' font-size='15' style='fill:var(--ink)'>細胞の表面に取りつく</text><rect x='10' y='128' width='340' height='78' rx='12' style='fill:var(--card);stroke:var(--landline);stroke-width:1.5'/><circle cx='34' cy='167' r='13' fill='#7B4FD0'/><text x='34' y='173' font-size='15' text-anchor='middle' font-weight='bold' fill='#fff'>2</text><ellipse cx='120' cy='167' rx='46' ry='30' fill='#FBE3D2' stroke='#D79B7A' stroke-width='2'/><circle cx='130' cy='170' r='10' fill='#F2B58F' opacity='.8'/><path d='M96 167 q6 -10 12 0 t12 0 t12 0' fill='none' stroke='#E5484D' stroke-width='2.5'/><circle cx='64' cy='167' r='6' fill='none' stroke='#E5484D' stroke-width='2' stroke-dasharray='3 2'/><text x='186' y='162' font-size='15' font-weight='bold' style='fill:var(--ink)'>細胞の中に入る</text><text x='186' y='186' font-size='15' style='fill:var(--ink)'>遺伝子を出す</text><rect x='10' y='212' width='340' height='78' rx='12' style='fill:var(--card);stroke:var(--landline);stroke-width:1.5'/><circle cx='34' cy='251' r='13' fill='#7B4FD0'/><text x='34' y='257' font-size='15' text-anchor='middle' font-weight='bold' fill='#fff'>3</text><ellipse cx='120' cy='251' rx='46' ry='30' fill='#FBE3D2' stroke='#D79B7A' stroke-width='2'/><circle cx='130' cy='254' r='10' fill='#F2B58F' opacity='.8'/><circle cx='96' cy='242' r='4' fill='#E5484D'/><circle cx='108' cy='258' r='4' fill='#E5484D'/><circle cx='122' cy='246' r='4' fill='#E5484D'/><circle cx='134' cy='260' r='4' fill='#E5484D'/><circle cx='146' cy='244' r='4' fill='#E5484D'/><circle cx='118' cy='262' r='4' fill='#E5484D'/><circle cx='100' cy='260' r='4' fill='#E5484D'/><circle cx='140' cy='252' r='4' fill='#E5484D'/><text x='186' y='246' font-size='15' font-weight='bold' style='fill:var(--ink)'>コピーを作らせる</text><text x='186' y='270' font-size='15' style='fill:var(--ink)'>細胞のしくみを借りる</text><rect x='10' y='296' width='340' height='78' rx='12' style='fill:var(--card);stroke:var(--landline);stroke-width:1.5'/><circle cx='34' cy='335' r='13' fill='#7B4FD0'/><text x='34' y='341' font-size='15' text-anchor='middle' font-weight='bold' fill='#fff'>4</text><ellipse cx='120' cy='335' rx='46' ry='30' fill='#FBE3D2' stroke='#D79B7A' stroke-width='2' stroke-dasharray='5 4'/><circle cx='66' cy='310' r='4' fill='#E5484D'/><circle cx='60' cy='336' r='4' fill='#E5484D'/><circle cx='70' cy='362' r='4' fill='#E5484D'/><circle cx='172' cy='310' r='4' fill='#E5484D'/><circle cx='176' cy='336' r='4' fill='#E5484D'/><circle cx='168' cy='362' r='4' fill='#E5484D'/><circle cx='120' cy='304' r='4' fill='#E5484D'/><circle cx='120' cy='368' r='4' fill='#E5484D'/><circle cx='110' cy='332' r='4' fill='#E5484D'/><circle cx='128' cy='340' r='4' fill='#E5484D'/><text x='186' y='330' font-size='15' font-weight='bold' style='fill:var(--ink)'>細胞からとび出す</text><text x='186' y='354' font-size='15' style='fill:var(--ink)'>ほかの細胞へ広がる</text></svg>",
+      "caption": "ウイルスは、ほかの{生|い}きものの{細胞|さいぼう}を{借|か}りて{増|ふ}える。",
+      "p": [
+        "{細菌|さいきん}は、1つの{細胞|さいぼう}でできていて、{自分|じぶん}で{栄養|えいよう}をとり、{自分|じぶん}の{力|ちから}で{分|わ}かれて{増|ふ}えます。{納豆菌|なっとうきん}や{乳酸菌|にゅうさんきん}も{細菌|さいきん}の{仲間|なかま}で、{私|わたし}たちの{生活|せいかつ}に{役立|やくだ}っています。",
+        "{一方|いっぽう}、ウイルスには{細胞|さいぼう}がなく、{遺伝子|いでんし}をたんぱく{質|しつ}のからで{包|つつ}んだだけの、とても{単純|たんじゅん}なつくりです。{自分|じぶん}だけでは{増|ふ}えることができず、ほかの{生|い}きものの{細胞|さいぼう}に{入|はい}りこんで、その{細胞|さいぼう}の{力|ちから}を{借|か}りて{増|ふ}えます。",
+        "このため、ウイルスが{生|い}きものかどうかは、{研究者|けんきゅうしゃ}の{間|あいだ}でも{意見|いけん}が{分|わ}かれています。"
+      ]
+    },
+    {
+      "h": "{薬|くすり}の{効|き}き{方|かた}も、ちがう",
+      "p": [
+        "{細菌|さいきん}をやっつける{薬|くすり}が「{抗菌薬|こうきんやく}（{抗生物質|こうせいぶっしつ}）」です。{細菌|さいきん}のつくりをこわしたり、{増|ふ}えるのをじゃましたりするので、{細菌|さいきん}とまったくちがうウイルスには{効|き}きません。",
+        "かぜの{多|おお}くはウイルスが{原因|げんいん}なので、{抗菌薬|こうきんやく}を{飲|の}んでも{意味|いみ}がない、と{厚生労働省|こうせいろうどうしょう}も{呼|よ}びかけています。",
+        "ウイルスの{病気|びょうき}には、{病気|びょうき}になる{前|まえ}に{体|からだ}に{練習|れんしゅう}をさせる「ワクチン」や、ウイルスが{増|ふ}えるのをおさえる{薬|くすり}が{使|つか}われます。",
+        "{必要|ひつよう}のない{抗菌薬|こうきんやく}を{使|つか}うと、{薬|くすり}が{効|き}かない{細菌|さいきん}（{耐性菌|たいせいきん}）が{増|ふ}えてしまいます。{薬|くすり}は、{医者|いしゃ}に{言|い}われたとおりに{飲|の}むことが{大切|たいせつ}です。"
+      ]
+    },
+    {
+      "h": "エボラ{出血熱|しゅっけつねつ}は、どんな{病気|びょうき}？",
+      "svg": "<svg viewBox='0 0 360 232'><text x='180' y='28' font-size='17' text-anchor='middle' font-weight='bold' style='fill:var(--ink)'>エボラ出血熱と防護服</text><rect x='10' y='40' width='340' height='160' rx='14' style='fill:var(--soft);stroke:var(--landline);stroke-width:1.5'/><rect x='24' y='194' width='312' height='4' rx='2' fill='#9AA5B8' opacity='.5'/><art name='ppe' x='60' y='42' width='88'/><art name='filovirus' x='190' y='70' width='130'/><text x='255' y='186' font-size='13' text-anchor='middle' style='fill:var(--muted)'>ウイルス（細長いひも状）</text><text x='180' y='222' font-size='13' text-anchor='middle' style='fill:var(--muted)'>防護服とウイルスのイメージ図</text></svg>",
+      "caption": "{防護服|ぼうごふく}とウイルス（{細長|ほそなが}いひも{状|じょう}）のイメージ{図|ず}。",
+      "p": [
+        "エボラ{出血熱|しゅっけつねつ}は、エボラウイルスによる{病気|びょうき}で、{日本|にほん}の{感染症法|かんせんしょうほう}では、{危険度|きけんど}がいちばん{高|たか}い「{一類感染症|いちるいかんせんしょう}」に{分類|ぶんるい}されています。",
+        "{人|ひと}から{人|ひと}へは、おもに{患者|かんじゃ}の{血液|けつえき}や{体液|たいえき}にさわることでうつり、{空気感染|くうきかんせん}は{考|かんが}えにくいとされています。だから{訓練|くんれん}では、{防護服|ぼうごふく}で{体|からだ}をしっかり{守|まも}るのです。",
+        "ウイルスの{病気|びょうき}は、ワクチンで{防|ふせ}げるものもあります。1796{年|ねん}にジェンナーが{種痘|しゅとう}（{天然痘|てんねんとう}のワクチン）を{発表|はっぴょう}し、{天然痘|てんねんとう}は1980{年|ねん}に、{世界保健機関|せかいほけんきかん}（WHO）が「{根絶|こんぜつ}した」と{宣言|せんげん}しました。"
+      ]
+    }
+  ],
+  "point": [
+    "{細菌|さいきん}は{細胞|さいぼう}をもつ{生|い}きもの。ウイルスは{細胞|さいぼう}をもたず、ほかの{生|い}きものの{細胞|さいぼう}の{中|なか}で{増|ふ}える。",
+    "{大|おお}きさは、{細菌|さいきん}が1〜10μm、ウイルスはその10〜100{分|ぶん}の1ほど。",
+    "{抗菌薬|こうきんやく}（{抗生物質|こうせいぶっしつ}）は{細菌|さいきん}に{効|き}くが、ウイルスには{効|き}かない。",
+    "{細菌|さいきん}の{例|れい}は{大腸菌|だいちょうきん}・{結核菌|けっかくきん}・{納豆菌|なっとうきん}。ウイルスの{例|れい}はインフルエンザ・エボラ・{新型|しんがた}コロナ。",
+    "{天然痘|てんねんとう}は、ジェンナーの{種痘|しゅとう}（1796{年|ねん}）から{約|やく}180{年|ねん}{後|ご}の1980{年|ねん}に、{根絶|こんぜつ}が{宣言|せんげん}された。"
+  ],
+  "keywords": [
+    {
+      "term": "ウイルス",
+      "desc": "{細胞|さいぼう}をもたず、ほかの{生|い}きものの{細胞|さいぼう}に{入|はい}って{増|ふ}える、とても{小|ちい}さなもの。"
+    },
+    {
+      "term": "{細菌|さいきん}",
+      "desc": "1つの{細胞|さいぼう}でできた{小|ちい}さな{生|い}きもの。{自分|じぶん}で{増|ふ}える。"
+    },
+    {
+      "term": "{抗菌薬|こうきんやく}",
+      "desc": "{細菌|さいきん}をやっつける{薬|くすり}。ウイルスには{効|き}かない。"
+    },
+    {
+      "term": "ワクチン",
+      "desc": "{病気|びょうき}にかかる{前|まえ}に、{体|からだ}に{病気|びょうき}を{防|ふせ}ぐ{力|ちから}をつけるもの。"
+    }
+  ],
+  "quiz": {
+    "q": "{次|つぎ}のうち、{細菌|さいきん}が{原因|げんいん}の{病気|びょうき}はどれ？",
+    "choices": [
+      "インフルエンザ",
+      "{結核|けっかく}",
+      "エボラ{出血熱|しゅっけつねつ}"
+    ],
+    "answer": 1,
+    "a": "{正|ただ}しいのは2{番目|ばんめ}の{結核|けっかく}です。{結核|けっかく}は{結核菌|けっかくきん}という{細菌|さいきん}が{原因|げんいん}で、{抗菌薬|こうきんやく}で{治療|ちりょう}します。インフルエンザとエボラ{出血熱|しゅっけつねつ}は、ウイルスが{原因|げんいん}です。",
+    "hint": "{細菌|さいきん}には、{抗菌薬|こうきんやく}が{効|き}くよ。"
+  },
+  "sources": [
+    {
+      "title": "長崎大学 感染症ニュース29号「感染症の原因となる細菌とウイルス」",
+      "url": "https://www.ccpid.nagasaki-u.ac.jp/wp-content/uploads/2022/07/newsletter29_part12.pdf"
+    },
+    {
+      "title": "厚生労働省「かぜで知っておきたい、抗菌薬はウイルスには効きません」",
+      "url": "https://www.mhlw.go.jp/content/10900000/001330637.pdf"
+    },
+    {
+      "title": "厚生労働省「エボラ出血熱の国内発生を想定した対応について」（一類感染症）",
+      "url": "https://www.mhlw.go.jp/bunya/kenkou/kekkaku-kansenshou19/dl/20151002_01.pdf"
+    },
+    {
+      "title": "岐阜県「一類感染症 エボラ出血熱」（感染経路・空気感染は否定的）",
+      "url": "https://www.pref.gifu.lg.jp/uploaded/attachment/13794.pdf"
+    },
+    {
+      "title": "厚生労働省「天然痘（痘瘡）」（ジェンナーの種痘・1980年の根絶宣言）",
+      "url": "https://www.mhlw.go.jp/topics/2001/0112/dl/tp1213-2a.pdf"
+    }
+  ]
+}

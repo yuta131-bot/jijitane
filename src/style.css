@@ -335,3 +335,18 @@ svg text{font-family:"Zen Maru Gothic","Hiragino Maru Gothic ProN","Hiragino San
 @media(max-width:520px){.sb-badges{grid-template-columns:repeat(3,1fr)}.sb-badge svg{max-width:46px}}
 .stamp-toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#1d2b44;color:#fff;padding:10px 18px;border-radius:999px;font-weight:900;font-size:.95rem;z-index:99;box-shadow:0 4px 14px rgba(0,0,0,.3);transition:opacity .5s}.stamp-toast.out{opacity:0}
 
+
+/* 深掘り */
+.fk-badge{display:inline-block;background:#7B4FD0;color:#fff;font-weight:900;font-size:14px;border-radius:999px;padding:3px 14px;margin:0 0 8px}
+.fk-from{display:block;border:2px dashed var(--line);border-radius:12px;padding:10px 14px;margin:0 0 18px;background:var(--soft);text-decoration:none;color:var(--ink)}
+.fk-from small{display:block;color:var(--muted);font-size:13px}.fk-from b{font-size:16px}
+.fk h2.fk-h{display:block;gap:0;font-size:21px;font-weight:900;margin:26px 0 8px;padding-left:10px;border-left:6px solid #7B4FD0;line-height:1.5}
+.fk p{line-height:2;margin:8px 0}
+.fk-point{border:3px solid #7B4FD0;border-radius:14px;padding:12px 16px;margin:22px 0;background:#F6F1FF;color:#1D2B44}
+.fk-point b{display:block;font-size:17px;margin-bottom:4px;color:#5B35A8}.fk-point ul{margin:0;padding-left:1.2em;line-height:1.9}
+.fkband{display:block;border:3px solid #7B4FD0;border-radius:16px;padding:12px 16px;margin:0 0 18px;background:#F6F1FF;text-decoration:none;color:#1D2B44}
+.fkband .fb-l{display:inline-block;background:#7B4FD0;color:#fff;font-weight:900;font-size:13px;border-radius:999px;padding:2px 12px;margin-bottom:6px}
+.fkband b{display:block;font-size:18px;line-height:1.5}.fkband small{display:block;color:#56677F;margin-top:2px}
+.fkband .fb-all{display:block;margin-top:6px;font-weight:900;color:#5B35A8;font-size:14px}
+.fkside{display:block;border:2px solid #7B4FD0;border-radius:12px;padding:8px 14px;margin:14px 0;background:#F6F1FF;text-decoration:none;color:#1D2B44}
+.fkside small{display:block;font-size:12px;color:#5B35A8;font-weight:900}.fkside b{font-size:16px;line-height:1.5}

@@ -9,6 +9,8 @@ import { validate, validateMatome } from '../src/schema.mjs';
 import { goPage } from '../src/go.mjs';
 import { loadSheets, sheetsIndexPage, sheetPage, sheetPrintHtml } from '../src/sheets.mjs';
 import { loadStudy, studyPage, studyIndexPage } from '../src/study.mjs';
+import { loadFukabori, validateFukabori, fukaboriPage, fukaboriIndexPage } from '../src/fukabori.mjs';
+import { setFukabori } from '../src/fkreg.mjs';
 import { flatNews, examYearOf, mondayOf, addDays, hubPage, monthPage, yearPage, rankingPage, weekData, weeklyPage, printHtml, rankPrintHtml } from '../src/matome.mjs';
 
 const cfg = JSON.parse(fs.readFileSync('site.config.json', 'utf8'));
@@ -39,6 +41,9 @@ if (examYear && fs.existsSync(yf)) {
 }
 const months = [...new Set(all.map((a) => a.date.slice(0, 7)))].sort();
 const weeks = [...new Set(all.map((a) => mondayOf(a.date)))].sort();
+const fukabori = loadFukabori(); // 深掘り（content/fukabori/*.json）
+for (const f of fukabori) { const e = validateFukabori(f); if (e.length) { console.error(`深掘り ${f.id}：\n- ${e.join('\n- ')}`); process.exit(1); } }
+setFukabori(fukabori);
 const study = loadStudy();     // 中受の読み物（content/study/*.json）
 const sheets = loadSheets();   // 覚えるシート（content/sheets/*.json）
 cfg.matomeLinks = [
@@ -124,6 +129,13 @@ for (const [key, name] of [['rika', '理科'], ['shakai', '社会']]) {
   }));
 }
 
+// 深掘り（/fukabori/）
+if (fukabori.length) {
+  fs.mkdirSync(path.join(OUT, 'fukabori'), { recursive: true });
+  fs.writeFileSync(path.join(OUT, 'fukabori', 'index.html'), fukaboriIndexPage({ cfg, css, items: fukabori, recent: desc }));
+  for (const f of fukabori) fs.writeFileSync(path.join(OUT, 'fukabori', `${f.id}.html`), fukaboriPage({ cfg, css, f, recent: desc }));
+}
+
 // 中受の読み物（/study/）
 if (study.length) {
   fs.mkdirSync(path.join(OUT, 'study'), { recursive: true });
@@ -157,7 +169,7 @@ const rss = `<?xml version="1.0" encoding="UTF-8"?>
 ${desc.slice(0, 30).map((a) => `<item><title>${esc(jpDate(a.date).short + ' ' + a.news.map((n) => plain(n.short_title || n.title)).join('／'))}</title><link>${base}/news/${a.date}.html</link><guid>${base}/news/${a.date}.html</guid><pubDate>${new Date(a.date + 'T07:00:00+09:00').toUTCString()}</pubDate></item>`).join('\n')}
 </channel></rss>`;
 fs.writeFileSync(path.join(OUT, 'feed.xml'), rss);
-const urls = ['/', '/matome/', ...(study.length ? ['/study/', ...study.map((x) => `/study/${x.id}.html`)] : []), ...(sheets.length ? ['/sheets/', ...sheets.map((s) => `/sheets/${s.id}.html`)] : []), ...(year ? [`/matome/${year.exam_year}.html`, `/matome/${year.exam_year}-ranking.html`] : []), ...months.map((m) => `/matome/${m}.html`), ...weeks.map((w) => `/weekly/${w}.html`), '/archive.html', '/glossary.html', '/units.html', '/subject/rika.html', '/subject/shakai.html', ...all.flatMap((a) => [`/news/${a.date}.html`, ...a.news.map((_, j) => `/news/${a.date}-${j + 1}.html`)])];
+const urls = ['/', '/matome/', ...(fukabori.length ? ['/fukabori/', ...fukabori.map((x) => `/fukabori/${x.id}.html`)] : []), ...(study.length ? ['/study/', ...study.map((x) => `/study/${x.id}.html`)] : []), ...(sheets.length ? ['/sheets/', ...sheets.map((s) => `/sheets/${s.id}.html`)] : []), ...(year ? [`/matome/${year.exam_year}.html`, `/matome/${year.exam_year}-ranking.html`] : []), ...months.map((m) => `/matome/${m}.html`), ...weeks.map((w) => `/weekly/${w}.html`), '/archive.html', '/glossary.html', '/units.html', '/subject/rika.html', '/subject/shakai.html', ...all.flatMap((a) => [`/news/${a.date}.html`, ...a.news.map((_, j) => `/news/${a.date}-${j + 1}.html`)])];
 // 更新日（lastmod）：記事ページはその号の日付、一覧・まとめ・固定ページは最新号の日付
 const newest = desc[0]?.date;
 const lastmodOf = (u) => { const m = u.match(/^\/news\/(\d{4}-\d{2}-\d{2})/); return m ? m[1] : newest; };
