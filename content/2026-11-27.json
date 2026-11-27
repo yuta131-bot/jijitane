@@ -1,0 +1,159 @@
+{
+  "date": "2026-11-27",
+  "intro": "{金曜日|きんようび}のきょうは、{学校|がっこう}のいじめの{調査結果|ちょうさけっか}、{日本|にほん}とロシアの{首脳|しゅのう}の{対話|たいわ}、{宇宙|うちゅう}で{見|み}つかった{史上最遠|しじょうさいえん}のクエーサーの3本です。",
+  "news": [
+    {
+      "subject": "社会（教育・くらし）",
+      "subject_key": "shakai",
+      "title": "{学校|がっこう}のいじめ79{万件|まんけん}{超|こ}え、{過去最多|かこさいた}",
+      "short_title": "学校のいじめ79万件超で過去最多",
+      "points": [
+        "{文部科学省|もんぶかがくしょう}が27{日|にち}、2025{年度|ねんど}の{調査|ちょうさ}を{発表|はっぴょう}。{学校|がっこう}で{把握|はあく}したいじめは79{万|まん}1784{件|けん}で、{過去最多|かこさいた}だった。",
+        "はじめて{調|しら}べた「{性的|せいてき}ないじめ」は8158{件|けん}。ネットでのいじめも3{万|まん}471{件|けん}あった。",
+        "{件数|けんすう}がふえた{理由|りゆう}のひとつは、{小|ちい}さなことも{見|み}のがさず{数|かぞ}える{学校|がっこう}がふえたこと。"
+      ],
+      "svg": "<svg viewBox='0 0 360 600'><defs><linearGradient id='b1' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#DCE9FA'/><stop offset='1' stop-color='#B9CFEA'/></linearGradient></defs><rect x='0' y='0' width='360' height='600' style='fill:var(--soft)'/><text x='180' y='28' font-size='17' text-anchor='middle' font-weight='bold' style='fill:var(--ink)'>いじめの数 過去最多に</text><rect x='14' y='42' width='332' height='128' rx='14' fill='url(#b1)'/><path d='M14 156 L346 156 L346 156 L346 156 Q346 170 332 170 L28 170 Q14 170 14 156 Z' fill='#9DB7D8'/><art name='person' x='50' y='76' width='60' color='#5B7DB1'/><art name='person' x='140' y='76' width='60' color='#C9784F'/><rect x='134' y='48' width='60' height='24' rx='10' fill='#fff' stroke='#7B8798' stroke-width='1.5'/><path d='M150 72 L156 80 L162 72 Z' fill='#fff' stroke='#7B8798' stroke-width='1.5'/><text x='164' y='66' font-size='15' text-anchor='middle' style='fill:#E5484D' font-weight='bold'>！</text><rect x='248' y='60' width='46' height='90' rx='9' fill='#2B3140'/><rect x='253' y='70' width='36' height='64' rx='3' fill='#BFD9F6'/><circle cx='271' cy='142' r='3.5' fill='#7B8798'/><rect x='258' y='80' width='26' height='8' rx='3' fill='#fff'/><rect x='258' y='94' width='20' height='8' rx='3' fill='#fff'/><rect x='258' y='108' width='24' height='8' rx='3' fill='#E5484D'/><rect x='14' y='182' width='332' height='88' rx='12' style='fill:var(--card);stroke:var(--soc);stroke-width:2'/><text x='180' y='207' font-size='14' text-anchor='middle' style='fill:var(--ink)'>全国の学校で把握（はあく）したいじめ</text><text x='180' y='234' font-size='18' text-anchor='middle' font-weight='bold' style='fill:var(--soc)'>79万1784件</text><text x='180' y='258' font-size='14' text-anchor='middle' style='fill:var(--ink)'>5年連続で過去最多</text><path d='M180 273 L180 285' stroke='var(--muted)' stroke-width='3'/><path d='M172 282 L180 292 L188 282 Z' style='fill:var(--muted)'/><rect x='14' y='296' width='332' height='70' rx='12' style='fill:var(--card);stroke:var(--soc);stroke-width:2'/><text x='180' y='321' font-size='14' text-anchor='middle' style='fill:var(--ink)'>はじめて調べた「性的（せいてき）いじめ」</text><text x='180' y='349' font-size='18' text-anchor='middle' font-weight='bold' style='fill:var(--soc)'>8158件</text><path d='M180 369 L180 379' stroke='var(--muted)' stroke-width='3'/><path d='M172 376 L180 386 L188 376 Z' style='fill:var(--muted)'/><rect x='14' y='390' width='332' height='70' rx='12' style='fill:var(--card);stroke:var(--soc);stroke-width:2'/><text x='180' y='415' font-size='14' text-anchor='middle' style='fill:var(--ink)'>ネットいじめ（ネットでの悪口など）</text><text x='180' y='443' font-size='16' text-anchor='middle' font-weight='bold' style='fill:var(--soc)'>3万471件 はじめて3万件超え</text><path d='M180 463 L180 473' stroke='var(--muted)' stroke-width='3'/><path d='M172 470 L180 480 L188 470 Z' style='fill:var(--muted)'/><rect x='14' y='484' width='332' height='104' rx='12' style='fill:var(--card);stroke:#E5484D;stroke-width:2'/><text x='180' y='510' font-size='14' text-anchor='middle' style='fill:var(--ink)'>年度の終わりまでに解消（かいしょう）した割合</text><rect x='30' y='522' width='300' height='20' rx='6' fill='#D9DEE8'/><rect x='30' y='522' width='222' height='20' rx='6' style='fill:var(--soc)'/><text x='180' y='572' font-size='15' text-anchor='middle' style='fill:var(--ink)'>74.1%（前の年より2.0ポイント低い）</text></svg>",
+      "caption": "いじめの数と、そのうちわけ（文部科学省の調査）。",
+      "body": [
+        "{文部科学省|もんぶかがくしょう}は11{月|がつ}27{日|にち}、{全国|ぜんこく}の{小学校|しょうがっこう}・{中学校|ちゅうがっこう}・{高校|こうこう}などの2025{年度|ねんど}の{調査結果|ちょうさけっか}を{発表|はっぴょう}しました。{学校|がっこう}が{把握|はあく}した==いじめの{件数|けんすう}は79{万|まん}1784{件|けん}で、5{年連続|ねんれんぞく}の{過去最多|かこさいた}==でした。{文部科学省|もんぶかがくしょう}は、{小|ちい}さなことも{見|み}のがさず「いじめ」として{数|かぞ}える{考|かんが}え{方|かた}が{広|ひろ}がったことなどを{理由|りゆう}に{挙|あ}げています。",
+        "{今回|こんかい}、はじめて「{性的|せいてき}ないじめ」を{調|しら}べました。{体|からだ}にふれたり、いやらしい{言葉|ことば}を{言|い}ったり、{性的|せいてき}な{写真|しゃしん}や{動画|どうが}を{送|おく}ったりすることで、{全国|ぜんこく}で8158{件|けん}ありました。{背景|はいけい}には、{AI|エーアイ}を{使|つか}って{同級生|どうきゅうせい}の{顔|かお}の{写真|しゃしん}を{別|べつ}の{体|からだ}と{合成|ごうせい}し、ネットで{広|ひろ}げる「ディープフェイク」の{問題|もんだい}があるとされています。{文部科学省|もんぶかがくしょう}は、{場合|ばあい}によっては{犯罪|はんざい}になるとして、{警察|けいさつ}と{協力|きょうりょく}した{対応|たいおう}を{求|もと}めています。",
+        "ネットでの{悪口|わるぐち}などのいじめは3{万|まん}471{件|けん}で、はじめて3{万件|まんけん}を{超|こ}えました。{年度|ねんど}の{終|お}わりまでに=={解消|かいしょう}したいじめは74.1%で、{前|まえ}の{年|とし}より2.0ポイント{低|ひく}く==なりました。ネットのいじめは、なくなったかどうかを{確|たし}かめにくいことも{理由|りゆう}のひとつだと{説明|せつめい}されています。{学校|がっこう}に{行|い}けない{小学生|しょうがくせい}・{中学生|ちゅうがくせい}（{不登校|ふとうこう}）も35{万|まん}9424{人|にん}で、{過去最多|かこさいた}でした。"
+      ],
+      "keywords": [
+        {"term": "{認知件数|にんちけんすう}", "desc": "学校が「いじめがあった」と確かめて数えた件数。数が多いのは、見のがさず数えている結果でもある。"},
+        {"term": "ディープフェイク", "desc": "AIを使って、本物そっくりのにせの写真や動画をつくること。"},
+        {"term": "{不登校|ふとうこう}", "desc": "病気や経済的な理由以外で、年に30日以上学校を休むこと。"}
+      ],
+      "quiz": {
+        "q": "日本国憲法で、すべての国民に保障されている「教育を受ける権利」は、次のうちどの人権のなかま？",
+        "choices": ["社会権", "自由権", "参政権"],
+        "answer": 0,
+        "a": "正しいのは1番目の社会権です。人間らしい生活を国に求める権利で、教育を受ける権利のほか、生存権（生きる権利）や勤労の権利などがふくまれます。",
+        "hint": "生存権や勤労の権利と同じなかまだよ。"
+      },
+      "units": ["社会：日本国憲法（基本的人権）"],
+      "talk": "いじめの数がふえた、というニュースを聞いて、「いじめがふえた」のか「見つけられるようになった」のか、どちらだと思う？",
+      "talk_hints": [
+        "ふえた：ネットやAIで、新しい形のいじめが生まれている。",
+        "見つけられるようになった：小さなことも数える学校がふえたので、数字が大きくなる。",
+        "身近な例：クラスで「これはいじめかな？」と迷ったとき、だれに相談するか。"
+      ],
+      "exam_level": 2
+    },
+    {
+      "subject": "社会（国際関係・政治）",
+      "subject_key": "shakai",
+      "title": "{日本|にほん}とロシアの{首脳|しゅのう}が{対話|たいわ}、ロシアが{認|みと}める",
+      "short_title": "日ロ首脳の対話、ロシアが認める",
+      "points": [
+        "{高市早苗首相|たかいちさなえしゅしょう}とロシアのプーチン{大統領|だいとうりょう}が、11{月|がつ}18{日|にち}に{中国|ちゅうごく}の{深圳|しんせん}で{短|みじか}く{話|はな}した。",
+        "ロシア{外務省|がいむしょう}が26{日|にち}の{記者会見|きしゃかいけん}で、その{対話|たいわ}があったと{認|みと}めた。",
+        "{日本|にほん}とロシアの{首脳|しゅのう}が{話|はな}すのは、めずらしいことだ。"
+      ],
+      "svg": "<svg viewBox='0 0 360 520'><defs><linearGradient id='b2' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#E3ECF9'/><stop offset='1' stop-color='#BCD0EA'/></linearGradient></defs><rect x='0' y='0' width='360' height='520' style='fill:var(--soft)'/><text x='180' y='28' font-size='17' text-anchor='middle' font-weight='bold' style='fill:var(--ink)'>日本とロシアの首脳が対話</text><rect x='14' y='42' width='332' height='134' rx='14' fill='url(#b2)'/><path d='M14 162 L346 162 L346 162 Q346 176 332 176 L28 176 Q14 176 14 162 Z' fill='#9DB7D8'/><art name='person' x='56' y='70' width='70' color='#5B7DB1'/><art name='person' x='234' y='70' width='70' color='#B0574E'/><rect x='148' y='84' width='64' height='30' rx='12' fill='#fff' stroke='#7B8798' stroke-width='1.5'/><path d='M172 114 L180 124 L188 114 Z' fill='#fff' stroke='#7B8798' stroke-width='1.5'/><text x='180' y='105' font-size='14' text-anchor='middle' style='fill:#2B3140'>対話</text><text x='91' y='198' font-size='14' text-anchor='middle' font-weight='bold' style='fill:var(--ink)'>日本の首相</text><text x='91' y='216' font-size='13' text-anchor='middle' style='fill:var(--muted)'>（しゅしょう）</text><text x='269' y='198' font-size='14' text-anchor='middle' font-weight='bold' style='fill:var(--ink)'>ロシアの大統領</text><text x='269' y='216' font-size='13' text-anchor='middle' style='fill:var(--muted)'>（だいとうりょう）</text><rect x='14' y='232' width='332' height='76' rx='12' style='fill:var(--card);stroke:var(--soc);stroke-width:2'/><text x='180' y='258' font-size='16' text-anchor='middle' font-weight='bold' style='fill:var(--soc)'>11月18日</text><text x='180' y='284' font-size='14' text-anchor='middle' style='fill:var(--ink)'>中国・深圳（しんせん）で短い対話</text><path d='M180 310 L180 322' stroke='var(--muted)' stroke-width='3'/><path d='M172 319 L180 329 L188 319 Z' style='fill:var(--muted)'/><rect x='14' y='334' width='332' height='76' rx='12' style='fill:var(--card);stroke:var(--soc);stroke-width:2'/><text x='180' y='360' font-size='16' text-anchor='middle' font-weight='bold' style='fill:var(--soc)'>11月26日</text><text x='180' y='386' font-size='14' text-anchor='middle' style='fill:var(--ink)'>ロシア外務省が対話を認めた</text><path d='M180 412 L180 424' stroke='var(--muted)' stroke-width='3'/><path d='M172 421 L180 431 L188 421 Z' style='fill:var(--muted)'/><rect x='14' y='436' width='332' height='76' rx='12' style='fill:var(--card);stroke:#E5484D;stroke-width:2'/><text x='180' y='464' font-size='14' text-anchor='middle' style='fill:var(--ink)'>ウクライナ侵攻（しんこう）のあと</text><text x='180' y='490' font-size='14' text-anchor='middle' font-weight='bold' style='fill:var(--ink)'>めずらしい首脳の対話</text></svg>",
+      "caption": "日本とロシアの首脳の対話が、公になるまでの流れ。",
+      "body": [
+        "ロシア{外務省|がいむしょう}のザハロワ{情報局長|じょうほうきょくちょう}は11{月|がつ}26{日|にち}の{記者会見|きしゃかいけん}で、{日本|にほん}の{高市早苗首相|たかいちさなえしゅしょう}とロシアのプーチン{大統領|だいとうりょう}が{短|みじか}く{話|はな}したことを{認|みと}めました。{場所|ばしょ}は{中国|ちゅうごく}の{深圳|しんせん}で、{日付|ひづけ}は11{月|がつ}18{日|にち}です。ロシア{側|がわ}は、{今|いま}までこの{対話|たいわ}を{発表|はっぴょう}していませんでした。",
+        "ロシアがウクライナに{攻|せ}めこんでから、{日本|にほん}は{欧米|おうべい}の{国々|くにぐに}とともにロシアに{制裁|せいさい}をかけてきました。そのため、=={日本|にほん}とロシアの{首脳|しゅのう}が{話|はな}すのは、めずらしいこと==だと{考|かんが}えられます。{対話|たいわ}の{中身|なかみ}は、くわしいことは{分|わ}かっていません。{今後|こんご}の{動|うご}きに{注目|ちゅうもく}が{集|あつ}まります。"
+      ],
+      "keywords": [
+        {"term": "{経済制裁|けいざいせいさい}", "desc": "ある国の行いをやめさせるために、貿易やお金のやりとりを制限すること。"},
+        {"term": "{首脳|しゅのう}", "desc": "国のいちばん上に立つ人。日本では内閣総理大臣、ロシアでは大統領など。"},
+        {"term": "{情報局長|じょうほうきょくちょう}", "desc": "ロシア外務省で、記者会見などを受け持つ責任者。"}
+      ],
+      "quiz": {
+        "q": "日本の内閣総理大臣（首相）を指名するのは、次のうちどこ？",
+        "choices": ["最高裁判所", "天皇", "国会"],
+        "answer": 2,
+        "a": "正しいのは3番目の国会です。国会議員の中から、国会が指名します。天皇は、国会の指名にもとづいて任命します（国事行為）。",
+        "hint": "国会は「国権の最高機関」だよ。"
+      },
+      "units": ["社会：国会・内閣・裁判所", "社会：国際連合と日本の役割"],
+      "talk": "意見が合わない国の首脳とも、短い時間でも話したほうがいいと思う？",
+      "talk_hints": [
+        "話したほうがいい：話さないと、相手の考えも、解決の糸口も分からない。",
+        "慎重にしたい：話しただけで「認めた」と受け取られるおそれもある。",
+        "身近な例：けんかをした友だちと、先に話しかけるかどうか。"
+      ],
+      "exam_level": 2
+    },
+    {
+      "subject": "理科（宇宙）",
+      "subject_key": "rika",
+      "title": "{史上最遠|しじょうさいえん}のクエーサー、ユークリッドが{発見|はっけん}",
+      "short_title": "史上最遠のクエーサーを発見",
+      "points": [
+        "{欧州宇宙機関|おうしゅううちゅうきかん}のユークリッド{宇宙望遠鏡|うちゅうぼうえんきょう}が、{観測史上|かんそくしじょう}いちばん{遠|とお}いクエーサーを{見|み}つけた（24{日|にち}{発表|はっぴょう}）。",
+        "ビッグバンから{約|やく}6{億|おく}3000{万年後|まんねんご}の{姿|すがた}で、{中心|ちゅうしん}のブラックホールは{太陽|たいよう}の{約|やく}3{億|おく}6000{万倍|まんばい}。",
+        "{宇宙|うちゅう}のはじめに、これほど{大|おお}きなブラックホールがどう{育|そだ}ったのか、{新|あたら}しいなぞになる。"
+      ],
+      "svg": "<svg viewBox='0 0 360 620'><defs><linearGradient id='sp3' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#080C26'/><stop offset='1' stop-color='#22336E'/></linearGradient><linearGradient id='tl' x1='0' y1='0' x2='1' y2='0'><stop offset='0' stop-color='#F2C14E'/><stop offset='1' stop-color='#3B5BDB'/></linearGradient><radialGradient id='qs' cx='0.5' cy='0.5' r='0.5'><stop offset='0' stop-color='#FFF6D6'/><stop offset='0.4' stop-color='#FFC95E'/><stop offset='1' stop-color='#FFC95E' stop-opacity='0'/></radialGradient></defs><rect x='0' y='0' width='360' height='620' style='fill:var(--soft)'/><text x='180' y='28' font-size='17' text-anchor='middle' font-weight='bold' style='fill:var(--ink)'>史上最遠（しじょうさいえん）のクエーサー</text><rect x='14' y='42' width='332' height='214' rx='14' fill='url(#sp3)'/><circle cx='40' cy='62' r='1.6' fill='#fff'/><circle cx='100' cy='86' r='1.3' fill='#fff'/><circle cx='160' cy='58' r='1.8' fill='#fff'/><circle cx='210' cy='80' r='1.3' fill='#fff'/><circle cx='330' cy='70' r='1.5' fill='#fff'/><circle cx='330' cy='225' r='1.4' fill='#fff'/><circle cx='60' cy='120' r='1.3' fill='#fff'/><circle cx='200' cy='230' r='1.4' fill='#fff'/><circle cx='272' cy='116' r='52' fill='url(#qs)'/><ellipse cx='272' cy='116' rx='46' ry='10' fill='none' stroke='#FF9F43' stroke-width='3' transform='rotate(-18 272 116)' opacity='.9'/><path d='M272 104 L272 62' stroke='#FFE9A8' stroke-width='3' stroke-linecap='round' opacity='.8'/><path d='M272 128 L272 170' stroke='#FFE9A8' stroke-width='3' stroke-linecap='round' opacity='.8'/><circle cx='272' cy='116' r='9' fill='#FFFBEA'/><text x='272' y='196' font-size='14' text-anchor='middle' style='fill:#fff'>クエーサー</text><path d='M236 134 L150 178' stroke='#FFE9A8' stroke-width='2' stroke-dasharray='6 5'/><path d='M146 176 L162 172 L156 188 Z' fill='#FFE9A8'/><art name='satellite' x='24' y='160' width='120'/><text x='84' y='246' font-size='13' text-anchor='middle' style='fill:#fff'>ユークリッド</text><rect x='24' y='278' width='312' height='14' rx='7' fill='url(#tl)'/><path d='M70 296 L64 306 L76 306 Z' style='fill:var(--ink)'/><text x='24' y='328' font-size='14' style='fill:var(--ink)'>ビッグバン</text><text x='336' y='328' font-size='14' text-anchor='end' style='fill:var(--ink)'>いま</text><text x='70' y='352' font-size='15' font-weight='bold' style='fill:var(--sci)'>ここ！ 約6億3000万年後</text><text x='180' y='374' font-size='13' text-anchor='middle' style='fill:var(--muted)'>（長さは正確ではありません）</text><rect x='14' y='388' width='332' height='62' rx='12' style='fill:var(--card);stroke:var(--sci);stroke-width:2'/><text x='180' y='412' font-size='14' text-anchor='middle' style='fill:var(--ink)'>見つけた望遠鏡（ぼうえんきょう）</text><text x='180' y='436' font-size='15' text-anchor='middle' font-weight='bold' style='fill:var(--sci)'>ユークリッド宇宙望遠鏡</text><path d='M180 452 L180 464' stroke='var(--muted)' stroke-width='3'/><path d='M172 461 L180 471 L188 461 Z' style='fill:var(--muted)'/><rect x='14' y='476' width='332' height='62' rx='12' style='fill:var(--card);stroke:var(--sci);stroke-width:2'/><text x='180' y='500' font-size='14' text-anchor='middle' style='fill:var(--ink)'>くわしく調べた望遠鏡</text><text x='180' y='524' font-size='15' text-anchor='middle' font-weight='bold' style='fill:var(--sci)'>ジェームズ・ウェッブ宇宙望遠鏡</text><path d='M180 540 L180 552' stroke='var(--muted)' stroke-width='3'/><path d='M172 549 L180 559 L188 549 Z' style='fill:var(--muted)'/><rect x='14' y='564' width='332' height='48' rx='12' style='fill:var(--card);stroke:#E5484D;stroke-width:2'/><text x='180' y='586' font-size='14' text-anchor='middle' style='fill:var(--ink)'>中心のブラックホールは</text><text x='180' y='604' font-size='14' text-anchor='middle' font-weight='bold' style='fill:var(--ink)'>太陽の約3億6000万倍</text></svg>",
+      "caption": "遠くの天体を見ることは、むかしの宇宙を見ること。",
+      "body": [
+        "{欧州宇宙機関|おうしゅううちゅうきかん}（{ESA|イーエスエー}）は11{月|がつ}24{日|にち}、ユークリッド{宇宙望遠鏡|うちゅうぼうえんきょう}のデータから、=={観測史上|かんそくしじょう}いちばん{遠|とお}いクエーサー==が{見|み}つかったと{発表|はっぴょう}しました。{名前|なまえ}は「J1504+6252」です。{宇宙|うちゅう}のはじまりのビッグバンから、{約|やく}6{億|おく}3000{万年後|まんねんご}の{姿|すがた}だとされています。",
+        "クエーサーとは、{銀河|ぎんが}の{中心|ちゅうしん}にある{巨大|きょだい}なブラックホールが、まわりのガスをのみこみながら、{強|つよ}く{光|ひか}っているものです。ジェームズ・ウェッブ{宇宙望遠鏡|うちゅうぼうえんきょう}などで{調|しら}べると、{中心|ちゅうしん}のブラックホールは=={太陽|たいよう}の{約|やく}3{億|おく}6000{万倍|まんばい}の{重|おも}さ==と{見積|みつ}もられました。ただし、この{数字|すうじ}にはかなりの{幅|はば}があります。",
+        "{光|ひかり}には{速|はや}さがあるので、{遠|とお}い{天体|てんたい}の{光|ひかり}ほど、{長|なが}い{時間|じかん}をかけて{地球|ちきゅう}にとどきます。つまり{遠|とお}くを{見|み}ることは、{昔|むかし}の{宇宙|うちゅう}を{見|み}ることです。{宇宙|うちゅう}のはじめのころに、これほど{大|おお}きなブラックホールがどう{育|そだ}ったのかは、まだ{分|わ}かっておらず、{研究|けんきゅう}が{続|つづ}きます。"
+      ],
+      "keywords": [
+        {"term": "クエーサー", "desc": "銀河の中心の巨大なブラックホールが、ガスをのみこんで強く光っている天体。"},
+        {"term": "ブラックホール", "desc": "重力がとても強くて、光でさえ出てこられない天体。"},
+        {"term": "ビッグバン", "desc": "宇宙がはじまったときの、高温で高密度の大爆発のこと。"}
+      ],
+      "quiz": {
+        "q": "遠くの天体を観測すると、どんなことが分かる？",
+        "choices": ["天体の未来の姿", "天体のむかしの姿", "天体の今の姿そのもの"],
+        "answer": 1,
+        "a": "正しいのは2番目です。光が地球にとどくまでに時間がかかるので、遠い天体ほど、むかしの姿を見ていることになります。",
+        "hint": "光がとどくまでに、時間がかかるよ。"
+      },
+      "units": ["理科：月と太陽", "理科：星と星座（宇宙のひろがり）"],
+      "talk": "宇宙のはじまりのころのことを知ると、わたしたちの暮らしにどんな意味があると思う？",
+      "talk_hints": [
+        "役に立つ：宇宙を調べる技術が、身近な機器（カメラやセンサー）にも生かされている。",
+        "役に立たなくても大切：「どうしてだろう？」を知りたい気持ちが、科学を進める。",
+        "身近な例：昔の写真を見ると、その頃の自分が分かるのに似ている。"
+      ],
+      "exam_level": 2
+    }
+  ],
+  "math": {
+    "news": 1,
+    "unit": "算数：割合・百分率",
+    "q": "{学校|がっこう}が{把握|はあく}したいじめは、{全国|ぜんこく}で{約|やく}79{万件|まんけん}でした（{正確|せいかく}な{数|かず}ではなく「{約|やく}」の{数|かず}を{使|つか}います）。このうち、{年度|ねんど}の{終|お}わりまでに{解消|かいしょう}したのは74.1%でした。{解消|かいしょう}していないいじめは、{約|やく}{何万件|なんまんけん}ですか。{小数第1位|しょうすうだいいちい}まで{答|こた}えましょう。",
+    "hint": "まず、解消していない割合は何%か考えよう。",
+    "answer": "約20.5万件",
+    "steps": [
+      "全体を100%とすると、解消していない割合は、100−74.1＝25.9（%）。",
+      "25.9%は小数で0.259。79万×0.259＝20.461（万件）。",
+      "別の方法の確かめ：解消した分は79×0.741＝58.539（万件）。79−58.539＝20.461（万件）。",
+      "小数第1位までなので、約20.5万件。"
+    ]
+  },
+  "briefs": [
+    "{政府|せいふ}は{今年度|こんねんど}の2{回目|かいめ}の{補正予算案|ほせいよさんあん}に、{原油高|げんゆだか}に{対応|たいおう}するガソリンの{補助金|ほじょきん}を{来年|らいねん}3{月|がつ}まで{続|つづ}けられる{内容|ないよう}を{入|い}れる{方針|ほうしん}だと、{共同通信|きょうどうつうしん}が{伝|つた}えました。{熊本地震|くまもとじしん}や{千葉豪雨|ちばごうう}からの{復旧|ふっきゅう}にも{使|つか}う{予定|よてい}です。"
+  ],
+  "extra": "",
+  "sources": [
+    {"title": "NHK：学校のいじめ79万件超で過去最多 「性的いじめ」初調査 文科省", "url": "https://news.web.nhk/newsweb/na/nd-20261127de82139"},
+    {"title": "テレビ朝日系（ANN）：学校でのいじめ件数 約79万件で過去最多 背景に「積極的な認知」 文科省", "url": "https://news.yahoo.co.jp/articles/b55e1b4d4b1eed41ec8006b4212667e5fd70958c"},
+    {"title": "産経新聞：初調査の「性的いじめ」8000件超 AI悪用のディープフェイク背景、全国の学校で", "url": "https://news.yahoo.co.jp/articles/0bfabe9204111194d06ab590ba66fa556524b78d"},
+    {"title": "新潟日報（共同通信）：ロ外務省が中国での日ロ首脳対話を認める", "url": "https://www.niigata-nippo.co.jp/articles/-/950452"},
+    {"title": "共同通信（Yahoo!ニュース）：ロ外務省が中国での日ロ首脳対話を認める", "url": "https://news.yahoo.co.jp/articles/e641d0290ccd57d6f563b2630e2786acd197bbe4"},
+    {"title": "日本経済新聞：ロシア、高市首相とプーチン大統領の対話認める", "url": "https://www.nikkei.com/article/DGXZQOGR26CNT0W6A121C2000000/"},
+    {"title": "財経新聞：宇宙望遠鏡ユークリッドが最遠方のクエーサーを発見", "url": "https://www.zaikei.co.jp/article/20261125/879140.html"},
+    {"title": "XenoSpectrum：宇宙誕生からわずか6億3000万年で太陽の3億6000万倍、史上最遠のクエーサーを発見", "url": "https://xenospectrum.com/euclid-quasar-black-hole-growth"},
+    {"title": "共同通信（373news）：補正予算、ガソリン補助を継続へ 原油高で家計支援", "url": "https://373news.com/news/national/detail/2026112601000943"}
+  ],
+  "review_notes": [
+    "候補（8本）：①いじめ調査 ②日ロ首脳対話 ③最遠のクエーサー ④補正予算のガソリン補助（ひとことニュースに回した）⑤スバルのリコール約18万台（公的資料で確認できず見送り）⑥日経平均株価の反発（前日に大幅下落を取り上げ済みで見送り）⑦天王星の衝（めずらしさが小さく見送り）⑧トランプ米大統領がプーチン大統領に自制を求めた件（出典が1社のみで見送り）。",
+    "選んだ理由：①は憲法の人権・教育の単元とつながり、全国ニュースのトップ級。②は国会・内閣・国際関係につながり、めずらしい出来事。③は理科の宇宙の話題で、前日までの号と分野がかぶらず、ESAの発表（24日）の報道。",
+    "いじめの数字（79万1784件・8158件・3万471件・74.1%・2.0ポイント・35万9424人）はNHK・ANN・産経の報道で確認。NHKの本文は冒頭しか読めておらず、「79万件余り」「5年連続」「8000件超」までを直接確認。詳しい数字は朝日系・産経のページから。公開前に文部科学省の発表資料で再確認してほしい。",
+    "「不登校：年30日以上」の説明は一般的な定義。文部科学省の最新の定義で確認してほしい。",
+    "日ロ首脳対話：日付（18日）・場所（深圳）・ザハロワ氏の会見（26日）は新潟日報・共同通信・日経で一致。「初めて」の断定は確認できず、本文では「めずらしい」とした。ロシア側の発言内容も確認できず外した。日経は本文が会員限定のため確認できた範囲が限られる。対話の内容は未確認で書いていない。",
+    "ザハロワ氏の発言「高市氏の要請で短い接触」は日経の要約から。引用ではなく言いかえで書いている。",
+    "クエーサー：名前（J1504+6252）、約6億3000万年後、約3億6000万倍、24日発表は財経新聞とXenoSpectrumで一致。質量には大きな幅があると両方が書いている。ESAの一次発表は直接開いていないので、公開前の確認が望ましい。",
+    "「光は遠いほど昔の姿」の説明は一般的な理科の知識で、報道の内容ではない。図の時間の長さは正確ではないと明記した。",
+    "算数は、79万件（約）と74.1%を使用。答えは2通りの計算で20.461万件、小数第1位で20.5万件。",
+    "図のpersonの人物は特定の人物の似顔絵ではなく、一般的な人のイメージ。"
+  ]
+}
