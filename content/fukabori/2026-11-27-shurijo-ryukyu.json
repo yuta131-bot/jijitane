@@ -1,0 +1,108 @@
+{
+  "id": "shurijo-ryukyu",
+  "date": "2026-11-27",
+  "title": "{首里城|しゅりじょう}は、なぜ{何度|なんど}も{建|た}て{直|なお}されるの？",
+  "short_title": "首里城と琉球王国",
+  "lead": "{焼|や}けた{首里城|しゅりじょう}の{正殿|せいでん}がよみがえり、{完成式|かんせいしき}が{開|ひら}かれました。{首里城|しゅりじょう}は、{昔|むかし}の{琉球王国|りゅうきゅうおうこく}の{中心|ちゅうしん}だった{城|しろ}です。どんな{国|くに}の{城|しろ}で、なぜ{何度|なんど}も{建|た}て{直|なお}されてきたのでしょう。",
+  "subject": "社会（歴史・地理）",
+  "subject_key": "shakai",
+  "from": {
+    "date": "2026-11-22",
+    "n": 1,
+    "title": "{首里城|しゅりじょう}{正殿|せいでん}、きょう{復元|ふくげん}の{完成式|かんせいしき}"
+  },
+  "sections": [
+    {
+      "h": "{首里城|しゅりじょう}は、{何|なん}の{城|しろ}だったの？",
+      "p": [
+        "{沖縄県|おきなわけん}{那覇市|なはし}にある{首里城|しゅりじょう}は、{琉球王国|りゅうきゅうおうこく}の{王|おう}が{政治|せいじ}を{行|おこな}った{城|しろ}です。{琉球王国|りゅうきゅうおうこく}は、{今|いま}の{沖縄県|おきなわけん}にあった{国|くに}です。",
+        "{琉球|りゅうきゅう}では、{城|しろ}のことを「グスク」とよびます。{首里城|しゅりじょう}は、そのなかでも{代表的|だいひょうてき}な、{王国|おうこく}の{政治|せいじ}・{経済|けいざい}・{文化|ぶんか}の{中心|ちゅうしん}でした。",
+        "1429{年|ねん}に{尚巴志|しょうはし}が{北山|ほくざん}・{中山|ちゅうざん}・{南山|なんざん}の3つの{勢力|せいりょく}をまとめたと{伝|つた}えられ、{首里城|しゅりじょう}を{拠点|きょてん}にしました。そのあと、{約|やく}450{年|ねん}のあいだ、{王|おう}の{城|しろ}として{使|つか}われました。",
+        "1879{年|ねん}、{明治政府|めいじせいふ}は{琉球王国|りゅうきゅうおうこく}をなくして、{沖縄県|おきなわけん}をおきました。この{一連|いちれん}のできごとを「{琉球処分|りゅうきゅうしょぶん}」といいます。==王国の{時代|じだい}が{終|お}わっても、{首里城|しゅりじょう}は{沖縄|おきなわ}の{歴史|れきし}を{伝|つた}える{大切|たいせつ}な{場所|ばしょ}==でした。"
+      ]
+    },
+    {
+      "h": "{小|ちい}さな{王国|おうこく}が、なぜ{栄|さか}えたの？",
+      "svg": "<svg viewBox='0 0 360 470'><text x='180' y='28' font-size='17' text-anchor='middle' font-weight='bold' style='fill:var(--ink)'>琉球王国をめぐる海の道（イメージ）</text><basemap name='japan' x='0' y='40' width='360'/><line x1='76' y1='361' x2='26' y2='308' stroke='#E5484D' stroke-width='3' stroke-linecap='round'/><polygon points='26,308 29.3,318.5 36.3,311.9' fill='#E5484D'/><line x1='76' y1='361' x2='110' y2='284' stroke='#E5484D' stroke-width='3' stroke-linecap='round'/><polygon points='110,284 101.6,291.1 110.4,295.0' fill='#E5484D'/><line x1='76' y1='361' x2='88' y2='400' stroke='#E5484D' stroke-width='3' stroke-linecap='round'/><polygon points='88,400 89.7,389.1 80.5,391.9' fill='#E5484D'/><circle cx='76' cy='361' r='6' fill='#E5484D' stroke='#fff' stroke-width='2'/><circle cx='114' cy='274' r='4.5' style='fill:var(--ink)'/><text x='94' y='352' font-size='14' font-weight='bold' style='fill:var(--ink);stroke:var(--card);stroke-width:3.5;stroke-linejoin:round;paint-order:stroke'>那覇（なは）</text><text x='8' y='280' font-size='14' font-weight='bold' style='fill:var(--ink);stroke:var(--card);stroke-width:3.5;stroke-linejoin:round;paint-order:stroke'>中国</text><text x='8' y='297' font-size='13' style='fill:var(--ink);stroke:var(--card);stroke-width:3.5;stroke-linejoin:round;paint-order:stroke'>（地図の外）</text><text x='124' y='312' font-size='14' font-weight='bold' style='fill:var(--ink);stroke:var(--card);stroke-width:3.5;stroke-linejoin:round;paint-order:stroke'>日本（九州）へ</text><text x='104' y='380' font-size='14' font-weight='bold' style='fill:var(--ink);stroke:var(--card);stroke-width:3.5;stroke-linejoin:round;paint-order:stroke'>東南アジアへ</text><text x='104' y='396' font-size='13' style='fill:var(--ink);stroke:var(--card);stroke-width:3.5;stroke-linejoin:round;paint-order:stroke'>（地図の外）</text><rect x='10' y='414' width='340' height='44' rx='22' style='fill:var(--card);stroke:var(--soc);stroke-width:1.5'/><text x='180' y='442' font-size='15' text-anchor='middle' font-weight='bold' style='fill:var(--ink)'>琉球は、3つの地域をつなぐ港だった</text></svg>",
+      "caption": "{琉球|りゅうきゅう}は、{中国|ちゅうごく}・{日本|にほん}・{東南|とうなん}アジアの{間|あいだ}にあった（{矢印|やじるし}はイメージ）。",
+      "p": [
+        "{琉球王国|りゅうきゅうおうこく}は、{中国|ちゅうごく}・{日本|にほん}・{東南|とうなん}アジアの{間|あいだ}の{海|うみ}にありました。{船|ふね}で{品物|しなもの}を{運|はこ}び、ほかの{国|くに}に{売|う}る「{中継貿易|ちゅうけいぼうえき}」で{栄|さか}えます。",
+        "{中継貿易|ちゅうけいぼうえき}が{成り立|なりた}った{背景|はいけい}には、{中国|ちゅうごく}（{明|みん}）が{外国|がいこく}との{行|い}き{来|き}を{制限|せいげん}していたことがあります。そのなかで{明|みん}は{琉球|りゅうきゅう}をとくべつに{大切|たいせつ}にして、{琉球|りゅうきゅう}の{船|ふね}は{自由|じゆう}に{貿易|ぼうえき}ができたのです。",
+        "{周|まわ}りの{国|くに}との{信頼|しんらい}。これが{小|ちい}さな{王国|おうこく}の{強|つよ}みでした。",
+        "また、{中国|ちゅうごく}や{日本|にほん}との{行|い}き{来|き}が{多|おお}かったため、{首里城|しゅりじょう}には、{中国|ちゅうごく}と{日本|にほん}、{両方|りょうほう}の{建築|けんちく}の{影響|えいきょう}が{見|み}られます。{正殿|せいでん}は{中国|ちゅうごく}の{宮殿|きゅうでん}のような{形|かたち}で、{入口|いりぐち}には{日本|にほん}の{建物|たてもの}にある{曲線|きょくせん}の{屋根|やね}（{唐破風|からはふ}）がついています。"
+      ]
+    },
+    {
+      "h": "{首里城|しゅりじょう}は、{何度|なんど}{焼|や}けたの？",
+      "svg": "<svg viewBox='0 0 360 450'><text x='180' y='28' font-size='17' text-anchor='middle' font-weight='bold' style='fill:var(--ink)'>首里城の年表</text><rect x='10' y='42' width='340' height='396' rx='14' style='fill:var(--soft);stroke:var(--landline);stroke-width:1.5'/><line x1='104' y1='66' x2='104' y2='402' stroke='#9AA5B8' stroke-width='3'/><text x='90' y='71' font-size='15' text-anchor='end' font-weight='bold' style='fill:var(--ink)'>1429</text><circle cx='104' cy='66' r='7' style='fill:var(--soc);stroke:var(--card);stroke-width:2'/><text x='122' y='66' font-size='15' font-weight='bold' style='fill:var(--ink)'>琉球王国が成立</text><text x='122' y='84' font-size='13' style='fill:var(--muted)'>尚巴志（しょうはし）が統一</text><text x='90' y='119' font-size='15' text-anchor='end' font-weight='bold' style='fill:var(--ink)'>王国時代</text><path d='M104 103 C112 111 113 117 104 124 C95 117 97 110 104 103Z' fill='#E5484D' stroke='#fff' stroke-width='1.5'/><text x='122' y='114' font-size='15' font-weight='bold' style='fill:var(--ink)'>正殿が3回焼ける</text><text x='122' y='132' font-size='13' style='fill:var(--muted)'>そのたびに再建された</text><text x='90' y='167' font-size='15' text-anchor='end' font-weight='bold' style='fill:var(--ink)'>1879</text><circle cx='104' cy='162' r='7' style='fill:var(--soc);stroke:var(--card);stroke-width:2'/><text x='122' y='162' font-size='15' font-weight='bold' style='fill:var(--ink)'>沖縄県ができる</text><text x='122' y='180' font-size='13' style='fill:var(--muted)'>琉球処分（りゅうきゅうしょぶん）</text><text x='90' y='215' font-size='15' text-anchor='end' font-weight='bold' style='fill:var(--ink)'>1945</text><path d='M104 199 C112 207 113 213 104 220 C95 213 97 206 104 199Z' fill='#E5484D' stroke='#fff' stroke-width='1.5'/><text x='122' y='215' font-size='15' font-weight='bold' style='fill:var(--ink)'>沖縄戦で全焼</text><text x='90' y='263' font-size='15' text-anchor='end' font-weight='bold' style='fill:var(--ink)'>1992</text><circle cx='104' cy='258' r='7' style='fill:var(--soc);stroke:var(--card);stroke-width:2'/><text x='122' y='258' font-size='15' font-weight='bold' style='fill:var(--ink)'>正殿などを復元</text><text x='122' y='276' font-size='13' style='fill:var(--muted)'>首里城公園が開園</text><text x='90' y='311' font-size='15' text-anchor='end' font-weight='bold' style='fill:var(--ink)'>2000</text><circle cx='104' cy='306' r='7' style='fill:var(--soc);stroke:var(--card);stroke-width:2'/><text x='122' y='311' font-size='15' font-weight='bold' style='fill:var(--ink)'>世界遺産に登録</text><text x='90' y='359' font-size='15' text-anchor='end' font-weight='bold' style='fill:var(--ink)'>2019</text><path d='M104 343 C112 351 113 357 104 364 C95 357 97 350 104 343Z' fill='#E5484D' stroke='#fff' stroke-width='1.5'/><text x='122' y='359' font-size='15' font-weight='bold' style='fill:var(--ink)'>10月31日に火災</text><text x='90' y='407' font-size='15' text-anchor='end' font-weight='bold' style='fill:var(--ink)'>2026</text><circle cx='104' cy='402' r='7' style='fill:var(--soc);stroke:var(--card);stroke-width:2'/><text x='122' y='402' font-size='15' font-weight='bold' style='fill:var(--ink)'>復元の完成式</text><text x='122' y='420' font-size='13' style='fill:var(--muted)'>11月22日</text></svg>",
+      "caption": "{首里城|しゅりじょう}は、{焼|や}けては{建|た}て{直|なお}されてきた（{炎|ほのお}のしるしが{焼失|しょうしつ}）。",
+      "p": [
+        "{首里城|しゅりじょう}の{正殿|せいでん}は、{王国|おうこく}の{時代|じだい}に3{回|かい}{焼|や}け、そのたびに{建|た}て{直|なお}されました。",
+        "1945{年|ねん}には、{沖縄戦|おきなわせん}で{全部|ぜんぶ}{焼|や}けてしまいます。{戦後|せんご}、1986{年|ねん}に{国|くに}が{公園|こうえん}として{復元|ふくげん}する{方針|ほうしん}を{決|き}め、1992{年|ねん}に{正殿|せいでん}などが{復元|ふくげん}されて{公園|こうえん}が{開|ひら}きました。2000{年|ねん}には、{首里城跡|しゅりじょうあと}をふくむ「{琉球王国|りゅうきゅうおうこく}のグスク{及|およ}び{関連遺産群|かんれんいさんぐん}」が{世界遺産|せかいいさん}になります。",
+        "{世界遺産|せかいいさん}とは、{人類|じんるい}みんなの{宝|たから}として{守|まも}っていく{場所|ばしょ}や{建物|たてもの}のことで、{国連教育科学文化機関|こくれんきょういくかがくぶんかきかん}（ユネスコ）が{登録|とうろく}します。{首里城|しゅりじょう}は、{遺跡|いせき}の{部分|ぶぶん}が{登録|とうろく}されています。",
+        "ところが2019{年|ねん}10{月|がつ}31{日|にち}、{火事|かじ}で{正殿|せいでん}をはじめ{主|おも}な{建物|たてもの}が{焼|や}けました。=={焼|や}けるたびに、{人々|ひとびと}は{首里城|しゅりじょう}を{建|た}て{直|なお}してきた==のです。"
+      ]
+    },
+    {
+      "h": "{今回|こんかい}、どんな{姿|すがた}にもどったの？",
+      "p": [
+        "2022{年|ねん}11{月|がつ}に{復元|ふくげん}の{工事|こうじ}が{始|はじ}まり、2026{年|ねん}11{月|がつ}に{正殿|せいでん}が{完成|かんせい}し、11{月|がつ}22{日|にち}に{完成式|かんせいしき}が{開|ひら}かれました。",
+        "{正殿|せいでん}は、{木|き}でできた3{階建|かいだ}ての{建物|たてもの}で、{琉球|りゅうきゅう}で{最大|さいだい}の{木造建築|もくぞうけんちく}とされます。{朱色|しゅいろ}（{赤|あか}い{漆|うるし}）が{基本|きほん}の{色|いろ}で、{王|おう}の{力|ちから}を{表|あらわ}す{龍|りゅう}のかざりがあちこちにあります。",
+        "{首里城|しゅりじょう}のように、{昔|むかし}の{姿|すがた}をもとにして{建物|たてもの}を{建|た}て{直|なお}すことを「{復元|ふくげん}」といいます。==復元は、{建物|たてもの}だけでなく、{地域|ちいき}の{歴史|れきし}と{文化|ぶんか}を{次|つぎ}の{世代|せだい}に{伝|つた}える{取|と}り{組|く}みです。=="
+      ]
+    }
+  ],
+  "point": [
+    "{首里城|しゅりじょう}は{琉球王国|りゅうきゅうおうこく}の{王|おう}の{城|しろ}。1429{年|ねん}に{尚巴志|しょうはし}が{琉球|りゅうきゅう}を{統一|とういつ}し、{王国|おうこく}は{約|やく}450{年|ねん}{続|つづ}いた。",
+    "{琉球王国|りゅうきゅうおうこく}は、{中国|ちゅうごく}・{日本|にほん}・{東南|とうなん}アジアをむすぶ{中継貿易|ちゅうけいぼうえき}で{栄|さか}えた。",
+    "1879{年|ねん}の{琉球処分|りゅうきゅうしょぶん}で{王国|おうこく}は{終|お}わり、{沖縄県|おきなわけん}ができた。",
+    "{首里城|しゅりじょう}は、{沖縄戦|おきなわせん}（1945{年|ねん}）と2019{年|ねん}の{火事|かじ}で{焼|や}け、2000{年|ねん}に{世界遺産|せかいいさん}（{首里城跡|しゅりじょうあと}）になった。"
+  ],
+  "keywords": [
+    {
+      "term": "{琉球王国|りゅうきゅうおうこく}",
+      "desc": "{今|いま}の{沖縄県|おきなわけん}にあった{国|くに}。1429{年|ねん}にできたとされ、1879{年|ねん}に{終|お}わった。"
+    },
+    {
+      "term": "{中継貿易|ちゅうけいぼうえき}",
+      "desc": "{他|ほか}の{国|くに}から{買|か}った{品物|しなもの}を、{別|べつ}の{国|くに}に{売|う}る{貿易|ぼうえき}。"
+    },
+    {
+      "term": "{琉球処分|りゅうきゅうしょぶん}",
+      "desc": "{明治政府|めいじせいふ}が{琉球|りゅうきゅう}を{日本|にほん}の{県|けん}にした{一連|いちれん}のできごと。1879{年|ねん}に{沖縄県|おきなわけん}ができた。"
+    },
+    {
+      "term": "{復元|ふくげん}",
+      "desc": "なくなった{建物|たてもの}を、{昔|むかし}の{姿|すがた}にもどして{建|た}て{直|なお}すこと。"
+    }
+  ],
+  "quiz": {
+    "q": "{琉球王国|りゅうきゅうおうこく}が{栄|さか}えた{理由|りゆう}として、{正|ただ}しいものはどれ？",
+    "choices": [
+      "{石炭|せきたん}を{世界|せかい}じゅうに{輸出|ゆしゅつ}したから",
+      "{中国|ちゅうごく}・{日本|にほん}・{東南|とうなん}アジアの{間|あいだ}で{中継貿易|ちゅうけいぼうえき}を{行|おこな}ったから",
+      "{鉄砲|てっぽう}を{大量|たいりょう}に{作|つく}って{売|う}ったから"
+    ],
+    "answer": 1,
+    "a": "{正|ただ}しいのは2{番目|ばんめ}です。{琉球王国|りゅうきゅうおうこく}は、{船|ふね}で{品物|しなもの}を{運|はこ}ぶ{中継貿易|ちゅうけいぼうえき}で{栄|さか}えました。",
+    "hint": "{海|うみ}の{真|ま}ん{中|なか}という{場所|ばしょ}に{注目|ちゅうもく}しよう。"
+  },
+  "sources": [
+    {
+      "title": "内閣府 沖縄総合事務局「首里城公園（国営沖縄記念公園 首里城地区）」",
+      "url": "https://www8.cao.go.jp/okinawa/5/52.html"
+    },
+    {
+      "title": "nippon.com「首里城のプロフィール：かつての琉球王国の中心」",
+      "url": "https://www.nippon.com/ja/japan-data/h00578/"
+    },
+    {
+      "title": "国土交通省 観光庁 多言語解説文データベース「首里城公園 首里城正殿・正殿遺構」",
+      "url": "https://www.mlit.go.jp/tagengo-db/R2-00488.html"
+    },
+    {
+      "title": "JICA「琉球王国の中継貿易」（研修報告）",
+      "url": "https://www.jica.go.jp/domestic/tokyo/activities/kaihatsu/kaigaikenshu/n_files/HS_report_02_09.pdf"
+    }
+  ]
+}
