@@ -1,6 +1,6 @@
 {
   "siteName": "中受 じじニュースのたね",
-  "tagline": "毎日のニュースが、入試で芽を出す。中学受験の時事を毎日3本、図解で",
+  "tagline": "毎日のニュースを、図解で。子ども向けニュース、中学受験の時事対策にも",
   "siteUrl": "https://jijitane.com",
   "hashtags": [
     "中学受験",
@@ -17,7 +17,7 @@
   },
   "brandPrefix": "中受",
   "brandMain": "じじニュースのたね",
-  "taglineShort": "毎日のニュースが、入試で芽を出す",
+  "taglineShort": "子ども向けニュース、中学受験にも",
   "analytics": {
     "plausible": "",
     "cloudflare": "2461bc4aa6c248f0b5ba6d41ce3a3d19"

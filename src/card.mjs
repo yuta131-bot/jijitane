@@ -89,10 +89,10 @@ export function siteCardSvg(cfg) {
 <rect width="1200" height="675" fill="#F5FAFE"/>${grid}
 ${cfg.brandPrefix ? `<rect x="70" y="72" width="96" height="60" rx="12" fill="#fff" stroke="#1D2B44" stroke-width="4"/><text x="118" y="116" text-anchor="middle" font-size="36" font-weight="700" fill="#1D2B44">${esc(cfg.brandPrefix)}</text><text x="184" y="128" font-size="58" font-weight="700" fill="#1D2B44">${esc(cfg.brandMain)}</text>` : `<text x="70" y="128" font-size="76" font-weight="700" fill="#1D2B44">${esc(cfg.siteName)}</text>`}
 <rect x="70" y="152" width="1060" height="8" fill="#1D2B44"/>
-<text x="70" y="266" font-size="82" font-weight="700" fill="#1D2B44">毎日のニュースが、</text>
-<text x="70" y="362" font-size="82" font-weight="700" fill="#1D2B44">入試で芽を出す。</text>
+<text x="70" y="266" font-size="82" font-weight="700" fill="#1D2B44">毎日のニュースを、</text>
+<text x="70" y="362" font-size="82" font-weight="700" fill="#1D2B44">図解でやさしく。</text>
 ${pillSvg}
-<text x="70" y="590" font-size="30" font-weight="500" fill="#56677F">中学受験の時事対策に、親子でどうぞ</text>
+<text x="70" y="590" font-size="30" font-weight="500" fill="#56677F">中学受験の時事対策にも、親子でどうぞ</text>
 <text x="1130" y="598" text-anchor="end" font-size="52" font-weight="700" fill="#2E78C9">jijitane.com</text>
 <g transform="translate(1010 200)"><path d="M60 190 C60 140 60 110 60 70" stroke="#1D2B44" stroke-width="10" fill="none" stroke-linecap="round"/><ellipse cx="22" cy="62" rx="44" ry="26" transform="rotate(-25 22 62)" fill="#7FD6B2" stroke="#1D2B44" stroke-width="6"/><ellipse cx="100" cy="46" rx="44" ry="26" transform="rotate(25 100 46)" fill="#7FD6B2" stroke="#1D2B44" stroke-width="6"/><circle cx="60" cy="204" r="14" fill="#FFE36E" stroke="#1D2B44" stroke-width="6"/></g>
 </svg>`;
