@@ -350,3 +350,4 @@ svg text{font-family:"Zen Maru Gothic","Hiragino Maru Gothic ProN","Hiragino San
 .fkband .fb-all{display:block;margin-top:6px;font-weight:900;color:#5B35A8;font-size:14px}
 .fkside{display:block;border:2px solid #7B4FD0;border-radius:12px;padding:8px 14px;margin:14px 0;background:#F6F1FF;text-decoration:none;color:#1D2B44}
 .fkside small{display:block;font-size:12px;color:#5B35A8;font-weight:900}.fkside b{font-size:16px;line-height:1.5}
+.pnote .pnote-on{font-size:.85rem;color:var(--muted);font-weight:700;margin:0 0 8px}.pnote .pnote-on a{color:inherit}
