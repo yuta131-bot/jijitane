@@ -27,6 +27,11 @@ export function validateFukabori(f) {
   if (!Array.isArray(f?.point) || f.point.length < 2) e.push('point（入試に出るポイント）は2つ以上');
   const q = f?.quiz;
   if (!q?.q || !q?.a || !Array.isArray(q.choices) || q.choices.length < 2 || !Number.isInteger(q.answer) || q.answer >= q.choices.length) e.push('quiz（q / a / choices / answer）が正しくありません');
+  if (q?.a && Number.isInteger(q.answer)) {
+    const L = /正しいのは\s*([A-D])/.exec(String(q.a));
+    if (L && 'ABCD'.indexOf(L[1]) !== q.answer) e.push(`quiz.a の「正しいのは${L[1]}」が answer（${'ABCD'[q.answer]}）とちがいます`);
+    if (/正しいのは\s*[1-4１-４](?:\{番目|番目)/.test(String(q.a))) e.push('quiz.a は「2番目」ではなく「B」のように記号で書いてください');
+  }
   if (!Array.isArray(f?.sources) || !f.sources.length) e.push('sources がありません');
   if ((JSON.stringify(f).match(/\{[^{}|"]*$/g) || []).length) e.push('ふりがな記法が閉じていない可能性があります');
   return e;

@@ -16,6 +16,11 @@ export function validate(a) {
     if (n.quiz?.choices !== undefined) {
       if (!Array.isArray(n.quiz.choices) || n.quiz.choices.length < 2 || n.quiz.choices.length > 4) e.push(`${p}.quiz.choices は2〜4個`);
       else if (!Number.isInteger(n.quiz.answer) || n.quiz.answer < 0 || n.quiz.answer >= n.quiz.choices.length) e.push(`${p}.quiz.answer が選択肢の番号になっていません`);
+      else {
+        const L = /正しいのは\s*([A-D])/.exec(String(n.quiz.a));
+        if (L && 'ABCD'.indexOf(L[1]) !== n.quiz.answer) e.push(`${p}.quiz.a の「正しいのは${L[1]}」が answer（${'ABCD'[n.quiz.answer]}）とちがいます`);
+        if (/正しいのは\s*[1-4１-４](?:\{番目|番目)/.test(String(n.quiz.a))) e.push(`${p}.quiz.a は「2番目」ではなく「B」のように記号で書いてください`);
+      }
     }
     if (n.units !== undefined && !Array.isArray(n.units)) e.push(`${p}.units は配列`);
     if (typeof n.svg !== 'string' || !/^\s*<svg[\s>]/i.test(n.svg) || !/<\/svg>\s*$/i.test(n.svg)) e.push(`${p}.svg が正しい SVG ではありません`);
