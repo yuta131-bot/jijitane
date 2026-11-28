@@ -84,6 +84,7 @@ export function layout({ cfg, title, desc, path, ogImage, main, css, recent = []
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+${cfg.stampEndpoint ? `<meta name="jt-stamp" content="${esc(cfg.stampEndpoint)}">` : ''}
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(desc)}">
 <link rel="canonical" href="${esc(url)}">

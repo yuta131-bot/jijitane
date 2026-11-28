@@ -299,7 +299,11 @@
     if (silent) return;
     ls.set('jt-q-' + q.dataset.qid, ok ? '1' : '0');
     var t = jstDay(0), d = stampDays();
-    if (d.indexOf(t) < 0) { d.push(t); ls.set('jt-days', JSON.stringify(d.slice(-400))); ls.set('jt-last', t); showStamps(d.length); }
+    if (d.indexOf(t) < 0) { d.push(t); ls.set('jt-days', JSON.stringify(d.slice(-400))); ls.set('jt-last', t); showStamps(d.length); countStamp(d.length); }
+  }
+  /* 匿名の回数だけ送る（個数のみ。名前・端末の情報は送らない）。設定がなければ何もしない */
+  function countStamp(n) {
+    try { var m = document.querySelector('meta[name="jt-stamp"]'); if (!m || !m.content) return; var body = 'n=' + n; if (navigator.sendBeacon) navigator.sendBeacon(m.content, body); else fetch(m.content, { method: 'POST', body: body, keepalive: true, mode: 'no-cors' }); } catch (e) {}
   }
   /* スタンプ帳：連続でなくてよい。クイズに答えた日の合計（累計）で、称号がふえる */
   var RANKS = [[5, 'ニュース見習い'], [10, 'ニュース博士'], [20, 'ニュースマスター'], [30, 'ニュースヒーロー'], [50, 'ニュース名人'], [100, 'ニュース王']];

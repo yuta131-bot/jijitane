@@ -62,6 +62,14 @@ jobs:
           D: ${{ steps.stats.outputs.date }}
         run: node scripts/render-tables.mjs "reports/data/$D.json" analytics-in/daily > "reports/$D.tables.md"
 
+      - name: スタンプ帳の匿名集計を足す
+        continue-on-error: true   # 設定前・取れない日は飛ばす
+        env:
+          D: ${{ steps.stats.outputs.date }}
+          STAMP_STATS_URL: ${{ vars.STAMP_STATS_URL }}
+          STAMP_STATS_TOKEN: ${{ secrets.STAMP_STATS_TOKEN }}
+        run: node scripts/stamp-stats.mjs >> "reports/$D.tables.md"
+
       - name: X のクレジットが少なければ知らせる
         env:
           GH_TOKEN: ${{ github.token }}
