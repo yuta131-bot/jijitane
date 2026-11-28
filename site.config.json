@@ -9,6 +9,7 @@
   "postHourJst": 7.5,
   "model": "claude-sonnet-5-5",
   "xHandle": "jijitane_news",
+  "stampEndpoint": "https://jijitane-stamp.tokura0821.workers.dev",
   "lineUrl": "https://lin.ee/sFLs55L",
   "ads": {
     "enabled": false,
